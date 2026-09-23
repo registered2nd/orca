@@ -1,11 +1,11 @@
+import { LOCAL_EXECUTION_HOST_ID } from '../../../../../../shared/execution-host'
 import { toast } from 'sonner'
 import { translate } from '@/i18n/i18n'
 import { extractIpcErrorMessage } from '@/runtime/errors/ipc-error'
 import { basename } from '@/lib/path'
 import {
   downloadRuntimeFileToClient,
-  isClientLocalRuntimeFile,
-  openRuntimeFileWithDefaultApp
+  isClientLocalRuntimeFile
 } from '@/runtime/files/reads/runtime-file-default-app-open'
 import { showDownloadedFileToast } from '@/lib/files/download/downloaded-file-toast'
 import { getRelativePathInsideWorktree } from '@/runtime/files/runtime-file-routing'
@@ -90,7 +90,17 @@ export async function downloadAndOpenRemoteTerminalFile(
     }
   }
   try {
-    await openRuntimeFileWithDefaultApp(linkFileReadSource(fileContext, filePath, grant))
+    const download = await downloadRuntimeFileToClient(
+      linkFileReadSource(fileContext, filePath, grant)
+    )
+    // Why: cancelling the native save dialog is a deliberate no-op, not a failure; a newer link
+    // click during the download supersedes this one.
+    if (!download?.canceled && isCurrent()) {
+      await window.api.shell.openFilePath(
+        download?.destinationPath ?? filePath,
+        LOCAL_EXECUTION_HOST_ID
+      )
+    }
   } catch (error) {
     showDownloadFailedToast(error, linkName(filePath))
   }
