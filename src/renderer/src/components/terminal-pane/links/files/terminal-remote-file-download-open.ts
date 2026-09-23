@@ -1,8 +1,9 @@
+import { LOCAL_EXECUTION_HOST_ID } from '../../../../../../shared/execution-host'
 import { toast } from 'sonner'
 import { translate } from '@/i18n/i18n'
 import { extractIpcErrorMessage } from '@/runtime/errors/ipc-error'
 import { basename } from '@/lib/path'
-import { openRuntimeFileWithDefaultApp } from '@/runtime/files/reads/runtime-file-default-app-open'
+import { downloadRuntimeFileForDefaultApp } from '@/runtime/files/reads/runtime-file-default-app-open'
 import { getRelativePathInsideWorktree } from '@/runtime/files/runtime-file-routing'
 import { hostStreamsGrantedFiles } from '@/runtime/files/grants/runtime-terminal-artifact-grant'
 import { isPairedWebClientWindow } from '@/app-shell/chrome/desktop-window-chrome'
@@ -40,7 +41,7 @@ export async function downloadAndOpenRemoteTerminalFile(
     }
   }
   try {
-    await openRuntimeFileWithDefaultApp({
+    const download = await downloadRuntimeFileForDefaultApp({
       target,
       filePath,
       relativePath: getRelativePathInsideWorktree(fileContext.worktreePath, filePath) ?? filePath,
@@ -50,6 +51,14 @@ export async function downloadAndOpenRemoteTerminalFile(
       expectedEnvironmentPairingRevision: fileContext.expectedEnvironmentPairingRevision,
       terminalArtifactGrantId: grant?.terminalArtifactGrantId
     })
+    // Why: cancelling the native save dialog is a deliberate no-op, not a failure; a newer link
+    // click during the download supersedes this one.
+    if (!download?.canceled && isCurrent()) {
+      await window.api.shell.openFilePath(
+        download?.destinationPath ?? filePath,
+        LOCAL_EXECUTION_HOST_ID
+      )
+    }
   } catch (error) {
     toast.error(
       extractIpcErrorMessage(
