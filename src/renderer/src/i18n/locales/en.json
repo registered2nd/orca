@@ -11240,7 +11240,12 @@
               "micInput": "input",
               "micDevice": "device",
               "micAirpods": "airpods",
-              "micDefault": "system default"
+              "micDefault": "system default",
+              "readAloudTitle": "Read Replies Aloud",
+              "readAloudDescription": "Speak finished agent replies with an Azure or system voice.",
+              "readAloudTts": "tts",
+              "readAloudSpeak": "read aloud",
+              "readAloudAzure": "azure"
             }
           }
         },
@@ -12829,6 +12834,33 @@
           "remove": "Remove",
           "forceUpdate": "Force update",
           "turnOn": "Turn on in Experimental"
+        },
+        "readAloud": {
+          "keySaved": "Azure Speech key saved",
+          "keyCleared": "Azure Speech key cleared",
+          "keyStored": "A key is stored in Orca.",
+          "keyFromEnv": "Using AZURE_SPEECH_KEY from the environment.",
+          "keyMissing": "No key: replies are read with the system voice.",
+          "enable": "Read Replies Aloud",
+          "enableDescription": "Speak each finished agent reply. Toggle with",
+          "enableDescriptionEnd": "; dictating or sending a new prompt stops it.",
+          "scope": "Which Agents Speak",
+          "scopeDescription": "The agent pane you last focused, or every agent that finishes.",
+          "scopeFocused": "Focused agent",
+          "scopeAll": "Every agent",
+          "voice": "Voice",
+          "voiceDescription": "Azure voice for English and mixed replies.",
+          "voiceZh": "Chinese Voice",
+          "voiceZhDescription": "Azure voice for replies that are mostly Chinese.",
+          "rate": "Speaking Rate",
+          "rateDescription": "Percent faster (or slower, when negative) than normal.",
+          "region": "Azure Region",
+          "regionDescription": "Empty uses AZURE_SPEECH_REGION.",
+          "key": "Azure Speech Key",
+          "save": "Save",
+          "clear": "Clear",
+          "sample": "This is how agent replies will sound.",
+          "test": "Test"
         }
       },
       "right": {
@@ -18079,6 +18111,12 @@
         "a62f9db53d": "Cancel",
         "c77189bc0c": "Update filter",
         "19af906d12": "Save filter"
+      },
+      "speakReplies": {
+        "controller": {
+          "stop": "Stop reading aloud",
+          "reading": "Reading reply aloud"
+        }
       }
     },
     "i18n": {

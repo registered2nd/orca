@@ -499,6 +499,9 @@ import {
   DictationHandle,
   DictationSetup,
   DictationStart,
+  SpeakAzureCredentials,
+  SpeakRepliesConfigure,
+  SpeakSay,
   SpeechModelAction
 } from './speech-params'
 import { RepoAddRemote, SshBrowseDir, SshTarget, SshTargetAdd, SshTargetUpdate } from './ssh-params'
@@ -1229,6 +1232,11 @@ export const RPC_PARAMS_BY_METHOD = {
   'speech.models.delete': SpeechModelAction,
   'speech.models.download': SpeechModelAction,
   'speech.models.list': null,
+  'speech.speak.configure': SpeakRepliesConfigure,
+  'speech.speak.credentials': SpeakAzureCredentials,
+  'speech.speak.say': SpeakSay,
+  'speech.speak.status': null,
+  'speech.speak.stop': null,
   'ssh.addTarget': SshTargetAdd,
   'ssh.browseDir': SshBrowseDir,
   'ssh.connect': SshTarget,

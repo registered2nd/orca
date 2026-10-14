@@ -215,6 +215,22 @@ export const HANDLER_GROUPS: readonly HandlerGroup[] = [
     load: async () => (await import('./handlers/profile-state.js')).PROFILE_STATE_HANDLERS
   },
   {
+    name: 'voice',
+    keys: [
+      'voice status',
+      'voice speak on',
+      'voice speak off',
+      'voice set',
+      'voice stop',
+      'voice say',
+      'voice azure-key set',
+      'voice azure-key clear',
+      'voice dictation on',
+      'voice dictation off'
+    ],
+    load: async () => (await import('./handlers/voice.js')).VOICE_HANDLERS
+  },
+  {
     name: 'diagnostics',
     keys: ['diagnostics memory', 'terminal-daemon status', 'terminal-daemon restart'],
     load: async () => (await import('./handlers/diagnostics.js')).DIAGNOSTICS_HANDLERS
