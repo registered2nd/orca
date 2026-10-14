@@ -17239,6 +17239,24 @@
                 }
               }
             }
+          },
+          "ask": {
+            "wholePage": "Whole page",
+            "noSelection": "Select some text on the page first (turn picking off to select).",
+            "noPageText": "Could not read the page.",
+            "sent": "Sent. Keep picking to ask a follow-up.",
+            "askingAgent": "Asking {{value0}}",
+            "agent": "the agent",
+            "noAgent": "Click into an agent terminal first; questions go to the agent you last used.",
+            "pickTitle": "Click page elements to add them",
+            "pick": "Pick",
+            "addSelection": "Selection",
+            "addPage": "Whole page",
+            "close": "Close Ask",
+            "remove": "Remove",
+            "placeholder": "Ask about what you picked… (Enter to send)",
+            "send": "Send question",
+            "toolbar": "Ask your agent about this page"
           }
         },
         "profile": {
