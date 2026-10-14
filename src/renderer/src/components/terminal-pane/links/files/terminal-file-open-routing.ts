@@ -3,6 +3,7 @@ import {
   downloadRemoteTerminalFile,
   downloadRemoteTerminalFolder
 } from './terminal-remote-file-download-open'
+import { openOsViewerOnlyTerminalFile } from './terminal-os-viewer-file-open'
 import { isMissingRuntimePathError } from '@/runtime/files/metadata/runtime-file-metadata-client'
 import { useAppStore } from '@/store/index'
 import {
@@ -19,7 +20,6 @@ import {
   shouldOpenTerminalFileWithSystemDefault,
   terminalLinkWslDistro
 } from '../../host-files/terminal-file-path-mapping'
-import { hasOsViewerOnlyFileExtension } from '../../../../../../shared/file-preview/binary-file-extensions'
 import {
   LOCAL_EXECUTION_HOST_ID,
   getConnectionExecutionHostId
@@ -275,22 +275,16 @@ export function openDetectedFilePath(
       return
     }
 
-    // Why: the editor can only say "Binary file — cannot display" for these, so an ordinary
-    // click takes the Shift+Cmd/Ctrl route to the app the OS registers for the file type.
-    if (!openWithSystemDefault && hasOsViewerOnlyFileExtension(mappedFilePath)) {
-      if (!canOpenWithSystemDefault) {
-        await downloadAndOpenRemoteTerminalFile(fileContext, mappedFilePath, {
-          isCurrent: isCurrentRequest
-        })
-        return
-      }
-      const openedWithSystemDefault = await window.api.shell.openFilePath(
+    if (
+      !openWithSystemDefault &&
+      (await openOsViewerOnlyTerminalFile(
+        fileContext,
         mappedFilePath,
-        LOCAL_EXECUTION_HOST_ID
-      )
-      if (openedWithSystemDefault || !isCurrentRequest()) {
-        return
-      }
+        canOpenWithSystemDefault,
+        isCurrentRequest
+      ))
+    ) {
+      return
     }
 
     const {
