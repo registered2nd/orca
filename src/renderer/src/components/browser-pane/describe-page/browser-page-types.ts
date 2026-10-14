@@ -76,6 +76,7 @@ export type BrowserPageGrabAnnotationsOptions = {
 export type BrowserPageGrabAnnotations = {
   grabIntent: GrabIntent
   startGrabIntent: (nextIntent: GrabIntent) => void
+  setGrabIntent: (intent: GrabIntent) => void
   pendingAnnotationPayload: BrowserGrabPayload | null
   setPendingAnnotationPayload: Dispatch<SetStateAction<BrowserGrabPayload | null>>
   grabToast: BrowserPageGrabToastState | null

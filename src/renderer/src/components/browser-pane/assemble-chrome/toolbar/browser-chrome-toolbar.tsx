@@ -16,6 +16,7 @@ import {
 import { resolveBrowserSourceUnifiedTab } from '@/lib/browser/workspace/browser-workspace-source-resolution'
 import { useFloatingSplitTabClose } from '@/components/floating-terminal/workspace/use-floating-split-tab-close'
 import { MarkupDrawButton } from '../../annotate/markup-tools/MarkupDrawButton'
+import { BrowserChromeAskButton } from './browser-chrome-ask-button'
 
 export type BrowserChromeOverflowMenuProps = {
   triggerRef: React.RefObject<HTMLButtonElement | null>
@@ -99,12 +100,20 @@ export function BrowserChromeToolbar({
     >
       {shareControl}
       {elementTools ? (
-        <BrowserAnnotateToolButton
-          tools={elementTools}
-          markup={markup}
-          notes={notes}
-          showTourAnchors={showTourAnchors}
-        />
+        <>
+          {/* Ask has its own toolbar button, so an Ask pick leaves this one idle. */}
+          <BrowserAnnotateToolButton
+            tools={
+              elementTools.activeIntent === 'ask'
+                ? { ...elementTools, activeIntent: null }
+                : elementTools
+            }
+            markup={markup}
+            notes={notes}
+            showTourAnchors={showTourAnchors}
+          />
+          <BrowserChromeAskButton tools={elementTools} />
+        </>
       ) : (
         <MarkupDrawButton
           onClick={markup.onToggle}
