@@ -3,6 +3,10 @@ import type {
   DictationContext,
   OpenAiCompatibleSpeechProvider,
   OpenAiCompatibleSpeechProviderSummary,
+  SpeakControlEvent,
+  SpeakRepliesStatus,
+  SpeakRepliesUpdate,
+  SpeakSynthesisResult,
   SpeechErrorEvent,
   SpeechLifecycleEvent,
   SpeechModelManifest,
@@ -47,4 +51,9 @@ export type SpeechApi = {
   onReady: (callback: (data: SpeechLifecycleEvent) => void) => () => void
   onStopped: (callback: (data: SpeechLifecycleEvent) => void) => () => void
   onError: (callback: (data: SpeechErrorEvent) => void) => () => void
+  synthesizeReply: (text: string) => Promise<SpeakSynthesisResult>
+  getSpeakRepliesStatus: () => Promise<SpeakRepliesStatus>
+  updateSpeakReplies: (update: SpeakRepliesUpdate) => Promise<SpeakRepliesStatus>
+  setAzureSpeechCredentials: (key: string | null, region?: string) => Promise<SpeakRepliesStatus>
+  onSpeakControl: (callback: (event: SpeakControlEvent) => void) => () => void
 }
