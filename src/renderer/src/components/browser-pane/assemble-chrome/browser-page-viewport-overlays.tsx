@@ -92,7 +92,7 @@ export function BrowserPageViewportOverlays({
           browserPageId={browserTab.id}
           page={{ title: browserTab.title, url: browserTab.url }}
           grab={grab}
-          onClose={grabAnnotations.endAskIntent}
+          onClose={() => grabAnnotations.startGrabIntent('ask')}
         />
       ) : null}
       <BrowserPageZoomIndicator state={browserZoomIndicatorState} percent={browserZoomPercent} />
