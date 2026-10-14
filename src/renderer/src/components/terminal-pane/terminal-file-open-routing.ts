@@ -1,5 +1,6 @@
 import { getWorkspaceFilePreviewPlan, openFileInBrowserTab } from '@/lib/file-preview'
 import { downloadAndOpenRemoteTerminalFile } from './terminal-remote-file-download-open'
+import { openOsViewerOnlyTerminalFile } from './terminal-os-viewer-file-open'
 import { isPathInsideWorktree, toWorktreeRelativePath } from '@/lib/terminal-links'
 import type { RuntimeWorkspaceFileRoute } from '@/lib/runtime-workspace-file-route'
 import { canClientOsOpenWorkspaceFile } from '@/lib/workspace-file-host-routing'
@@ -13,7 +14,6 @@ import {
   terminalLinkWslDistro,
   type TerminalFileContext
 } from './terminal-file-path-mapping'
-import { hasOsViewerOnlyFileExtension } from '../../../../shared/binary-file-extensions'
 import {
   LOCAL_EXECUTION_HOST_ID,
   getConnectionExecutionHostId,
@@ -242,20 +242,16 @@ export function openDetectedFilePath(
       }
     }
 
-    // Why: the editor can only say "Binary file — cannot display" for these, so an ordinary
-    // click takes the Shift+Cmd/Ctrl route to the app the OS registers for the file type.
-    if (!openWithSystemDefault && hasOsViewerOnlyFileExtension(mappedFilePath)) {
-      if (!canOpenWithSystemDefault) {
-        await downloadAndOpenRemoteTerminalFile(fileContext, mappedFilePath, isCurrentOpen)
-        return
-      }
-      const openedWithSystemDefault = await window.api.shell.openFilePath(
+    if (
+      !openWithSystemDefault &&
+      (await openOsViewerOnlyTerminalFile(
+        fileContext,
         mappedFilePath,
-        LOCAL_EXECUTION_HOST_ID
-      )
-      if (openedWithSystemDefault || !isCurrentOpen()) {
-        return
-      }
+        canOpenWithSystemDefault,
+        isCurrentOpen
+      ))
+    ) {
+      return
     }
 
     const runtimeOwnerId = runtimeTargetEnvironmentId(fileContext.target) ?? sourceRuntimeOwnerId
