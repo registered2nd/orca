@@ -4,8 +4,17 @@ import {
   DictationHandle,
   DictationSetup,
   DictationStart,
+  SpeakAzureCredentials,
+  SpeakRepliesConfigure,
+  SpeakSay,
   SpeechModelAction
 } from '../../../../shared/rpc-contract/speech-params'
+import {
+  getSpeakRepliesStatus,
+  sendSpeakControl,
+  setAzureSpeechCredentials,
+  updateSpeakReplies
+} from '../../../speech/speak-replies-service'
 
 export const SPEECH_METHODS = [
   defineMethod({
@@ -64,5 +73,41 @@ export const SPEECH_METHODS = [
     params: DictationHandle,
     handler: async (params, { runtime, clientId, connectionId }) =>
       runtime.cancelMobileDictation({ ...params, clientId, connectionId })
+  }),
+  defineMethod({
+    name: 'speech.speak.status',
+    permission: 'workspace',
+    params: null,
+    handler: () => getSpeakRepliesStatus()
+  }),
+  defineMethod({
+    name: 'speech.speak.configure',
+    permission: 'settings-write',
+    params: SpeakRepliesConfigure,
+    handler: (params) => updateSpeakReplies(params)
+  }),
+  defineMethod({
+    name: 'speech.speak.credentials',
+    permission: 'settings-write',
+    params: SpeakAzureCredentials,
+    handler: (params) => setAzureSpeechCredentials(params.key, params.region)
+  }),
+  defineMethod({
+    name: 'speech.speak.stop',
+    permission: 'workspace',
+    params: null,
+    handler: () => {
+      sendSpeakControl({ action: 'stop' })
+      return { stopped: true }
+    }
+  }),
+  defineMethod({
+    name: 'speech.speak.say',
+    permission: 'workspace',
+    params: SpeakSay,
+    handler: (params) => {
+      sendSpeakControl({ action: 'say', text: params.text })
+      return { queued: true }
+    }
   })
 ]
