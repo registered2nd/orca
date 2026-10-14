@@ -57,3 +57,25 @@ export const OPENAI_SPEECH_KEY_MAX_LENGTH = 1024
 export const OpenAiSpeechKeySet = z.object({
   apiKey: z.string().trim().min(1).max(OPENAI_SPEECH_KEY_MAX_LENGTH)
 })
+
+export const SpeakRepliesConfigure = z
+  .object({
+    speakReplies: z.boolean().optional(),
+    speakScope: z.enum(['focused', 'all']).optional(),
+    speakVoice: z.string().trim().min(1).max(200).optional(),
+    speakVoiceZh: z.string().trim().min(1).max(200).optional(),
+    speakRate: z.number().int().min(-50).max(100).optional(),
+    azureSpeechRegion: z.string().trim().max(64).optional()
+  })
+  .strict()
+
+export const SpeakAzureCredentials = z
+  .object({
+    key: z.string().trim().min(1).max(512).nullable(),
+    region: z.string().trim().max(64).optional()
+  })
+  .strict()
+
+export const SpeakSay = z.object({
+  text: requiredString('Missing text').refine((value) => value.length <= 8000, 'Text is too long')
+})
