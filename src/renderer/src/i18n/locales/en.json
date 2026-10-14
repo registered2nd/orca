@@ -13276,7 +13276,9 @@
           "save": "Save",
           "clear": "Clear",
           "sample": "This is how agent replies will sound.",
-          "test": "Test"
+          "test": "Test",
+          "mixedVoices": "Switch Voices in Mixed Replies (Experimental)",
+          "mixedVoicesDescription": "Read the Chinese parts of a reply with the Chinese voice and the rest with the English voice."
         }
       },
       "right": {
