@@ -106,6 +106,9 @@ export function getDefaultSettings(homedir: string): GlobalSettings {
   })
 }
 
+export const DEFAULT_SPEAK_VOICE = 'en-US-Ava:DragonHDLatestNeural'
+export const DEFAULT_SPEAK_VOICE_ZH = 'zh-CN-Xiaochen:DragonHDLatestNeural'
+
 export function getDefaultVoiceSettings(): VoiceSettings {
   return {
     enabled: false,
@@ -117,7 +120,14 @@ export function getDefaultVoiceSettings(): VoiceSettings {
     userModels: [],
     openAiApiKeyConfigured: false,
     microphoneDeviceId: null,
-    microphoneDeviceLabel: null
+    microphoneDeviceLabel: null,
+    speakReplies: false,
+    speakScope: 'focused',
+    speakVoice: DEFAULT_SPEAK_VOICE,
+    speakVoiceZh: DEFAULT_SPEAK_VOICE_ZH,
+    speakRate: 10,
+    azureSpeechRegion: '',
+    azureSpeechKeyConfigured: false
   }
 }
 

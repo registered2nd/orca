@@ -1,5 +1,6 @@
 import { app } from 'electron'
 import type { BrowserWindow } from 'electron'
+import { handleSpeakRepliesShortcut } from '../speech/speak-replies-shortcut'
 import {
   ModifierDoubleTapDetector,
   toModifierDoubleTapEvent
@@ -200,6 +201,10 @@ export function installMainWindowShortcutRouting(args: {
       !input.shift &&
       modForBold
     ) {
+      return
+    }
+
+    if (handleSpeakRepliesShortcut(event, input, keybindings, terminalShortcutContext)) {
       return
     }
 
