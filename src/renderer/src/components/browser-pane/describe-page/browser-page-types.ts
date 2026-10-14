@@ -95,6 +95,7 @@ export type BrowserPageGrabAnnotations = {
   handleCancelPendingBrowserAnnotation: () => void
   cancelPendingBrowserCapture: () => void
   handleGrabActionShortcut: (key: 'c' | 's') => void
+  endAskIntent: () => void
 }
 
 export type BrowserPageRecoveryNavigationValidation = {
