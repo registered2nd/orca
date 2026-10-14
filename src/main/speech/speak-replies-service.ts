@@ -42,6 +42,7 @@ export function getSpeakRepliesStatus(): SpeakRepliesStatus {
     speakVoice: voice.speakVoice,
     speakVoiceZh: voice.speakVoiceZh,
     speakRate: voice.speakRate,
+    speakMixedVoices: voice.speakMixedVoices,
     azureSpeechRegion: resolveAzureSpeechRegion(voice),
     azureSpeechKey: hasStoredAzureSpeechKey()
       ? 'stored'
