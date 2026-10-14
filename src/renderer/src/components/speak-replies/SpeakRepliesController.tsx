@@ -15,6 +15,20 @@ import {
 } from './reply-speech-player'
 import { finishedTurnReply, startedNewTurn } from './speak-replies-trigger'
 
+// The status row holds only the turn's last text block; the agent's transcript has the whole turn.
+async function speakWholeTurn(
+  lastBlock: string,
+  transcriptPath: string | undefined,
+  paneKey: string
+): Promise<void> {
+  const whole = transcriptPath
+    ? await window.api.speech.turnReplyText(transcriptPath).catch(() => null)
+    : null
+  // Why: the final block can reach the hook before it is flushed to the transcript.
+  const text = !whole ? lastBlock : whole.includes(lastBlock) ? whole : `${whole}\n\n${lastBlock}`
+  await speakReply(text, paneKey)
+}
+
 function useSpeakRepliesTriggers(): void {
   useEffect(() => {
     const mountedAt = Date.now()
@@ -61,7 +75,7 @@ function useSpeakRepliesTriggers(): void {
         }
         const reply = finishedTurnReply(entry, before, mountedAt)
         if (reply) {
-          void speakReply(reply, paneKey)
+          void speakWholeTurn(reply, entry.providerSession?.transcriptPath, paneKey)
         }
       }
     })
