@@ -1,10 +1,12 @@
 import type { BrowserGrabPayload } from '../../../../../shared/browser-grab-types'
 
 const ELEMENT_TEXT_MAX_CHARS = 1500
+const FENCE = '```'
 
 export type AskPromptItem =
-  | { kind: 'element'; payload: BrowserGrabPayload; screenshotPath: string | null }
+  | { kind: 'element'; payload: BrowserGrabPayload }
   | { kind: 'text'; text: string }
+  | { kind: 'elements'; text: string }
   | { kind: 'page'; textPath: string | null; text: string }
 
 function decodeEntities(text: string): string {
@@ -31,58 +33,53 @@ export function elementText(payload: BrowserGrabPayload): string {
   return text.length > ELEMENT_TEXT_MAX_CHARS ? `${text.slice(0, ELEMENT_TEXT_MAX_CHARS)}…` : text
 }
 
-function quote(text: string): string {
-  return text
-    .trim()
-    .split('\n')
-    .map((line) => `> ${line}`)
-    .join('\n')
-}
-
-function describeElement(payload: BrowserGrabPayload, screenshotPath: string | null): string {
+function describeElement(payload: BrowserGrabPayload): string {
   const { target } = payload
   const name = target.accessibility.accessibleName?.trim()
+  const { width, height } = target.rectPage
+  const styles = Object.entries(target.computedStyles)
+    .filter(([, value]) => value)
+    .map(([key, value]) => `${key.replace(/[A-Z]/g, (c) => `-${c.toLowerCase()}`)}: ${value}`)
+    .join('; ')
   const lines = [
-    `Element <${target.tagName.toLowerCase()}>${name ? ` "${name}"` : ''} at \`${target.elementPath ?? target.selector}\``
+    `Element <${target.tagName.toLowerCase()}>${name ? ` "${name}"` : ''} at \`${target.elementPath ?? target.selector}\` (${Math.round(width)} x ${Math.round(height)} px)`
   ]
-  if (target.selectedText?.trim()) {
-    lines.push(`Selected text:\n${quote(target.selectedText)}`)
+  if (styles) {
+    lines.push(`Styles: ${styles}`)
   }
-  const text = elementText(payload)
-  if (text) {
-    lines.push(`Text:\n${quote(text)}`)
-  }
-  if (screenshotPath) {
-    lines.push(`Screenshot: ${screenshotPath}`)
+  if (target.htmlSnippet) {
+    lines.push(`Markup:\n${FENCE}html\n${target.htmlSnippet}\n${FENCE}`)
   }
   return lines.join('\n')
+}
+
+function describeItem(item: AskPromptItem): string {
+  switch (item.kind) {
+    case 'element':
+      return describeElement(item.payload)
+    case 'text':
+      return `Highlighted on the page:\n\n${item.text.trim()}`
+    case 'elements':
+      return `Elements my highlight covers:\n\n${item.text.trim()}`
+    case 'page':
+      return item.textPath
+        ? `The whole page's text, saved at: ${item.textPath}`
+        : `The whole page's text:\n\n${item.text.trim()}`
+  }
 }
 
 /** The message an agent receives: the question first, then what the user pointed at. */
 export function buildAskPrompt(args: {
   question: string
   page: { title: string; url: string }
-  items: AskPromptItem[]
+  items: readonly AskPromptItem[]
 }): string {
   const parts = [args.question.trim()]
   if (args.items.length > 0) {
     parts.push(
-      `About the web page I'm looking at in Orca: "${args.page.title}" (${args.page.url}). I picked:`
+      `About the web page I'm looking at in Orca: "${args.page.title}" (${args.page.url}).`
     )
-    args.items.forEach((item, index) => {
-      const body =
-        item.kind === 'element'
-          ? describeElement(item.payload, item.screenshotPath)
-          : item.kind === 'text'
-            ? `Selected text:\n${quote(item.text)}`
-            : item.textPath
-              ? `The whole page's text, saved at: ${item.textPath}`
-              : `The whole page's text:\n${quote(item.text)}`
-      parts.push(`${index + 1}. ${body}`)
-    })
-    if (args.items.some((item) => item.kind === 'element' && item.screenshotPath)) {
-      parts.push('Open the screenshot files to see what I see.')
-    }
+    args.items.forEach((item, index) => parts.push(`${index + 1}. ${describeItem(item)}`))
   }
   return parts.join('\n\n')
 }
