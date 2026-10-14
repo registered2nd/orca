@@ -11501,7 +11501,12 @@
               "micInput": "input",
               "micDevice": "device",
               "micAirpods": "airpods",
-              "micDefault": "system default"
+              "micDefault": "system default",
+              "readAloudTitle": "Read Replies Aloud",
+              "readAloudDescription": "Speak finished agent replies with an Azure or system voice.",
+              "readAloudTts": "tts",
+              "readAloudSpeak": "read aloud",
+              "readAloudAzure": "azure"
             }
           }
         },
@@ -13384,6 +13389,33 @@
           "manualDeleteWarning": "Only do this if no other machine sharing this home runs Orca for this profile.",
           "close": "Close",
           "reclaimedNotStarted": "The lock was cleared, but Orca’s server did not start."
+        },
+        "readAloud": {
+          "keySaved": "Azure Speech key saved",
+          "keyCleared": "Azure Speech key cleared",
+          "keyStored": "A key is stored in Orca.",
+          "keyFromEnv": "Using AZURE_SPEECH_KEY from the environment.",
+          "keyMissing": "No key: replies are read with the system voice.",
+          "enable": "Read Replies Aloud",
+          "enableDescription": "Speak each finished agent reply. Toggle with",
+          "enableDescriptionEnd": "; dictating or sending a new prompt stops it.",
+          "scope": "Which Agents Speak",
+          "scopeDescription": "The agent pane you last focused, or every agent that finishes.",
+          "scopeFocused": "Focused agent",
+          "scopeAll": "Every agent",
+          "voice": "Voice",
+          "voiceDescription": "Azure voice for English and mixed replies.",
+          "voiceZh": "Chinese Voice",
+          "voiceZhDescription": "Azure voice for replies that are mostly Chinese.",
+          "rate": "Speaking Rate",
+          "rateDescription": "Percent faster (or slower, when negative) than normal.",
+          "region": "Azure Region",
+          "regionDescription": "Empty uses AZURE_SPEECH_REGION.",
+          "key": "Azure Speech Key",
+          "save": "Save",
+          "clear": "Clear",
+          "sample": "This is how agent replies will sound.",
+          "test": "Test"
         }
       },
       "right": {
@@ -18730,6 +18762,12 @@
         "cancelled": "This plain SSH terminal was closed before it started.",
         "terminalUnavailable": "Orca couldn’t open a terminal here.",
         "openHint": "Keeps you working on the host while Orca can’t set up there."
+      },
+      "speakReplies": {
+        "controller": {
+          "stop": "Stop reading aloud",
+          "reading": "Reading reply aloud"
+        }
       }
     },
     "i18n": {
