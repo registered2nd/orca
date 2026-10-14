@@ -4,6 +4,10 @@ import type {
   DictationContext,
   OpenAiCompatibleSpeechProvider,
   OpenAiCompatibleSpeechProviderSummary,
+  SpeakControlEvent,
+  SpeakRepliesStatus,
+  SpeakRepliesUpdate,
+  SpeakSynthesisResult,
   SpeechAudioPortMessage,
   SpeechErrorEvent,
   SpeechLifecycleEvent,
@@ -145,5 +149,19 @@ export const speechApi = {
       callback(data)
     ipcRenderer.on('speech:error', listener)
     return () => ipcRenderer.removeListener('speech:error', listener)
+  },
+  synthesizeReply: (text: string): Promise<SpeakSynthesisResult> =>
+    ipcRenderer.invoke('speech:synthesizeReply', text),
+  getSpeakRepliesStatus: (): Promise<SpeakRepliesStatus> =>
+    ipcRenderer.invoke('speech:getSpeakRepliesStatus'),
+  updateSpeakReplies: (update: SpeakRepliesUpdate): Promise<SpeakRepliesStatus> =>
+    ipcRenderer.invoke('speech:updateSpeakReplies', update),
+  setAzureSpeechCredentials: (key: string | null, region?: string): Promise<SpeakRepliesStatus> =>
+    ipcRenderer.invoke('speech:setAzureSpeechCredentials', key, region),
+  onSpeakControl: (callback: (event: SpeakControlEvent) => void): (() => void) => {
+    const listener = (_event: Electron.IpcRendererEvent, data: SpeakControlEvent): void =>
+      callback(data)
+    ipcRenderer.on('speech:speakControl', listener)
+    return () => ipcRenderer.removeListener('speech:speakControl', listener)
   }
 } satisfies PreloadApi['speech']
