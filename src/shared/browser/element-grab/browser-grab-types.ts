@@ -91,7 +91,17 @@ export type BrowserAnnotationPayload = Omit<BrowserGrabPayload, 'screenshot'> & 
   screenshot: null
 }
 
-export type GrabIntent = 'copy' | 'annotate'
+export type GrabIntent = 'copy' | 'annotate' | 'ask'
+
+export type BrowserAskReadPageArgs = { browserPageId: string; what: 'selection' | 'page' }
+
+export type BrowserAskReadPageResult =
+  | { ok: true; text: string; title: string; url: string }
+  | { ok: false; reason: string }
+
+export type BrowserAskSaveAttachmentArgs =
+  | { kind: 'png'; dataUrl: string }
+  | { kind: 'text'; text: string }
 
 /** Why a grab operation was cancelled before the user selected an element. */
 export type BrowserGrabCancelReason = 'user' | 'tab-inactive' | 'navigation' | 'evicted' | 'timeout'
