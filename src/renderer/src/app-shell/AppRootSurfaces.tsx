@@ -9,6 +9,7 @@ import { useTranslate } from '@/i18n/use-translate'
 import { RecoverableRenderErrorBoundary } from '../components/error-boundaries/RecoverableRenderErrorBoundary'
 import NewWorkspaceComposerModal from '../components/new-workspace/composer/NewWorkspaceComposerModal'
 import { CrashReportDialog } from '../components/crash-report/CrashReportDialog'
+import { SpeakRepliesSurface } from '../components/speak-replies/SpeakRepliesSurface'
 import { MarkdownTemplatePicker } from '../components/editor/markdown/documents/MarkdownTemplatePicker'
 import RecentTabSwitcher from '../components/tab-bar/recent-switcher/RecentTabSwitcher'
 import { SkillFreshnessUpdateDialog } from '../components/skills/freshness/SkillFreshnessUpdateDialog'
@@ -389,6 +390,7 @@ export const AppRootSurfaces = memo(function AppRootSurfaces(props: {
           </OverlayBoundary>
         </Suspense>
       ) : null}
+      <SpeakRepliesSurface />
       <OverlayBoundary boundaryId="overlay.recent-tab-switcher" resetKey={activeView}>
         <RecentTabSwitcher />
       </OverlayBoundary>
