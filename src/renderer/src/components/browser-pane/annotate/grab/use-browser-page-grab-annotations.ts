@@ -193,6 +193,12 @@ export function useBrowserPageGrabAnnotations({
 
   const startGrabIntent = useCallback(
     (nextIntent: GrabIntent): void => {
+      // Ask opens unarmed so text can be highlighted; its toolbar button toggles the panel.
+      if (nextIntent === 'ask') {
+        grabRef.current.cancel()
+        setGrabIntent(grabIntent === 'ask' ? 'copy' : 'ask')
+        return
+      }
       recordFeatureInteraction('browser-grab')
       if (nextIntent === 'annotate') {
         recordFeatureInteraction('browser-annotations')
@@ -294,11 +300,6 @@ export function useBrowserPageGrabAnnotations({
     }
   }, [grab, grabIntent])
 
-  const endAskIntent = useCallback((): void => {
-    grabRef.current.cancel()
-    setGrabIntent('copy')
-  }, [])
-
   const cancelPendingBrowserCapture = useCallback((): void => {
     claimGrabToast()
     grabRef.current.cancel()
@@ -325,7 +326,6 @@ export function useBrowserPageGrabAnnotations({
     handleAddBrowserAnnotation,
     handleCancelPendingBrowserAnnotation,
     cancelPendingBrowserCapture,
-    handleGrabActionShortcut,
-    endAskIntent
+    handleGrabActionShortcut
   }
 }
