@@ -13398,7 +13398,7 @@
           "keyMissing": "No key: replies are read with the system voice.",
           "enable": "Read Replies Aloud",
           "enableDescription": "Speak each finished agent reply. Toggle with",
-          "enableDescriptionEnd": "; dictating or sending a new prompt stops it.",
+          "enableDescriptionEnd": "; sending a new prompt to that agent stops it.",
           "scope": "Which Agents Speak",
           "scopeDescription": "The agent pane you last focused, or every agent that finishes.",
           "scopeFocused": "Focused agent",
