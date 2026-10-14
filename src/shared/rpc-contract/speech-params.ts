@@ -67,6 +67,7 @@ export const SpeakRepliesConfigure = z
     speakVoice: z.string().trim().min(1).max(200).optional(),
     speakVoiceZh: z.string().trim().min(1).max(200).optional(),
     speakRate: z.number().int().min(-50).max(100).optional(),
+    speakMixedVoices: z.boolean().optional(),
     azureSpeechRegion: z.string().trim().max(64).optional()
   })
   .strict()
