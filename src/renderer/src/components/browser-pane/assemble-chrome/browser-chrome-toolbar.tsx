@@ -17,6 +17,7 @@ import {
   type BrowserChromeNoteActions
 } from './browser-annotate-split-button'
 import { useFloatingSplitBrowserClose } from './use-floating-split-browser-close'
+import { BrowserChromeAskButton } from './browser-chrome-ask-button'
 
 export type {
   BrowserChromeElementTools,
@@ -126,6 +127,7 @@ export function BrowserChromeToolbar({
         compact={folded.has('annotate-label')}
         showTourAnchors={showTourAnchors}
       />
+      <BrowserChromeAskButton tools={elementTools} />
       <span className="flex shrink-0 items-center">
         {extensionActions?.(folded.has('extensions'), overflowTriggerRef)}
         {overflowMenu({

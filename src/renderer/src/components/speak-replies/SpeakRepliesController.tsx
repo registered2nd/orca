@@ -6,7 +6,7 @@ import { ShortcutKeyCombo } from '@/components/ShortcutKeyCombo'
 import { useShortcutKeyDetails } from '@/hooks/useShortcutLabel'
 import { translate } from '@/i18n/i18n'
 import { useAppStore } from '@/store'
-import { getFocusedAgentPaneKeyForWorktree } from '../sidebar/focused-agent-row-highlight'
+import { getLastFocusedAgentPane, trackLastFocusedAgentPane } from '@/lib/last-focused-agent-pane'
 import {
   getReplySpeechState,
   speakReply,
@@ -32,19 +32,10 @@ async function speakWholeTurn(
 function useSpeakRepliesTriggers(): void {
   useEffect(() => {
     const mountedAt = Date.now()
-    const initial = useAppStore.getState()
-    let lastFocusedAgentPaneKey = initial.activeWorktreeId
-      ? getFocusedAgentPaneKeyForWorktree(initial, initial.activeWorktreeId)
-      : null
+    // Started before the store subscription below, so it has recorded focus by the time that reads it.
+    const stopTracking = trackLastFocusedAgentPane()
 
     const unsubscribeStore = useAppStore.subscribe((state, previous) => {
-      if (state.activeWorktreeId) {
-        // Why: remember the last agent pane, so looking at a browser pane keeps that agent speaking.
-        const focused = getFocusedAgentPaneKeyForWorktree(state, state.activeWorktreeId)
-        if (focused) {
-          lastFocusedAgentPaneKey = focused
-        }
-      }
       // Why: dictation does not stop the voice, so the user can talk while listening.
       const voice = state.settings?.voice
       if (previous.settings?.voice?.speakReplies && !voice?.speakReplies) {
@@ -65,7 +56,7 @@ function useSpeakRepliesTriggers(): void {
         if (!voice?.speakReplies) {
           continue
         }
-        if (voice.speakScope !== 'all' && paneKey !== lastFocusedAgentPaneKey) {
+        if (voice.speakScope !== 'all' && paneKey !== getLastFocusedAgentPane()?.paneKey) {
           continue
         }
         const reply = finishedTurnReply(entry, before, mountedAt)
@@ -86,6 +77,7 @@ function useSpeakRepliesTriggers(): void {
     return () => {
       unsubscribeStore()
       unsubscribeControl()
+      stopTracking()
       stopReplySpeech()
     }
   }, [])
