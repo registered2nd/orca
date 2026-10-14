@@ -23,6 +23,7 @@ import { VoiceModelUnloadSetting } from './VoiceModelUnloadSetting'
 import { VoiceSpeechModelSection } from './VoiceSpeechModelSection'
 import { SettingsSubsectionHeader, SettingsSwitchRow } from '../form-controls/SettingsFormControls'
 import { VoiceSpeechGpuSetting } from './VoiceSpeechGpuSetting'
+import { VoiceReadAloudSettingsSection } from './VoiceReadAloudSettingsSection'
 import { useTranslate } from '@/i18n/use-translate'
 import { readIpcErrorMessage } from '@/lib/ipc-error'
 import { useLanguageReadiness } from '@/i18n/language-readiness'
@@ -329,6 +330,15 @@ export function VoicePane({ settings, updateSettings }: VoicePaneProps): React.J
           />
         </>
       ) : null}
+
+      <Separator />
+
+      <div className="space-y-1">
+        <VoiceReadAloudSettingsSection
+          voiceSettings={voiceSettings}
+          onUpdateVoiceSettings={updateVoiceSettings}
+        />
+      </div>
 
       <Separator />
 
