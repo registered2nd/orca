@@ -40,6 +40,7 @@ export type SpeechApi = {
   onError: (callback: (data: SpeechErrorEvent) => void) => () => void
   synthesizeReply: (text: string) => Promise<SpeakSynthesisResult>
   getSpeakRepliesStatus: () => Promise<SpeakRepliesStatus>
+  turnReplyText: (transcriptPath: string) => Promise<string | null>
   updateSpeakReplies: (update: SpeakRepliesUpdate) => Promise<SpeakRepliesStatus>
   setAzureSpeechCredentials: (key: string | null, region?: string) => Promise<SpeakRepliesStatus>
   onSpeakControl: (callback: (event: SpeakControlEvent) => void) => () => void
