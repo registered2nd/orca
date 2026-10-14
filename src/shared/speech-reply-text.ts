@@ -12,6 +12,49 @@ export function speechLanguageOf(text: string): SpeechLanguage {
   return cjk > latin / 2 ? 'zh' : 'en'
 }
 
+export type SpeechSegment = { language: SpeechLanguage; text: string }
+
+// A Chinese run starts at a Han character and carries on through CJK punctuation, digits and spaces.
+const CHINESE_RUN_RE = /[㐀-鿿豈-﫿][㐀-鿿豈-﫿　-〿＀-￯\d\s]*/g
+// Short English inside Chinese ("API", a file name) stays with the Chinese voice.
+const MAX_EMBEDDED_ENGLISH_WORDS = 3
+
+/** Splits mixed text into runs, each read by the voice for its language. */
+export function speechSegments(text: string): SpeechSegment[] {
+  const pieces: SpeechSegment[] = []
+  let last = 0
+  for (const match of text.matchAll(CHINESE_RUN_RE)) {
+    if (match.index > last) {
+      pieces.push({ language: 'en', text: text.slice(last, match.index) })
+    }
+    pieces.push({ language: 'zh', text: match[0] })
+    last = match.index + match[0].length
+  }
+  if (last < text.length) {
+    pieces.push({ language: 'en', text: text.slice(last) })
+  }
+  const merged: SpeechSegment[] = []
+  pieces.forEach((piece, index) => {
+    const words = piece.text.match(/[A-Za-z0-9][\w.'-]*/g)?.length ?? 0
+    const betweenChinese =
+      pieces[index - 1]?.language === 'zh' && pieces[index + 1]?.language === 'zh'
+    const language =
+      piece.language === 'en' &&
+      (words === 0 || (betweenChinese && words <= MAX_EMBEDDED_ENGLISH_WORDS))
+        ? (merged.at(-1)?.language ?? 'en')
+        : piece.language
+    const previous = merged.at(-1)
+    if (previous && previous.language === language) {
+      previous.text += piece.text
+    } else {
+      merged.push({ language, text: piece.text })
+    }
+  })
+  return merged
+    .map((segment) => ({ ...segment, text: segment.text.trim() }))
+    .filter((segment) => segment.text.length > 0)
+}
+
 function speakableInlineCode(code: string): string {
   // Paths read aloud are noise; the file name carries the meaning.
   const named = /[/\\]/.test(code)
@@ -79,15 +122,17 @@ function escapeXml(text: string): string {
 }
 
 export function buildSpeechSsml(args: {
-  text: string
-  voice: string
-  language: SpeechLanguage
+  segments: SpeechSegment[]
+  voices: Record<SpeechLanguage, string>
   ratePercent: number
 }): string {
-  const lang = args.language === 'zh' ? 'zh-CN' : 'en-US'
+  const lang = args.segments[0]?.language === 'zh' ? 'zh-CN' : 'en-US'
   const rate = `${args.ratePercent >= 0 ? '+' : ''}${Math.round(args.ratePercent)}%`
-  return (
-    `<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='${lang}'>` +
-    `<voice name='${escapeXml(args.voice)}'><prosody rate='${rate}'>${escapeXml(args.text)}</prosody></voice></speak>`
-  )
+  const voices = args.segments
+    .map(
+      (segment) =>
+        `<voice name='${escapeXml(args.voices[segment.language])}'><prosody rate='${rate}'>${escapeXml(segment.text)}</prosody></voice>`
+    )
+    .join('')
+  return `<speak version='1.0' xmlns='http://www.w3.org/2001/10/synthesis' xml:lang='${lang}'>${voices}</speak>`
 }
