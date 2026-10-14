@@ -12,6 +12,7 @@ import type { BrowserPageTabShortcut } from '../../../../../shared/browser/guest
 import type { ResolveRenderer } from '../../browser-guest-renderer-target'
 import { matchesGuestTabShortcut } from './browser-guest-tab-shortcut'
 import { textInputOwnsComposition } from '../../../../../shared/keybindings/text-input-shortcut-policy'
+import { handleSpeakRepliesShortcut } from '../speech/speak-replies-shortcut'
 
 export type ShouldForwardDictationShortcut = () => boolean
 export type IsMobileEmulatorEnabled = () => boolean
@@ -43,6 +44,9 @@ export function forwardGuestShortcutInput(
   input: GuestShortcutInput,
   action = resolveWindowShortcutAction(input, process.platform, ctx.getKeybindings?.())
 ): boolean {
+  if (handleSpeakRepliesShortcut(event, input, ctx.getKeybindings?.())) {
+    return true
+  }
   const {
     browserTabId,
     resolveRenderer,

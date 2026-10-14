@@ -201,5 +201,21 @@ export const KEYBINDING_DEFINITION_CORE_4: readonly KeybindingDefinition[] = [
     conflictGroups: ['global', 'tabs', 'botItem'],
     searchKeywords: ['shortcut', 'bot', 'item', 'items', 'next', 'down'],
     defaultBindings: platformBindings(['Mod+Alt+ArrowDown'])
+  },
+  {
+    id: 'voice.speakReplies.toggle',
+    title: 'Read Replies Aloud',
+    group: 'Global',
+    scope: 'global',
+    searchKeywords: ['shortcut', 'voice', 'speech', 'read aloud', 'speak', 'tts'],
+    defaultBindings: platformBindings(['Mod+Alt+E'])
+  },
+  {
+    id: 'voice.speakReplies.stop',
+    title: 'Stop Reading Aloud',
+    group: 'Global',
+    scope: 'global',
+    searchKeywords: ['shortcut', 'voice', 'speech', 'read aloud', 'stop', 'tts'],
+    defaultBindings: platformBindings(['Mod+Alt+S'])
   }
 ]
