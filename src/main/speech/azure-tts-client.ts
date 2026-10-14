@@ -1,5 +1,5 @@
 import type { SpeakSynthesisResult, VoiceSettings } from '../../shared/speech-types'
-import { buildSpeechSsml, speechLanguageOf } from '../../shared/speech-reply-text'
+import { buildSpeechSsml, speechLanguageOf, speechSegments } from '../../shared/speech-reply-text'
 import { readAzureSpeechKey } from './azure-speech-key-store'
 
 const SYNTHESIS_TIMEOUT_MS = 20_000
@@ -12,7 +12,10 @@ export function resolveAzureSpeechRegion(voice: Pick<VoiceSettings, 'azureSpeech
 /** One chunk of text to MP3 through Azure's REST endpoint; no SDK, no native module. */
 export async function synthesizeWithAzure(
   text: string,
-  voice: Pick<VoiceSettings, 'azureSpeechRegion' | 'speakVoice' | 'speakVoiceZh' | 'speakRate'>
+  voice: Pick<
+    VoiceSettings,
+    'azureSpeechRegion' | 'speakVoice' | 'speakVoiceZh' | 'speakRate' | 'speakMixedVoices'
+  >
 ): Promise<SpeakSynthesisResult> {
   let key: string | null
   try {
@@ -27,11 +30,11 @@ export async function synthesizeWithAzure(
   if (!region) {
     return { ok: false, reason: 'no-region' }
   }
-  const language = speechLanguageOf(text)
   const ssml = buildSpeechSsml({
-    text,
-    voice: language === 'zh' ? voice.speakVoiceZh : voice.speakVoice,
-    language,
+    segments: voice.speakMixedVoices
+      ? speechSegments(text)
+      : [{ language: speechLanguageOf(text), text }],
+    voices: { en: voice.speakVoice, zh: voice.speakVoiceZh },
     ratePercent: voice.speakRate
   })
   try {
