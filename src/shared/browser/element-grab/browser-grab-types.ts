@@ -92,7 +92,17 @@ export type BrowserAnnotationPayload = Omit<BrowserGrabPayload, 'screenshot'> & 
   screenshot: null
 }
 
-export type GrabIntent = 'copy' | 'annotate'
+export type GrabIntent = 'copy' | 'annotate' | 'ask'
+
+export type BrowserAskReadPageArgs = { browserPageId: string; what: 'selection' | 'page' }
+
+export type BrowserAskReadPageResult =
+  | { ok: true; text: string; title: string; url: string }
+  | { ok: false; reason: string }
+
+export type BrowserAskSaveAttachmentArgs =
+  | { kind: 'png'; dataUrl: string }
+  | { kind: 'text'; text: string }
 
 /** Bare keys that copy (C) or screenshot (S) the hovered or picked element while Grab is on. */
 export type BrowserGrabActionKey = 'c' | 's'

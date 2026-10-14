@@ -143,7 +143,8 @@ export function useBrowserPageGrabAnnotations({
 
   // The picker supports clipboard copying and independently dismissible annotation drafts.
   useEffect(() => {
-    if (grab.state !== 'confirming' || !grab.payload) {
+    // Ask-mode picks are collected by the Ask panel.
+    if (grab.state !== 'confirming' || !grab.payload || grabIntent === 'ask') {
       return
     }
     if (grabIntent === 'annotate') {
@@ -211,7 +212,7 @@ export function useBrowserPageGrabAnnotations({
         return
       }
       setGrabIntent(nextIntent)
-      if (nextIntent === 'copy') {
+      if (nextIntent !== 'annotate') {
         setPendingAnnotationPayload(null)
       }
       if (grab.state === 'idle' || grab.state === 'error' || grabIntent === nextIntent) {
@@ -306,6 +307,7 @@ export function useBrowserPageGrabAnnotations({
   return {
     grabIntent,
     startGrabIntent,
+    setGrabIntent,
     pendingAnnotationPayload,
     setPendingAnnotationPayload,
     grabToast,

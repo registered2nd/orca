@@ -17,6 +17,7 @@ import { syncGuestAnnotationViewportBridge } from './viewport/guest-annotation-v
 import { consumeBrowserAnnotationViewportMessage } from './viewport/browser-annotation-viewport-message'
 import { useBrowserPageAnnotationSend } from './delivery/use-browser-page-annotation-send'
 import { useBrowserPageGrabAnnotations } from './grab/use-browser-page-grab-annotations'
+import { useBrowserAskIntent } from '../ask/use-browser-ask-intent'
 import { useGrabMode } from './grab/useGrabMode'
 import { useBrowserGrabShortcuts } from './use-browser-grab-shortcuts'
 import {
@@ -107,7 +108,7 @@ export function useBrowserGuestAnnotateTools({
   const annotateElementShortcut = useShortcutLabel('browser.annotateElement')
   const grab = useGrabMode(toolTargetId, transport, paletteKeys)
   const annotationSend = useBrowserPageAnnotationSend({ browserTabId: browserPageId, worktreeId })
-  const grabAnnotations = useBrowserPageGrabAnnotations({
+  const pickerAnnotations = useBrowserPageGrabAnnotations({
     browserTabId: browserPageId,
     toolTargetId,
     isActive,
@@ -119,6 +120,7 @@ export function useBrowserGuestAnnotateTools({
     setBrowserOverlayViewport,
     browserAnnotationsLength: annotationSend.browserAnnotations.length
   })
+  const grabAnnotations = useBrowserAskIntent(pickerAnnotations, grab)
   const { browserAnnotations } = annotationSend
   const { pendingAnnotationPayload, cancelPendingBrowserCapture } = grabAnnotations
   const markerIds = useAppStore((s) =>

@@ -29,6 +29,7 @@ import BrowserFind from './find/BrowserFind'
 import { BrowserNewTabPage } from '../new-tab/BrowserNewTabPage'
 import { BrowserGuestAnnotateOverlays } from '../annotate/browser-guest-annotate-overlays'
 import { BrowserPasswordFillDropdown } from '../passwords/BrowserPasswordFillDropdown'
+import { BrowserPageAskPanel } from '../ask/BrowserPageAskPanel'
 import type { MarkupModeController } from '../annotate/capture/useMarkupMode'
 import type { GrabModeHook } from '../annotate/grab/useGrabMode'
 import type { BrowserOverlayViewport } from '../describe-page/browser-annotation-geometry'
@@ -121,6 +122,14 @@ export function BrowserPageViewportOverlays({
         }
         showPaletteKeyHints
       />
+      {grabAnnotations.grabIntent === 'ask' ? (
+        <BrowserPageAskPanel
+          browserPageId={browserTab.id}
+          page={{ title: browserTab.title, url: browserTab.url }}
+          grab={grab}
+          onClose={() => grabAnnotations.startGrabIntent('ask')}
+        />
+      ) : null}
       <BrowserPageFeedbackBadge ref={feedbackBadgeRef} />
       <BrowserPasswordFillDropdown
         isActive={isActive}
