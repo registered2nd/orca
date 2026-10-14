@@ -1,0 +1,128 @@
+import { useEffect, useSyncExternalStore } from 'react'
+import { Square, Volume2 } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import { ShortcutKeyCombo } from '@/components/ShortcutKeyCombo'
+import { useShortcutKeyDetails } from '@/hooks/useShortcutLabel'
+import { translate } from '@/i18n/i18n'
+import { useAppStore } from '@/store'
+import { getFocusedAgentPaneKeyForWorktree } from '../sidebar/focused-agent-row-highlight'
+import {
+  getReplySpeechState,
+  speakReply,
+  stopReplySpeech,
+  subscribeReplySpeech
+} from './reply-speech-player'
+import { finishedTurnReply, startedNewTurn } from './speak-replies-trigger'
+
+function useSpeakRepliesTriggers(): void {
+  useEffect(() => {
+    const mountedAt = Date.now()
+    const initial = useAppStore.getState()
+    let lastFocusedAgentPaneKey = initial.activeWorktreeId
+      ? getFocusedAgentPaneKeyForWorktree(initial, initial.activeWorktreeId)
+      : null
+
+    const unsubscribeStore = useAppStore.subscribe((state, previous) => {
+      if (state.activeWorktreeId) {
+        // Why: remember the last agent pane, so looking at a browser pane keeps that agent speaking.
+        const focused = getFocusedAgentPaneKeyForWorktree(state, state.activeWorktreeId)
+        if (focused) {
+          lastFocusedAgentPaneKey = focused
+        }
+      }
+      if (
+        state.dictationState !== previous.dictationState &&
+        (state.dictationState === 'starting' || state.dictationState === 'listening')
+      ) {
+        stopReplySpeech()
+      }
+      const voice = state.settings?.voice
+      if (previous.settings?.voice?.speakReplies && !voice?.speakReplies) {
+        stopReplySpeech()
+      }
+      if (state.agentStatusByPaneKey === previous.agentStatusByPaneKey) {
+        return
+      }
+      const speaking = getReplySpeechState()
+      for (const [paneKey, entry] of Object.entries(state.agentStatusByPaneKey)) {
+        const before = previous.agentStatusByPaneKey[paneKey]
+        if (entry === before) {
+          continue
+        }
+        if (speaking.speaking && speaking.paneKey === paneKey && startedNewTurn(entry, before)) {
+          stopReplySpeech()
+        }
+        if (!voice?.speakReplies) {
+          continue
+        }
+        if (voice.speakScope !== 'all' && paneKey !== lastFocusedAgentPaneKey) {
+          continue
+        }
+        const reply = finishedTurnReply(entry, before, mountedAt)
+        if (reply) {
+          void speakReply(reply, paneKey)
+        }
+      }
+    })
+
+    const unsubscribeControl = window.api.speech.onSpeakControl((event) => {
+      if (event.action === 'stop') {
+        stopReplySpeech()
+      } else {
+        void speakReply(event.text, null)
+      }
+    })
+
+    return () => {
+      unsubscribeStore()
+      unsubscribeControl()
+      stopReplySpeech()
+    }
+  }, [])
+}
+
+export function SpeakRepliesController(): React.JSX.Element | null {
+  useSpeakRepliesTriggers()
+  const speech = useSyncExternalStore(subscribeReplySpeech, getReplySpeechState)
+  const shortcut = useShortcutKeyDetails('voice.speakReplies.stop')
+  if (!speech.speaking) {
+    return null
+  }
+  const stopLabel = translate('auto.components.speakReplies.controller.stop', 'Stop reading aloud')
+  return (
+    <div
+      data-testid="speak-replies-indicator"
+      className="fixed bottom-24 left-1/2 z-50 flex h-10 -translate-x-1/2 items-center gap-2 rounded-full border border-border bg-popover/95 px-3 text-sm text-popover-foreground shadow-floating backdrop-blur"
+    >
+      <Volume2 className="size-4 text-muted-foreground" aria-hidden />
+      <span className="font-medium">
+        {translate('auto.components.speakReplies.controller.reading', 'Reading reply aloud')}
+      </span>
+      <span aria-hidden className="h-4 w-px shrink-0 bg-border" />
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon-xs"
+            aria-label={stopLabel}
+            className="shrink-0"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={stopReplySpeech}
+          >
+            <Square className="size-3 fill-current" />
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent side="top" sideOffset={6}>
+          <span className="flex items-center gap-1.5">
+            {stopLabel}
+            {shortcut.keys.length > 0 ? (
+              <ShortcutKeyCombo keys={shortcut.keys} doubleTap={shortcut.doubleTap} />
+            ) : null}
+          </span>
+        </TooltipContent>
+      </Tooltip>
+    </div>
+  )
+}

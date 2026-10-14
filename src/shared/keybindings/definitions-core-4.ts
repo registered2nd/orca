@@ -182,5 +182,21 @@ export const KEYBINDING_DEFINITION_CORE_4: readonly KeybindingDefinition[] = [
       linux: ['Alt+ArrowLeft'],
       win32: ['Alt+ArrowLeft']
     }
+  },
+  {
+    id: 'voice.speakReplies.toggle',
+    title: 'Read Replies Aloud',
+    group: 'Global',
+    scope: 'global',
+    searchKeywords: ['shortcut', 'voice', 'speech', 'read aloud', 'speak', 'tts'],
+    defaultBindings: platformBindings(['Mod+Alt+E'])
+  },
+  {
+    id: 'voice.speakReplies.stop',
+    title: 'Stop Reading Aloud',
+    group: 'Global',
+    scope: 'global',
+    searchKeywords: ['shortcut', 'voice', 'speech', 'read aloud', 'stop', 'tts'],
+    defaultBindings: platformBindings(['Mod+Alt+S'])
   }
 ]
