@@ -126,6 +126,7 @@ export function getDefaultVoiceSettings(): VoiceSettings {
     speakVoice: DEFAULT_SPEAK_VOICE,
     speakVoiceZh: DEFAULT_SPEAK_VOICE_ZH,
     speakRate: 10,
+    speakMixedVoices: false,
     azureSpeechRegion: '',
     azureSpeechKeyConfigured: false
   }
