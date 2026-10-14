@@ -47,7 +47,8 @@ export function BrowserGuestGrabBanner({
     handleClearBrowserAnnotations
   } = tools.annotationSend
   const browserAnnotationsLength = browserAnnotations.length
-  if (grab.state === 'idle') {
+  // Ask mode explains itself in its own panel.
+  if (grab.state === 'idle' || grabIntent === 'ask') {
     return null
   }
   return (

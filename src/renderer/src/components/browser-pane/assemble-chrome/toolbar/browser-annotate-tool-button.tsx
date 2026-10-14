@@ -134,20 +134,22 @@ export function BrowserAnnotateToolButton({
     'Annotate page element'
   )
 
+  // Ask has its own toolbar button, so an Ask pick leaves this one idle.
+  const pickerIntent = tools.activeIntent === 'ask' ? null : tools.activeIntent
   const mode = markup.active
     ? { icon: PenTool, label: t('browser.toolbar.draw', 'Draw') }
-    : tools.activeIntent === 'copy'
+    : pickerIntent === 'copy'
       ? { icon: Crosshair, label: t('browser.toolbar.grab', 'Grab') }
       : { icon: SquareMousePointer, label: t('browser.toolbar.annotate', 'Annotate') }
-  const active = markup.active || tools.activeIntent !== null
+  const active = markup.active || pickerIntent !== null
   const ModeIcon = mode.icon
 
   // Clicking while armed stops that tool, so the button is always the way back out.
   const onPrimary = (): void => {
     if (markup.active) {
       markup.onToggle()
-    } else if (tools.activeIntent) {
-      tools.onStartIntent(tools.activeIntent)
+    } else if (pickerIntent) {
+      tools.onStartIntent(pickerIntent)
     } else {
       tools.onStartIntent('annotate')
     }
