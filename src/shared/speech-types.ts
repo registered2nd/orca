@@ -89,6 +89,8 @@ export type VoiceSettings = {
   speakVoiceZh: string
   /** Speaking-rate change in percent; 0 is the voice's normal speed. */
   speakRate: number
+  /** Experimental: switch voice inside a reply between its English and Chinese stretches. */
+  speakMixedVoices: boolean
   /** Azure Speech region (e.g. eastus2); empty falls back to AZURE_SPEECH_REGION. */
   azureSpeechRegion: string
   azureSpeechKeyConfigured: boolean
@@ -108,6 +110,7 @@ export type SpeakRepliesStatus = {
   speakVoice: string
   speakVoiceZh: string
   speakRate: number
+  speakMixedVoices: boolean
   /** The region synthesis uses: the setting, else AZURE_SPEECH_REGION. */
   azureSpeechRegion: string
   azureSpeechKey: 'stored' | 'environment' | 'missing'
@@ -122,6 +125,7 @@ export type SpeakRepliesUpdate = Partial<
     | 'speakVoice'
     | 'speakVoiceZh'
     | 'speakRate'
+    | 'speakMixedVoices'
     | 'azureSpeechRegion'
   >
 >
