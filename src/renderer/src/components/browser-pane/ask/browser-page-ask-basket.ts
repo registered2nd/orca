@@ -4,6 +4,7 @@ import type { BrowserGrabPayload } from '../../../../../shared/browser-grab-type
 export type BrowserAskItem =
   | { id: string; kind: 'element'; payload: BrowserGrabPayload }
   | { id: string; kind: 'text'; text: string }
+  | { id: string; kind: 'elements'; text: string }
   | { id: string; kind: 'page'; text: string }
 
 // Why: the basket outlives the picker re-arming and the panel remounting, and is per browser page.
