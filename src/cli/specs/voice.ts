@@ -30,8 +30,8 @@ export const VOICE_COMMAND_SPECS: CommandSpec[] = [
     path: ['voice', 'set'],
     summary: 'Change who speaks, the voices, the speaking rate or the Azure region',
     usage:
-      'orca voice set [--scope focused|all] [--voice <name>] [--voice-zh <name>] [--rate <percent>] [--region <region>] [--json]',
-    allowedFlags: [...GLOBAL_FLAGS, 'scope', 'voice', 'voice-zh', 'rate', 'region'],
+      'orca voice set [--scope focused|all] [--voice <name>] [--voice-zh <name>] [--rate <percent>] [--region <region>] [--mixed-voices on|off] [--json]',
+    allowedFlags: [...GLOBAL_FLAGS, 'scope', 'voice', 'voice-zh', 'rate', 'region', 'mixed-voices'],
     examples: [
       'orca voice set --scope all',
       'orca voice set --voice en-US-Andrew:DragonHDLatestNeural --rate 15'

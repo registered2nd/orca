@@ -203,6 +203,30 @@ export function VoiceReadAloudSettingsSection({
           }
         }}
       />
+      <div className="flex items-center justify-between gap-4 py-2">
+        <div className="space-y-0.5">
+          <Label>
+            {translate(
+              'auto.components.settings.readAloud.mixedVoices',
+              'Switch Voices in Mixed Replies (Experimental)'
+            )}
+          </Label>
+          <p className="text-xs text-muted-foreground">
+            {translate(
+              'auto.components.settings.readAloud.mixedVoicesDescription',
+              'Read the Chinese parts of a reply with the Chinese voice and the rest with the English voice.'
+            )}
+          </p>
+        </div>
+        <Switch
+          checked={voiceSettings.speakMixedVoices}
+          aria-label={translate(
+            'auto.components.settings.readAloud.mixedVoices',
+            'Switch Voices in Mixed Replies (Experimental)'
+          )}
+          onCheckedChange={(checked) => onUpdateVoiceSettings({ speakMixedVoices: checked })}
+        />
+      </div>
       <TextSetting
         id="speak-region"
         label={translate('auto.components.settings.readAloud.region', 'Azure Region')}
