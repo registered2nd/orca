@@ -122,7 +122,7 @@ export function VoiceReadAloudSettingsSection({
             {shortcutLabel}
             {translate(
               'auto.components.settings.readAloud.enableDescriptionEnd',
-              '; dictating or sending a new prompt stops it.'
+              '; sending a new prompt to that agent stops it.'
             )}
           </p>
         </div>
