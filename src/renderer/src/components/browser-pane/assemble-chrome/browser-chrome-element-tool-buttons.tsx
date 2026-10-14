@@ -1,4 +1,4 @@
-import { Crosshair, MessageSquarePlus } from 'lucide-react'
+import { Crosshair, MessageCircleQuestion, MessageSquarePlus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { translate } from '@/i18n/i18n'
@@ -109,6 +109,38 @@ export function BrowserChromeElementToolButtons({
                   'auto.components.browser.pane.BrowserPane.fc9be38f6f',
                   'Annotate page element'
                 )}
+          </TooltipContent>
+        </Tooltip>
+      ) : null}
+
+      {showAnnotate ? (
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span className="inline-flex">
+              <Button
+                size="icon"
+                variant={tools.activeIntent === 'ask' ? 'default' : 'ghost'}
+                className={cn(
+                  'h-8 w-8',
+                  tools.activeIntent === 'ask' &&
+                    'bg-foreground/80 text-background hover:bg-foreground/90'
+                )}
+                onClick={() => tools.onStartIntent('ask')}
+                disabled={tools.disabled}
+                aria-label={translate(
+                  'auto.components.browser.pane.ask.toolbar',
+                  'Ask your agent about this page'
+                )}
+              >
+                <MessageCircleQuestion className="size-4" />
+              </Button>
+            </span>
+          </TooltipTrigger>
+          <TooltipContent side="bottom" sideOffset={4}>
+            {translate(
+              'auto.components.browser.pane.ask.toolbar',
+              'Ask your agent about this page'
+            )}
           </TooltipContent>
         </Tooltip>
       ) : null}
