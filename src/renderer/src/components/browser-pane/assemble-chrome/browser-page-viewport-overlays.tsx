@@ -19,6 +19,7 @@ import { retryBrowserTabLoad, toDisplayUrl } from '../describe-page/browser-page
 import type { BrowserTabPageState } from '../describe-page/browser-page-types'
 import type { useBrowserPageAnnotationSend } from '../annotate/use-browser-page-annotation-send'
 import type { useBrowserPageGrabAnnotations } from '../annotate/use-browser-page-grab-annotations'
+import { BrowserPageAskPanel } from '../ask/BrowserPageAskPanel'
 
 export function BrowserPageViewportOverlays({
   markup,
@@ -86,6 +87,14 @@ export function BrowserPageViewportOverlays({
         worktreeId={worktreeId}
         currentUrl={browserTab.url}
       />
+      {grabAnnotations.grabIntent === 'ask' ? (
+        <BrowserPageAskPanel
+          browserPageId={browserTab.id}
+          page={{ title: browserTab.title, url: browserTab.url }}
+          grab={grab}
+          onClose={grabAnnotations.endAskIntent}
+        />
+      ) : null}
       <BrowserPageZoomIndicator state={browserZoomIndicatorState} percent={browserZoomPercent} />
       <BrowserFind isOpen={findOpen} onClose={() => setFindOpen(false)} webviewRef={webviewRef} />
       {showFailureOverlay && browserTab.loadError ? (
