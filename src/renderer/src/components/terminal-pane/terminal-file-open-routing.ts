@@ -1,6 +1,7 @@
 import { absolutePathToFileUri } from '@/components/editor/markdown-internal-links'
 import { getWorkspaceFilePreviewPlan, openFileInBrowserTab } from '@/lib/file-preview'
 import { downloadAndOpenRemoteTerminalFile } from './terminal-remote-file-download-open'
+import { openOsViewerOnlyTerminalFile } from './terminal-os-viewer-file-open'
 import { findWorkspaceFileRoute } from '@/lib/runtime-workspace-file-route'
 import { isPathInsideWorktree, toWorktreeRelativePath } from '@/lib/terminal-links'
 import { canClientOsOpenWorkspaceFile } from '@/lib/workspace-file-host-routing'
@@ -14,7 +15,6 @@ import {
   terminalLinkWslDistro,
   type TerminalFileContext
 } from './terminal-file-path-mapping'
-import { hasOsViewerOnlyFileExtension } from '../../../../shared/binary-file-extensions'
 import {
   LOCAL_EXECUTION_HOST_ID,
   getConnectionExecutionHostId,
@@ -106,6 +106,7 @@ export function openDetectedFilePath(
     terminalLinkWslDistro(deps.wslDistro, runtimeEnvironmentId)
   )
   const requestId = ++latestOpenDetectedFilePathRequestId
+  const isRequestCurrent = (): boolean => requestId === latestOpenDetectedFilePathRequestId
   cancelPendingEditorLineRevealFrames()
   // Why: capture at activation; focus may move while the host resolves the path.
   const linkIntent = captureEditorOpenLinkIntent(
@@ -233,11 +234,7 @@ export function openDetectedFilePath(
     if (openWithSystemDefault && !canOpenWithSystemDefault && hostGrantId === null) {
       // Why: the popover names Shift+Cmd/Ctrl "Download & open with default app", and the OS
       // cannot launch a remote path, so the direct gesture must reach the same download.
-      await downloadAndOpenRemoteTerminalFile(
-        fileContext,
-        mappedFilePath,
-        () => requestId === latestOpenDetectedFilePathRequestId
-      )
+      await downloadAndOpenRemoteTerminalFile(fileContext, mappedFilePath, isRequestCurrent)
       return
     }
 
@@ -265,24 +262,16 @@ export function openDetectedFilePath(
       }
     }
 
-    // Why: the editor can only say "Binary file — cannot display" for these, so an ordinary
-    // click takes the Shift+Cmd/Ctrl route to the app the OS registers for the file type.
-    if (!openWithSystemDefault && hasOsViewerOnlyFileExtension(mappedFilePath)) {
-      if (!canOpenWithSystemDefault) {
-        await downloadAndOpenRemoteTerminalFile(
-          fileContext,
-          mappedFilePath,
-          () => requestId === latestOpenDetectedFilePathRequestId
-        )
-        return
-      }
-      const openedWithSystemDefault = await window.api.shell.openFilePath(
+    if (
+      !openWithSystemDefault &&
+      (await openOsViewerOnlyTerminalFile(
+        fileContext,
         mappedFilePath,
-        LOCAL_EXECUTION_HOST_ID
-      )
-      if (openedWithSystemDefault || requestId !== latestOpenDetectedFilePathRequestId) {
-        return
-      }
+        canOpenWithSystemDefault,
+        isRequestCurrent
+      ))
+    ) {
+      return
     }
 
     const store = useAppStore.getState()
