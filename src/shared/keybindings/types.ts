@@ -39,6 +39,8 @@ export type KeybindingActionId =
   | 'workspace.openBoard'
   | 'workspace.selectByIndex'
   | 'voice.dictation'
+  | 'voice.speakReplies.toggle'
+  | 'voice.speakReplies.stop'
   | 'view.tasks'
   | 'view.plugins'
   | 'dashboard.toggle'
