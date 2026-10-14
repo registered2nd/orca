@@ -94,6 +94,8 @@ export const FLAG_HELP_TEXT: Record<string, string> = {
   'voice-zh': '--voice-zh <name>      Azure voice for mostly-Chinese replies',
   rate: '--rate <percent>       Speaking-rate change in percent (0 = normal)',
   region: '--region <region>      Azure Speech region, e.g. eastus2',
+  'mixed-voices':
+    '--mixed-voices on|off  Experimental: switch voice between English and Chinese inside a reply',
   'from-env': '--from-env             Read the key from AZURE_SPEECH_KEY',
   'task-id': '--task-id <id>        Task id to include in orchestration payload JSON',
   'task-title': '--task-title <text>    Concise title for an orchestration task',
