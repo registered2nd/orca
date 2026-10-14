@@ -1,5 +1,6 @@
 import { ipcMain, webContents } from 'electron'
 import { browserCertificateTrustController, browserManager } from '../browser/browser-manager'
+import { registerBrowserAskHandlers } from './browser-ask-ipc'
 import type { AgentBrowserBridge } from '../browser/agent-browser-bridge'
 import { isWorkspaceDocPageId } from '../browser/doc-preview-guest-policy'
 import { isTrustedBrowserRenderer } from './browser-renderer-trust'
@@ -254,6 +255,7 @@ export function registerBrowserHandlers(): void {
   // --- Browser Context Grab IPC ---
 
   registerBrowserGrabHandlers()
+  registerBrowserAskHandlers()
 
   // --- Browser Session Profile IPC ---
 
