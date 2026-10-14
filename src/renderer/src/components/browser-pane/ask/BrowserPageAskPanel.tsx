@@ -1,6 +1,7 @@
-import { useEffect, useState, useSyncExternalStore } from 'react'
-import { Crosshair, FileText, Send, TextSelect, X } from 'lucide-react'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
+import { Crosshair, FileText, Highlighter, Send, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { translate } from '@/i18n/i18n'
 import { activeAgentNotesSendFailureMessage } from '@/lib/active-agent-note-send-result'
 import { sendMessageToAgent } from '@/lib/agent-message-send'
@@ -20,34 +21,17 @@ import {
   subscribeAskBasket,
   type BrowserAskItem
 } from './browser-page-ask-basket'
-import { buildAskPrompt, elementText, type AskPromptItem } from './browser-page-ask-prompt'
-
-function chipLabel(item: BrowserAskItem): string {
-  if (item.kind === 'page') {
-    return translate('auto.components.browser.pane.ask.wholePage', 'Whole page')
-  }
-  const text = item.kind === 'text' ? item.text : elementText(item.payload)
-  const label = text.replace(/\s+/g, ' ').trim()
-  const prefix = item.kind === 'element' ? `<${item.payload.target.tagName.toLowerCase()}> ` : ''
-  return `${prefix}${label.length > 40 ? `${label.slice(0, 40)}…` : label || '…'}`
-}
-
-async function toPromptItem(item: BrowserAskItem): Promise<AskPromptItem> {
-  if (item.kind === 'element') {
-    const dataUrl = item.payload.screenshot?.dataUrl
-    const screenshotPath = dataUrl
-      ? await window.api.browser.askSaveAttachment({ kind: 'png', dataUrl }).catch(() => null)
-      : null
-    return { kind: 'element', payload: item.payload, screenshotPath }
-  }
-  if (item.kind === 'page') {
-    const textPath = await window.api.browser
-      .askSaveAttachment({ kind: 'text', text: item.text })
-      .catch(() => null)
-    return { kind: 'page', textPath, text: item.text }
-  }
-  return item
-}
+import { buildAskPrompt } from './browser-page-ask-prompt'
+import {
+  chipLabel,
+  collectSendItems,
+  loadAskMode,
+  readHighlight,
+  readWholePage,
+  saveAskMode,
+  toPromptItem,
+  type AskMode
+} from './browser-page-ask-send'
 
 export function BrowserPageAskPanel({
   browserPageId,
@@ -69,7 +53,17 @@ export function BrowserPageAskPanel({
   const [question, setQuestion] = useState('')
   const [sending, setSending] = useState(false)
   const [notice, setNotice] = useState<string | null>(null)
+  const [mode, setMode] = useState<AskMode>(loadAskMode)
   const picking = grab.state !== 'idle' && grab.state !== 'error'
+  const grabRef = useRef(grab)
+  grabRef.current = grab
+
+  // Content never picks; leaving Elements disarms the picker so text can be highlighted.
+  useEffect(() => {
+    if (mode === 'content') {
+      grabRef.current.cancel()
+    }
+  }, [mode])
 
   // Each pick joins the basket and the picker re-arms for the next one.
   useEffect(() => {
@@ -79,25 +73,28 @@ export function BrowserPageAskPanel({
     }
   }, [browserPageId, grab, grab.state, grab.payload])
 
-  const addFromPage = async (what: 'selection' | 'page'): Promise<void> => {
-    const result = await window.api.browser.askReadPage({ browserPageId, what })
-    if (!result.ok || !result.text.trim()) {
+  const changeMode = (next: string): void => {
+    if (next !== 'content' && next !== 'elements') {
+      return
+    }
+    setMode(next)
+    saveAskMode(next)
+    setNotice(null)
+  }
+
+  const keep = async (read: () => Promise<BrowserAskItem | null>): Promise<void> => {
+    const item = await read()
+    if (!item) {
       setNotice(
-        what === 'selection'
-          ? translate(
-              'auto.components.browser.pane.ask.noSelection',
-              'Select some text on the page first (turn picking off to select).'
-            )
-          : translate('auto.components.browser.pane.ask.noPageText', 'Could not read the page.')
+        translate(
+          'auto.components.browser.pane.ask.nothingHighlighted',
+          'Highlight something on the page first.'
+        )
       )
       return
     }
     setNotice(null)
-    addAskItem(browserPageId, {
-      id: createAskItemId(),
-      kind: what === 'page' ? 'page' : 'text',
-      text: result.text
-    })
+    addAskItem(browserPageId, item)
   }
 
   const send = async (): Promise<void> => {
@@ -107,7 +104,8 @@ export function BrowserPageAskPanel({
     }
     setSending(true)
     try {
-      const promptItems = await Promise.all(items.map(toPromptItem))
+      const askItems = await collectSendItems(browserPageId, mode, items)
+      const promptItems = await Promise.all(askItems.map(toPromptItem))
       const result = await sendMessageToAgent({
         worktreeId: target.worktreeId,
         target: { kind: 'terminal', tabId: pane.tabId, leafId: pane.leafId },
@@ -116,12 +114,7 @@ export function BrowserPageAskPanel({
       if (result.status === 'sent') {
         clearAskBasket(browserPageId)
         setQuestion('')
-        setNotice(
-          translate(
-            'auto.components.browser.pane.ask.sent',
-            'Sent. Keep picking to ask a follow-up.'
-          )
-        )
+        setNotice(translate('auto.components.browser.pane.ask.sent', 'Sent.'))
       } else {
         setNotice(
           activeAgentNotesSendFailureMessage(result.status, {
@@ -135,43 +128,78 @@ export function BrowserPageAskPanel({
     }
   }
 
+  const placeholder =
+    items.length > 0
+      ? translate(
+          'auto.components.browser.pane.ask.placeholder',
+          'Ask about what you kept… (Enter to send)'
+        )
+      : mode === 'content'
+        ? translate(
+            'auto.components.browser.pane.ask.placeholderContent',
+            'Highlight text, then ask… (Enter sends the highlight, or the whole page)'
+          )
+        : translate(
+            'auto.components.browser.pane.ask.placeholderElements',
+            'Highlight across blocks or Pick them, then ask… (Enter to send)'
+          )
+
   return (
     <div
       data-testid="browser-ask-panel"
       className="absolute bottom-3 left-1/2 z-20 flex w-[min(36rem,calc(100%-1.5rem))] -translate-x-1/2 flex-col gap-2 rounded-xl border border-border bg-popover/95 p-2 text-sm text-popover-foreground shadow-floating backdrop-blur"
     >
       <div className="flex items-center gap-1">
-        <span className="min-w-0 flex-1 truncate px-1 text-xs text-muted-foreground">
-          {target
-            ? translate('auto.components.browser.pane.ask.askingAgent', 'Asking {{value0}}', {
-                value0:
-                  targetTitle ?? translate('auto.components.browser.pane.ask.agent', 'the agent')
-              })
-            : translate(
-                'auto.components.browser.pane.ask.noAgent',
-                'Click into an agent terminal first; questions go to the agent you last used.'
-              )}
-        </span>
+        <ToggleGroup
+          type="single"
+          size="sm"
+          variant="outline"
+          value={mode}
+          onValueChange={changeMode}
+        >
+          <ToggleGroupItem value="content">
+            {translate('auto.components.browser.pane.ask.modeContent', 'Content')}
+          </ToggleGroupItem>
+          <ToggleGroupItem value="elements">
+            {translate('auto.components.browser.pane.ask.modeElements', 'Elements')}
+          </ToggleGroupItem>
+        </ToggleGroup>
         <Button
           size="sm"
-          variant={picking ? 'default' : 'ghost'}
-          onClick={grab.toggle}
+          variant="ghost"
+          onClick={() => void keep(() => readHighlight(browserPageId, mode))}
           title={translate(
-            'auto.components.browser.pane.ask.pickTitle',
-            'Click page elements to add them'
+            'auto.components.browser.pane.ask.keepTitle',
+            'Keep this highlight and highlight another'
           )}
         >
-          <Crosshair className="size-3.5" />
-          {translate('auto.components.browser.pane.ask.pick', 'Pick')}
+          <Highlighter className="size-3.5" />
+          {translate('auto.components.browser.pane.ask.keep', 'Keep highlight')}
         </Button>
-        <Button size="sm" variant="ghost" onClick={() => void addFromPage('selection')}>
-          <TextSelect className="size-3.5" />
-          {translate('auto.components.browser.pane.ask.addSelection', 'Selection')}
-        </Button>
-        <Button size="sm" variant="ghost" onClick={() => void addFromPage('page')}>
-          <FileText className="size-3.5" />
-          {translate('auto.components.browser.pane.ask.addPage', 'Whole page')}
-        </Button>
+        {mode === 'elements' ? (
+          <Button
+            size="sm"
+            variant={picking ? 'default' : 'ghost'}
+            onClick={grab.toggle}
+            title={translate(
+              'auto.components.browser.pane.ask.pickTitle',
+              'Click blocks to add them; turn off to highlight'
+            )}
+          >
+            <Crosshair className="size-3.5" />
+            {translate('auto.components.browser.pane.ask.pick', 'Pick')}
+          </Button>
+        ) : (
+          <Button
+            size="sm"
+            variant="ghost"
+            onClick={() => void keep(() => readWholePage(browserPageId))}
+          >
+            <FileText className="size-3.5" />
+            {translate('auto.components.browser.pane.ask.addPage', 'Whole page')}
+          </Button>
+        )}
+        <span className="min-w-0 flex-1" />
         <Button
           size="icon-xs"
           variant="ghost"
@@ -206,10 +234,7 @@ export function BrowserPageAskPanel({
           className="min-h-9 flex-1 resize-none rounded-md border border-input bg-background px-2 py-1.5 text-sm outline-none focus-visible:ring-1 focus-visible:ring-ring"
           rows={2}
           value={question}
-          placeholder={translate(
-            'auto.components.browser.pane.ask.placeholder',
-            'Ask about what you picked… (Enter to send)'
-          )}
+          placeholder={placeholder}
           onChange={(event) => setQuestion(event.target.value)}
           onKeyDown={(event) => {
             if (event.key === 'Enter' && !event.shiftKey) {
@@ -227,7 +252,18 @@ export function BrowserPageAskPanel({
           <Send className="size-4" />
         </Button>
       </div>
-      {notice ? <p className="px-1 text-xs text-muted-foreground">{notice}</p> : null}
+      <p className="truncate px-1 text-xs text-muted-foreground">
+        {notice ??
+          (target
+            ? translate('auto.components.browser.pane.ask.askingAgent', 'Asking {{value0}}', {
+                value0:
+                  targetTitle ?? translate('auto.components.browser.pane.ask.agent', 'the agent')
+              })
+            : translate(
+                'auto.components.browser.pane.ask.noAgent',
+                'Click into an agent terminal first; questions go to the agent you last used.'
+              ))}
+      </p>
     </div>
   )
 }
