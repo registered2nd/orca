@@ -42,7 +42,7 @@ export const VOICE_COMMAND_SPECS: CommandSpec[] = [
     summary: 'Stop the reply being read aloud now',
     usage: 'orca voice stop [--json]',
     allowedFlags: [...GLOBAL_FLAGS],
-    notes: ['Call it from a push-to-talk tool when recording starts so you can talk over a reply.'],
+    notes: ['Same as the Stop Reading Aloud shortcut (Shift+Alt+Q by default).'],
     examples: ['orca voice stop']
   },
   {

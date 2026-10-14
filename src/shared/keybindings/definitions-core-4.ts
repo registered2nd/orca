@@ -121,6 +121,6 @@ export const KEYBINDING_DEFINITION_CORE_4: readonly KeybindingDefinition[] = [
     group: 'Global',
     scope: 'global',
     searchKeywords: ['shortcut', 'voice', 'speech', 'read aloud', 'stop', 'tts'],
-    defaultBindings: platformBindings(['Mod+Alt+S'])
+    defaultBindings: platformBindings(['Alt+Shift+Q'])
   }
 ]
