@@ -3,7 +3,8 @@ import {
   buildSpeechSsml,
   replyTextForSpeech,
   speechChunks,
-  speechLanguageOf
+  speechLanguageOf,
+  speechSegments
 } from './speech-reply-text'
 
 describe('replyTextForSpeech', () => {
@@ -52,15 +53,45 @@ describe('speechLanguageOf', () => {
   })
 })
 
+describe('speechSegments', () => {
+  it('gives Chinese runs to Chinese and keeps short English terms inside them', () => {
+    expect(speechSegments('The layer we call 注意力机制 decides what matters.')).toEqual([
+      { language: 'en', text: 'The layer we call' },
+      { language: 'zh', text: '注意力机制' },
+      { language: 'en', text: 'decides what matters.' }
+    ])
+    expect(speechSegments('这个 API 返回 JSON 数据。')).toEqual([
+      { language: 'zh', text: '这个 API 返回 JSON 数据。' }
+    ])
+  })
+})
+
+describe('speechSegments', () => {
+  it('gives Chinese runs to Chinese and keeps short English terms inside them', () => {
+    expect(speechSegments('The layer we call 注意力机制 decides what matters.')).toEqual([
+      { language: 'en', text: 'The layer we call' },
+      { language: 'zh', text: '注意力机制' },
+      { language: 'en', text: 'decides what matters.' }
+    ])
+    expect(speechSegments('这个 API 返回 JSON 数据。')).toEqual([
+      { language: 'zh', text: '这个 API 返回 JSON 数据。' }
+    ])
+  })
+})
+
 describe('buildSpeechSsml', () => {
-  it('escapes text and formats the rate', () => {
-    expect(
-      buildSpeechSsml({
-        text: 'a < b & c',
-        voice: 'v',
-        language: 'en',
-        ratePercent: 10
-      })
-    ).toContain("<prosody rate='+10%'>a &lt; b &amp; c</prosody>")
+  it('escapes text, formats the rate and gives each segment its voice', () => {
+    const ssml = buildSpeechSsml({
+      segments: [
+        { language: 'en', text: 'a < b & c' },
+        { language: 'zh', text: '中文' }
+      ],
+      voices: { en: 'v-en', zh: 'v-zh' },
+      ratePercent: 10
+    })
+    expect(ssml).toContain(
+      "<voice name='v-en'><prosody rate='+10%'>a &lt; b &amp; c</prosody></voice>"
+    )
+    expect(ssml).toContain("<voice name='v-zh'><prosody rate='+10%'>中文</prosody></voice>")
   })
 })
