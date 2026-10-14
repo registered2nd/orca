@@ -11,6 +11,7 @@ function formatSpeakStatus(status: SpeakRepliesStatus): string {
     `Voice: ${status.speakVoice}`,
     `Chinese voice: ${status.speakVoiceZh}`,
     `Rate: ${status.speakRate >= 0 ? '+' : ''}${status.speakRate}%`,
+    `Switch voices in mixed replies (experimental): ${status.speakMixedVoices ? 'on' : 'off'}`,
     `Azure region: ${status.azureSpeechRegion || '(not set)'}`,
     `Azure key: ${status.azureSpeechKey === 'environment' ? 'from AZURE_SPEECH_KEY' : status.azureSpeechKey}`,
     `Dictation: ${status.dictationEnabled ? 'on' : 'off'}`
@@ -68,6 +69,7 @@ export const VOICE_HANDLERS: Record<string, CommandHandler> = {
     const voiceZh = getOptionalStringFlag(flags, 'voice-zh')
     const rate = getOptionalStringFlag(flags, 'rate')
     const region = getOptionalStringFlag(flags, 'region')
+    const mixedVoices = getOptionalStringFlag(flags, 'mixed-voices')
     if (scope !== undefined) {
       update.speakScope = parseScope(scope)
     }
@@ -83,10 +85,16 @@ export const VOICE_HANDLERS: Record<string, CommandHandler> = {
     if (region !== undefined) {
       update.azureSpeechRegion = region
     }
+    if (mixedVoices !== undefined) {
+      if (mixedVoices !== 'on' && mixedVoices !== 'off') {
+        throw new RuntimeClientError('invalid_argument', '--mixed-voices must be on or off')
+      }
+      update.speakMixedVoices = mixedVoices === 'on'
+    }
     if (Object.keys(update).length === 0) {
       throw new RuntimeClientError(
         'invalid_argument',
-        'Nothing to set: pass --scope, --voice, --voice-zh, --rate or --region'
+        'Nothing to set: pass --scope, --voice, --voice-zh, --rate, --region or --mixed-voices'
       )
     }
     printResult(
