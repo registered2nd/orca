@@ -214,11 +214,12 @@ export const browserPageInteractionAndSessionsApi = {
     ipcRenderer.on('browser:guestEscape', listener)
     return () => ipcRenderer.removeListener('browser:guestEscape', listener)
   },
-  askReadPage: (args: { browserPageId: string; what: 'selection' | 'page' }) =>
-    ipcRenderer.invoke('browser:askReadPage', args),
-  askSaveAttachment: (
-    args: { kind: 'png'; dataUrl: string } | { kind: 'text'; text: string }
-  ): Promise<string | null> => ipcRenderer.invoke('browser:askSaveAttachment', args),
+  askReadPage: (args: {
+    browserPageId: string
+    what: 'selection' | 'selection-elements' | 'page'
+  }) => ipcRenderer.invoke('browser:askReadPage', args),
+  askSaveAttachment: (args: { kind: 'text'; text: string }): Promise<string | null> =>
+    ipcRenderer.invoke('browser:askSaveAttachment', args),
   sessionListProfiles: () => ipcRenderer.invoke('browser:session:listProfiles'),
   onSessionProfilesChanged: (callback: () => void): (() => void) => {
     const listener = (): void => callback()

@@ -3,7 +3,7 @@ import type { GrabIntent } from '../../../../../shared/browser/element-grab/brow
 import type { GrabModeHook } from '../annotate/grab/useGrabMode'
 import type { BrowserPageGrabAnnotations } from '../describe-page/browser-page-types'
 
-/** The picker's intents plus Ask's: a second press on Ask's button closes its panel. */
+/** The picker's intents plus Ask's, which the picker hook has no lines left for. */
 export function useBrowserAskIntent(
   annotations: BrowserPageGrabAnnotations,
   grab: GrabModeHook
@@ -11,9 +11,10 @@ export function useBrowserAskIntent(
   const { grabIntent, setGrabIntent, startGrabIntent } = annotations
   const startGrabOrAskIntent = useCallback(
     (nextIntent: GrabIntent): void => {
-      if (nextIntent === 'ask' && grabIntent === 'ask') {
+      // Ask opens unarmed so text can be highlighted; its toolbar button toggles the panel.
+      if (nextIntent === 'ask') {
         grab.cancel()
-        setGrabIntent('copy')
+        setGrabIntent(grabIntent === 'ask' ? 'copy' : 'ask')
         return
       }
       startGrabIntent(nextIntent)
