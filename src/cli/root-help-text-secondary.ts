@@ -41,7 +41,7 @@ export const ROOT_HELP_TEXT_SECONDARY = [
   '  orca diagnostics memory [--json]',
   '  orca voice status [--json]',
   '  orca voice speak on|off [--json]',
-  '  orca voice set [--scope focused|all] [--voice <name>] [--voice-zh <name>] [--rate <percent>] [--region <region>] [--json]',
+  '  orca voice set [--scope focused|all] [--voice <name>] [--voice-zh <name>] [--rate <percent>] [--region <region>] [--mixed-voices on|off] [--json]',
   '  orca voice stop [--json]',
   '  orca voice say --text <text> [--json]',
   '  orca voice azure-key set (--key <key> | --from-env) [--region <region>] [--json]',
