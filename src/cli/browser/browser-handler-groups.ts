@@ -1,5 +1,6 @@
 import { ORCA_BROWSER_CLI_COMMAND_KEYS } from '../../shared/browser/automation/orca-browser-cli-commands'
 import type { HandlerGroup } from '../dispatch/handler-group-manifest'
+import { VOICE_HANDLER_GROUP } from '../speech/voice-handler-group'
 
 export const BROWSER_HANDLER_GROUPS: readonly HandlerGroup[] = [
   {
@@ -51,5 +52,7 @@ export const BROWSER_HANDLER_GROUPS: readonly HandlerGroup[] = [
     name: 'browser-storage',
     keys: ORCA_BROWSER_CLI_COMMAND_KEYS['browser-storage'],
     load: async () => (await import('./browser-storage.js')).BROWSER_STORAGE_HANDLERS
-  }
+  },
+  // Fork-only: rides this list because handler-group-manifest.ts sits at its line limit.
+  VOICE_HANDLER_GROUP
 ]
