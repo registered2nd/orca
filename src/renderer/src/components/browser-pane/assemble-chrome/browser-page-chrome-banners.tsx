@@ -82,7 +82,8 @@ export function BrowserPageChromeBanners({
           </button>
         </div>
       ) : null}
-      {grab.state !== 'idle' ? (
+      {/* Ask mode explains itself in its own panel. */}
+      {grab.state !== 'idle' && grabIntent !== 'ask' ? (
         <div
           className={cn(
             'flex items-center gap-2 border-b border-border/60 px-3 py-1.5 text-xs text-foreground/90',
