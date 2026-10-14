@@ -20,6 +20,7 @@ export const CLI_BOOLEAN_FLAGS = new Set([
   'grant-desktop-control',
   'force',
   'fresh',
+  'from-env',
   'full',
   'full-tree',
   'help',
