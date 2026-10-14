@@ -31,6 +31,7 @@ import { retryBrowserTabLoad } from '../describe-page/browser-page-url-display'
 import type { BrowserTabPageState } from '../describe-page/browser-page-types'
 import type { useBrowserPageAnnotationSend } from '../annotate/use-browser-page-annotation-send'
 import type { useBrowserPageGrabAnnotations } from '../annotate/use-browser-page-grab-annotations'
+import { BrowserPageAskPanel } from '../ask/BrowserPageAskPanel'
 
 export function BrowserPageViewportOverlays({
   markup,
@@ -102,6 +103,14 @@ export function BrowserPageViewportOverlays({
         worktreeId={worktreeId}
         currentUrl={browserTab.url}
       />
+      {grabAnnotations.grabIntent === 'ask' ? (
+        <BrowserPageAskPanel
+          browserPageId={browserTab.id}
+          page={{ title: browserTab.title, url: browserTab.url }}
+          grab={grab}
+          onClose={grabAnnotations.endAskIntent}
+        />
+      ) : null}
       <BrowserPageFeedbackBadge ref={feedbackBadgeRef} />
       <BrowserPasswordFillDropdown
         isActive={isActive}
