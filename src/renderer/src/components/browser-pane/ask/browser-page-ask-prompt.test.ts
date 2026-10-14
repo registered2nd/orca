@@ -58,29 +58,35 @@ describe('elementText', () => {
 })
 
 describe('buildAskPrompt', () => {
-  it('puts the question first, then numbered picks with screenshot paths', () => {
+  it('puts the question first, then numbered items: picked element, content, elements, page', () => {
     const prompt = buildAskPrompt({
       question: ' What does this mean? ',
       page: { title: 'Example', url: 'https://example.com/a' },
       items: [
-        { kind: 'element', payload: payload(), screenshotPath: 'C:/tmp/a.png' },
-        { kind: 'text', text: 'softmax over scores' },
+        {
+          kind: 'element',
+          payload: payload({
+            computedStyles: { ...payload().target.computedStyles, display: 'block' }
+          })
+        },
+        { kind: 'text', text: '## Step\n\nsoftmax over scores' },
+        { kind: 'elements', text: 'Element <section> at `main > #data`' },
         { kind: 'page', textPath: 'C:/tmp/page.md', text: '' }
       ]
     })
     expect(prompt).toBe(
       [
         'What does this mean?',
-        `About the web page I'm looking at in Orca: "Example" (https://example.com/a). I picked:`,
-        '1. Element <p> at `main > p.intro`\nText:\n> Attention lets each token look at the others & mix.\nScreenshot: C:/tmp/a.png',
-        '2. Selected text:\n> softmax over scores',
-        "3. The whole page's text, saved at: C:/tmp/page.md",
-        'Open the screenshot files to see what I see.'
+        `About the web page I'm looking at in Orca: "Example" (https://example.com/a).`,
+        '1. Element <p> at `main > p.intro` (1 x 1 px)\nStyles: display: block\nMarkup:\n```html\n<p class="intro">Attention lets each token <b>look at</b> the others &amp; mix.</p>\n```',
+        '2. Highlighted on the page:\n\n## Step\n\nsoftmax over scores',
+        '3. Elements my highlight covers:\n\nElement <section> at `main > #data`',
+        "4. The whole page's text, saved at: C:/tmp/page.md"
       ].join('\n\n')
     )
   })
 
-  it('sends a follow-up question alone when nothing new was picked', () => {
+  it('sends the question alone when there is nothing to attach', () => {
     expect(buildAskPrompt({ question: 'And why?', page: { title: '', url: '' }, items: [] })).toBe(
       'And why?'
     )
