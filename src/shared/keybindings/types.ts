@@ -38,6 +38,8 @@ export type KeybindingActionId =
   | 'workspace.openBoard'
   | 'workspace.selectByIndex'
   | 'voice.dictation'
+  | 'voice.speakReplies.toggle'
+  | 'voice.speakReplies.stop'
   | 'view.tasks'
   | 'dashboard.toggle'
   | 'sidebar.left.toggle'
