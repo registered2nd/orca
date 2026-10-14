@@ -15,6 +15,7 @@ import {
 } from './browser-annotate-tool-button'
 import { useFloatingSplitBrowserClose } from './use-floating-split-browser-close'
 import { MarkupDrawButton } from '../../annotate/markup-tools/MarkupDrawButton'
+import { BrowserChromeAskButton } from './browser-chrome-ask-button'
 
 export type BrowserChromeToolAction = {
   onSelect: () => void
@@ -105,12 +106,15 @@ export function BrowserChromeToolbar({
     >
       {shareControl}
       {elementTools ? (
-        <BrowserAnnotateToolButton
-          tools={elementTools}
-          markup={markup}
-          notes={notes}
-          showTourAnchors={showTourAnchors}
-        />
+        <>
+          <BrowserAnnotateToolButton
+            tools={elementTools}
+            markup={markup}
+            notes={notes}
+            showTourAnchors={showTourAnchors}
+          />
+          <BrowserChromeAskButton tools={elementTools} />
+        </>
       ) : (
         <MarkupDrawButton
           onClick={markup.onToggle}

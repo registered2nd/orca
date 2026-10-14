@@ -4,6 +4,7 @@ import {
   browserCertificateTrustController,
   browserManager
 } from '../../browser/guest-lifecycle/manager/browser-manager'
+import { registerBrowserAskHandlers } from './browser-ask-ipc'
 import type { AgentBrowserBridge } from '../../browser/agent-browser/agent-browser-bridge'
 import { isWorkspaceDocPageId } from '../../browser/document-preview/doc-preview-guest-policy'
 import { isTrustedBrowserRenderer } from './browser-renderer-trust'
@@ -309,6 +310,7 @@ export function registerBrowserHandlers(
   registerBrowserDictationHandlers()
 
   registerBrowserGrabHandlers()
+  registerBrowserAskHandlers()
 
   registerBrowserSessionProfileHandlers()
 
