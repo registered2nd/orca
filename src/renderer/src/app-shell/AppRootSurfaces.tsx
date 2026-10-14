@@ -59,6 +59,11 @@ const DeleteWorktreeDialog = lazy(() => import('../components/sidebar/DeleteWork
 const PreservedBranchBatchReviewModal = lazy(
   () => import('../components/sidebar/PreservedBranchBatchReviewModal')
 )
+const SpeakRepliesController = lazy(() =>
+  import('../components/speak-replies/SpeakRepliesController').then((module) => ({
+    default: module.SpeakRepliesController
+  }))
+)
 const DictationController = lazy(() =>
   import('../components/dictation/DictationController').then((module) => ({
     default: module.DictationController
@@ -391,6 +396,11 @@ export const AppRootSurfaces = memo(function AppRootSurfaces(props: {
           </OverlayBoundary>
         </Suspense>
       ) : null}
+      <Suspense fallback={null}>
+        <OverlayBoundary boundaryId="overlay.speak-replies">
+          <SpeakRepliesController />
+        </OverlayBoundary>
+      </Suspense>
       <OverlayBoundary boundaryId="overlay.recent-tab-switcher" resetKey={activeView}>
         <RecentTabSwitcher />
       </OverlayBoundary>
