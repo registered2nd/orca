@@ -48,6 +48,9 @@ import type {
   BrowserCaptureSelectionScreenshotResult,
   BrowserExtractHoverArgs,
   BrowserExtractHoverResult,
+  BrowserAskReadPageArgs,
+  BrowserAskReadPageResult,
+  BrowserAskSaveAttachmentArgs,
   GrabIntent
 } from '../../../shared/browser/element-grab/browser-grab-types'
 import type {
@@ -206,6 +209,8 @@ export type BrowserApi = {
     args: BrowserCaptureSelectionScreenshotArgs
   ) => Promise<BrowserCaptureSelectionScreenshotResult>
   extractHoverPayload: (args: BrowserExtractHoverArgs) => Promise<BrowserExtractHoverResult>
+  askReadPage: (args: BrowserAskReadPageArgs) => Promise<BrowserAskReadPageResult>
+  askSaveAttachment: (args: BrowserAskSaveAttachmentArgs) => Promise<string | null>
   onGrabModeToggle: (callback: (browserPageId: string, intent: GrabIntent) => void) => () => void
   onGrabActionShortcut: (
     callback: (args: { browserPageId: string; key: 'c' | 's' }) => void
