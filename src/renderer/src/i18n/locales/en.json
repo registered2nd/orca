@@ -11135,7 +11135,12 @@
               "micInput": "input",
               "micDevice": "device",
               "micAirpods": "airpods",
-              "micDefault": "system default"
+              "micDefault": "system default",
+              "readAloudTitle": "Read Replies Aloud",
+              "readAloudDescription": "Speak finished agent replies with an Azure or system voice.",
+              "readAloudTts": "tts",
+              "readAloudSpeak": "read aloud",
+              "readAloudAzure": "azure"
             }
           }
         },
@@ -12689,6 +12694,33 @@
           "offCount": "{{count}} off",
           "machines": "Machines",
           "machinesDescription": "Choose which machines can show notifications on this computer. A paired server’s switch also covers work reached through it."
+        },
+        "readAloud": {
+          "keySaved": "Azure Speech key saved",
+          "keyCleared": "Azure Speech key cleared",
+          "keyStored": "A key is stored in Orca.",
+          "keyFromEnv": "Using AZURE_SPEECH_KEY from the environment.",
+          "keyMissing": "No key: replies are read with the system voice.",
+          "enable": "Read Replies Aloud",
+          "enableDescription": "Speak each finished agent reply. Toggle with",
+          "enableDescriptionEnd": "; dictating or sending a new prompt stops it.",
+          "scope": "Which Agents Speak",
+          "scopeDescription": "The agent pane you last focused, or every agent that finishes.",
+          "scopeFocused": "Focused agent",
+          "scopeAll": "Every agent",
+          "voice": "Voice",
+          "voiceDescription": "Azure voice for English and mixed replies.",
+          "voiceZh": "Chinese Voice",
+          "voiceZhDescription": "Azure voice for replies that are mostly Chinese.",
+          "rate": "Speaking Rate",
+          "rateDescription": "Percent faster (or slower, when negative) than normal.",
+          "region": "Azure Region",
+          "regionDescription": "Empty uses AZURE_SPEECH_REGION.",
+          "key": "Azure Speech Key",
+          "save": "Save",
+          "clear": "Clear",
+          "sample": "This is how agent replies will sound.",
+          "test": "Test"
         }
       },
       "right": {
@@ -17842,6 +17874,12 @@
         "9a4c6b2d7e": "Skill sharing",
         "3d8e5f1b9c": "Share skills behind an unlisted link and install them on any machine you use.",
         "c5b3e8a17d": "Sign in to Orca"
+      },
+      "speakReplies": {
+        "controller": {
+          "stop": "Stop reading aloud",
+          "reading": "Reading reply aloud"
+        }
       },
       "NativeChatResumeOutcomeRow": {
         "openChat": "Open chat",

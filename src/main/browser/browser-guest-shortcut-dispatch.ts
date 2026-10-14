@@ -7,6 +7,7 @@ import { FLOATING_TERMINAL_WORKTREE_ID } from '../../shared/constants'
 import type { BrowserPageZoomDirection } from '../../shared/browser-page-zoom'
 import type { BrowserFindTarget } from '../../shared/browser-find-source'
 import type { ResolveRenderer } from './browser-guest-renderer-target'
+import { handleSpeakRepliesShortcut } from '../speech/speak-replies-shortcut'
 
 export type ShouldForwardDictationShortcut = () => boolean
 export type IsMobileEmulatorEnabled = () => boolean
@@ -29,6 +30,9 @@ export function forwardGuestShortcutInput(
   input: GuestShortcutInput,
   action = resolveWindowShortcutAction(input, process.platform, ctx.getKeybindings?.())
 ): boolean {
+  if (handleSpeakRepliesShortcut(event, input, ctx.getKeybindings?.())) {
+    return true
+  }
   const {
     browserTabId,
     resolveRenderer,
