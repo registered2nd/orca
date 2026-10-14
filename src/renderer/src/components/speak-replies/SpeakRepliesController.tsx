@@ -45,12 +45,7 @@ function useSpeakRepliesTriggers(): void {
           lastFocusedAgentPaneKey = focused
         }
       }
-      if (
-        state.dictationState !== previous.dictationState &&
-        (state.dictationState === 'starting' || state.dictationState === 'listening')
-      ) {
-        stopReplySpeech()
-      }
+      // Why: dictation does not stop the voice, so the user can talk while listening.
       const voice = state.settings?.voice
       if (previous.settings?.voice?.speakReplies && !voice?.speakReplies) {
         stopReplySpeech()
