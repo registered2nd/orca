@@ -88,6 +88,8 @@ export const speechApi = {
   },
   synthesizeReply: (text: string): Promise<SpeakSynthesisResult> =>
     ipcRenderer.invoke('speech:synthesizeReply', text),
+  turnReplyText: (transcriptPath: string): Promise<string | null> =>
+    ipcRenderer.invoke('speech:turnReplyText', transcriptPath),
   getSpeakRepliesStatus: (): Promise<SpeakRepliesStatus> =>
     ipcRenderer.invoke('speech:getSpeakRepliesStatus'),
   updateSpeakReplies: (update: SpeakRepliesUpdate): Promise<SpeakRepliesStatus> =>
