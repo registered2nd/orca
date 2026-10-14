@@ -106,5 +106,21 @@ export const KEYBINDING_DEFINITION_CORE_4: readonly KeybindingDefinition[] = [
     },
     // Why: macOS uses Shift+Space as an input-source shortcut; Orca otherwise rejects Shift-only bindings to avoid stealing typed text.
     allowShiftOnlyKeybindings: true
+  },
+  {
+    id: 'voice.speakReplies.toggle',
+    title: 'Read Replies Aloud',
+    group: 'Global',
+    scope: 'global',
+    searchKeywords: ['shortcut', 'voice', 'speech', 'read aloud', 'speak', 'tts'],
+    defaultBindings: platformBindings(['Mod+Alt+E'])
+  },
+  {
+    id: 'voice.speakReplies.stop',
+    title: 'Stop Reading Aloud',
+    group: 'Global',
+    scope: 'global',
+    searchKeywords: ['shortcut', 'voice', 'speech', 'read aloud', 'stop', 'tts'],
+    defaultBindings: platformBindings(['Mod+Alt+S'])
   }
 ]
