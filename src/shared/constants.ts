@@ -104,8 +104,8 @@ export function getDefaultSettings(homedir: string): GlobalSettings {
   })
 }
 
-export const DEFAULT_SPEAK_VOICE = 'en-US-Ava:DragonHDLatestNeural'
-export const DEFAULT_SPEAK_VOICE_ZH = 'zh-CN-Xiaochen:DragonHDLatestNeural'
+export const DEFAULT_SPEAK_VOICE = 'en-US-Ava:DragonHDOmniLatestNeural'
+export const DEFAULT_SPEAK_VOICE_ZH = 'zh-CN-Mei:MAI-Voice-2.1'
 
 export function getDefaultVoiceSettings(): VoiceSettings {
   return {
