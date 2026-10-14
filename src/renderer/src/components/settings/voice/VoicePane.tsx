@@ -24,6 +24,7 @@ import { VoiceModelUnloadSetting } from './VoiceModelUnloadSetting'
 import { VoiceSpeechModelSection } from './VoiceSpeechModelSection'
 import { SettingsGroup } from '../section-layout/SettingsGroup'
 import { VoiceSpeechGpuSetting } from './VoiceSpeechGpuSetting'
+import { VoiceReadAloudSettingsSection } from './VoiceReadAloudSettingsSection'
 import { useTranslate } from '@/i18n/use-translate'
 import { readIpcErrorMessage } from '@/runtime/errors/ipc-error'
 import { useLanguageReadiness } from '@/i18n/language-readiness'
@@ -348,6 +349,15 @@ export function VoicePane({
         onUpdateVoiceSettings={updateVoiceSettings}
         writeSourceControlAiSettings={writeSourceControlAiSettings}
       />
+
+      <SettingsGroup
+        title={t('auto.components.settings.voice.pane.search.readAloudTitle', 'Read Replies Aloud')}
+      >
+        <VoiceReadAloudSettingsSection
+          voiceSettings={voiceSettings}
+          onUpdateVoiceSettings={updateVoiceSettings}
+        />
+      </SettingsGroup>
 
       <SettingsGroup title={t('components.settings.voice.advanced.title', 'Advanced')}>
         <VoiceSpeechGpuSetting
