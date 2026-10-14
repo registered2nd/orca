@@ -79,4 +79,49 @@ export type VoiceSettings = {
   microphoneDeviceId: string | null
   /** Cached label for display when the preferred device is unplugged */
   microphoneDeviceLabel: string | null
+  /** Read finished agent replies aloud. */
+  speakReplies: boolean
+  /** Which agents speak: the last-focused agent pane, or every agent. */
+  speakScope: SpeakRepliesScope
+  /** Azure voice for English (and mixed) replies, e.g. en-US-Ava:DragonHDLatestNeural. */
+  speakVoice: string
+  /** Azure voice for mostly-Chinese replies. */
+  speakVoiceZh: string
+  /** Speaking-rate change in percent; 0 is the voice's normal speed. */
+  speakRate: number
+  /** Azure Speech region (e.g. eastus2); empty falls back to AZURE_SPEECH_REGION. */
+  azureSpeechRegion: string
+  azureSpeechKeyConfigured: boolean
 }
+
+export type SpeakRepliesScope = 'focused' | 'all'
+
+export type SpeakControlEvent = { action: 'stop' } | { action: 'say'; text: string }
+
+export type SpeakSynthesisResult =
+  | { ok: true; audio: Uint8Array; mimeType: string }
+  | { ok: false; reason: 'no-key' | 'no-region' | 'failed'; message?: string }
+
+export type SpeakRepliesStatus = {
+  speakReplies: boolean
+  speakScope: SpeakRepliesScope
+  speakVoice: string
+  speakVoiceZh: string
+  speakRate: number
+  /** The region synthesis uses: the setting, else AZURE_SPEECH_REGION. */
+  azureSpeechRegion: string
+  azureSpeechKey: 'stored' | 'environment' | 'missing'
+  dictationEnabled: boolean
+}
+
+export type SpeakRepliesUpdate = Partial<
+  Pick<
+    VoiceSettings,
+    | 'speakReplies'
+    | 'speakScope'
+    | 'speakVoice'
+    | 'speakVoiceZh'
+    | 'speakRate'
+    | 'azureSpeechRegion'
+  >
+>
