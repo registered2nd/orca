@@ -201,7 +201,6 @@ export function useBrowserPageGrabAnnotations({
       recordFeatureInteraction('browser-grab')
       if (nextIntent === 'annotate') {
         recordFeatureInteraction('browser-annotations')
-        setBrowserAnnotationTrayOpen(true)
       }
       setGrabIntent(nextIntent)
       if (nextIntent !== 'annotate') {
