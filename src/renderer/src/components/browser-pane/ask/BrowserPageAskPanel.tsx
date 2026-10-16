@@ -5,6 +5,7 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { translate } from '@/i18n/i18n'
 import { activeAgentNotesSendFailureMessage } from '@/lib/active-agent-note-send-result'
 import { sendMessageToAgent } from '@/lib/agent-message-send'
+import { ImeTextarea } from '@/lib/ime-text-field'
 import {
   getLastFocusedAgentPane,
   subscribeLastFocusedAgentPane
@@ -230,7 +231,7 @@ export function BrowserPageAskPanel({
         </div>
       ) : null}
       <div className="flex items-end gap-2">
-        <textarea
+        <ImeTextarea
           className="min-h-9 flex-1 resize-none rounded-md border border-input bg-background px-2 py-1.5 text-sm outline-none focus-visible:ring-1 focus-visible:ring-ring"
           rows={2}
           value={question}
