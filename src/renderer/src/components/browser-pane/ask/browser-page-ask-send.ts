@@ -1,6 +1,12 @@
 import { translate } from '@/i18n/i18n'
-import { createAskItemId, type BrowserAskItem } from './browser-page-ask-basket'
+import {
+  addAskItem,
+  createAskItemId,
+  getAskBasket,
+  type BrowserAskItem
+} from './browser-page-ask-basket'
 import { elementText, type AskPromptItem } from './browser-page-ask-prompt'
+import type { GrabIntent } from '../describe-page/browser-page-types'
 
 /** Content reads a highlight as text; Elements reads the blocks it covers, for design questions. */
 export type AskMode = 'content' | 'elements'
@@ -94,4 +100,30 @@ export async function collectSendItems(
   }
   const page = await readWholePage(browserPageId)
   return page ? [page] : []
+}
+
+export type BrowserAskIntent = {
+  grabIntent: GrabIntent
+  startGrabIntent: (intent: GrabIntent) => void
+}
+
+/** Right-click Ask: opens the panel with the highlight attached, read the way the panel's mode reads it. */
+export async function askAboutBrowserSelection(
+  browserPageId: string,
+  selectionText: string,
+  ask: BrowserAskIntent
+): Promise<void> {
+  if (ask.grabIntent !== 'ask') {
+    ask.startGrabIntent('ask')
+  }
+  const highlight = await readHighlight(browserPageId, loadAskMode())
+  const text = selectionText.trim()
+  const item = highlight ?? (text ? { id: createAskItemId(), kind: 'text' as const, text } : null)
+  const kept = getAskBasket(browserPageId).some(
+    (existing) =>
+      item && existing.kind === item.kind && 'text' in existing && existing.text === item.text
+  )
+  if (item && !kept) {
+    addAskItem(browserPageId, item)
+  }
 }

@@ -18,6 +18,7 @@ import {
   BrowserPageContextMenuItems,
   type BrowserPageContextMenuActions
 } from './browser-page-context-menu-items'
+import { askAboutBrowserSelection, type BrowserAskIntent } from '../ask/browser-page-ask-send'
 
 export function BrowserPageContextMenu({
   browserPageId,
@@ -25,6 +26,7 @@ export function BrowserPageContextMenu({
   canGoBack,
   canGoForward,
   webviewRef,
+  ask,
   onReload,
   remoteRoutedNetwork = false,
   externalUrl,
@@ -35,6 +37,8 @@ export function BrowserPageContextMenu({
   canGoBack: boolean
   canGoForward: boolean
   webviewRef: MutableRefObject<Electron.WebviewTag | null>
+  /** The pane's Ask panel; absent where the pane has none. */
+  ask?: BrowserAskIntent
   onReload: () => void
   /** The page browses through a remote host, whose loopback this desktop's browser cannot reach. */
   remoteRoutedNetwork?: boolean
@@ -227,6 +231,14 @@ export function BrowserPageContextMenu({
           canGoForward={canGoForward}
           actions={webviewMenuActions(contextMenu.pagePoint)}
           onClose={closeMenu}
+          onAskAboutSelection={
+            ask
+              ? (selectionText) => {
+                  void askAboutBrowserSelection(browserPageId, selectionText, ask)
+                  setContextMenu(null)
+                }
+              : undefined
+          }
         />
       </div>
     </>,
