@@ -77,6 +77,11 @@ export const FLAG_HELP_TEXT: Record<string, string> = {
   'mixed-voices':
     '--mixed-voices on|off  Experimental: switch voice between English and Chinese inside a reply',
   'from-env': '--from-env             Read the key from AZURE_SPEECH_KEY',
+  'terminal-right-click-paste':
+    '--terminal-right-click-paste on|off  Right-click copies/pastes (on) or opens the menu (off)',
+  keys: '--keys <keys>[,<keys>]  Shortcut keys, e.g. Alt+Shift+A, or none',
+  reset: '--reset                Restore the default keys',
+  match: '--match <text>         Only shortcuts whose id or title contains this',
   'text-stdin': '--text-stdin          Read text payload from stdin',
   'task-id': '--task-id <id>        Task id to include in orchestration payload JSON',
   'task-title': '--task-title <text>    Concise title for an orchestration task',
