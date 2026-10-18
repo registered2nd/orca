@@ -189,6 +189,7 @@ function mountSurface(
     paneTitleBackground: 'transparent',
     activatePaneTitleInteraction: activate,
     contextMenu: {},
+    selectionAsk: {},
     daemonActions: {},
     sessionRestoredBannerPaneIds: [],
     setContainerRef: (root: HTMLElement | null) =>

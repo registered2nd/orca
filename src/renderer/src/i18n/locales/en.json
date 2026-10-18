@@ -3953,7 +3953,8 @@
             "925f49f210": "Expand Pane",
             "df766809e0": "Collapse Pane",
             "cff67afad1": "Copy Context",
-            "15dd899676": "Add to {{value0}}…"
+            "15dd899676": "Add to {{value0}}…",
+            "askAboutSelection": "Ask About Selection…"
           },
           "TerminalErrorToast": {
             "e4aa243f8c": "Restart daemon",
@@ -4200,6 +4201,14 @@
           },
           "WslHostUnavailableBanner": {
             "turnOn": "Turn on"
+          },
+          "ask": {
+            "close": "Close Ask",
+            "placeholder": "Ask about the selection… (Enter to send)",
+            "send": "Send question",
+            "askingAgent": "Asking {{value0}}",
+            "agent": "the agent",
+            "noAgent": "Click into an agent terminal first; questions go to the agent you last used."
           }
         }
       },
@@ -17492,7 +17501,8 @@
             "placeholderContent": "Highlight text, then ask… (Enter sends the highlight, or the whole page)",
             "placeholderElements": "Highlight across blocks or Pick them, then ask… (Enter to send)",
             "send": "Send question",
-            "toolbar": "Ask your agent about this page"
+            "toolbar": "Ask your agent about this page",
+            "askAboutSelection": "Ask About Selection…"
           }
         },
         "webauthn": {
