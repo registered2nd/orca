@@ -10,6 +10,7 @@ import {
 } from '@/lib/pane-manager/terminal-scroll-intent'
 import type { resolveTerminalKeyboardShortcutAction } from './terminal-keyboard-shortcut-matching'
 import { equalizeTerminalPanes } from './terminal-pane-layout-owner-commands'
+import { requestTerminalSelectionAsk } from './terminal-selection-ask-request'
 
 type TerminalShortcutAction = NonNullable<ReturnType<typeof resolveTerminalKeyboardShortcutAction>>
 
@@ -195,6 +196,15 @@ export function dispatchTerminalShortcutAction(
     const pane = manager.getActivePane() ?? manager.getPanes()[0]
     if (pane) {
       onClearPaneTitle(pane.id)
+    }
+    return
+  }
+  if (action.type === 'askAboutSelection') {
+    event.preventDefault()
+    event.stopImmediatePropagation()
+    const pane = manager.getActivePane() ?? manager.getPanes()[0]
+    if (pane) {
+      requestTerminalSelectionAsk({ tabId, paneId: pane.id })
     }
     return
   }
