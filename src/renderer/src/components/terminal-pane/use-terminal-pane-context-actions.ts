@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo } from 'react'
 import { useTerminalPaneContextMenu } from './use-terminal-pane-context-menu'
+import { useTerminalSelectionAsk } from './use-terminal-selection-ask'
 import type { TerminalPaneCloseController } from './use-terminal-pane-close-actions'
 import { useTerminalQuickCommandHosts } from '@/hooks/use-terminal-quick-command-hosts'
 import { terminalQuickCommandMatchesWorkspaceProject } from '@/lib/terminal-quick-command-project-scope'
@@ -217,6 +218,19 @@ export function useTerminalPaneContextActions(controller: TerminalPaneCloseContr
     // oxlint-disable-next-line react-hooks/exhaustive-deps -- Preserve the pre-split dependency contract.
   }, [contextMenu.menuPaneId])
   const contextMenuLeafId = getContextMenuLeafId()
+  const selectionAsk = useTerminalSelectionAsk({
+    managerRef,
+    tabId,
+    menuOpen: contextMenu.open,
+    setMenuOpen: contextMenu.setOpen,
+    resolveMenuPane: () => {
+      const manager = managerRef.current
+      const panes = manager?.getPanes() ?? []
+      return (
+        panes.find((pane) => pane.id === contextMenu.menuPaneId) ?? manager?.getActivePane() ?? null
+      )
+    }
+  })
 
   return {
     handleRenameSubmit,
@@ -229,7 +243,8 @@ export function useTerminalPaneContextActions(controller: TerminalPaneCloseContr
     quickCommandHostOwnershipPending,
     visibleQuickCommandHosts,
     getContextMenuLeafId,
-    contextMenuLeafId
+    contextMenuLeafId,
+    selectionAsk
   }
 }
 

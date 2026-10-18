@@ -56,6 +56,7 @@ export type TerminalShortcutAction =
   | { type: 'toggleExpandActivePane' }
   | { type: 'setTitle' }
   | { type: 'clearPaneTitle' }
+  | { type: 'askAboutSelection' }
   | { type: 'closeActivePane' }
   | { type: 'splitActivePane'; direction: 'vertical' | 'horizontal' }
   | { type: 'scrollViewport'; position: 'top' | 'bottom' }
@@ -160,6 +161,10 @@ export function resolveTerminalShortcutAction(
 
     if (matches('terminal.clearPaneTitle')) {
       return { type: 'clearPaneTitle' }
+    }
+
+    if (matches('terminal.askAboutSelection')) {
+      return { type: 'askAboutSelection' }
     }
 
     // Why: recognize the active tab.close binding as a pane-close alias too, so a user who remaps

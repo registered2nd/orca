@@ -209,6 +209,7 @@ export function installPreviewTerminalKeyHandler(args: {
       // e.g. Ctrl+Shift+D as a bare Ctrl+D. Listed one by one rather than under a
       // `default` so a newly added action has to be classified here, not
       // silently swallowed.
+      case 'askAboutSelection':
       case 'clearActivePane':
       case 'clearPaneTitle':
       case 'closeActivePane':
