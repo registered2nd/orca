@@ -327,6 +327,7 @@ export function BrowserPagePane({
         worktreeId={worktreeId}
         canGoBack={browserTab.canGoBack}
         canGoForward={browserTab.canGoForward}
+        ask={grabAnnotations}
         webviewRef={webviewRef}
         onReload={() => reload.reloadWebviewOrRecoverGuest(false)}
         externalUrl={sshRoutedExternalUrl}

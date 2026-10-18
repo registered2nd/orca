@@ -215,6 +215,7 @@ export function installPreviewTerminalKeyHandler(args: {
         }
         return consumeEvent(event)
       // Swallow pane-only actions rather than encoding shell bytes such as Ctrl+D; list each so new actions require explicit classification.
+      case 'askAboutSelection':
       case 'clearActivePane':
       case 'clearPaneTitle':
       case 'copySelection':
