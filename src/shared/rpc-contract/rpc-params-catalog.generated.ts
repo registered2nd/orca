@@ -764,6 +764,7 @@ import {
   PluginUpdateParams,
   PluginsPanelActionParams
 } from './plugins/plugins-params'
+import { KeybindingSet, PreferencesUpdate } from './preferences/preferences-params'
 import {
   PreflightAgentDetection,
   PreflightAgentRefresh,
@@ -2026,6 +2027,10 @@ export const RPC_PARAMS_BY_METHOD = {
   'plugins.shotReplay': PluginShotReplayParams,
   'plugins.uninstall': PluginUninstallParams,
   'plugins.update': PluginUpdateParams,
+  'preferences.get': null,
+  'preferences.shortcuts.list': null,
+  'preferences.shortcuts.set': KeybindingSet,
+  'preferences.update': PreferencesUpdate,
   'preflight.check': PreflightCheck,
   'preflight.detectAgents': PreflightProjectAgentDetection,
   'preflight.detectRemoteAgents': PreflightDetectRemoteAgents,
