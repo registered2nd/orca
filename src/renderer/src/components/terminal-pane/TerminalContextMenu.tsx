@@ -5,6 +5,7 @@ import {
   Eraser,
   GitFork,
   Maximize2,
+  MessageCircleQuestion,
   MessageSquare,
   Minimize2,
   PanelBottomClose,
@@ -46,6 +47,8 @@ type TerminalContextMenuProps = {
   canExpandPane: boolean
   menuPaneIsExpanded: boolean
   onCopy: () => void
+  canAskAboutSelection: boolean
+  onAskAboutSelection: () => void
   onSelectAll: () => void
   onPaste: () => void
   onSplitRight: () => void
@@ -138,6 +141,8 @@ function TerminalContextMenuItems({
   canExpandPane,
   menuPaneIsExpanded,
   onCopy,
+  canAskAboutSelection,
+  onAskAboutSelection,
   onSelectAll,
   onPaste,
   onSplitRight,
@@ -174,6 +179,7 @@ function TerminalContextMenuItems({
   const shortcuts = useMemo(
     () => ({
       copy: formatPrimaryShortcutLabel('terminal.copySelection', keybindings),
+      askAboutSelection: formatPrimaryShortcutLabel('terminal.askAboutSelection', keybindings),
       selectAll: formatPrimaryShortcutLabel('terminal.selectAll', keybindings),
       paste: formatPrimaryShortcutLabel('terminal.paste', keybindings),
       splitRight: formatPrimaryShortcutLabel('terminal.splitRight', keybindings),
@@ -197,6 +203,24 @@ function TerminalContextMenuItems({
         {translate('auto.components.terminal.pane.TerminalContextMenu.f3eeb1de13', 'Copy')}
         <DropdownMenuShortcut>{shortcuts.copy}</DropdownMenuShortcut>
       </DropdownMenuItem>
+      {canAskAboutSelection ? (
+        <DropdownMenuItem
+          onSelect={() => {
+            // Why: the Ask box takes focus; close first so the menu's focus guards let go.
+            onOpenChange(false)
+            onAskAboutSelection()
+          }}
+        >
+          <MessageCircleQuestion />
+          {translate(
+            'auto.components.terminal.pane.TerminalContextMenu.askAboutSelection',
+            'Ask About Selection…'
+          )}
+          {shortcuts.askAboutSelection !== 'Unassigned' ? (
+            <DropdownMenuShortcut>{shortcuts.askAboutSelection}</DropdownMenuShortcut>
+          ) : null}
+        </DropdownMenuItem>
+      ) : null}
       <DropdownMenuItem onSelect={onSelectAll}>
         <TextSelect />
         {translate('auto.components.terminal.pane.TerminalContextMenu.selectAll', 'Select All')}

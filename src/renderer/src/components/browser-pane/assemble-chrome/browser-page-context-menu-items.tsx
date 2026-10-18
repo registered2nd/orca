@@ -40,6 +40,8 @@ type BrowserPageContextMenuItemsProps = {
   webviewRef: MutableRefObject<Electron.WebviewTag | null>
   onReload: () => void
   onClose: () => void
+  /** Opens the pane's Ask panel on the selection; absent where the pane has none. */
+  onAskAboutSelection?: (selectionText: string) => void
 }
 
 /**
@@ -55,6 +57,7 @@ function buildMenuSections({
   webviewRef,
   onReload,
   onClose,
+  onAskAboutSelection,
   searchEngine
 }: BrowserPageContextMenuItemsProps & { searchEngine: SearchEngine }): MenuItem[][] {
   const { editable, image, linkUrl, pageUrl, pagePoint } = menu
@@ -221,6 +224,17 @@ function buildMenuSections({
               () => void window.api.ui.writeClipboardText(selectionText)
             )
           ]),
+      ...(onAskAboutSelection
+        ? [
+            {
+              label: translate(
+                'auto.components.browser.pane.ask.askAboutSelection',
+                'Ask About Selection…'
+              ),
+              run: () => onAskAboutSelection(selectionText)
+            }
+          ]
+        : []),
       item(
         translate(
           'auto.components.browser.pane.BrowserPane.searchSelection',
