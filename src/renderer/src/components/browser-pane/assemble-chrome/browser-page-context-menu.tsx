@@ -11,6 +11,7 @@ import { createPortal } from 'react-dom'
 import type { BrowserPageContextMenuState } from '../describe-page/browser-page-types'
 import { addAppKeyListener, removeAppKeyListener } from '@/lib/app-keyboard-router'
 import { BrowserPageContextMenuItems } from './browser-page-context-menu-items'
+import { askAboutBrowserSelection, type BrowserAskIntent } from '../ask/browser-page-ask-send'
 
 export function BrowserPageContextMenu({
   browserPageId,
@@ -18,7 +19,8 @@ export function BrowserPageContextMenu({
   canGoBack,
   canGoForward,
   webviewRef,
-  onReload
+  onReload,
+  ask
 }: {
   browserPageId: string
   worktreeId: string
@@ -26,6 +28,8 @@ export function BrowserPageContextMenu({
   canGoForward: boolean
   webviewRef: MutableRefObject<Electron.WebviewTag | null>
   onReload: () => void
+  /** The pane's Ask panel; absent where the pane has none. */
+  ask?: BrowserAskIntent
 }): React.JSX.Element | null {
   const [contextMenu, setContextMenu] = useState<BrowserPageContextMenuState | null>(null)
   const contextMenuRef = useRef<HTMLDivElement>(null)
@@ -190,6 +194,14 @@ export function BrowserPageContextMenu({
           webviewRef={webviewRef}
           onReload={onReload}
           onClose={closeMenu}
+          onAskAboutSelection={
+            ask
+              ? (selectionText) => {
+                  void askAboutBrowserSelection(browserPageId, selectionText, ask)
+                  setContextMenu(null)
+                }
+              : undefined
+          }
         />
       </div>
     </>,

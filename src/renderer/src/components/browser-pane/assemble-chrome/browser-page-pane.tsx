@@ -344,6 +344,7 @@ export function BrowserPagePane({
         canGoForward={browserTab.canGoForward}
         webviewRef={webviewRef}
         onReload={() => reload.reloadWebviewOrRecoverGuest(false)}
+        ask={grabAnnotations}
       />
       <BrowserPageChromeHeader
         chromeHeaderRef={chromeHeaderRef}
