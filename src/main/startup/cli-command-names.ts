@@ -62,6 +62,8 @@ export const CLI_COMMAND_NAMES = [
   'select-all',
   'serve',
   'set',
+  'settings',
+  'shortcut',
   'skills',
   'snapshot',
   'speech',

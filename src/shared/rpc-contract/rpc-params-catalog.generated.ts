@@ -463,6 +463,7 @@ import {
   PluginSetEnabledParams,
   PluginsPanelActionParams
 } from './plugins-params'
+import { KeybindingSet, PreferencesUpdate } from './preferences-params'
 import {
   PreflightAgentDetection,
   PreflightCheck,
@@ -1223,6 +1224,10 @@ export const RPC_PARAMS_BY_METHOD = {
   'plugins.panelAction': PluginsPanelActionParams,
   'plugins.readPanelEntry': PluginReadPanelEntryParams,
   'plugins.setEnabled': PluginSetEnabledParams,
+  'preferences.get': null,
+  'preferences.shortcuts.list': null,
+  'preferences.shortcuts.set': KeybindingSet,
+  'preferences.update': PreferencesUpdate,
   'preflight.check': PreflightCheck,
   'preflight.detectAgents': PreflightAgentDetection,
   'preflight.detectRemoteAgents': PreflightDetectRemoteAgents,
