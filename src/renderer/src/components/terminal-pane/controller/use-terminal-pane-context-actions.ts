@@ -1,6 +1,7 @@
 import { usePaneTitleRenameActions } from '../titles/use-pane-title-rename-actions'
 import { useCallback, useEffect } from 'react'
 import { useTerminalPaneContextMenu } from '../context-menu/use-terminal-pane-context-menu'
+import { useTerminalSelectionAsk } from '../selection-ask/use-terminal-selection-ask'
 import type { TerminalPaneCloseController } from '../layout/close/use-terminal-pane-close-actions'
 import { useTerminalQuickCommandHosts } from '@/hooks/use-terminal-quick-command-hosts'
 import { useVisibleTerminalQuickCommandHosts } from '@/hooks/use-visible-terminal-quick-command-hosts'
@@ -112,6 +113,19 @@ export function useTerminalPaneContextActions(controller: TerminalPaneCloseContr
     return manager.getActivePane()?.leafId ?? null
   }, [contextMenu.menuPaneId, managerRef])
   const contextMenuLeafId = getContextMenuLeafId()
+  const selectionAsk = useTerminalSelectionAsk({
+    managerRef,
+    tabId,
+    menuOpen: contextMenu.open,
+    setMenuOpen: contextMenu.setOpen,
+    resolveMenuPane: () => {
+      const manager = managerRef.current
+      const panes = manager?.getPanes() ?? []
+      return (
+        panes.find((pane) => pane.id === contextMenu.menuPaneId) ?? manager?.getActivePane() ?? null
+      )
+    }
+  })
 
   return {
     handleRenameSubmit,
@@ -124,7 +138,8 @@ export function useTerminalPaneContextActions(controller: TerminalPaneCloseContr
     quickCommandHostOwnershipPending,
     visibleQuickCommandHosts,
     getContextMenuLeafId,
-    contextMenuLeafId
+    contextMenuLeafId,
+    selectionAsk
   }
 }
 
