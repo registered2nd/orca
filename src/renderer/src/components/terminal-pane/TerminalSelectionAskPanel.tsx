@@ -93,6 +93,8 @@ export function TerminalSelectionAskPanel({
   return (
     <div
       data-testid="terminal-selection-ask-panel"
+      data-terminal-pane-own-input
+      data-pane-prevent-terminal-focus
       className="absolute bottom-3 left-1/2 z-50 flex w-[min(36rem,calc(100%-1.5rem))] -translate-x-1/2 flex-col gap-2 rounded-xl border border-border bg-popover/95 p-2 text-sm text-popover-foreground shadow-floating backdrop-blur"
       // Why: keys typed here are the question, not terminal shortcuts or PTY input.
       onKeyDown={(event) => {
