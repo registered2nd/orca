@@ -1,5 +1,6 @@
 import type { HandlerGroup } from './handler-group-manifest'
 import { VOICE_HANDLER_GROUP } from './voice-handler-group'
+import { PREFERENCES_HANDLER_GROUP } from './preferences-handler-group'
 
 // Why split out: the browser command surface is a third of the CLI's groups and
 // changes as a unit, so it keeps handler-group-manifest.ts readable at a glance.
@@ -132,5 +133,6 @@ export const BROWSER_HANDLER_GROUPS: readonly HandlerGroup[] = [
     load: async () => (await import('./handlers/browser-storage.js')).BROWSER_STORAGE_HANDLERS
   },
   // Fork-only: rides this list because handler-group-manifest.ts sits at its line limit.
-  VOICE_HANDLER_GROUP
+  VOICE_HANDLER_GROUP,
+  PREFERENCES_HANDLER_GROUP
 ]
