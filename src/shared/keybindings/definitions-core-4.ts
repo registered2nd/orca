@@ -41,6 +41,19 @@ export const KEYBINDING_DEFINITION_CORE_4: readonly KeybindingDefinition[] = [
     defaultBindings: platformBindings([])
   },
   {
+    id: 'terminal.askAboutSelection',
+    title: 'Ask agent about terminal selection',
+    group: 'Terminal Panes',
+    scope: 'terminal',
+    searchKeywords: ['shortcut', 'terminal', 'ask', 'question', 'selection', 'agent', 'quote'],
+    // Why: Ctrl+Shift+A is terminal Select All off macOS, and Ctrl+Alt+letter is AltGr text input there.
+    defaultBindings: {
+      darwin: ['Mod+Shift+A'],
+      linux: ['Alt+Shift+A'],
+      win32: ['Alt+Shift+A']
+    }
+  },
+  {
     id: 'terminal.closePane',
     title: 'Close active pane',
     group: 'Terminal Panes',

@@ -14,6 +14,7 @@ import { normalizeExternalBrowserUrl } from '../../../../../shared/browser-url'
 import { resolveBrowserSourceUnifiedTab } from '@/lib/browser-workspace-source-resolution'
 import type { BrowserPageContextMenuState } from '../describe-page/browser-page-types'
 import { addAppKeyListener, removeAppKeyListener } from '@/lib/app-keyboard-router'
+import { askAboutBrowserSelection, type BrowserAskIntent } from '../ask/browser-page-ask-send'
 
 // `focus:` rather than `focus-visible:` — items are only ever focused programmatically
 // while the menu is open, so every focus here is keyboard navigation.
@@ -26,7 +27,8 @@ export function BrowserPageContextMenu({
   canGoBack,
   canGoForward,
   webviewRef,
-  onReload
+  onReload,
+  ask
 }: {
   browserPageId: string
   worktreeId: string
@@ -34,6 +36,8 @@ export function BrowserPageContextMenu({
   canGoForward: boolean
   webviewRef: MutableRefObject<Electron.WebviewTag | null>
   onReload: () => void
+  /** The pane's Ask panel; absent where the pane has none. */
+  ask?: BrowserAskIntent
 }): React.JSX.Element | null {
   const createBrowserTab = useAppStore((s) => s.createBrowserTab)
   const [contextMenu, setContextMenu] = useState<BrowserPageContextMenuState | null>(null)
@@ -253,6 +257,21 @@ export function BrowserPageContextMenu({
             >
               {translate('auto.components.browser.pane.BrowserPane.2a4c4b8e1f', 'Copy')}
             </button>
+            {ask ? (
+              <button
+                role="menuitem"
+                className={MENU_ITEM_CLASS}
+                onClick={() => {
+                  void askAboutBrowserSelection(browserPageId, contextMenu.selectionText, ask)
+                  setContextMenu(null)
+                }}
+              >
+                {translate(
+                  'auto.components.browser.pane.ask.askAboutSelection',
+                  'Ask About Selection…'
+                )}
+              </button>
+            ) : null}
             <div className="my-1 h-px bg-border/70" />
           </>
         ) : null}
