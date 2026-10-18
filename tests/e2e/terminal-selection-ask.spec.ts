@@ -12,6 +12,7 @@ import {
 import { openTerminalContextMenu } from './helpers/terminal-pane-title-actions'
 
 const PROBE = 'ask-selection-probe-7731'
+const APP_COPY_PROBE = 'app-copied-probe-5521'
 
 async function selectAllInActivePane(page: Page): Promise<void> {
   await page.evaluate(() => {
@@ -57,4 +58,26 @@ test('the selection goes into an Ask box from the shortcut and the pane menu', a
   await expect(panel).toBeVisible()
   await expect(panel).toContainText(PROBE)
   await expect(panel.locator('textarea')).toBeFocused()
+})
+
+test('a selection an app copies through the terminal can be asked about', async ({ orcaPage }) => {
+  await waitForSessionReady(orcaPage)
+  await ensureTerminalVisible(orcaPage)
+  const ptyId = await waitForActivePanePtyId(orcaPage)
+  // Claude Code's fullscreen mode copies its own mouse selection this way (OSC 52).
+  const copied = Buffer.from(APP_COPY_PROBE).toString('base64')
+  const emitCopy =
+    process.platform === 'win32'
+      ? `[Console]::Write("$([char]27)]52;c;${copied}$([char]7)")`
+      : `printf '\\033]52;c;${copied}\\007'`
+  await execInTerminal(orcaPage, ptyId, emitCopy)
+  await expect
+    .poll(() => orcaPage.evaluate(() => window.api.ui.readClipboardText()))
+    .toBe(APP_COPY_PROBE)
+
+  await openTerminalContextMenu(orcaPage)
+  await orcaPage.getByRole('menuitem', { name: 'Ask About Selection…' }).click()
+  const panel = orcaPage.getByTestId('terminal-selection-ask-panel')
+  await expect(panel).toBeVisible()
+  await expect(panel).toContainText(APP_COPY_PROBE)
 })

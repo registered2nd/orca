@@ -4,6 +4,7 @@ import { useAppStore } from '@/store'
 import { isWebClientLocation } from '@/lib/web-client-location'
 import { makePaneKey } from '../../../../shared/stable-pane-id'
 import { createOsc52OscHandler } from '../../../../shared/osc52-clipboard'
+import { recordTerminalAppCopy } from './terminal-app-copied-selection'
 import {
   showOsc52ClipboardBlockedToast,
   showOsc52ClipboardCopyRetryToast,
@@ -81,7 +82,10 @@ export function createTerminalPaneCreatedHandler(
         createOsc52OscHandler({
           getSettingEnabled: () => settingsRef.current?.terminalAllowOsc52Clipboard,
           getReplaying: () => isPaneReplaying(replayingPanesRef, pane.id),
-          writeClipboardText: (text) => window.api.ui.writeTerminalClipboardText(text),
+          writeClipboardText: (text) => {
+            recordTerminalAppCopy(pane.terminal, text)
+            return window.api.ui.writeTerminalClipboardText(text)
+          },
           showBlockedWriteToast: showOsc52ClipboardBlockedToast,
           // Web clipboards need a recent gesture that a host round trip can outlive (#33937).
           showWriteFailedToast: isWebClientLocation()
