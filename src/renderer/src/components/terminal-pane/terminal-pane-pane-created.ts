@@ -3,6 +3,7 @@ import type { PaneSpawnHints } from '@/lib/pane-manager/pane-manager-types'
 import { useAppStore } from '@/store'
 import { makePaneKey } from '../../../../shared/stable-pane-id'
 import { createOsc52OscHandler } from '../../../../shared/osc52-clipboard'
+import { recordTerminalAppCopy } from './terminal-app-copied-selection'
 import {
   showOsc52ClipboardBlockedToast,
   showOsc52ClipboardFailedToast
@@ -81,7 +82,10 @@ export function createTerminalPaneCreatedHandler(
         createOsc52OscHandler({
           getSettingEnabled: () => settingsRef.current?.terminalAllowOsc52Clipboard,
           getReplaying: () => isPaneReplaying(replayingPanesRef, pane.id),
-          writeClipboardText: (text) => window.api.ui.writeTerminalClipboardText(text),
+          writeClipboardText: (text) => {
+            recordTerminalAppCopy(pane.terminal, text)
+            return window.api.ui.writeTerminalClipboardText(text)
+          },
           showBlockedWriteToast: showOsc52ClipboardBlockedToast,
           showWriteFailedToast: showOsc52ClipboardFailedToast
         })
