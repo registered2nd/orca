@@ -117,6 +117,7 @@ export type KeybindingActionId =
   | 'terminal.expandPane'
   | 'terminal.setTitle'
   | 'terminal.clearPaneTitle'
+  | 'terminal.askAboutSelection'
   | 'terminal.closePane'
   | 'terminal.splitRight'
   | 'terminal.splitDown'
