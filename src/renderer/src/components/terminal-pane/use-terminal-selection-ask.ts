@@ -2,12 +2,17 @@ import { useCallback, useEffect, useState } from 'react'
 import type { ManagedPane, PaneManager } from '@/lib/pane-manager/pane-manager'
 import type { TerminalSelectionAsk } from './TerminalSelectionAskPanel'
 import { subscribeTerminalSelectionAsk } from './terminal-selection-ask-request'
+import { clearTerminalAppCopy, readTerminalAppCopy } from './terminal-app-copied-selection'
 
 export type TerminalSelectionAskState = {
   canAskAboutSelection: boolean
   onAskAboutSelection: () => void
   askSelection: TerminalSelectionAsk | null
   closeAskSelection: () => void
+}
+
+function hasAskableSelection(pane: ManagedPane | null): boolean {
+  return Boolean(pane && (pane.terminal.hasSelection() || readTerminalAppCopy(pane.terminal)))
 }
 
 /** Ask about the selection, from the pane menu or the shortcut: holds what was selected while the question is typed. */
@@ -28,10 +33,15 @@ export function useTerminalSelectionAsk({
 
   const openAskSelection = useCallback(
     (pane: ManagedPane | null): void => {
-      const text = pane?.terminal.getSelection() ?? ''
-      if (!pane || !text.trim()) {
+      if (!pane) {
         return
       }
+      const text = pane.terminal.getSelection() || readTerminalAppCopy(pane.terminal) || ''
+      if (!text.trim()) {
+        return
+      }
+      // Once asked about, an app's copied selection is spent.
+      clearTerminalAppCopy(pane.terminal)
       setMenuOpen(false)
       setAskSelection({ paneId: pane.id, leafId: pane.leafId, text, columns: pane.terminal.cols })
     },
@@ -58,7 +68,7 @@ export function useTerminalSelectionAsk({
 
   return {
     // Why: PaneManager.getPanes() allocates; a closed menu needs no selection check.
-    canAskAboutSelection: menuOpen ? Boolean(resolveMenuPane()?.terminal.hasSelection()) : false,
+    canAskAboutSelection: menuOpen ? hasAskableSelection(resolveMenuPane()) : false,
     onAskAboutSelection: () => openAskSelection(resolveMenuPane()),
     askSelection,
     closeAskSelection
