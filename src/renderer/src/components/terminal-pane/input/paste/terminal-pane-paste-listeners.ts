@@ -35,6 +35,9 @@ import {
   type TerminalPanePasteExecution
 } from './terminal-pane-paste-execution'
 
+// Why: the find bar and the Ask box sit inside the pane but take their own pastes.
+const PANE_OWN_INPUT_SELECTOR = '[data-terminal-search-root], [data-terminal-pane-own-input]'
+
 export function registerTerminalPanePasteListeners({
   container,
   controller,
@@ -78,7 +81,7 @@ export function registerTerminalPanePasteListeners({
   const onKeyPaste = (event: KeyboardEvent): void => {
     const target = event.target
     if (
-      (target instanceof Element && target.closest('[data-terminal-search-root]')) ||
+      (target instanceof Element && target.closest(PANE_OWN_INPUT_SELECTOR)) ||
       isInsideNativeChatCover(target)
     ) {
       return
@@ -130,7 +133,7 @@ export function registerTerminalPanePasteListeners({
   const onPaste = (event: ClipboardEvent): void => {
     const target = event.target
     if (
-      (target instanceof Element && target.closest('[data-terminal-search-root]')) ||
+      (target instanceof Element && target.closest(PANE_OWN_INPUT_SELECTOR)) ||
       isInsideNativeChatCover(target)
     ) {
       return
@@ -186,7 +189,7 @@ export function registerTerminalPanePasteListeners({
     if (
       !(activeElementAtDispatch instanceof Element) ||
       !container.contains(activeElementAtDispatch) ||
-      activeElementAtDispatch.closest('[data-terminal-search-root]') ||
+      activeElementAtDispatch.closest(PANE_OWN_INPUT_SELECTOR) ||
       isInsideNativeChatCover(activeElementAtDispatch)
     ) {
       return
@@ -232,7 +235,7 @@ export function registerTerminalPanePasteListeners({
       !(activeElement instanceof Element) ||
       !container.contains(activeElement) ||
       isEditableTarget(activeElement) ||
-      activeElement.closest('[data-terminal-search-root]') ||
+      activeElement.closest(PANE_OWN_INPUT_SELECTOR) ||
       isInsideNativeChatCover(activeElement)
     ) {
       return

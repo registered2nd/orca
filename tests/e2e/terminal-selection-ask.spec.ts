@@ -48,6 +48,19 @@ test('the selection goes into an Ask box from the shortcut and the pane menu', a
   await expect(panel.locator('textarea')).toBeFocused()
   await orcaPage.keyboard.type('what is this?')
   await expect(panel.locator('textarea')).toHaveValue('what is this?')
+  // Dictation tools paste with Ctrl+V or Ctrl+Shift+V; the pane must not take the paste.
+  await orcaPage.evaluate(() => window.api.ui.writeClipboardText(' dictated'))
+  await panel.locator('p').first().click()
+  // Clicking the box outside its field must not hand focus back to the terminal.
+  expect(
+    await orcaPage.evaluate(() =>
+      Boolean(document.activeElement?.classList.contains('xterm-helper-textarea'))
+    )
+  ).toBe(false)
+  await panel.locator('textarea').focus()
+  await orcaPage.keyboard.press(isMac ? 'Meta+V' : 'Control+V')
+  await orcaPage.keyboard.press(isMac ? 'Meta+Shift+V' : 'Control+Shift+V')
+  await expect(panel.locator('textarea')).toHaveValue('what is this? dictated dictated')
   await expect(panel).toContainText('Click into an agent terminal first')
   await orcaPage.keyboard.press('Escape')
   await expect(panel).toBeHidden()
