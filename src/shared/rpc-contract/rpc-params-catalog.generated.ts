@@ -126,6 +126,10 @@ import {
   AiVaultSessionTitlesParams
 } from './ai-vault/ai-vault-params'
 import {
+  AppFunctionsInvokeIpcParams,
+  AppFunctionsListParams
+} from './app-functions/app-functions-params'
+import {
   ArtifactsDeleteParams,
   ListOptions,
   SourceRequest,
@@ -1216,6 +1220,8 @@ export const RPC_PARAMS_BY_METHOD = {
   'aiVault.searchSessions': AiVaultSearchRequestSchema,
   'aiVault.searchStatus': AiVaultSearchStatusRequestSchema,
   'aiVault.setSearchEnabled': AiVaultSetSearchEnabledParamsSchema,
+  'appFunctions.invokeIpc': AppFunctionsInvokeIpcParams,
+  'appFunctions.list': AppFunctionsListParams,
   'artifacts.delete': ArtifactsDeleteParams,
   'artifacts.getPublishedLink': SourceRequest,
   'artifacts.list': ListOptions,

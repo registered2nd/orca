@@ -1,5 +1,6 @@
 import { STATUS_METHODS } from './host-management/status'
 import { DESKTOP_WINDOW_METHODS } from './host-management/desktop-window'
+import { APP_FUNCTION_METHODS } from './app-functions/app-functions'
 import { SIDEBAR_INPUT_METHODS } from './sidebar-inputs/sidebar-inputs'
 import { SIDEBAR_REPO_ICON_METHODS } from './sidebar-inputs/sidebar-repo-icons'
 import { ORCAD_TERMINAL_CENSUS_METHODS } from './orcad/orcad-terminal-census'
@@ -131,6 +132,7 @@ const CORE_RPC_METHODS = [
   ...STATUS_METHODS,
   ...PAIRED_SERVER_ASKS_METHODS,
   ...DESKTOP_WINDOW_METHODS,
+  ...APP_FUNCTION_METHODS,
   ...ORCAD_TERMINAL_CENSUS_METHODS,
   ...ORCAD_MIGRATION_METHODS,
   ...SESSION_TERMINAL_SCROLLBACK_METHODS,
