@@ -423,6 +423,36 @@ orca agent hooks on --json
 orca agent hooks off --json
 ```
 
+## App functions
+
+Everything the desktop window can ask the app to do is reachable from the CLI, including actions that otherwise exist only as buttons. `app functions` lists them; `app invoke` runs one exactly as the window would.
+
+```bash
+orca app functions --filter pairing --json
+orca app functions --kind rpc --json
+orca app functions --all --json
+orca app invoke mobile:listRuntimeAccessGrants --json
+orca app invoke mobile:revokeRuntimeAccess --args '[{"deviceId":"<deviceId>"}]' --json
+```
+
+The list has two kinds of entry:
+
+- `ipc`: a channel the window calls in the app's main process, read live from the running app. `params` are its positional arguments, with TypeScript types where the source declares them. `preload.api` is the `window.api` member the window calls it through.
+- `rpc`: a runtime method no other `orca` command calls, with a JSON Schema of its params. `--all` adds the methods other commands already cover.
+
+`--args` takes JSON: an array of positional arguments for an `ipc` function, the params object for an `rpc` one. `--args-file <path>` reads it from a file, and `--args-file -` from stdin, which avoids shell quoting. An `ipc` function runs with the Orca window as its caller, so the window must be open. A function that throws exits non-zero with code `app_function_failed` and its error in `data.error`.
+
+For example, the **Settings → Remote Orca Servers → Advertise this app as a server** form maps to these functions. `reach` is `network` for a link opened on another device and `this-computer` for one opened here. A `network` link widens the server to listen beyond loopback, as the button does.
+
+```bash
+orca app invoke mobile:listNetworkInterfaces --json
+orca app invoke mobile:getRuntimePairingUrl --args '[{"address":"192.168.1.20","rotate":true,"reach":"network"}]' --json
+orca app invoke mobile:listRuntimeAccessGrants --json
+orca app invoke mobile:revokeRuntimeAccess --args '[{"deviceId":"<deviceId>"}]' --json
+```
+
+These commands reach only the Orca on this machine: a paired client or `--environment` server refuses them. Some window state never reaches the app, such as which settings page or view is open, and has no app function.
+
 ## Agent habits
 
 - Prefer `--json` for automation and agent calls.
