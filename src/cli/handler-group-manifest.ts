@@ -17,6 +17,11 @@ export const HANDLER_GROUPS: readonly HandlerGroup[] = [
   LINEAR_HANDLER_GROUP,
   REFERENCE_HANDLER_GROUP,
   {
+    name: 'app-functions',
+    keys: ['app functions', 'app invoke'],
+    load: async () => (await import('./handlers/app-functions.js')).APP_FUNCTION_HANDLERS
+  },
+  {
     name: 'core',
     keys: ['claude-teams', 'open', 'serve', 'status'],
     load: async () => (await import('./handlers/core.js')).CORE_HANDLERS
