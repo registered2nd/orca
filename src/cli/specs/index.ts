@@ -31,6 +31,7 @@ import { SPEECH_COMMAND_SPECS } from './speech'
 import { TERMINAL_DAEMON_COMMAND_SPECS } from './terminal-daemon'
 import { EMULATOR_COMMAND_SPECS } from './emulator'
 import { INTROSPECTION_COMMAND_SPECS } from './introspection'
+import { APP_FUNCTION_COMMAND_SPECS } from './app-functions'
 import { JIRA_COMMAND_SPECS } from './jira'
 import { LINEAR_COMMAND_SPECS } from './linear'
 import { VM_COMMAND_SPECS } from './vm'
@@ -79,6 +80,7 @@ export const COMMAND_SPECS: CommandSpec[] = [
   ...SPEECH_COMMAND_SPECS,
   ...TERMINAL_DAEMON_COMMAND_SPECS,
   ...INTROSPECTION_COMMAND_SPECS,
+  ...APP_FUNCTION_COMMAND_SPECS,
   ...ENVIRONMENT_COMMAND_SPECS,
   ...MANAGED_SERVER_COMMAND_SPECS,
   ...JIRA_COMMAND_SPECS,
