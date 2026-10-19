@@ -2,6 +2,8 @@ import { readSessionWorkers } from '../runtime/rpc/methods/orchestration/worker/
 import { ipcMain } from 'electron'
 import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../shared/workspace-layout/layout-owner-switch'
 import { placeUnshownLiveTerminalsBestEffort } from '../runtime/terminal/adoption/unshown-live-terminal-placement'
+import { setAppIpcHost } from '../app-functions/app-ipc-host'
+import { createElectronAppIpcHost } from '../app-functions/electron-app-ipc-host'
 import { recoverLegacyWorkerTerminalsForRendererStartup } from './pty-startup/legacy-worker-renderer-recovery'
 import { logStartupMilestone } from './diagnostics/startup-diagnostics'
 import { mainProcessState as state } from './main-process-state'
@@ -18,6 +20,16 @@ import {
 import { subscribeAgentSessionUploadRemoval } from '../native-chat/agent-session-attachments/agent-session-attachment-store-registry'
 
 export function registerMainProcessIpcHandlers(): void {
+  // Why: `orca app invoke` calls these handlers as the main window would.
+  setAppIpcHost(
+    createElectronAppIpcHost({
+      ipc: ipcMain,
+      getSender: () => {
+        const window = state.mainWindow
+        return window && !window.isDestroyed() ? window.webContents : null
+      }
+    })
+  )
   ipcMain.handle('app:awaitFirstWindowStartupServices', async () => {
     await Promise.all([
       state.firstWindowStartupServicesReady,
