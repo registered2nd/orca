@@ -54,6 +54,8 @@ export function translateRemotePairingEndpointKind(
       return t('auto.lib.remotePairingCopy.public', 'Public address')
     case 'custom':
       return t('auto.lib.remotePairingCopy.custom', 'Custom hostname')
+    case 'relay':
+      return t('auto.lib.remotePairingCopy.relay', 'Orca Relay')
   }
 }
 
