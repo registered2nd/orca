@@ -1,5 +1,9 @@
 import type { CommandHandler } from '../dispatch'
 import {
+  addEnvironmentFromRelayPairingCode,
+  isRelayPairingCode
+} from '../../shared/runtime-environment-relay-store'
+import {
   formatEnvironment,
   formatEnvironmentList,
   formatHostList,
@@ -48,11 +52,11 @@ export const ENVIRONMENT_HANDLERS: Record<string, CommandHandler> = {
   'environment add': async ({ flags, json }) => {
     const name = getRequiredStringFlag(flags, 'name')
     const pairingCode = getRequiredStringFlag(flags, 'pairing-code')
+    // Why async for relay links: the one-time invite is traded for a resume credential before saving.
     const environment = redactRuntimeEnvironment(
-      addEnvironmentFromPairingCode(getDefaultUserDataPath(), {
-        name,
-        pairingCode
-      })
+      isRelayPairingCode(pairingCode)
+        ? await addEnvironmentFromRelayPairingCode(getDefaultUserDataPath(), { name, pairingCode })
+        : addEnvironmentFromPairingCode(getDefaultUserDataPath(), { name, pairingCode })
     )
     printResult(
       localSuccess({ environment }),

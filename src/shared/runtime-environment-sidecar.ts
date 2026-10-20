@@ -15,6 +15,7 @@ import {
   type PersistedRuntimeEnvironment
 } from './runtime-environments'
 import { hardenExistingSecureFile } from './secure-file'
+import { RuntimeRelayAccessSchema } from './runtime-relay-access-schema'
 
 // Why a sidecar: shipped builds parse orca-environments.json with key-stripping schemas and rewrite
 // it on routine use, so T5 state stored there would vanish across a downgrade. They never touch this.
@@ -46,7 +47,9 @@ const SidecarEntrySchema = z.object({
   orcadMigratedAt: z.string().datetime().optional(),
   // Keeps the overlaid pairing revision monotonic after the access that raised it is removed.
   pairingRevisionFloor: z.number().finite().optional(),
-  reconciliation: RuntimeEnvironmentReconciliationRecordSchema.optional()
+  reconciliation: RuntimeEnvironmentReconciliationRecordSchema.optional(),
+  // The resume credential a server paired through Orca Relay is reached with.
+  relayAccess: RuntimeRelayAccessSchema.optional()
 })
 
 const SidecarSchema = z.object({
@@ -176,7 +179,8 @@ export function overlayRuntimeEnvironmentSidecar(
       : {}),
     ...(entry.orcadDeployment ? { orcadDeployment: entry.orcadDeployment } : {}),
     ...(entry.orcadMigratedAt ? { orcadMigratedAt: entry.orcadMigratedAt } : {}),
-    ...(entry.reconciliation ? { reconciliation: entry.reconciliation } : {})
+    ...(entry.reconciliation ? { reconciliation: entry.reconciliation } : {}),
+    ...(entry.relayAccess ? { relayAccess: entry.relayAccess } : {})
   })
   return overlaid.success ? overlaid.data : base
 }
@@ -224,6 +228,7 @@ export function writeRuntimeEnvironmentSidecarEntry(
       entry.orcadDeployment !== undefined ||
       entry.orcadMigratedAt !== undefined ||
       entry.reconciliation !== undefined ||
+      entry.relayAccess !== undefined ||
       (entry.pairingRevisionFloor ?? basePairingRevision) > basePairingRevision)
   if (entry && hasState) {
     const { pendingBinding: _staleTarget, ...state } = entry
