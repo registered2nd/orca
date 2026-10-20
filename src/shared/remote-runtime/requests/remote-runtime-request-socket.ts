@@ -1,5 +1,6 @@
 import { randomUUID } from 'node:crypto'
 import WebSocket from 'ws'
+import { createRemoteRuntimeWebSocket } from '../../remote-runtime-relay-socket'
 import { abortSignalReason, throwIfSignalAborted } from '../../abort-signal-reason'
 import type { PairedRuntimeConnection } from '../../paired-runtime-connection'
 import type { RuntimeCapability } from '../../protocol-version'
@@ -68,7 +69,10 @@ export async function sendRemoteRuntimeRequestOnSocket<TResult>(
   }
   let serializedRequest = takeRemoteRuntimePreparedRequest(pendingRequest)
   return await new Promise<RuntimeRpcResponse<TResult>>((resolve, reject) => {
-    const handshake = createRemoteRuntimeClientHandshake(connection.hostPublicKeyB64)
+    const handshake = createRemoteRuntimeClientHandshake(
+      connection.hostPublicKeyB64,
+      connection.relay
+    )
     let settled = false
     let ws: WebSocket | null = null
     let router: RemoteRuntimeRequestResponseRouter<TResult>
@@ -183,7 +187,7 @@ export async function sendRemoteRuntimeRequestOnSocket<TResult>(
       const connectOptions = remoteRuntimeConnectOptions({
         maxPayload: REMOTE_RUNTIME_MAX_WEBSOCKET_FRAME_BYTES
       })
-      ws = new WebSocket(connection.endpoint, connectOptions)
+      ws = createRemoteRuntimeWebSocket(connection, connectOptions)
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error)
       finishError(

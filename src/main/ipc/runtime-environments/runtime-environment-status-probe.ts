@@ -1,4 +1,6 @@
 import { resolveEnvironment } from '../../../shared/runtime-environment-store'
+import { ELECTRON_REMOTE_RUNTIME_CLIENT_CAPABILITIES } from '../../../shared/electron-remote-runtime-client-capabilities'
+import { renewEnvironmentRelayAccessIfDue } from '../../../shared/runtime-relay-access-renewal'
 import {
   getOrcadSshDeployment,
   getPreferredPairedRuntimeConnection,
@@ -38,6 +40,14 @@ export async function getRuntimeEnvironmentStatus(
     timeoutMs,
     ...options
   })
+  if (response.ok && environment.relayAccess) {
+    // Why fire-and-forget: renewal only matters within a week of expiry and must not slow status.
+    void renewEnvironmentRelayAccessIfDue(
+      userDataPath,
+      environment,
+      ELECTRON_REMOTE_RUNTIME_CLIENT_CAPABILITIES
+    ).catch((error: unknown) => console.warn('[runtime-environments] Relay renewal failed:', error))
+  }
   // A retired request must not publish old status or borrow its replacement's diagnostics.
   if (getRuntimeEnvironmentCapabilityIncarnation(environment.id) !== incarnation) {
     // Follow one repair started by this probe; the successor owner verifies the new pairing.

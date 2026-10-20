@@ -3,22 +3,31 @@ import {
   type PairedE2EEClientHandshake
 } from '../paired-e2ee-client-handshake'
 import { NODE_PAIRED_E2EE_PRIMITIVES } from '../paired-e2ee-node-primitives'
+import type { PairedRuntimeRelayRoute } from '../paired-runtime-connection'
 import { serializeRemoteRuntimePayload } from './remote-runtime-memory-limits'
 import { parseRemoteRuntimeJsonText } from './requests/remote-runtime-request-frames'
 
 export type RemoteRuntimeHandshakeState = 'awaiting_ready' | 'awaiting_authenticated' | 'ready'
 
-// Desktop and CLI runtime clients: legacy framing, structure-limited parsing,
-// size-limited auth serialization. Throws on an invalid host public key.
+// Desktop and CLI runtime clients: legacy framing direct, v2 over Orca Relay (which requires it),
+// structure-limited parsing, size-limited auth serialization. Throws on an invalid host public key.
 export function createRemoteRuntimeClientHandshake(
-  hostPublicKeyB64: string
+  hostPublicKeyB64: string,
+  relay?: Pick<PairedRuntimeRelayRoute, 'relayHostId'>
 ): PairedE2EEClientHandshake {
   return createPairedE2EEClientHandshake({
     primitives: NODE_PAIRED_E2EE_PRIMITIVES,
     hostPublicKeyB64,
-    framing: 'legacy',
     parseJson: parseRemoteRuntimeJsonText,
-    serializeJson: serializeRemoteRuntimePayload
+    serializeJson: serializeRemoteRuntimePayload,
+    ...(relay
+      ? {
+          framing: 'v2' as const,
+          transport: 'relay' as const,
+          relayHostId: relay.relayHostId,
+          tokenAuthCarriesCapabilities: true
+        }
+      : { framing: 'legacy' as const })
   })
 }
 
