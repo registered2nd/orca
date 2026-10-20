@@ -9,6 +9,7 @@ import { OrcaRuntimeRpcServer } from '../runtime/rpc/server/runtime-rpc'
 import { resolveServePinnedBindHost } from './serve-pinned-bind-host'
 import { isOrcadSidecarLaunch } from '../window/foreground-activation-policy'
 import { registerMobileHandlers } from '../ipc/mobile'
+import { registerRuntimeRelayPairingHandler } from '../ipc/runtime-relay-pairing-ipc'
 import { createRuntimeEnvironmentMobileRelayHosts } from '../ipc/runtime-environments/runtime-environment-mobile-relay-hosts'
 import { getLocalPtyProvider } from '../ipc/pty/provider/registry'
 import { registerHeadlessPtyRuntime } from '../ipc/pty/register-headless-runtime'
@@ -148,6 +149,7 @@ function installRuntimeRpc(
       return true
     }
   })
+  registerRuntimeRelayPairingHandler(runtimeRpc)
   // Repeated direct-auth failures need a re-pairing explanation rather than silent nonconnection.
   runtimeRpc.setOnUnpairedDeviceAuthFailure(() => {
     // Retain the one-shot across the runtime-start/renderer-mount race.

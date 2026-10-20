@@ -2,7 +2,8 @@ import { pairedRuntimeConnectionFromOffer } from '../../../shared/remote-runtime
 import {
   addOrUpdateEnvironmentFromPairingCode,
   resolveEnvironment,
-  updateEnvironmentFromPairingCode
+  updateEnvironmentFromPairingCode,
+  type AddEnvironmentOutcome
 } from '../../../shared/remote-runtime/host-store/runtime-environment-store'
 import { RuntimeEnvironmentStoreError } from '../../../shared/remote-runtime/host-store/runtime-environment-store-records'
 import {
@@ -17,6 +18,7 @@ import {
 import { RemoteRuntimeClientError } from '../../../shared/remote-runtime/remote-runtime-client-error'
 import { exchangeRemotePairingTicket } from '../../../shared/remote-runtime/pairing/remote-pairing-ticket-exchange'
 import { sendRemoteRuntimeRequestOnSocket } from '../../../shared/remote-runtime/requests/remote-runtime-request-socket'
+import { addOrUpdateEnvironmentFromRelayPairingCode } from '../../../shared/remote-runtime/host-store/runtime-environment-relay-store'
 import { ELECTRON_REMOTE_RUNTIME_CLIENT_CAPABILITIES } from '../../../shared/electron-remote-runtime-client-capabilities'
 import {
   getPreferredPairingOffer,
@@ -107,16 +109,26 @@ export async function verifyAndAddRuntimeEnvironmentFromPairingCode(
     offer: link.pairing,
     hostCapabilities: runtimeStatus.capabilities
   })
-  let outcome: ReturnType<typeof addOrUpdateEnvironmentFromPairingCode>
+  let outcome: AddEnvironmentOutcome
   try {
-    outcome = addOrUpdateEnvironmentFromPairingCode(userDataPath, {
-      ...args,
-      pairingCode,
-      // Only a verified key match permits updating an existing server identity.
-      runtimeId: runtimeStatus.runtimeId,
-      ...(usesSshTunnel ? { connectionDependency: 'ssh-tunnel' as const } : {})
-    })
+    outcome = link.pairing.relay
+      ? await addOrUpdateEnvironmentFromRelayPairingCode(userDataPath, {
+          name: args.name,
+          pairingCode,
+          clientCapabilities: ELECTRON_REMOTE_RUNTIME_CLIENT_CAPABILITIES,
+          runtimeId: runtimeStatus.runtimeId
+        })
+      : addOrUpdateEnvironmentFromPairingCode(userDataPath, {
+          ...args,
+          pairingCode,
+          // Only a verified key match permits updating an existing server identity.
+          runtimeId: runtimeStatus.runtimeId,
+          ...(usesSshTunnel ? { connectionDependency: 'ssh-tunnel' as const } : {})
+        })
   } catch (error) {
+    if (error instanceof RemoteRuntimeClientError) {
+      return { ok: false, kind: 'connection-interrupted', message: error.message }
+    }
     return pairingSaveFailure(error, 'hostSaveFailed')
   }
   return {
