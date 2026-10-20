@@ -1,7 +1,13 @@
 import type { Worker } from 'node:worker_threads'
 import type { ModelManager } from './model-manager'
-import type { OpenAiTranscriptionSession } from './openai-transcription-client'
 import type { SttEventSink } from './stt-service'
+
+export type CloudTranscriptionSession = {
+  /** Returns true on the chunk that reaches the session's audio cap. */
+  feedAudio(samples: Float32Array, sampleRate: number): boolean
+  finish(): Promise<string>
+  cancel(): void
+}
 
 export type StopInFlight = {
   worker: Worker
@@ -11,8 +17,8 @@ export type StopInFlight = {
 
 export type SttSessionState = {
   worker: Worker | null
-  cloudSession: OpenAiTranscriptionSession | null
-  cloudStopInFlight: { session: OpenAiTranscriptionSession; promise: Promise<void> } | null
+  cloudSession: CloudTranscriptionSession | null
+  cloudStopInFlight: { session: CloudTranscriptionSession; promise: Promise<void> } | null
   modelManager: ModelManager
   activeModelId: string | null
   activeHotwordsFilePath: string | undefined
