@@ -3,7 +3,8 @@ import {
   addOrUpdateEnvironmentFromPairingCode,
   resolveEnvironment,
   RuntimeEnvironmentStoreError,
-  updateEnvironmentFromPairingCode
+  updateEnvironmentFromPairingCode,
+  type AddEnvironmentOutcome
 } from '../../../shared/runtime-environment-store'
 import {
   parseHostAccessLink,
@@ -15,6 +16,7 @@ import {
   type VerifyAndAddRuntimeEnvironmentResult
 } from '../../../shared/remote-pairing-verification'
 import { RemoteRuntimeClientError } from '../../../shared/remote-runtime/remote-runtime-client-error'
+import { addOrUpdateEnvironmentFromRelayPairingCode } from '../../../shared/runtime-environment-relay-store'
 import { sendRemoteRuntimeRequest } from '../../../shared/remote-runtime/remote-runtime-client'
 import { ELECTRON_REMOTE_RUNTIME_CLIENT_CAPABILITIES } from '../../../shared/electron-remote-runtime-client-capabilities'
 import {
@@ -97,15 +99,25 @@ export async function verifyAndAddRuntimeEnvironmentFromPairingCode(
   }
   const { link, runtimeStatus } = verified
   const usesSshTunnel = link.endpointKind === 'loopback' && args.allowLoopback === true
-  let outcome: ReturnType<typeof addOrUpdateEnvironmentFromPairingCode>
+  let outcome: AddEnvironmentOutcome
   try {
-    outcome = addOrUpdateEnvironmentFromPairingCode(userDataPath, {
-      ...args,
-      // Only a verified key match permits updating an existing server identity.
-      runtimeId: runtimeStatus.runtimeId,
-      ...(usesSshTunnel ? { connectionDependency: 'ssh-tunnel' as const } : {})
-    })
+    outcome = link.pairing.relay
+      ? await addOrUpdateEnvironmentFromRelayPairingCode(userDataPath, {
+          name: args.name,
+          pairingCode: args.pairingCode,
+          clientCapabilities: ELECTRON_REMOTE_RUNTIME_CLIENT_CAPABILITIES,
+          runtimeId: runtimeStatus.runtimeId
+        })
+      : addOrUpdateEnvironmentFromPairingCode(userDataPath, {
+          ...args,
+          // Only a verified key match permits updating an existing server identity.
+          runtimeId: runtimeStatus.runtimeId,
+          ...(usesSshTunnel ? { connectionDependency: 'ssh-tunnel' as const } : {})
+        })
   } catch (error) {
+    if (error instanceof RemoteRuntimeClientError) {
+      return { ok: false, kind: 'connection-interrupted', message: error.message }
+    }
     return pairingSaveFailure(error, 'hostSaveFailed')
   }
   return {

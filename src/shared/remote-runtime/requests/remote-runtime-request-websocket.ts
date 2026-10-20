@@ -1,4 +1,5 @@
 import WebSocket from 'ws'
+import { createRemoteRuntimeWebSocket } from '../../remote-runtime-relay-socket'
 import type { PairedRuntimeConnection } from '../../paired-runtime-connection'
 import type { PairedE2EEClientHandshake } from '../../paired-e2ee-client-handshake'
 import { createRemoteRuntimeClientHandshake } from '../remote-runtime-client-handshake'
@@ -107,7 +108,7 @@ function createSocket(
   | { ok: false; error: RemoteRuntimeClientError } {
   let handshake: PairedE2EEClientHandshake
   try {
-    handshake = createRemoteRuntimeClientHandshake(connection.hostPublicKeyB64)
+    handshake = createRemoteRuntimeClientHandshake(connection.hostPublicKeyB64, connection.relay)
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error)
     return {
@@ -122,8 +123,8 @@ function createSocket(
     return {
       ok: true,
       // Why: no runtime frame exceeds this, so a larger one is a broken peer, not a payload to buffer.
-      ws: new WebSocket(
-        connection.endpoint,
+      ws: createRemoteRuntimeWebSocket(
+        connection,
         remoteRuntimeConnectOptions(
           { maxPayload: REMOTE_RUNTIME_MAX_WEBSOCKET_FRAME_BYTES },
           connectTimeoutMs
