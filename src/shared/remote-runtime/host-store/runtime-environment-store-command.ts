@@ -5,6 +5,7 @@ import * as core3 from './runtime-environment-wsl-host-operations'
 import * as core4 from './runtime-environment-resume-pairing-operations'
 import * as core5 from './runtime-environment-store-records'
 import * as core6 from './wsl-host-deployment-store'
+import * as core7 from './runtime-environment-relay-store-operations'
 import type {
   EnvironmentStoreCommand,
   EnvironmentStoreSuccess
@@ -128,5 +129,15 @@ export function executeEnvironmentStoreCommand(
       }
     case 'readWslHostDeployments':
       return { operation: command.operation, value: core6.readWslHostDeployments(...command.args) }
+    case 'writeEnvironmentRelayAccess':
+      return {
+        operation: command.operation,
+        value: core7.writeEnvironmentRelayAccess(...command.args)
+      }
+    case 'assertRelayPairingSavable':
+      return {
+        operation: command.operation,
+        value: core7.assertRelayPairingSavable(...command.args)
+      }
   }
 }

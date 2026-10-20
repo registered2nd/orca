@@ -11,6 +11,7 @@ import { resolveServePinnedBindHost } from '../serve-launch/serve-pinned-bind-ho
 import { isOrcadSidecarLaunch } from '../../window/activation/foreground-activation-policy'
 import type { MainWindowOpenOptions } from '../../window/main-window/main-window-contracts'
 import { registerMobileHandlers } from '../../ipc/mobile'
+import { registerRuntimeRelayPairingHandler } from '../../ipc/runtime-relay-pairing-ipc'
 import { createRuntimeEnvironmentMobileRelayHosts } from '../../ipc/runtime-environments/mobile-relay/runtime-environment-mobile-relay-hosts'
 import { registerHeadlessPtyRuntime } from '../../ipc/pty/register-headless-runtime'
 import { publishHeadlessRuntimeGraph } from '../../runtime/session-graph/headless-runtime-graph'
@@ -130,6 +131,7 @@ function installRuntimeRpc(
       return true
     }
   })
+  registerRuntimeRelayPairingHandler(runtimeRpc)
   // Pairing and revocation complete in main with no renderer call, so push them to open lists.
   runtimeRpc.setOnPairedDevicesChanged(() => {
     if (state.mainWindow && !state.mainWindow.isDestroyed()) {
