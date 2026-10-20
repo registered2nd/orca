@@ -7,7 +7,13 @@ import {
 } from '../../../shared/remote-runtime/pairing/device-key-proof'
 
 export type ClassifiedE2EEAuth =
-  | { kind: 'token'; deviceToken: string; clientCapabilities?: unknown }
+  | {
+      kind: 'token'
+      deviceToken: string
+      clientCapabilities?: unknown
+      // Set for v2 token auth carrying capabilities, which only a runtime-scope device may send.
+      runtimeScopeOnly?: true
+    }
   | { kind: 'device-key'; deviceId: string; deviceProofB64: string; clientCapabilities?: unknown }
   | { kind: 'invalid' }
 
@@ -18,7 +24,7 @@ const V2_DEVICE_KEY_KEYS = new Set(['clientCapabilities', 'deviceId', 'devicePro
 export function classifyE2EEAuth(
   plaintext: string,
   v2Session: DesktopMobileE2EEV2Session | null,
-  // Direct sockets only: Relay token auth stays the exact mobile shape.
+  // Direct sockets: any device. Relay: only a runtime-scope device (a desktop paired through it).
   v2TokenCapabilities = false
 ): ClassifiedE2EEAuth {
   let auth: Record<string, unknown>
@@ -54,14 +60,14 @@ export function classifyE2EEAuth(
   }
   const keys = Object.keys(auth).sort()
   // Why: runtime clients (desktop, CLI, web) carry capabilities on v2 token auth as on legacy.
-  const tokenKeys = keys
-    .filter((key) => !(v2TokenCapabilities && key === 'clientCapabilities'))
-    .join(',')
+  const tokenKeys = keys.filter((key) => key !== 'clientCapabilities').join(',')
   if (tokenKeys === V2_TOKEN_KEYS && typeof auth.deviceToken === 'string' && auth.deviceToken) {
+    const carriesCapabilities = 'clientCapabilities' in auth
     return {
       kind: 'token',
       deviceToken: auth.deviceToken,
-      ...('clientCapabilities' in auth ? { clientCapabilities: auth.clientCapabilities } : {})
+      ...(carriesCapabilities ? { clientCapabilities: auth.clientCapabilities } : {}),
+      ...(carriesCapabilities && !v2TokenCapabilities ? { runtimeScopeOnly: true as const } : {})
     }
   }
   const rest = keys.filter((key) => key !== 'type' && key !== 'v' && key !== 'transcriptHashB64')
@@ -97,7 +103,9 @@ export type DeviceKeyResolution<TDevice> =
   | { kind: 'refused' }
   | { kind: 'unavailable' }
 
-export function authenticateMobileE2EE<TDevice extends { deviceToken?: string }>(args: {
+export function authenticateMobileE2EE<
+  TDevice extends { deviceToken?: string; scope?: string }
+>(args: {
   plaintext: string
   v2Session: DesktopMobileE2EEV2Session | null
   v2TokenCapabilities?: boolean
@@ -110,6 +118,10 @@ export function authenticateMobileE2EE<TDevice extends { deviceToken?: string }>
   const auth = classifyE2EEAuth(args.plaintext, args.v2Session, args.v2TokenCapabilities)
   if (auth.kind === 'token') {
     const device = args.resolveDevice(auth.deviceToken)
+    // Why: phones keep the exact-key v2 token shape; only a relay-paired desktop adds capabilities.
+    if (device && auth.runtimeScopeOnly && device.scope !== 'runtime') {
+      return { ok: false, code: 'bad_auth' }
+    }
     // Why: a keyed row has no token, so presenting one can never match it.
     return device?.deviceToken === auth.deviceToken
       ? { ok: true, device, clientCapabilities: auth.clientCapabilities }

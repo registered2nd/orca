@@ -49,7 +49,7 @@ function hello(): MobileE2EEV2Hello {
   }
 }
 
-function setup() {
+function setup(scope: 'mobile' | 'runtime' = 'mobile') {
   const ws = createMockWs()
   const onReady = vi.fn()
   const onError = vi.fn()
@@ -58,7 +58,7 @@ function setup() {
       ? {
           deviceId: 'device-1',
           deviceToken: token,
-          scope: 'mobile' as const,
+          scope,
           clientId: token,
           callerFingerprint: 'test-fingerprint',
           credentialRevision: 0
@@ -164,7 +164,7 @@ describe('E2EEChannel v2', () => {
     expect(onMessage.mock.calls[0]?.[0]).toBe(capabilityFrame)
   })
 
-  it('rejects legacy downgrade and runtime-only capability metadata when mobile v2 is required', () => {
+  it('rejects legacy downgrade and runtime-only capability metadata from a phone', () => {
     const legacy = setup()
     legacy.channel.handleRawMessage(
       JSON.stringify({ type: 'e2ee_hello', publicKeyB64: 'legacy-key' })
@@ -187,8 +187,29 @@ describe('E2EEChannel v2', () => {
         0n
       )
     )
-    expect(ctx.resolveAuthenticatedDevice).not.toHaveBeenCalled()
+    expect(ctx.onReady).not.toHaveBeenCalled()
     expect(ctx.onError).toHaveBeenCalledWith(4001, 'Invalid e2ee_auth')
+  })
+
+  it('takes capability metadata on v2 token auth from a desktop paired through the relay', () => {
+    const ctx = setup('runtime')
+    const { schedule } = startV2(ctx)
+    ctx.channel.handleRawMessage(
+      clientText(
+        JSON.stringify({
+          type: 'e2ee_auth',
+          v: 2,
+          transcriptHashB64: Buffer.from(schedule.transcriptHash).toString('base64'),
+          deviceToken: 'valid-token',
+          clientCapabilities: ['session-tabs.close-intent.v1']
+        }),
+        schedule,
+        0n
+      )
+    )
+    expect(ctx.onError).not.toHaveBeenCalled()
+    expect(ctx.onReady).toHaveBeenCalledOnce()
+    expect(ctx.channel.capabilitySource.current).toEqual(['session-tabs.close-intent.v1'])
   })
 
   it('rejects a captured authenticated mutating trace on a fresh socket', () => {
