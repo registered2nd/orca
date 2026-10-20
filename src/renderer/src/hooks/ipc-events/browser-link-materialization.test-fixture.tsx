@@ -1,4 +1,5 @@
 import { buildDefaultSettings } from '../../../../shared/default-global-settings'
+import { getDefaultVoiceSettings } from '../../../../shared/constants'
 import { createRoot } from 'react-dom/client'
 import { useAppStore } from '@/store'
 import { TooltipProvider } from '@/components/ui/tooltip'
@@ -81,6 +82,7 @@ export function installBrowserLinkMaterializationProbe() {
         notifyHiddenWorkspaces: false
       },
       voice: {
+        ...getDefaultVoiceSettings(),
         enabled: false,
         sttModel: '',
         modelsDir: '',
