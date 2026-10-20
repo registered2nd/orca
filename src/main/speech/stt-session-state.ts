@@ -1,8 +1,14 @@
 import { voiceModelUnloadDelayMs } from '../../shared/voice-model-unload'
 import type { ModelManager } from './model-manager'
-import type { OpenAiTranscriptionSession } from './openai-transcription-client'
 import type { SttEventSink } from './stt-service'
 import type { SpawnSttWorkerProcess, SttWorkerProcess } from './stt-worker-process'
+
+export type CloudTranscriptionSession = {
+  /** Returns true on the chunk that reaches the session's audio cap. */
+  feedAudio(samples: Float32Array, sampleRate: number): boolean
+  finish(): Promise<string>
+  cancel(): void
+}
 
 // Each session holds its own stream on the shared recognizer; this bounds decode load and memory.
 export const MAX_STT_SESSIONS = 4
@@ -37,7 +43,7 @@ export type SttSession = {
   /** Spellings this dictation's stream tells the engine to expect. */
   vocabulary: string[]
   engine: SttEngine | null
-  cloud: OpenAiTranscriptionSession | null
+  cloud: CloudTranscriptionSession | null
   phase: 'starting' | 'active' | 'stopping'
   stopPromise: Promise<void> | null
 }

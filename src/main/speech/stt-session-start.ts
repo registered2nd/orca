@@ -4,6 +4,7 @@ import type { SpeechModelManifest } from '../../shared/speech-types'
 import { getCatalogModel } from './model-catalog'
 import { OpenAiTranscriptionSession } from './openai-transcription-client'
 import { resolveCloudTranscriptionTarget } from './cloud-transcription-target'
+import { VtypesAppSession } from './vtypes-app-client'
 import type { SttEventSink } from './stt-service'
 import {
   MAX_STT_SESSIONS,
@@ -92,10 +93,13 @@ export async function startSttDictation(
       await requireModelReady(state, modelId)
       // A cloud dictation needs no recognizer; free one nobody else uses.
       await teardownIdleSttEngine(state)
-      session.cloud = new OpenAiTranscriptionSession(
-        () => resolveCloudTranscriptionTarget(modelId),
-        engineDictationLanguage(manifest, language)
-      )
+      session.cloud =
+        manifest.provider === 'vtypes'
+          ? new VtypesAppSession()
+          : new OpenAiTranscriptionSession(
+              () => resolveCloudTranscriptionTarget(modelId),
+              engineDictationLanguage(manifest, language)
+            )
     }
     throwIfCanceled(state, session)
     session.phase = 'active'
