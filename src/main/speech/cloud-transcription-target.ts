@@ -11,6 +11,7 @@ import {
   openAiCompatibleTranscriptionUrl,
   readOpenAiCompatibleSpeechProvider
 } from './openai-compatible-speech-provider-store'
+import { hasVtypesAgentApiFile } from './vtypes-app-client'
 
 export const OPENAI_TRANSCRIPTION_URL = 'https://api.openai.com/v1/audio/transcriptions'
 
@@ -28,6 +29,9 @@ export type CloudTranscriptionTarget = {
 }
 
 export async function hasCloudSpeechCredentials(provider: SpeechModelProvider): Promise<boolean> {
+  if (provider === 'vtypes') {
+    return hasVtypesAgentApiFile()
+  }
   return provider === 'openai-compatible'
     ? await hasOpenAiCompatibleSpeechProvider()
     : await hasOpenAiSpeechApiKey()
@@ -37,6 +41,9 @@ export async function hasCloudSpeechCredentials(provider: SpeechModelProvider): 
 export async function canReadCloudSpeechCredentials(
   provider: SpeechModelProvider
 ): Promise<boolean> {
+  if (provider === 'vtypes') {
+    return hasVtypesAgentApiFile()
+  }
   return provider === 'openai-compatible'
     ? await canReadOpenAiCompatibleSpeechProvider()
     : await canReadOpenAiSpeechApiKey()
