@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { relayRouteFromAccess, RuntimeRelayAccessSchema } from './runtime-relay-access-schema'
 import { PAIRING_OFFER_VERSION, type PairingOffer } from './pairing'
 import {
   pairedRuntimeConnectionFromOffer,
@@ -108,7 +109,8 @@ export const KnownRuntimeEnvironmentSchema = PersistedRuntimeEnvironmentSchema.e
   orcadDeployment: OrcadDeploymentLinkSchema.optional(),
   /** When a migration into this managed server began committing; older snapshots predate it. */
   orcadMigratedAt: z.string().datetime().optional(),
-  reconciliation: RuntimeEnvironmentReconciliationRecordSchema.optional()
+  reconciliation: RuntimeEnvironmentReconciliationRecordSchema.optional(),
+  relayAccess: RuntimeRelayAccessSchema.optional()
 })
   .refine(
     ({ pendingSshAccessOperation, sshAccess, orcadDeployment, connectionDependency }) =>
@@ -169,8 +171,9 @@ export type PublicKnownRuntimeEnvironment = Omit<KnownRuntimeEnvironment, 'endpo
 export function redactRuntimeEnvironment(
   environment: KnownRuntimeEnvironment
 ): PublicKnownRuntimeEnvironment {
+  const { relayAccess: _relayAccess, ...rest } = environment
   return {
-    ...environment,
+    ...rest,
     endpoints: environment.endpoints.map(
       ({ deviceToken: _deviceToken, publicKeyB64: _key, ...rest }) => rest
     )
@@ -272,7 +275,8 @@ export function isListedRemoteServer(
 type PreferredEndpointSource = Pick<
   KnownRuntimeEnvironment,
   'name' | 'endpoints' | 'preferredEndpointId' | 'pairedDeviceId'
->
+> &
+  Partial<Pick<KnownRuntimeEnvironment, 'relayAccess'>>
 
 function preferredEndpoint(environment: PreferredEndpointSource) {
   const endpoint =
@@ -288,12 +292,15 @@ export function getPreferredPairedRuntimeConnection(
   environment: PreferredEndpointSource
 ): PairedRuntimeConnection {
   const endpoint = preferredEndpoint(environment)
-  return pairedRuntimeConnectionFromOffer({
+  const connection = pairedRuntimeConnectionFromOffer({
     endpoint: endpoint.endpoint,
     deviceToken: endpoint.deviceToken,
     publicKeyB64: endpoint.publicKeyB64,
     pairedDeviceId: environment.pairedDeviceId
   })
+  return environment.relayAccess
+    ? { ...connection, relay: relayRouteFromAccess(environment.relayAccess) }
+    : connection
 }
 
 export function getPreferredPairingOffer(environment: PreferredEndpointSource): PairingOffer {

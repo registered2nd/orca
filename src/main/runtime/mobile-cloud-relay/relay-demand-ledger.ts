@@ -44,7 +44,8 @@ export class RelayDemandLedger {
     return this.options.deviceRegistry.listDevices().some((device) => {
       const binding = device.relayBinding
       if (
-        device.scope !== 'mobile' ||
+        // Why runtime too: a desktop paired through the relay keeps the control connection wanted.
+        (device.scope !== 'mobile' && device.scope !== 'runtime') ||
         !binding ||
         binding.ownerIdentityKey !== ownerIdentityKey ||
         binding.relayHostId !== this.options.relayHostId
