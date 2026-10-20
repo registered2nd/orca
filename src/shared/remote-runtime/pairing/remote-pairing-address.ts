@@ -2,7 +2,9 @@ import { parsePairingCode } from './pairing'
 import type { PairingOffer } from './mobile-relay-pairing-offer'
 import { isTailnetIPv4Address } from '../../tailnet-address'
 
-export type RemotePairingEndpointKind = 'loopback' | 'tailscale' | 'lan' | 'public' | 'custom'
+/** Where a bare hostname points; a relay route is only ever known from the whole link. */
+export type RemotePairingHostnameKind = 'loopback' | 'tailscale' | 'lan' | 'public' | 'custom'
+export type RemotePairingEndpointKind = RemotePairingHostnameKind | 'relay'
 
 export type ParsedHostAccessLink = {
   pairing: PairingOffer
@@ -62,7 +64,7 @@ function getEmbeddedIPv4Address(hostname: string): string | null {
   return `${high >> 8}.${high & 0xff}.${low >> 8}.${low & 0xff}`
 }
 
-export function classifyRemotePairingHostname(hostname: string): RemotePairingEndpointKind {
+export function classifyRemotePairingHostname(hostname: string): RemotePairingHostnameKind {
   const normalized = hostname
     .toLowerCase()
     .replace(/^\[|\]$/g, '')
@@ -135,6 +137,17 @@ export function parseHostAccessLink(input: string): ParseHostAccessLinkResult {
       ok: false,
       kind: 'non-connectable-destination',
       message: 'This access link contains a non-connectable destination.'
+    }
+  }
+  // Why the relay, not the endpoint: a relay link's endpoint is the server's own loopback.
+  if (pairing.relay) {
+    return {
+      ok: true,
+      value: {
+        pairing,
+        displayEndpoint: new URL(pairing.relay.cellUrl).host,
+        endpointKind: 'relay'
+      }
     }
   }
   return {

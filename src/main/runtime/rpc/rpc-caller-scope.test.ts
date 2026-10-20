@@ -32,7 +32,8 @@ describe('paired runtime clients', () => {
     expect(errorCode(response)).toBe('forbidden')
   })
 
-  it.each(['pairing.provisionRelay', 'pairing.getEndpoints', 'notifications.registerPush'])(
+  // pairing.provisionRelay / getEndpoints act on the caller's own relay credential: see the self-relay test.
+  it.each(['notifications.registerPush'])(
     'are refused pairing and push administration: %s',
     async (method) => {
       const response = await dispatchAs(PAIRED, method, {})
