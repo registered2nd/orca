@@ -1,4 +1,5 @@
 import WebSocket from 'ws'
+import { createRemoteRuntimeWebSocket } from '../relay/remote-runtime-relay-socket'
 import { abortSignalReason, throwIfSignalAborted } from '../../concurrency/abort-signal-reason'
 import type { PairedRuntimeConnection } from '../pairing/paired-runtime-connection'
 import type { RuntimeCapability } from '../protocol/protocol-version'
@@ -233,7 +234,7 @@ export async function sendRemoteRuntimeRequestOnSocket<TResult>(
           const connectOptions = remoteRuntimeConnectOptions({
             maxPayload: REMOTE_RUNTIME_MAX_WEBSOCKET_FRAME_BYTES
           })
-          ws = new WebSocket(connection.endpoint, connectOptions)
+          ws = createRemoteRuntimeWebSocket(connection, connectOptions)
         } catch (error) {
           const message = error instanceof Error ? error.message : String(error)
           finishError(
@@ -301,6 +302,7 @@ export async function sendRemoteRuntimeRequestOnSocket<TResult>(
     : withRemoteRuntimeFramingFallback(connection.hostPublicKeyB64, {
         attempt,
         signal,
+        relay: connection.relay,
         readStatus: (handshake) =>
           sendRemoteRuntimeRequestOnSocket<RuntimeStatus>(
             connection,
