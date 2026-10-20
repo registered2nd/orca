@@ -49,7 +49,7 @@ function hello(): MobileE2EEV2Hello {
   }
 }
 
-function setup() {
+function setup(scope: 'mobile' | 'runtime' = 'mobile') {
   const ws = createMockWs()
   const onReady = vi.fn()
   const onError = vi.fn()
@@ -58,7 +58,7 @@ function setup() {
       ? {
           deviceId: 'device-1',
           deviceToken: token,
-          scope: 'mobile' as const,
+          scope,
           clientId: token,
           callerFingerprint: 'test-fingerprint',
           credentialRevision: 0
@@ -144,6 +144,27 @@ function authenticate(
 describe('E2EEChannel v2', () => {
   beforeEach(() => vi.useFakeTimers())
   afterEach(() => vi.useRealTimers())
+
+  it('takes capability metadata on v2 token auth from a desktop paired through the relay', () => {
+    const ctx = setup('runtime')
+    const { schedule } = startV2(ctx)
+    ctx.channel.handleRawMessage(
+      clientText(
+        JSON.stringify({
+          type: 'e2ee_auth',
+          v: 2,
+          transcriptHashB64: Buffer.from(schedule.transcriptHash).toString('base64'),
+          deviceToken: 'valid-token',
+          clientCapabilities: ['session-tabs.close-intent.v1']
+        }),
+        schedule,
+        0n
+      )
+    )
+    expect(ctx.onError).not.toHaveBeenCalled()
+    expect(ctx.onReady).toHaveBeenCalledOnce()
+    expect(ctx.channel.capabilitySource.current).toEqual(['session-tabs.close-intent.v1'])
+  })
 
   it('rejects a captured authenticated mutating trace on a fresh socket', () => {
     const first = setup()
