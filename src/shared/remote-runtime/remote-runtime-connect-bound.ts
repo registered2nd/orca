@@ -47,6 +47,10 @@ export function isRemoteRuntimeConnectTimeout(error: unknown): boolean {
 
 /** Loss of contact leaves remote work unverifiable; never imply its terminals stopped (ssh-execution-boundary.md). */
 export function remoteRuntimeConnectFailureMessage(error: unknown, endpoint: string): string {
+  // Why: a relay refusal names its own cause; the host endpoint is the relay host's loopback.
+  if (error instanceof Error && error.name === 'OrcaRelayRefusal') {
+    return error.message
+  }
   if (!isRemoteRuntimeConnectTimeout(error)) {
     return `${REMOTE_RUNTIME_CONNECT_FAILURE_PHRASE}.`
   }

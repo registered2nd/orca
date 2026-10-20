@@ -21,6 +21,26 @@ describe('classifyE2EEAuth', () => {
     })
   })
 
+  it('takes capabilities on v2 token auth, as a desktop paired through the relay sends them', () => {
+    expect(
+      classifyE2EEAuth(
+        auth({ v: 2, transcriptHashB64, deviceToken: 't', clientCapabilities: ['x'] }),
+        v2
+      )
+    ).toEqual({
+      kind: 'token',
+      deviceToken: 't',
+      clientCapabilities: ['x'],
+      runtimeScopeOnly: true
+    })
+    expect(
+      classifyE2EEAuth(
+        auth({ v: 2, transcriptHashB64, deviceToken: 't', clientCapabilities: ['x'], extra: 1 }),
+        v2
+      ).kind
+    ).toBe('invalid')
+  })
+
   it('accepts key auth only inside the matching v2 transcript', () => {
     const keyAuth = { v: 2, transcriptHashB64, deviceId: 'd', deviceProofB64: proof }
     expect(classifyE2EEAuth(auth({ ...keyAuth, clientCapabilities: ['x'] }), v2)).toMatchObject({
@@ -43,9 +63,6 @@ describe('classifyE2EEAuth', () => {
         auth({ ...base, deviceId: 'd', deviceProofB64: proof, deviceToken: 't' }),
         v2
       ).kind
-    ).toBe('invalid')
-    expect(
-      classifyE2EEAuth(auth({ ...base, deviceToken: 't', clientCapabilities: [] }), v2).kind
     ).toBe('invalid')
     expect(
       classifyE2EEAuth(auth({ ...base, deviceId: 'd', deviceProofB64: 'short' }), v2).kind
