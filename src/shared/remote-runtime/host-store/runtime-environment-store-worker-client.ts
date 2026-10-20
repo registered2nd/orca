@@ -43,7 +43,8 @@ const readers = new Set<EnvironmentStoreCommand['operation']>([
   'resolveEnvironmentPairingOffer',
   'findWslHostDeployment',
   'readEnvironmentStoreRecords',
-  'readWslHostDeployments'
+  'readWslHostDeployments',
+  'assertRelayPairingSavable'
 ])
 const queue: Pending[] = []
 let owner: Owner | undefined
