@@ -143,6 +143,17 @@ export const SPEECH_MODEL_CATALOG: SpeechModelManifest[] = [
     language: 'multilingual',
     sampleRate: 16000,
     streaming: false
+  },
+  {
+    id: 'vtypes-app',
+    label: 'Vtypes',
+    description:
+      'Hands each dictation to the Vtypes app on this computer, which transcribes and polishes it with its own settings. Requires Vtypes.',
+    type: 'vtypes',
+    provider: 'vtypes',
+    language: 'multilingual',
+    sampleRate: 16000,
+    streaming: false
   }
 ]
 
