@@ -242,8 +242,10 @@ export class RuntimeRpcWebSocketDispatch extends RuntimeRpcMobileDevices {
         clientKind: device.scope,
         callerScope,
         clientCapabilities: authenticatedSocket?.clientCapabilities,
+        // Why relay too: v2 token auth carries no capabilities, so a relayed desktop reports them after.
         updateClientCapabilities:
-          authenticatedSocket && device.scope === 'mobile'
+          authenticatedSocket &&
+          (device.scope === 'mobile' || authenticatedSocket.transport.transport === 'relay')
             ? (clientCapabilities) => {
                 authenticatedSocket.clientCapabilities = clientCapabilities
               }

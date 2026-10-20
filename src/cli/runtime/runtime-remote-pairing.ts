@@ -3,7 +3,8 @@ import {
   type PairedRuntimeConnection
 } from '../../shared/paired-runtime-connection'
 import { parsePairingCode } from '../../shared/pairing'
-import { resolveEnvironmentPairingOffer } from './environments'
+import { getPreferredPairedRuntimeConnection } from '../../shared/runtime-environments'
+import { resolveEnvironment } from './environments'
 import { RuntimeClientError } from './types'
 
 export function resolveRemoteConnection(
@@ -18,8 +19,9 @@ export function resolveRemoteConnection(
     )
   }
   if (environmentSelector) {
-    return pairedRuntimeConnectionFromOffer(
-      resolveEnvironmentPairingOffer(userDataPath, environmentSelector)
+    // Why the environment, not its offer: a relay-paired server's route lives beside the offer.
+    return getPreferredPairedRuntimeConnection(
+      resolveEnvironment(userDataPath, environmentSelector)
     )
   }
   if (!pairingCode) {

@@ -33,6 +33,13 @@ const RUNTIME_PAIRED_STANDARD: ReadonlySet<RpcMethodPermission> = new Set([
   'device-self'
 ])
 
+// Why: these act only on the calling device's own relay credential (bound to its socket), which a
+// desktop paired through the relay must install and renew exactly as a phone does.
+const RUNTIME_PAIRED_SELF_RELAY_METHODS: ReadonlySet<string> = new Set([
+  'pairing.getEndpoints',
+  'pairing.provisionRelay'
+])
+
 /**
  * Returns the refusal message, or null when the caller may invoke the method. `permission` is
  * undefined for a method this build does not register; only the mobile row answers that by name,
@@ -51,7 +58,11 @@ export function denyRpcMethodForCaller(
       ? `Method '${methodName}' is not available to a phone connected through a paired desktop`
       : null
   }
-  if (scope.kind === 'owner' || permission === undefined) {
+  if (
+    scope.kind === 'owner' ||
+    permission === undefined ||
+    RUNTIME_PAIRED_SELF_RELAY_METHODS.has(methodName)
+  ) {
     return null
   }
   return !RUNTIME_PAIRED_STANDARD.has(permission) &&

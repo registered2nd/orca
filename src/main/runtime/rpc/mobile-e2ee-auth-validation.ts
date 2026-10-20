@@ -4,11 +4,19 @@ import { parseRemoteRuntimeJsonText } from '../../../shared/remote-runtime-reque
 import { isDeviceProofB64, verifyDeviceProof } from '../../../shared/device-key-proof'
 
 export type ClassifiedE2EEAuth =
-  | { kind: 'token'; deviceToken: string; clientCapabilities?: unknown }
+  | {
+      kind: 'token'
+      deviceToken: string
+      clientCapabilities?: unknown
+      // Set for v2 token auth carrying capabilities, which only a runtime-scope device may send.
+      runtimeScopeOnly?: true
+    }
   | { kind: 'device-key'; deviceId: string; deviceProofB64: string; clientCapabilities?: unknown }
   | { kind: 'invalid' }
 
 const V2_TOKEN_KEYS = 'deviceToken,transcriptHashB64,type,v'
+// Why: a desktop paired through the relay authenticates with v2 framing yet needs its capabilities.
+const V2_TOKEN_WITH_CAPABILITIES_KEYS = 'clientCapabilities,deviceToken,transcriptHashB64,type,v'
 const V2_DEVICE_KEY_KEYS = new Set(['clientCapabilities', 'deviceId', 'deviceProofB64'])
 
 /** The one parser for e2ee_auth: every accepted shape, nothing mixed. */
@@ -56,6 +64,18 @@ export function classifyE2EEAuth(
   ) {
     return { kind: 'token', deviceToken: auth.deviceToken }
   }
+  if (
+    keys.join(',') === V2_TOKEN_WITH_CAPABILITIES_KEYS &&
+    typeof auth.deviceToken === 'string' &&
+    auth.deviceToken
+  ) {
+    return {
+      kind: 'token',
+      deviceToken: auth.deviceToken,
+      clientCapabilities: auth.clientCapabilities,
+      runtimeScopeOnly: true
+    }
+  }
   const rest = keys.filter((key) => key !== 'type' && key !== 'v' && key !== 'transcriptHashB64')
   if (
     rest.every((key) => V2_DEVICE_KEY_KEYS.has(key)) &&
@@ -89,7 +109,9 @@ export type DeviceKeyResolution<TDevice> =
   | { kind: 'refused' }
   | { kind: 'unavailable' }
 
-export function authenticateMobileE2EE<TDevice extends { deviceToken?: string }>(args: {
+export function authenticateMobileE2EE<
+  TDevice extends { deviceToken?: string; scope?: string }
+>(args: {
   plaintext: string
   v2Session: DesktopMobileE2EEV2Session | null
   resolveDevice: (token: string) => TDevice | null
@@ -101,6 +123,10 @@ export function authenticateMobileE2EE<TDevice extends { deviceToken?: string }>
   const auth = classifyE2EEAuth(args.plaintext, args.v2Session)
   if (auth.kind === 'token') {
     const device = args.resolveDevice(auth.deviceToken)
+    // Why: phones keep the exact-key v2 token shape; only a relay-paired desktop adds capabilities.
+    if (device && auth.runtimeScopeOnly && device.scope !== 'runtime') {
+      return { ok: false, code: 'bad_auth' }
+    }
     // Why: a keyed row has no token, so presenting one can never match it.
     return device?.deviceToken === auth.deviceToken
       ? { ok: true, device, clientCapabilities: auth.clientCapabilities }

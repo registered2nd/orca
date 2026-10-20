@@ -55,8 +55,9 @@ export class RuntimeRpcPairing extends RuntimeRpcNetworkExposure {
 
   setMobileRelayBinding(deviceId: string, binding: RelayDeviceBinding): boolean {
     const current = this.deviceRegistry?.getDevice(deviceId)
+    // Why runtime too: a server shared through the relay binds its runtime-scope client like a phone.
     if (
-      current?.scope !== 'mobile' ||
+      (current?.scope !== 'mobile' && current?.scope !== 'runtime') ||
       this.deviceRegistry?.getMobilePairingConnectionMode(deviceId) === 'local-only'
     ) {
       return false
