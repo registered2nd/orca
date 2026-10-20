@@ -3,7 +3,8 @@ import {
   type PairedRuntimeConnection
 } from '../../shared/remote-runtime/pairing/paired-runtime-connection'
 import { parsePairingCode } from '../../shared/remote-runtime/pairing/pairing'
-import { resolveEnvironmentPairingOffer } from './environments'
+import { getPreferredPairedRuntimeConnection } from '../../shared/remote-runtime/host-catalog/runtime-environments'
+import { resolveEnvironment } from './environments'
 import { RuntimeClientError } from './types'
 import { configureRemoteRuntimeE2EEV2HostLatch } from '../../shared/remote-runtime/e2ee/node/remote-runtime-e2ee-v2-host-latch'
 
@@ -32,8 +33,9 @@ function resolvePairedConnection(
     )
   }
   if (environmentSelector) {
-    return pairedRuntimeConnectionFromOffer(
-      resolveEnvironmentPairingOffer(userDataPath, environmentSelector)
+    // Why the environment, not its offer: a relay-paired server's route lives beside the offer.
+    return getPreferredPairedRuntimeConnection(
+      resolveEnvironment(userDataPath, environmentSelector)
     )
   }
   if (!pairingCode) {
