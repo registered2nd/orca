@@ -138,7 +138,17 @@ export function VoiceSpeechModelSection({
                 cancelSpeechModelDownload(modelId, onRefreshModelStates)
               }
               onDelete={deleteModel}
-              onSetUpCloud={onOpenCloudSetup}
+              onSetUpCloud={
+                row.manifest.provider === 'vtypes'
+                  ? () =>
+                      toast.info(
+                        t(
+                          'auto.components.settings.vtypesApp.notFound',
+                          'Install and start the Vtypes app first.'
+                        )
+                      )
+                  : onOpenCloudSetup
+              }
               onSetUp={onSetUp}
             />
           ))}

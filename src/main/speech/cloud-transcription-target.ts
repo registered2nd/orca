@@ -11,6 +11,7 @@ import {
   openAiCompatibleTranscriptionUrl,
   readOpenAiCompatibleSpeechProvider
 } from './openai-compatible-speech-provider-store'
+import { hasVtypesAgentApiFile } from './vtypes-app-client'
 
 export const OPENAI_TRANSCRIPTION_URL = 'https://api.openai.com/v1/audio/transcriptions'
 
@@ -28,6 +29,9 @@ export type CloudTranscriptionTarget = {
 }
 
 export function hasCloudSpeechCredentials(provider: SpeechModelProvider): boolean {
+  if (provider === 'vtypes') {
+    return hasVtypesAgentApiFile()
+  }
   return provider === 'openai-compatible'
     ? hasOpenAiCompatibleSpeechProvider()
     : hasOpenAiSpeechApiKey()
@@ -35,6 +39,9 @@ export function hasCloudSpeechCredentials(provider: SpeechModelProvider): boolea
 
 /** Headless hosts can't raise keychain prompts, so their readiness verifies decryption. */
 export function canReadCloudSpeechCredentials(provider: SpeechModelProvider): boolean {
+  if (provider === 'vtypes') {
+    return hasVtypesAgentApiFile()
+  }
   return provider === 'openai-compatible'
     ? canReadOpenAiCompatibleSpeechProvider()
     : canReadOpenAiSpeechApiKey()
