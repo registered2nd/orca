@@ -11,6 +11,7 @@ import { NODE_PAIRED_E2EE_PRIMITIVES } from './e2ee/node/paired-e2ee-node-primit
 import { remoteRuntimeE2EEV2HostLatchStore } from './e2ee/node/remote-runtime-e2ee-v2-host-latch'
 import { RemoteRuntimeClientError } from './remote-runtime-client-error'
 import { E2EE_V2_TOKEN_CAPABILITIES_RUNTIME_CAPABILITY } from './pairing/device-key-capability'
+import type { PairedRuntimeRelayRoute } from './pairing/paired-runtime-connection'
 import type { RuntimeRpcResponse } from '../runtime-rpc-envelope'
 import type { RuntimeStatus } from '../runtime-session-contracts'
 import { serializeRemoteRuntimePayload } from './remote-runtime-memory-limits'
@@ -52,6 +53,8 @@ type HandshakeOptions = {
   probeV2?: boolean
   // Legacy dial to a latched host that only reads its status (see latchedHostPredatesV2Token).
   latchedHostCheck?: boolean
+  // Orca Relay: v2 bound to the host's relay id, never legacy.
+  relay?: Pick<PairedRuntimeRelayRoute, 'relayHostId'>
 }
 
 /**
@@ -63,6 +66,9 @@ export function createRemoteRuntimeClientHandshake(
   hostPublicKeyB64: string,
   options: HandshakeOptions = {}
 ): RemoteRuntimeClientHandshake {
+  if (options.relay) {
+    return createRelayClientHandshake(hostPublicKeyB64, options.relay.relayHostId)
+  }
   const store = remoteRuntimeE2EEV2HostLatchStore()
   const policy = framingPolicyFor(hostPublicKeyB64, store)
   const latched = store.isLatched(hostPublicKeyB64) === true
@@ -120,12 +126,34 @@ export function createRemoteRuntimeClientHandshake(
   }
 }
 
+function createRelayClientHandshake(
+  hostPublicKeyB64: string,
+  relayHostId: string
+): RemoteRuntimeClientHandshake {
+  return {
+    ...createPairedE2EEClientHandshake({
+      primitives: NODE_PAIRED_E2EE_PRIMITIVES,
+      hostPublicKeyB64,
+      framing: 'v2',
+      transport: 'relay',
+      relayHostId,
+      // Hosts take capabilities on relay token auth from a runtime-scope device alone.
+      v2TokenCapabilities: true,
+      parseJson: parseRemoteRuntimeJsonText,
+      serializeJson: serializeRemoteRuntimePayload
+    }),
+    v2Refusal: () => null
+  }
+}
+
 type FramingDial<TResult> = {
   attempt: (handshake: RemoteRuntimeClientHandshake) => Promise<TResult>
   readStatus: (
     handshake: RemoteRuntimeClientHandshake
   ) => Promise<RuntimeRpcResponse<RuntimeStatus>>
   signal?: AbortSignal
+  // Orca Relay carries v2 alone, so a relayed dial has no framing to fall back to.
+  relay?: Pick<PairedRuntimeRelayRoute, 'relayHostId'>
 }
 
 /**
@@ -138,6 +166,11 @@ export async function withRemoteRuntimeFramingFallback<TResult>(
   hostPublicKeyB64: string,
   dial: FramingDial<TResult>
 ): Promise<TResult> {
+  if (dial.relay) {
+    return await dial.attempt(
+      createRemoteRuntimeClientHandshake(hostPublicKeyB64, { relay: dial.relay })
+    )
+  }
   const first = createRemoteRuntimeClientHandshake(hostPublicKeyB64, { probeV2: true })
   try {
     return await dial.attempt(first)
