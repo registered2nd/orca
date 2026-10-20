@@ -241,8 +241,10 @@ export class DesktopRelayService {
     }
   }
 
+  // Why runtime too: a desktop paired through the relay installs its resume credential like a phone.
   private requireMobileDevice(deviceId: string): void {
-    if (this.runtimeRpc.getDeviceRegistry()?.getDevice(deviceId)?.scope !== 'mobile') {
+    const scope = this.runtimeRpc.getDeviceRegistry()?.getDevice(deviceId)?.scope
+    if (scope !== 'mobile' && scope !== 'runtime') {
       throw new Error('mobile_device_not_found')
     }
   }
