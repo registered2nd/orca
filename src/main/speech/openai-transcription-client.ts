@@ -29,7 +29,7 @@ export function sanitizeOpenAiTranscriptionErrorMessage(message: string): string
   return sanitized || 'OpenAI transcription request failed'
 }
 
-function encodePcm16Wav(samples: Float32Array, sampleRate: number): Buffer {
+export function encodePcm16Wav(samples: Float32Array, sampleRate: number): Buffer {
   const dataBytes = samples.length * 2
   const buffer = Buffer.alloc(44 + dataBytes)
 
@@ -56,7 +56,7 @@ function encodePcm16Wav(samples: Float32Array, sampleRate: number): Buffer {
   return buffer
 }
 
-function combineChunks(chunks: Float32Array[]): Float32Array {
+export function combineChunks(chunks: Float32Array[]): Float32Array {
   const totalLength = chunks.reduce((sum, chunk) => sum + chunk.length, 0)
   const combined = new Float32Array(totalLength)
   let offset = 0

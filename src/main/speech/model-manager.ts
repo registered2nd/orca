@@ -8,6 +8,7 @@ import type {
 } from '../../shared/speech-types'
 import { SPEECH_MODEL_CATALOG, getCatalogModel, isLocalSpeechModel } from './model-catalog'
 import { hasOpenAiSpeechApiKey } from './openai-api-key-store'
+import { hasVtypesAgentApiFile } from './vtypes-app-client'
 import {
   getSpeechModelCacheDirCandidates,
   migrateSpeechModelCacheIfNeeded,
@@ -105,6 +106,10 @@ export class ModelManager extends SpeechModelDownloadTransport {
 
     if (manifest.provider === 'openai') {
       return { id: modelId, status: this.hasOpenAiKey() ? 'ready' : 'not-downloaded' }
+    }
+
+    if (manifest.provider === 'vtypes') {
+      return { id: modelId, status: hasVtypesAgentApiFile() ? 'ready' : 'not-downloaded' }
     }
 
     const modelDir = this.getModelDir(modelId)
