@@ -74,6 +74,11 @@ export function VoiceSpeechModelRow({
       'components.settings.voice.models.needsUpdate',
       'Needs a one-time download for the faster engine.'
     )
+  } else if (manifest.provider === 'vtypes') {
+    subline = t(
+      'components.settings.voice.models.sendsToVtypes',
+      'Sends your audio to the Vtypes app on this computer, which transcribes it with its own settings.'
+    )
   }
 
   const button = (
