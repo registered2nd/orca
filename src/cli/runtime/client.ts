@@ -30,7 +30,7 @@ import {
   attachUnverifiedTerminalPromptRecovery,
   didAnotherRuntimeHandleTerminalPrompt
 } from './terminal-prompt-mutation-recovery'
-import { markEnvironmentUsed } from './environments'
+import { recordEnvironmentUse } from './relay-access-renewal'
 import { createRuntimeSourceFence, type RuntimeSourceFence } from './runtime-source-fence'
 import { resolveRemoteConnection } from './runtime-remote-pairing'
 import {
@@ -175,11 +175,7 @@ export class RuntimeClient {
       if (response.ok === false) {
         throw recover(new RuntimeRpcFailureError(response), null)
       }
-      if (this.environmentSelector) {
-        markEnvironmentUsed(this.userDataPath, this.environmentSelector, {
-          runtimeId: response._meta.runtimeId
-        })
-      }
+      await recordEnvironmentUse(this, response._meta.runtimeId)
       return response
     }
     const metadata = readMetadata(this.userDataPath)
