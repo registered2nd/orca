@@ -229,6 +229,16 @@ export const SPEECH_MODEL_CATALOG: SpeechModelManifest[] = [
     sampleRate: 16000,
     streaming: false,
     replacedBy: 'openai-gpt-transcribe'
+  },
+  {
+    id: 'vtypes-app',
+    label: 'Vtypes',
+    type: 'vtypes',
+    provider: 'vtypes',
+    language: 'multilingual',
+    languages: DICTATION_LANGUAGES,
+    sampleRate: 16000,
+    streaming: false
   }
 ]
 

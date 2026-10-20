@@ -21610,6 +21610,7 @@
           "retired": "No longer offered. Delete it to free up space.",
           "sendsToOpenAi": "Sends your audio to OpenAI.",
           "sendsToCompatible": "Sends your audio to the service you set up.",
+          "sendsToVtypes": "Sends your audio to the Vtypes app on this computer, which transcribes it with its own settings.",
           "delete": "Delete",
           "cancelDownload": "Cancel download",
           "inUse": "In use",

@@ -84,6 +84,11 @@ export function VoiceSpeechModelRow({
       'components.settings.voice.models.sendsToCompatible',
       'Sends your audio to the service you set up.'
     )
+  } else if (manifest.provider === 'vtypes') {
+    subline = t(
+      'components.settings.voice.models.sendsToVtypes',
+      'Sends your audio to the Vtypes app on this computer, which transcribes it with its own settings.'
+    )
   }
 
   let action: React.ReactNode

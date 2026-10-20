@@ -6,7 +6,8 @@ export type SpeechModelType =
   | 'senseVoice'
   | 'nemo-ctc'
   | 'openai'
-export type SpeechModelProvider = 'local' | 'openai' | 'openai-compatible'
+  | 'vtypes'
+export type SpeechModelProvider = 'local' | 'openai' | 'openai-compatible' | 'vtypes'
 
 export type SpeechModelDownloadFile = {
   name: string
