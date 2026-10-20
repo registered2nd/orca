@@ -21,6 +21,7 @@ import { StarNagToastHost } from '../components/star-nag/StarNagToastHost'
 import { TelemetryFirstLaunchSurface } from '../components/TelemetryFirstLaunchSurface'
 import { ZoomOverlay } from '../components/ZoomOverlay'
 import { WslMoveDialogHost } from '../components/wsl-move/WslMoveDialog'
+import { SpeakRepliesSurface } from '../components/speak-replies/SpeakRepliesSurface'
 import { shouldRenderPetOverlay } from '../components/pet/pet-overlay-visibility'
 import { useAppStore } from '../store'
 import type { UpdateStatus } from '../../../shared/update-status-types'
@@ -58,11 +59,6 @@ const AiVaultSessionHistoryDialog = lazy(
 const DeleteWorktreeDialog = lazy(() => import('../components/sidebar/DeleteWorktreeDialog'))
 const PreservedBranchBatchReviewModal = lazy(
   () => import('../components/sidebar/PreservedBranchBatchReviewModal')
-)
-const SpeakRepliesController = lazy(() =>
-  import('../components/speak-replies/SpeakRepliesController').then((module) => ({
-    default: module.SpeakRepliesController
-  }))
 )
 const DictationController = lazy(() =>
   import('../components/dictation/DictationController').then((module) => ({
@@ -396,11 +392,7 @@ export const AppRootSurfaces = memo(function AppRootSurfaces(props: {
           </OverlayBoundary>
         </Suspense>
       ) : null}
-      <Suspense fallback={null}>
-        <OverlayBoundary boundaryId="overlay.speak-replies">
-          <SpeakRepliesController />
-        </OverlayBoundary>
-      </Suspense>
+      <SpeakRepliesSurface />
       <OverlayBoundary boundaryId="overlay.recent-tab-switcher" resetKey={activeView}>
         <RecentTabSwitcher />
       </OverlayBoundary>
