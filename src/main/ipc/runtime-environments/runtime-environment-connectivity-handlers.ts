@@ -5,7 +5,6 @@ import {
 import { desktopChatCreationHistory } from '../../runtime/desktop-chat-creation-history'
 import { ipcMain } from 'electron'
 import {
-  addEnvironmentFromPairingCode,
   listEnvironments,
   removeEnvironment,
   resolveEnvironment
@@ -19,6 +18,8 @@ import {
   connectThroughOwningService,
   removeThroughOwningService
 } from './runtime-environment-host-service-ops'
+import { ELECTRON_REMOTE_RUNTIME_CLIENT_CAPABILITIES } from '../../../shared/electron-remote-runtime-client-capabilities'
+import { addEnvironmentFromAnyPairingCode } from '../../../shared/runtime-environment-relay-store'
 import type { RuntimeRpcResponse } from '../../../shared/runtime-rpc-envelope'
 import type { RuntimeStatus } from '../../../shared/runtime-types'
 import type { Store } from '../../persistence'
@@ -83,12 +84,16 @@ export function registerRuntimeEnvironmentConnectivityHandlers({
   })
   ipcMain.handle(
     'runtimeEnvironments:addFromPairingCode',
-    (
+    async (
       _event,
       args: { name: string; pairingCode: string }
-    ): { environment: PublicKnownRuntimeEnvironment } => {
+    ): Promise<{ environment: PublicKnownRuntimeEnvironment }> => {
       // An unverified code must not replace a working pairing.
-      const environment = addEnvironmentFromPairingCode(getUserDataPath(), args)
+      const environment = await addEnvironmentFromAnyPairingCode(
+        getUserDataPath(),
+        args,
+        ELECTRON_REMOTE_RUNTIME_CLIENT_CAPABILITIES
+      )
       clearRuntimeEnvironmentManualDisconnect(environment.id)
       return { environment: redactRuntimeEnvironment(environment) }
     }
