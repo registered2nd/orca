@@ -7,6 +7,7 @@ import {
 } from '../persistence'
 import { OrcaRuntimeRpcServer } from '../runtime/runtime-rpc'
 import { registerMobileHandlers } from '../ipc/mobile'
+import { registerRuntimeRelayPairingHandler } from '../ipc/runtime-relay-pairing-ipc'
 import { createRuntimeEnvironmentMobileRelayHosts } from '../ipc/runtime-environments/runtime-environment-mobile-relay-hosts'
 import { getLocalPtyProvider } from '../ipc/pty/provider/registry'
 import { registerHeadlessPtyRuntime } from '../ipc/pty/register-headless-runtime'
@@ -118,6 +119,7 @@ function installRuntimeRpc(
       return true
     }
   })
+  registerRuntimeRelayPairingHandler(runtimeRpc)
   // Why: repeated direct auth failures otherwise look like a client that never connects; point users to re-pairing.
   runtimeRpc.setOnUnpairedDeviceAuthFailure(() => {
     // Why: runtime startup races renderer mount; retain the one-shot until the listener consumes it.
