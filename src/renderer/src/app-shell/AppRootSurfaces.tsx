@@ -9,6 +9,7 @@ import { translate } from '@/i18n/i18n'
 import { RecoverableRenderErrorBoundary } from '../components/error-boundaries/RecoverableRenderErrorBoundary'
 import NewWorkspaceComposerModal from '../components/NewWorkspaceComposerModal'
 import { CrashReportDialog } from '../components/crash-report/CrashReportDialog'
+import { SpeakRepliesSurface } from '../components/speak-replies/SpeakRepliesSurface'
 import { MarkdownTemplatePicker } from '../components/editor/markdown/documents/MarkdownTemplatePicker'
 import RecentTabSwitcher from '../components/tab-bar/RecentTabSwitcher'
 import { SkillFreshnessUpdateDialog } from '../components/skills/SkillFreshnessUpdateDialog'
@@ -70,11 +71,6 @@ const DeleteWorktreeDialog = lazy(
 )
 const PreservedBranchBatchReviewModal = lazy(
   () => import('../components/sidebar/workspace-actions/deletion/PreservedBranchBatchReviewModal')
-)
-const SpeakRepliesController = lazy(() =>
-  import('../components/speak-replies/SpeakRepliesController').then((module) => ({
-    default: module.SpeakRepliesController
-  }))
 )
 const DictationController = lazy(() =>
   import('../components/dictation/DictationController').then((module) => ({
@@ -392,11 +388,7 @@ export const AppRootSurfaces = memo(function AppRootSurfaces(props: {
           </OverlayBoundary>
         </Suspense>
       ) : null}
-      <Suspense fallback={null}>
-        <OverlayBoundary boundaryId="overlay.speak-replies">
-          <SpeakRepliesController />
-        </OverlayBoundary>
-      </Suspense>
+      <SpeakRepliesSurface />
       <OverlayBoundary boundaryId="overlay.recent-tab-switcher" resetKey={activeView}>
         <RecentTabSwitcher />
       </OverlayBoundary>
