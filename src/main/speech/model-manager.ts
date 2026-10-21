@@ -104,12 +104,9 @@ export class ModelManager extends SpeechModelDownloadTransport {
       return { id: modelId, status: 'error', error: 'Unknown model' }
     }
 
-    if (manifest.provider === 'openai') {
-      return { id: modelId, status: this.hasOpenAiKey() ? 'ready' : 'not-downloaded' }
-    }
-
-    if (manifest.provider === 'vtypes') {
-      return { id: modelId, status: hasVtypesAgentApiFile() ? 'ready' : 'not-downloaded' }
+    if (!isLocalSpeechModel(manifest)) {
+      const ready = manifest.provider === 'vtypes' ? hasVtypesAgentApiFile() : this.hasOpenAiKey()
+      return { id: modelId, status: ready ? 'ready' : 'not-downloaded' }
     }
 
     const modelDir = this.getModelDir(modelId)
