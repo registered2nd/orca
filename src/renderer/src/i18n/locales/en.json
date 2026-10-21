@@ -13412,6 +13412,9 @@
           "mixedVoices": "Switch Voices in Mixed Replies (Experimental)",
           "mixedVoicesDescription": "Read the Chinese parts of a reply with the Chinese voice and the rest with the English voice."
         },
+        "vtypesApp": {
+          "notFound": "Install and start the Vtypes app first."
+        },
         "PluginContributionActionNewFile": {
           "create": "Create"
         },
