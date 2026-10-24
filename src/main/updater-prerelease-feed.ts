@@ -2,13 +2,13 @@ import { net } from 'electron'
 import { parse } from 'yaml'
 import { compareVersions, isPrereleaseVersion, isValidVersion } from './updater-fallback'
 
-const ATOM_FEED_URL = 'https://github.com/stablyai/orca/releases.atom'
-const RELEASES_DOWNLOAD_BASE = 'https://github.com/stablyai/orca/releases/download'
+const ATOM_FEED_URL = 'https://github.com/registered2nd/orca/releases.atom'
+const RELEASES_DOWNLOAD_BASE = 'https://github.com/registered2nd/orca/releases/download'
 const FETCH_TIMEOUT_MS = 5000
 const MAX_MANIFEST_PROBE_CANDIDATES = 6
 
 // Atom includes stable and prerelease tags without channel filtering.
-const TAG_HREF_RE = /href="https:\/\/github\.com\/stablyai\/orca\/releases\/tag\/([^"]+)"/g
+const TAG_HREF_RE = /href="https:\/\/github\.com\/registered2nd\/orca\/releases\/tag\/([^"]+)"/g
 
 export function getReleaseDownloadUrl(tag: string): string {
   return `${RELEASES_DOWNLOAD_BASE}/${encodeURIComponent(tag)}`
@@ -151,7 +151,7 @@ async function getReleaseAssetReadiness(tag: string, assetName: string): Promise
   const isGitHubReleaseAsset =
     process.platform === 'win32' &&
     (isRelativeAsset ||
-      /^https:\/\/github\.com\/stablyai\/orca\/releases\/download\//i.test(assetName))
+      /^https:\/\/github\.com\/registered2nd\/orca\/releases\/download\//i.test(assetName))
   const assetUrl = isRelativeAsset
     ? getReleaseAssetUrl(tag, assetName.split('/').findLast(Boolean) ?? assetName)
     : assetName
