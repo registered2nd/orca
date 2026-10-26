@@ -14,6 +14,7 @@ const {
   setAnnotationViewportBridgeMock,
   openDevToolsMock,
   setViewportOverrideMock,
+  guestExecuteJavaScriptMock,
   previewAuthoritySpy,
   registrationWaitSpy
 } = vi.hoisted(() => ({
@@ -28,6 +29,7 @@ const {
   setAnnotationViewportBridgeMock: vi.fn().mockResolvedValue(true),
   openDevToolsMock: vi.fn().mockResolvedValue(true),
   setViewportOverrideMock: vi.fn().mockResolvedValue(true),
+  guestExecuteJavaScriptMock: vi.fn().mockResolvedValue(null),
   previewAuthoritySpy: vi.fn(),
   registrationWaitSpy: vi.fn()
 }))
@@ -109,7 +111,8 @@ const TOOL_CHANNELS = [
   'browser:cancelGrab',
   'browser:captureSelectionScreenshot',
   'browser:extractHoverPayload',
-  'browser:setAnnotationViewportBridge'
+  'browser:setAnnotationViewportBridge',
+  'browser:askReadPage'
 ]
 
 const BROWSER_PAGE_CHANNELS = [
@@ -134,6 +137,8 @@ const BROWSER_PAGE_CHANNELS = [
   'browser:setPageSiteColorScheme',
   'browser:publishClientPageMetadata',
   'browser:cancelDownload',
+  // Writes Ask's attachment to a temp file, never touching a guest.
+  'browser:askSaveAttachment',
   'browser:session:listProfiles',
   'browser:session:createProfile',
   'browser:session:deleteProfile',
@@ -234,7 +239,8 @@ function renderPreviewForGrant(
     on: vi.fn(register),
     once: vi.fn(register),
     setWindowOpenHandler: vi.fn(),
-    setWebRTCIPHandlingPolicy: vi.fn()
+    setWebRTCIPHandlingPolicy: vi.fn(),
+    executeJavaScript: (...args: unknown[]): unknown => guestExecuteJavaScriptMock(guest, ...args)
   }
   installDocPreviewGuestPolicy(guest as never, { id: hostId, send: vi.fn() })
   handlers['did-start-navigation']?.({ url: documentUrl, isMainFrame: true } as never)
@@ -262,6 +268,8 @@ function toolArgs(channel: string, browserPageId: string): Record<string, unknow
       return { browserPageId, enabled: true }
     case 'browser:awaitGrabSelection':
       return { browserPageId, opId: 'op-1' }
+    case 'browser:askReadPage':
+      return { browserPageId, what: 'selection' }
     case 'browser:captureSelectionScreenshot':
       return { browserPageId, rect: { x: 0, y: 0, width: 10, height: 10 } }
     case 'browser:setAnnotationViewportBridge':
@@ -287,7 +295,8 @@ const GUEST_RECEIVING_MOCKS = [
   awaitGrabSelectionMock,
   captureSelectionScreenshotMock,
   extractHoverPayloadMock,
-  setAnnotationViewportBridgeMock
+  setAnnotationViewportBridgeMock,
+  guestExecuteJavaScriptMock
 ]
 
 beforeEach(() => {
