@@ -9,7 +9,7 @@ import {
   HIDDEN_OUTPUT_RESTORE_REMOTE_REARM_MAX
 } from './hidden-output-restore-limits'
 import { shouldWritePtyOutputForeground } from './foreground-output-scan'
-import { skipGapEscapeContinuation } from './gap-escape-continuation'
+import { escapeOpenAtCut, skipGapEscapeContinuation } from './gap-escape-continuation'
 
 import type { ConnectPanePtySession } from './connect-pane-pty-session'
 import type { PendingHiddenOutputRestoreChunk } from './pending-hidden-output-restore-chunk'
@@ -50,7 +50,7 @@ export function bindHiddenOutputRestoreDrain(session: ConnectPanePtySession): vo
             skipGapEscapeContinuation(
               session,
               data,
-              data === chunk.data ? chunk.gapEscapeState : undefined
+              escapeOpenAtCut(chunk.data, data, chunk.gapEscapeState)
             ),
             true
           )
