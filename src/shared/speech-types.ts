@@ -115,6 +115,8 @@ export type SpeakRepliesStatus = {
   /** The region synthesis uses: the setting, else AZURE_SPEECH_REGION. */
   azureSpeechRegion: string
   azureSpeechKey: 'stored' | 'environment' | 'missing'
+  /** The latest failed Azure synthesis since the app started; that chunk used the system voice. */
+  lastAzureFailure: { at: string; message: string } | null
   dictationEnabled: boolean
 }
 
