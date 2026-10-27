@@ -6,6 +6,7 @@ import {
   type ParsedDirtyRowSpan
 } from './terminal-parsed-dirty-rows'
 import { runGuardedWriteCompletionStep } from './xterm-write-callback-guard'
+import { observeTerminalWrite } from './terminal-escape-tail-detector'
 
 export type ForegroundTerminalOutputTarget = {
   buffer?: {
@@ -210,6 +211,7 @@ export function writeForegroundTerminalChunk(
     }
   }
   try {
+    observeTerminalWrite(terminal, data, 'fg')
     terminal.write(data, runParsedSteps)
     return true
   } catch {
