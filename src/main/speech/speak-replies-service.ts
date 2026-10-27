@@ -12,7 +12,7 @@ import {
   hasStoredAzureSpeechKey,
   saveAzureSpeechKey
 } from './azure-speech-key-store'
-import { resolveAzureSpeechRegion } from './azure-tts-client'
+import { getLastAzureSpeechFailure, resolveAzureSpeechRegion } from './azure-tts-client'
 
 export const SPEAK_CONTROL_CHANNEL = 'speech:speakControl'
 
@@ -49,6 +49,7 @@ export function getSpeakRepliesStatus(): SpeakRepliesStatus {
       : process.env.AZURE_SPEECH_KEY?.trim()
         ? 'environment'
         : 'missing',
+    lastAzureFailure: getLastAzureSpeechFailure(),
     dictationEnabled: voice.enabled
   }
 }
