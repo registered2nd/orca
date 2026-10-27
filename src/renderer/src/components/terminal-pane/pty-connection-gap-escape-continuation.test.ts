@@ -181,4 +181,29 @@ describe('post-gap escape continuation (#33766)', () => {
       tail: false
     })
   })
+
+  it('skips the continuation when the snapshot seq cuts a queued chunk mid-escape', async () => {
+    const frame = `\x1b[${RESUMED}`
+    // The snapshot ends after ESC [ and carries no pending escape to re-arm.
+    vi.mocked(window.api.pty.getMainBufferSnapshot).mockResolvedValue({
+      data: 'history\r\n',
+      cols: 120,
+      rows: 40,
+      seq: HIDDEN_FLOOD.length + 2
+    })
+    const drive = await connectLocalPane(false)
+    vi.useFakeTimers()
+    drive.deliver(HIDDEN_FLOOD, { seq: HIDDEN_FLOOD.length, rawLength: HIDDEN_FLOOD.length })
+    drive.setVisible(true)
+    drive.deliver(frame, { seq: HIDDEN_FLOOD.length + frame.length, rawLength: frame.length })
+    await vi.advanceTimersByTimeAsync(60_000)
+    await flushAsyncTicks(20)
+    drive.disposable.dispose()
+    vi.useRealTimers()
+    const screen = await screenOf(drive.written())
+    expect({ prompt: screen.includes('> prompt'), tail: screen.includes(TAIL) }).toEqual({
+      prompt: true,
+      tail: false
+    })
+  })
 })

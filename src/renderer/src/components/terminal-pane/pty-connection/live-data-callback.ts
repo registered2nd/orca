@@ -7,7 +7,7 @@ import type { PtyDataMeta } from '../pty-dispatcher'
 import { sendTerminalOscColorQueryReplies } from '../terminal-capability-replies'
 
 import { shouldWritePtyOutputForeground } from './foreground-output-scan'
-import { skipGapEscapeContinuation } from './gap-escape-continuation'
+import { escapeOpenAtCut, skipGapEscapeContinuation } from './gap-escape-continuation'
 import { registerE2eTerminalPtyDataInjection } from './e2e-terminal-pty-harness'
 
 import type { ConnectPanePtySession } from './connect-pane-pty-session'
@@ -160,8 +160,10 @@ export function bindLiveDataCallback(session: ConnectPanePtySession): void {
         }
         session.queueLiveChunkDuringRestore(
           orderedRendererData,
-          // The gap label describes the chunk's original first byte only.
-          orderedRendererData === arrivedData ? rendererMeta : withoutGapEscapeState(rendererMeta)
+          withGapEscapeState(
+            rendererMeta,
+            escapeOpenAtCut(arrivedData, orderedRendererData, rendererMeta?.gapEscapeState)
+          )
         )
         session.requestHiddenOutputRestoreIfNeeded()
       } else if (session.hiddenOutputRestoreInFlight) {
@@ -180,7 +182,7 @@ export function bindLiveDataCallback(session: ConnectPanePtySession): void {
         skipGapEscapeContinuation(
           session,
           orderedRendererData,
-          orderedRendererData === arrivedData ? rendererMeta?.gapEscapeState : undefined
+          escapeOpenAtCut(arrivedData, orderedRendererData, rendererMeta?.gapEscapeState)
         ),
         foreground,
         { liveStartupBatch: true }
@@ -202,11 +204,22 @@ export function bindLiveDataCallback(session: ConnectPanePtySession): void {
   )
 }
 
-function withoutGapEscapeState(meta: PtyDataMeta | undefined): PtyDataMeta | undefined {
-  if (!meta?.gapEscapeState) {
+// The label describes the queued data's first byte: the gap escape, or the one a cut left open.
+function withGapEscapeState(
+  meta: PtyDataMeta | undefined,
+  gapEscapeState: string | undefined
+): PtyDataMeta | undefined {
+  if (meta?.gapEscapeState === gapEscapeState) {
     return meta
   }
+  if (!meta) {
+    return gapEscapeState ? { gapEscapeState } : undefined
+  }
   const next = { ...meta }
-  delete next.gapEscapeState
+  if (gapEscapeState) {
+    next.gapEscapeState = gapEscapeState
+  } else {
+    delete next.gapEscapeState
+  }
   return next
 }
