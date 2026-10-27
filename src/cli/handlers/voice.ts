@@ -14,6 +14,7 @@ function formatSpeakStatus(status: SpeakRepliesStatus): string {
     `Switch voices in mixed replies (experimental): ${status.speakMixedVoices ? 'on' : 'off'}`,
     `Azure region: ${status.azureSpeechRegion || '(not set)'}`,
     `Azure key: ${status.azureSpeechKey === 'environment' ? 'from AZURE_SPEECH_KEY' : status.azureSpeechKey}`,
+    `Last Azure failure: ${status.lastAzureFailure ? `${status.lastAzureFailure.at} ${status.lastAzureFailure.message}` : 'none since Orca started'}`,
     `Dictation: ${status.dictationEnabled ? 'on' : 'off'}`
   ].join('\n')
 }
