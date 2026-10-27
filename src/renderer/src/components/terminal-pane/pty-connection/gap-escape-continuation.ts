@@ -1,4 +1,7 @@
-import { skipOpenEscapeContinuation } from '../../../../../shared/terminal-partial-escape-tail'
+import {
+  advanceTerminalEscapeBoundary,
+  skipOpenEscapeContinuation
+} from '../../../../../shared/terminal-partial-escape-tail'
 
 import type { ConnectPanePtySession } from './connect-pane-pty-session'
 
@@ -17,4 +20,20 @@ export function skipGapEscapeContinuation(
   const skipped = skipOpenEscapeContinuation(session.gapEscapeContinuation, data)
   session.gapEscapeContinuation = skipped.stillOpen
   return skipped.rest
+}
+
+/** The escape left open where `original` was cut down to its suffix `rest`, given the escape its first byte resumed inside; a snapshot-seq cut can land mid-escape (#33766). */
+export function escapeOpenAtCut(
+  original: string,
+  rest: string,
+  gapEscapeState: string | undefined
+): string | undefined {
+  if (rest === original) {
+    return gapEscapeState
+  }
+  if (!original.endsWith(rest)) {
+    return undefined
+  }
+  const dropped = original.slice(0, original.length - rest.length)
+  return advanceTerminalEscapeBoundary(gapEscapeState ?? '', dropped) || undefined
 }
