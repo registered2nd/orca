@@ -7,6 +7,7 @@ import type { PtyDataMeta } from '../pty-dispatcher'
 import { sendTerminalOscColorQueryReplies } from '../terminal-capability-replies'
 
 import { shouldWritePtyOutputForeground } from './foreground-output-scan'
+import { skipGapEscapeContinuation } from './gap-escape-continuation'
 import { registerE2eTerminalPtyDataInjection } from './e2e-terminal-pty-harness'
 
 import type { ConnectPanePtySession } from './connect-pane-pty-session'
@@ -175,7 +176,15 @@ export function bindLiveDataCallback(session: ConnectPanePtySession): void {
           hiddenStartupRendererQuery: true
         })
       }
-      session.writePtyOutputToXterm(orderedRendererData, foreground, { liveStartupBatch: true })
+      session.writePtyOutputToXterm(
+        skipGapEscapeContinuation(
+          session,
+          orderedRendererData,
+          orderedRendererData === arrivedData ? rendererMeta?.gapEscapeState : undefined
+        ),
+        foreground,
+        { liveStartupBatch: true }
+      )
       if (foreground) {
         session.recordRendererOrderedSeq(rendererMeta)
       }
