@@ -12,6 +12,7 @@ import {
   SYNC_FOREGROUND_FLUSH_CHARS
 } from './pane-terminal-cursor-sequencing'
 import { enqueueChunk } from './pane-terminal-output-queue-chunks'
+import { noteTerminalOutputProducer } from './terminal-escape-tail-detector'
 import {
   exposeTerminalOutputSchedulerDebugApi as exposeDebugApi,
   terminalOutputSchedulerDebugEnabled as debugEnabled,
@@ -60,6 +61,7 @@ export function writeTerminalOutputImpl(
     options.ackCredit?.()
     return
   }
+  noteTerminalOutputProducer(terminal, data)
 
   if (options.foreground) {
     const entry = queuedByTerminal.get(terminal)
