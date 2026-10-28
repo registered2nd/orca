@@ -18,6 +18,8 @@ import { stampWslOrchestrationCompatibilityHost } from '../../pty/wsl-orca-env'
 import { getRuntimeSourceStamp } from '../../runtime/host-descriptor'
 import type { OrcaRuntimeService } from '../../runtime/orca-runtime'
 import { buildPtyHostEnv } from './host-env/assembly'
+import { resolveModelRouteResume } from './host-env/model-route-resume'
+import { resolveWindowsShellStartupFamily } from '../../../shared/windows-terminal-shell'
 import {
   codexHomePathsEqual,
   getCompatibleSelectedCodexHomePath,
@@ -114,8 +116,39 @@ export async function resolvePtySpawnHostEnv(args: PtySpawnHostEnvArgs): Promise
   // Time provenance/hook repair, auth selection and env assembly separately to attribute their different costs.
   args.mark?.('codex_resume')
   const codexResumeHome = codexResumeLaunch.codexResumeHome
-  const launchCommand = codexResumeLaunch.command
-  const baseEnv = deps.stripSequencedStartupResumeArgv(args.env, codexResumeLaunch)
+  // A resumed session on a routed model (DeepSeek, GLM, the Neptune relay) gets its model back; see model-route-resume.
+  const routeWslDistro = target.runtime === 'wsl' ? args.expectedWslDistro : null
+  const modelRoute = args.preAdopted
+    ? null
+    : resolveModelRouteResume({
+        launchAgent: args.launchAgent,
+        command: codexResumeLaunch.command,
+        providerSession: args.resumeProviderSession,
+        shell:
+          routeWslDistro || process.platform !== 'win32'
+            ? 'posix'
+            : resolveWindowsShellStartupFamily(
+                args.shellOverride ?? deps.getSettings?.()?.terminalWindowsShell
+              ),
+        wslDistro: routeWslDistro,
+        cwd: args.cwd
+      })
+  const launchCommand = modelRoute?.command ?? codexResumeLaunch.command
+  const strippedEnv = deps.stripSequencedStartupResumeArgv(args.env, codexResumeLaunch)
+  const baseEnv = modelRoute
+    ? {
+        ...strippedEnv,
+        ...modelRoute.env,
+        // A WSL pane receives only the host variables WSLENV names.
+        ...(routeWslDistro
+          ? {
+              WSLENV: [strippedEnv?.WSLENV, ...Object.keys(modelRoute.env)]
+                .filter(Boolean)
+                .join(':')
+            }
+          : {})
+      }
+    : strippedEnv
   const launchesCodex = args.launchAgent === 'codex'
   const selectLaunchCodexHome = async (): Promise<string | null> =>
     (await deps.getSelectedCodexHomePath?.(target, baseEnv, { launchesCodex })) ?? null
