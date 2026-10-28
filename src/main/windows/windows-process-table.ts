@@ -246,24 +246,32 @@ function readOneSnapshot<Row>(projection: ProcessRowProjection<Row>): Promise<Ro
         reject(new WindowsProcessTableTimeoutError('windows process table timed out'))
       }, WINDOWS_PROCESS_QUERY_TIMEOUT_MS)
       deadline.unref?.()
-      native.getAllProcesses((processes) => {
+      native.getAllProcesses((processes: unknown) => {
         clearTimeout(deadline)
         // Only this read's callback proves its outstanding native work drained.
         unreturnedReads.delete(readId)
-        if (!processes) {
-          reject(new Error('windows process table returned no snapshot'))
-          return
+        // Why the try: this runs inside the addon's own callback loop, where a throw is uncaught and ends the
+        // whole terminal host; a failed snapshot (seen under memory exhaustion) must only fail this read.
+        try {
+          // A failed snapshot can arrive as a non-array value, not only as undefined.
+          if (!Array.isArray(processes)) {
+            reject(new Error('windows process table returned no snapshot'))
+            return
+          }
+          const rows = processes as NativeProcessInfo[]
+          // Missing self means unreadable/truncated data, never proof that no processes run.
+          if (!rows.some((row) => row?.pid === process.pid)) {
+            reject(new Error('windows process table is unreadable'))
+            return
+          }
+          // Only meaningful when a command line was actually asked for.
+          if ((flags & native.ProcessDataFlag.CommandLine) !== 0) {
+            reportWindowsCommandLineRecoveryHealth(rows)
+          }
+          resolve(rows.map(projection.fromNative))
+        } catch (error) {
+          reject(error instanceof Error ? error : new Error(String(error)))
         }
-        // Missing self means unreadable/truncated data, never proof that no processes run.
-        if (!processes.some((row) => row.pid === process.pid)) {
-          reject(new Error('windows process table is unreadable'))
-          return
-        }
-        // Only meaningful when a command line was actually asked for.
-        if ((flags & native.ProcessDataFlag.CommandLine) !== 0) {
-          reportWindowsCommandLineRecoveryHealth(processes)
-        }
-        resolve(processes.map(projection.fromNative))
       }, flags)
     } catch (error) {
       clearTimeout(deadline)
