@@ -127,7 +127,10 @@ import {
 } from './ai-vault/ai-vault-params'
 import {
   AppFunctionsInvokeIpcParams,
-  AppFunctionsListParams
+  AppFunctionsListParams,
+  AppUiInvokeParams,
+  AppUiLoadTerminalsParams,
+  AppUiStateParams
 } from './app-functions/app-functions-params'
 import {
   ArtifactsDeleteParams,
@@ -1222,6 +1225,11 @@ export const RPC_PARAMS_BY_METHOD = {
   'aiVault.setSearchEnabled': AiVaultSetSearchEnabledParamsSchema,
   'appFunctions.invokeIpc': AppFunctionsInvokeIpcParams,
   'appFunctions.list': AppFunctionsListParams,
+  'appUi.invoke': AppUiInvokeParams,
+  'appUi.listActions': null,
+  'appUi.loadTerminals': AppUiLoadTerminalsParams,
+  'appUi.state': AppUiStateParams,
+  'appUi.terminalTabs': null,
   'artifacts.delete': ArtifactsDeleteParams,
   'artifacts.getPublishedLink': SourceRequest,
   'artifacts.list': ListOptions,
