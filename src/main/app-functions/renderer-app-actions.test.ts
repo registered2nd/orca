@@ -34,6 +34,25 @@ describe('loadAllRendererTerminals', () => {
     expect(polls).toBe(2)
   })
 
+  it('asks the window again while tabs stay unloaded', async () => {
+    let requests = 0
+    const host = hostAnswering((operation) => {
+      if (operation === 'loadTerminals') {
+        requests += 1
+        return {
+          workspaceSessionReady: true,
+          requestedWorktreeIds: ['wt'],
+          unloadedTabIds: requests > 1 ? [] : ['a'],
+          totalTabs: 1
+        }
+      }
+      return [tab('a', false)]
+    })
+    const outcome = await loadAllRendererTerminals(host, 10_000, async () => {})
+    expect(requests).toBe(2)
+    expect(outcome.stillUnloadedTabIds).toEqual([])
+  })
+
   it('reports tabs that never attach once the wait runs out', async () => {
     const host = hostAnswering((operation) =>
       operation === 'loadTerminals'
