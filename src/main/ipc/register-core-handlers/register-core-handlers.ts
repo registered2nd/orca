@@ -85,7 +85,6 @@ import type { ClaudeAccountService } from '../../claude-accounts/service'
 import type { AutomationService } from '../../automations/automation-service'
 import type { AgentAwakeService } from '../../power/agent-awake-service'
 import type { CrashReportStore } from '../../crash-reporting/reports/crash-report-store'
-import { setCliPreferencesOwners } from '../../preferences/cli-preferences-service'
 import type { KeybindingService } from '../../keybindings/keybinding-service'
 import {
   getSavedRuntimeAiVaultHostInfos,
@@ -277,7 +276,6 @@ export async function registerCoreHandlers(
     })
     registerUpdaterHandlers(store)
     registerSpeechHandlers(store, commitMessageAgentEnv)
-    setCliPreferencesOwners(store, keybindings ?? null)
     void hostsReady.catch((error: unknown) =>
       console.warn('[startup] Host initialization failed:', error)
     )
