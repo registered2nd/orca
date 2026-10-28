@@ -5,9 +5,19 @@ import type {
   AppFunctionsListResult,
   AppIpcInvokeResult
 } from '../../shared/app-functions-contract'
+import type {
+  RendererActionsListResult,
+  RendererTerminalTab,
+  RendererTerminalsLoadOutcome
+} from '../../shared/renderer-app-actions-contract'
 import type { CommandHandler, HandlerContext } from '../dispatch'
 import { formatAppFunctionList } from '../app-functions-format'
-import { getOptionalJsonFlag, getOptionalStringFlag, getRequiredStringFlag } from '../flags'
+import {
+  getOptionalJsonFlag,
+  getOptionalNonNegativeIntegerFlag,
+  getOptionalStringFlag,
+  getRequiredStringFlag
+} from '../flags'
 import { printResult } from '../format'
 import { RuntimeClientError } from '../runtime-client'
 
@@ -159,5 +169,102 @@ export const APP_FUNCTION_HANDLERS: Record<string, CommandHandler> = {
       )
     }
     printValue(ctx, response, outcome.value)
+  },
+  'app ui actions': async (ctx) => {
+    const filter = getOptionalStringFlag(ctx.flags, 'filter')?.toLowerCase()
+    const matches = (name: string): boolean => !filter || name.toLowerCase().includes(filter)
+    const response = await ctx.client.call<RendererActionsListResult>('appUi.listActions')
+    const result = {
+      actions: response.result.actions.filter((action) => matches(action.name)),
+      stateKeys: response.result.stateKeys.filter(matches)
+    }
+    printResult({ ...response, result }, ctx.json, (listed) =>
+      [
+        `Actions (${listed.actions.length}):`,
+        ...listed.actions.map((action) => `  ${action.name} (${action.arity} args)`),
+        `State (${listed.stateKeys.length}):`,
+        ...listed.stateKeys.map((key) => `  ${key}`)
+      ].join('\n')
+    )
+  },
+  'app ui invoke': async (ctx) => {
+    const name = getRequiredStringFlag(ctx.flags, 'name')
+    const args = await readInvokeArgs(ctx)
+    if (args !== undefined && !Array.isArray(args)) {
+      throw new RuntimeClientError(
+        'invalid_argument',
+        `Window action '${name}' takes positional arguments: pass --args as a JSON array.`
+      )
+    }
+    const response = await ctx.client.call<AppIpcInvokeResult>('appUi.invoke', {
+      name,
+      args: args ?? []
+    })
+    const outcome = response.result
+    if (!outcome.ok) {
+      throw new RuntimeClientError(
+        'app_function_failed',
+        `${name} failed: ${outcome.error.message}`,
+        { error: outcome.error }
+      )
+    }
+    printValue(ctx, response, outcome.value)
+  },
+  'app ui state': async (ctx) => {
+    const path = getOptionalStringFlag(ctx.flags, 'path') ?? ''
+    const response = await ctx.client.call<{ value: unknown }>('appUi.state', { path })
+    printValue(ctx, response, response.result.value)
+  },
+  'app terminals list': async (ctx) => {
+    const onlyUnloaded = ctx.flags.get('unloaded') === true
+    const response = await ctx.client.call<{ tabs: RendererTerminalTab[] }>('appUi.terminalTabs')
+    const tabs = response.result.tabs.filter((tab) => !onlyUnloaded || !tab.loaded)
+    printResult({ ...response, result: { tabs } }, ctx.json, (listed) =>
+      listed.tabs.length === 0
+        ? 'No terminal tabs.'
+        : listed.tabs
+            .map(
+              (tab) =>
+                `${tab.loaded ? 'loaded  ' : 'unloaded'} ${tab.focused ? '*' : ' '} ${tab.tabId}  ${tab.title}  [${tab.worktreeId}]`
+            )
+            .join('\n')
+    )
+  },
+  'app terminals load': async (ctx) => {
+    const waitMs = getOptionalNonNegativeIntegerFlag(ctx.flags, 'wait-ms') ?? 30_000
+    const response = await ctx.client.call<RendererTerminalsLoadOutcome>(
+      'appUi.loadTerminals',
+      { waitMs },
+      { timeoutMs: waitMs + 30_000 }
+    )
+    const outcome = response.result
+    if (outcome.stillUnloadedTabIds.length > 0) {
+      throw new RuntimeClientError(
+        'terminals_not_loaded',
+        `${outcome.stillUnloadedTabIds.length} of ${outcome.totalTabs} terminal tabs did not load within ${waitMs} ms: ${outcome.stillUnloadedTabIds.join(', ')}`,
+        outcome
+      )
+    }
+    printResult(response, ctx.json, () =>
+      outcome.unloadedTabIds.length === 0
+        ? `All ${outcome.totalTabs} terminal tabs were already loaded.`
+        : `Loaded ${outcome.unloadedTabIds.length} terminal tabs across ${outcome.requestedWorktreeIds.length} workspaces; all ${outcome.totalTabs} are loaded.`
+    )
+  },
+  'app terminals activate': async (ctx) => {
+    const tabId = getRequiredStringFlag(ctx.flags, 'tab')
+    const listed = await ctx.client.call<{ tabs: RendererTerminalTab[] }>('appUi.terminalTabs')
+    const tab = listed.result.tabs.find((entry) => entry.tabId === tabId)
+    if (!tab) {
+      throw new RuntimeClientError(
+        'invalid_argument',
+        `No terminal tab ${tabId}. Run \`orca app terminals list\` for the tabs.`
+      )
+    }
+    const response = await ctx.client.call('session.tabs.activate', {
+      worktree: `id:${tab.worktreeId}`,
+      tabId
+    })
+    printResult(response, ctx.json, () => `Activated ${tabId} in ${tab.worktreeId}.`)
   }
 }
