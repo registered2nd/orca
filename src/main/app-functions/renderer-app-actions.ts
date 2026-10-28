@@ -56,7 +56,10 @@ export function listRendererTerminalTabs(host: AppIpcHost | null): Promise<Rende
   return callRenderer(host, 'terminalTabs')
 }
 
+const REQUEST_AGAIN_EVERY_POLLS = 8
+
 // Asks the window to mount every unloaded tab, then waits up to waitMs for each to attach a PTY.
+// Why ask again: right after a restart the window can drop a request while it is still settling.
 export async function loadAllRendererTerminals(
   host: AppIpcHost | null,
   waitMs: number,
@@ -65,8 +68,13 @@ export async function loadAllRendererTerminals(
   const requested = await callRenderer<RendererTerminalsLoadResult>(host, 'loadTerminals')
   const deadline = Date.now() + waitMs
   let unloaded = requested.unloadedTabIds
-  while (unloaded.length > 0 && Date.now() < deadline) {
+  for (let poll = 1; unloaded.length > 0 && Date.now() < deadline; poll += 1) {
     await sleep(250)
+    if (poll % REQUEST_AGAIN_EVERY_POLLS === 0) {
+      unloaded = (await callRenderer<RendererTerminalsLoadResult>(host, 'loadTerminals'))
+        .unloadedTabIds
+      continue
+    }
     const tabs = await listRendererTerminalTabs(host)
     unloaded = tabs.filter((tab) => !tab.loaded).map((tab) => tab.tabId)
   }
