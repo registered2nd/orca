@@ -1,5 +1,6 @@
 import { STATUS_METHODS } from './host-management/status'
 import { APP_FUNCTION_METHODS } from './app-functions/app-functions'
+import { APP_UI_METHODS } from './app-functions/app-ui'
 import { SIDEBAR_INPUT_METHODS } from './sidebar-inputs/sidebar-inputs'
 import { ORCAD_TERMINAL_CENSUS_METHODS } from './orcad/orcad-terminal-census'
 import { ORCAD_MIGRATION_METHODS } from './orcad/orcad-migration'
@@ -86,6 +87,7 @@ import { ORCA_SIDEBAR_INPUTS_IS_MAIN } from '../../../../shared/sidebar-inputs-s
 export const ALL_RPC_METHODS = [
   ...STATUS_METHODS,
   ...APP_FUNCTION_METHODS,
+  ...APP_UI_METHODS,
   ...ORCAD_TERMINAL_CENSUS_METHODS,
   ...ORCAD_MIGRATION_METHODS,
   ...SESSION_TERMINAL_SCROLLBACK_METHODS,
