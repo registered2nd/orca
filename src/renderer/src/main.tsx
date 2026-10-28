@@ -17,6 +17,7 @@ import {
 } from './app-shell/appearance/document-theme'
 import { installTypingLatencyDiagnostic } from './diagnostics/typing-latency/diagnostic'
 import { installAppKeyboardRouter } from './lib/keyboard/app-keyboard-router'
+import { installRendererAppActions } from './lib/renderer-app-actions'
 import { shouldEnableReactGrab } from './diagnostics/react-commits/react-grab-dev-gate'
 import { I18nProvider } from './i18n/I18nProvider'
 import { useTranslate } from './i18n/use-translate'
@@ -39,6 +40,7 @@ recordRendererCrashBreadcrumb('renderer_bootstrap_started', { dev: import.meta.e
 installRendererCrashDiagnostics()
 installTypingLatencyDiagnostic()
 installAppKeyboardRouter()
+installRendererAppActions()
 installAutomationHostDiagnostic()
 
 if (
