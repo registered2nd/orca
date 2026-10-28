@@ -8,7 +8,7 @@ import {
   closeSync
 } from 'node:fs'
 import { homedir } from 'node:os'
-import { join } from 'node:path'
+import { dirname, join } from 'node:path'
 import type { AgentProviderSessionMetadata } from '../../../../shared/agent-session-resume'
 import {
   quoteStartupArg,
@@ -141,26 +141,43 @@ function findAgentExecutableIndex(tokens: readonly string[], name: 'claude' | 'c
 }
 
 /** A local Claude session's transcript: under the pane's folder, else under whichever project holds it. */
+/** The provider homes model_routes.py keeps apart from the harness's own, so their sessions never mix with it. */
+function providerHomes(routesHome: string, harness: '.claude' | '.codex'): string[] {
+  try {
+    const homes = JSON.parse(
+      readFileSync(join(routesHome, harness, 'model_routes', 'homes.json'), 'utf8')
+    ) as Record<string, string>
+    return [...new Set(Object.values(homes))]
+  } catch {
+    return []
+  }
+}
+
+/** A local Claude session's transcript, in Claude Code's own home or a provider's: under the pane's folder, else
+ * under whichever project holds it. */
 function findClaudeTranscript(args: Args, sessionId: string): string | undefined {
   if (args.wslDistro) {
     return undefined
   }
-  const projects = join(homedir(), '.claude', 'projects')
-  const byFolder = args.cwd
-    ? join(projects, args.cwd.replace(/[^A-Za-z0-9]/g, '-'), `${sessionId}.jsonl`)
-    : undefined
-  if (byFolder && existsSync(byFolder)) {
-    return byFolder
-  }
-  try {
-    for (const project of readdirSync(projects)) {
-      const candidate = join(projects, project, `${sessionId}.jsonl`)
-      if (existsSync(candidate)) {
-        return candidate
-      }
+  const routesHome = args.routesHome ?? homedir()
+  for (const configDir of [join(routesHome, '.claude'), ...providerHomes(routesHome, '.claude')]) {
+    const projects = join(configDir, 'projects')
+    const byFolder = args.cwd
+      ? join(projects, args.cwd.replace(/[^A-Za-z0-9]/g, '-'), `${sessionId}.jsonl`)
+      : undefined
+    if (byFolder && existsSync(byFolder)) {
+      return byFolder
     }
-  } catch {
-    // No Claude projects folder.
+    try {
+      for (const project of readdirSync(projects)) {
+        const candidate = join(projects, project, `${sessionId}.jsonl`)
+        if (existsSync(candidate)) {
+          return candidate
+        }
+      }
+    } catch {
+      // No projects folder in this home.
+    }
   }
   return undefined
 }
@@ -170,8 +187,11 @@ function findCodexRollout(args: Args, sessionId: string): string | null {
   if (given && existsSync(hostPath(given, args.wslDistro))) {
     return hostPath(given, args.wslDistro)
   }
-  const sessions = join(args.codexHomePath ?? join(homedir(), '.codex'), 'sessions')
-  const stack = [sessions]
+  const routesHome = args.routesHome ?? homedir()
+  const stack = [
+    args.codexHomePath ?? join(routesHome, '.codex'),
+    ...providerHomes(routesHome, '.codex')
+  ].map((codexHome) => join(codexHome, 'sessions'))
   while (stack.length > 0) {
     const dir = stack.pop()!
     let entries: string[]
@@ -236,6 +256,7 @@ export function resolveModelRouteResume(args: Args): ModelRouteResume | null {
         return null
       }
       const model = lastClaudeTranscriptModel(readTail(hostPath(claudeTranscript, wslDistro)))
+      const transcriptHome = dirname(dirname(dirname(claudeTranscript)))
       if (!model || model.startsWith('claude-')) {
         return null
       }
@@ -253,7 +274,13 @@ export function resolveModelRouteResume(args: Args): ModelRouteResume | null {
           `--settings ${quote(panePath(route, wslDistro))} --model ${quote(routeModel)}`
         ),
         // Claude skips its own resume model restore, and its warning, only when this is in its environment.
-        env: { ANTHROPIC_MODEL: routeModel }
+        env: {
+          ANTHROPIC_MODEL: routeModel,
+          // A session kept in a provider's home resumes there: <home>/projects/<folder>/<id>.jsonl.
+          ...(providerHomes(routesHome, '.claude').includes(transcriptHome)
+            ? { CLAUDE_CONFIG_DIR: transcriptHome }
+            : {})
+        }
       }
     }
     if (agent === 'codex') {
@@ -266,6 +293,7 @@ export function resolveModelRouteResume(args: Args): ModelRouteResume | null {
       if (!rollout) {
         return null
       }
+      const rolloutHome = dirname(dirname(dirname(dirname(dirname(rollout)))))
       const recorded = codexRolloutRoute(readFirstLine(rollout), readTail(rollout))
       const route = recorded
         ? join(routesHome, '.codex', 'model_routes', `${recorded.provider}.json`)
@@ -282,7 +310,13 @@ export function resolveModelRouteResume(args: Args): ModelRouteResume | null {
       const config = (parsed.config ?? []).map((line) => `-c ${quote(line)}`).join(' ')
       return {
         command: config ? spliceAfter(withModel, spans[at].end, config) : withModel,
-        env: parsed.env ?? {}
+        env: {
+          ...parsed.env,
+          // A rollout kept in a provider's home resumes there: <home>/sessions/YYYY/MM/DD/rollout-….jsonl.
+          ...(providerHomes(routesHome, '.codex').includes(rolloutHome)
+            ? { CODEX_HOME: rolloutHome }
+            : {})
+        }
       }
     }
   } catch {
