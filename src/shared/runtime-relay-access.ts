@@ -6,8 +6,8 @@ import {
 import type { PairedRuntimeConnection, PairedRuntimeRelayRoute } from './paired-runtime-connection'
 import type { PairingOffer } from './pairing'
 import type { RuntimeCapability } from './protocol-version'
-import { sendRemoteRuntimeRequest } from './remote-runtime-client'
-import { RemoteRuntimeClientError } from './remote-runtime-client-error'
+import { sendRemoteRuntimeRequest } from './remote-runtime/remote-runtime-client'
+import { RemoteRuntimeClientError } from './remote-runtime/remote-runtime-client-error'
 import type { RuntimeRelayAccess } from './runtime-relay-access-schema'
 
 const INSTALL_TIMEOUT_MS = 30_000

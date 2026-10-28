@@ -3,7 +3,7 @@ import type { KnownRuntimeEnvironment } from './runtime-environments'
 
 const sendRemoteRuntimeRequest = vi.fn()
 const writeEnvironmentRelayAccess = vi.fn()
-vi.mock('./remote-runtime-client', () => ({ sendRemoteRuntimeRequest }))
+vi.mock('./remote-runtime/remote-runtime-client', () => ({ sendRemoteRuntimeRequest }))
 vi.mock('./runtime-environment-relay-store', () => ({ writeEnvironmentRelayAccess }))
 
 const { renewEnvironmentRelayAccessIfDue } = await import('./runtime-relay-access-renewal')

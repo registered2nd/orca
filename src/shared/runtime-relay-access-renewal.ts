@@ -1,7 +1,7 @@
 import { randomBytes } from 'node:crypto'
 import { PairingGetEndpointsResultSchema } from './mobile-relay-credential-contract'
 import type { RuntimeCapability } from './protocol-version'
-import { sendRemoteRuntimeRequest } from './remote-runtime-client'
+import { sendRemoteRuntimeRequest } from './remote-runtime/remote-runtime-client'
 import { writeEnvironmentRelayAccess } from './runtime-environment-relay-store'
 import {
   getPreferredPairedRuntimeConnection,
