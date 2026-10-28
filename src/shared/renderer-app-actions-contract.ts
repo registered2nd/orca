@@ -10,7 +10,7 @@ export type RendererTerminalTab = {
   worktreeId: string
   title: string
   ptyIds: string[]
-  // True once the tab is attached to a PTY; a restored tab stays false until it mounts.
+  // True once every pane of the tab is mounted in the window and attached to its PTY.
   loaded: boolean
   active: boolean
   focused: boolean
