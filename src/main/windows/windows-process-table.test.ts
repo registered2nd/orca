@@ -334,6 +334,24 @@ describe('windows process table', () => {
     await expect(readWindowsProcessTableFresh()).rejects.toThrow()
   })
 
+  it('rejects, without throwing inside the addon callback, a failed snapshot that is not a list', async () => {
+    // 2026-10-28: under memory exhaustion the scan handed back a non-array; `.some` threw inside the addon's
+    // callback loop, where nothing catches it, and the terminal host died with every PTY on it.
+    for (const failed of [{}, 'error', 0, { length: 1 }, [null]]) {
+      let thrown: unknown
+      getAllProcesses.mockImplementation((cb: (rows: unknown) => void) => {
+        try {
+          cb(failed)
+        } catch (error) {
+          thrown = error
+        }
+      })
+      resetWindowsProcessTableForTests()
+      await expect(readWindowsProcessTableFresh()).rejects.toThrow()
+      expect(thrown).toBeUndefined()
+    }
+  })
+
   it('rejects an empty snapshot rather than reporting an idle machine', async () => {
     // A blocked snapshot can return [] without error; it must not prove a live root dead.
     getAllProcesses.mockImplementation((cb: (rows: unknown) => void) => cb([]))
