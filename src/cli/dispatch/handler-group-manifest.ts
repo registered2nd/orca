@@ -1,4 +1,5 @@
 import type { CommandHandler } from './dispatch'
+import { APP_FUNCTIONS_HANDLER_GROUP } from '../app-functions/app-functions-handler-group'
 import { AUTH_HANDLER_GROUP } from '../accounts/auth-handler-group'
 import { BOT_HANDLER_GROUPS } from '../bots/bot-handler-groups'
 import { BROWSER_HANDLER_GROUPS } from '../browser/browser-handler-groups'
@@ -21,11 +22,7 @@ export const HANDLER_GROUPS: readonly HandlerGroup[] = [
   JIRA_HANDLER_GROUP,
   LINEAR_HANDLER_GROUP,
   REFERENCE_HANDLER_GROUP,
-  {
-    name: 'app-functions',
-    keys: ['app functions', 'app invoke'],
-    load: async () => (await import('../app-functions/app-functions.js')).APP_FUNCTION_HANDLERS
-  },
+  APP_FUNCTIONS_HANDLER_GROUP,
   {
     name: 'core',
     keys: ['claude-teams', 'open', 'serve', 'status'],
