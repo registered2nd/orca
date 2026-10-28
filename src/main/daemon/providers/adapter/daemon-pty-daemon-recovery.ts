@@ -7,7 +7,7 @@ import {
   isDaemonGoneError,
   isUnknownRequestTypeError
 } from '../../endpoint/identity/daemon-endpoint-errors'
-import { DaemonPtyCheckpointPersistence } from '../checkpointing/daemon-pty-checkpoint-persistence'
+import { DaemonPtyHostLoss } from './daemon-pty-host-loss'
 import type { DaemonRespawnReason } from './daemon-pty-adapter-options'
 import type { ListSessionsResult } from '../../protocol/daemon-rpc-contract'
 import type { PtyBackgroundStreamEvent } from '../../../providers/pty-provider-contract'
@@ -17,7 +17,7 @@ import type {
 } from '../../../../shared/terminal/runtime-policy/terminal-limit-policy'
 import type { DaemonEndpointIdentity } from '../../protocol/daemon-hello-protocol'
 
-export abstract class DaemonPtyDaemonRecovery extends DaemonPtyCheckpointPersistence {
+export abstract class DaemonPtyDaemonRecovery extends DaemonPtyHostLoss {
   abstract getDaemonIdentity(): DaemonEndpointIdentity | null
 
   async terminalLimit(update?: TerminalLimitUpdate): Promise<TerminalLimitStatus | null> {
@@ -105,9 +105,14 @@ export abstract class DaemonPtyDaemonRecovery extends DaemonPtyCheckpointPersist
 
   // Reconnect on endpoint loss without waiting for input; only daemon-gone errors permit respawn.
   protected recoverAfterEndpointLoss(): void {
-    if (this.activeSessionIds.size > 0) {
-      this.reconnectAfterWriteFailure()
+    if (this.activeSessionIds.size === 0) {
+      return
     }
+    if (!this.respawnFn) {
+      void this.reportHostLossIfEndpointGone()
+      return
+    }
+    this.reconnectAfterWriteFailure()
   }
 
   protected notifyActiveSessionsWriteUnavailable(): void {
