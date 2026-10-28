@@ -10,6 +10,7 @@ import type { BrowserExtensionToolbarApi } from './browser-extension-toolbar-api
 import type { BrowserExtensionSidePanelApi } from './browser-extension-side-panel-api'
 import type { BrowserExtensionContextMenuApi } from './browser-extension-context-menu-api'
 import type { BrowserExtensionWebStoreApi } from './browser-extension-webstore-api'
+import type { BrowserAskApi } from './browser-ask-api'
 import type {
   BrowserExtensionActionResult,
   BrowserExtensionListResult
@@ -52,9 +53,6 @@ import type {
   BrowserCaptureSelectionScreenshotResult,
   BrowserExtractHoverArgs,
   BrowserExtractHoverResult,
-  BrowserAskReadPageArgs,
-  BrowserAskReadPageResult,
-  BrowserAskSaveAttachmentArgs,
   GrabIntent
 } from '../../../shared/browser/element-grab/browser-grab-types'
 import type {
@@ -85,7 +83,7 @@ import type {
   BrowserClientPageRendererRequest
 } from '../../../shared/browser/client-hosting/browser-client-page-renderer-protocol'
 
-export type BrowserApi = {
+export type BrowserApi = BrowserAskApi & {
   /** Absent on clients that host no browser guests, including web clients. */
   readClientHostId?: () => string | null
   onClientPageRendererRequest?: (
@@ -216,8 +214,6 @@ export type BrowserApi = {
     args: BrowserCaptureSelectionScreenshotArgs
   ) => Promise<BrowserCaptureSelectionScreenshotResult>
   extractHoverPayload: (args: BrowserExtractHoverArgs) => Promise<BrowserExtractHoverResult>
-  askReadPage: (args: BrowserAskReadPageArgs) => Promise<BrowserAskReadPageResult>
-  askSaveAttachment: (args: BrowserAskSaveAttachmentArgs) => Promise<string | null>
   onGrabModeToggle: (callback: (browserPageId: string, intent: GrabIntent) => void) => () => void
   onGrabActionShortcut: (
     callback: (args: { browserPageId: string; key: 'c' | 's' }) => void

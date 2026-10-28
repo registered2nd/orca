@@ -22,6 +22,7 @@ import {
 } from '../agent-accounts/codex-session-resume-launch'
 import { isRecoveryReloadInFlight } from './main-window-lifecycle-flags'
 import { quitFromUserCommand } from './main-window-actions'
+import { setCliPreferencesOwners } from '../../preferences/cli-preferences-service'
 
 let attachmentTail: Promise<void> = Promise.resolve()
 
@@ -135,6 +136,7 @@ async function installMainWindowCoreServices(
   if (window.isDestroyed() || state.mainWindow !== window || state.isQuitting) {
     throw new Error('Main window closed while preparing services')
   }
+  setCliPreferencesOwners(store, keybindings)
   automations.start()
   await attachMainWindowServices(
     window,
