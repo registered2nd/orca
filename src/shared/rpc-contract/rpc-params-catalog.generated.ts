@@ -86,7 +86,13 @@ import {
   AntigravityChatSignInCompleteParams,
   AntigravityChatSignInFlowParams
 } from './antigravity-accounts-params'
-import { AppFunctionsInvokeIpcParams, AppFunctionsListParams } from './app-functions-params'
+import {
+  AppFunctionsInvokeIpcParams,
+  AppFunctionsListParams,
+  AppUiInvokeParams,
+  AppUiLoadTerminalsParams,
+  AppUiStateParams
+} from './app-functions-params'
 import { ArtifactsDeleteParams, ListOptions, SourceRequest, WriteRequest } from './artifacts-params'
 import {
   AutomationCreate,
@@ -808,6 +814,11 @@ export const RPC_PARAMS_BY_METHOD = {
   'aiVault.setSearchEnabled': AiVaultSetSearchEnabledParamsSchema,
   'appFunctions.invokeIpc': AppFunctionsInvokeIpcParams,
   'appFunctions.list': AppFunctionsListParams,
+  'appUi.invoke': AppUiInvokeParams,
+  'appUi.listActions': null,
+  'appUi.loadTerminals': AppUiLoadTerminalsParams,
+  'appUi.state': AppUiStateParams,
+  'appUi.terminalTabs': null,
   'artifacts.delete': ArtifactsDeleteParams,
   'artifacts.getPublishedLink': SourceRequest,
   'artifacts.list': ListOptions,
