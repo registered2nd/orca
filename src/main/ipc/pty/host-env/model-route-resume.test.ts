@@ -135,4 +135,33 @@ describe('resolveModelRouteResume', () => {
       expect(resumed?.env).toEqual({ ANTHROPIC_MODEL: 'deepseek-flash[1m]' })
     }
   })
+
+  it('resumes a session kept in a provider home in that home', () => {
+    const dir = home()
+    const providerHome = join(dir, 'deepseek_home', '.claude')
+    const folder = join(providerHome, 'projects', '-work')
+    mkdirSync(folder, { recursive: true })
+    writeFileSync(join(folder, 'abc.jsonl'), assistant('deepseek-flash'))
+    writeFileSync(
+      join(dir, '.claude', 'model_routes', 'homes.json'),
+      JSON.stringify({ 'deepseek-flash': providerHome })
+    )
+    writeFileSync(
+      join(dir, '.claude', 'model_routes', 'deepseek-flash.json'),
+      JSON.stringify({ env: { ANTHROPIC_MODEL: 'deepseek-flash[1m]' } })
+    )
+    const resumed = resolveModelRouteResume({
+      launchAgent: 'claude',
+      command: 'claude --resume abc',
+      providerSession: undefined,
+      shell: 'posix',
+      wslDistro: null,
+      cwd: '/work',
+      routesHome: dir
+    })
+    expect(resumed?.env).toEqual({
+      ANTHROPIC_MODEL: 'deepseek-flash[1m]',
+      CLAUDE_CONFIG_DIR: providerHome
+    })
+  })
 })
