@@ -11,7 +11,8 @@ function fakeHost(
   return {
     listChannels: () =>
       Object.entries(handlers).map(([channel, handlerSource]) => ({ channel, handlerSource })),
-    invoke
+    invoke,
+    callRenderer: vi.fn()
   }
 }
 
