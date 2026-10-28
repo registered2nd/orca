@@ -1,5 +1,6 @@
 import { useAppStore } from '@/store'
 import { requestBackgroundTerminalWorktreeMount } from '@/components/terminal/background-terminal-worktree-mount'
+import { hasPtySerializer } from '@/components/terminal-pane/pty-buffer-serializer'
 import { wakeSleepingAgentsForWorktreeInBackground } from './wake-sleeping-agents-in-background'
 import type {
   RendererActionsListResult,
@@ -114,7 +115,8 @@ export function listRendererTerminalTabs(): RendererTerminalTab[] {
         worktreeId,
         title: tab.customTitle ?? tab.generatedTitle ?? tab.title,
         ptyIds,
-        loaded: ptyIds.length > 0 || tab.ptyId !== null,
+        // A restored tab keeps its PTY ids before it mounts, so only a mounted pane counts.
+        loaded: ptyIds.length > 0 && ptyIds.every(hasPtySerializer),
         active: state.activeTabIdByWorktree[worktreeId] === tab.id,
         focused: state.activeWorktreeId === worktreeId && state.activeTabId === tab.id
       })
