@@ -23,6 +23,7 @@ import {
 import { isRecoveryReloadInFlight } from './main-window-lifecycle-flags'
 import { RELAY_HOST_CLOSE_REASON } from '../../shared/relay-host-close-reason'
 import { holdLaunchReconnectOptOuts } from '../ipc/ssh/ssh-host-user-disconnect'
+import { setCliPreferencesOwners } from '../preferences/cli-preferences-service'
 
 export function attachMainWindowCoreServices(
   window: BrowserWindow,
@@ -118,6 +119,7 @@ export function attachMainWindowCoreServices(
         }
       : undefined
   )
+  setCliPreferencesOwners(store, keybindings)
   automations.start()
   attachMainWindowServices(
     window,
