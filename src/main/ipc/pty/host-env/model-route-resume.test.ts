@@ -110,4 +110,29 @@ describe('resolveModelRouteResume', () => {
     expect(resumed?.command).toBe("codex -c 'model_provider=neptune' resume -m 'qwen38-27b' abc")
     expect(resumed?.env).toEqual({ NEPTUNE_KEY: 'k' })
   })
+
+  it('finds the agent after a folder change and with no session record', () => {
+    const dir = home()
+    const transcript = join(dir, 'session.jsonl')
+    writeFileSync(transcript, assistant('deepseek-flash'))
+    writeFileSync(
+      join(dir, '.claude', 'model_routes', 'deepseek-flash.json'),
+      JSON.stringify({ env: { ANTHROPIC_MODEL: 'deepseek-flash[1m]' } })
+    )
+    for (const command of [
+      "cd -- '/work' && claude --resume abc",
+      "Set-Location -LiteralPath 'C:\\work'; claude.exe --resume abc",
+      "& 'C:\\Users\\me\\.local\\bin\\claude.exe' --resume abc"
+    ]) {
+      const resumed = resolveModelRouteResume({
+        launchAgent: undefined,
+        command,
+        providerSession: { key: 'session_id', id: 'abc', transcriptPath: transcript },
+        shell: command.startsWith('cd') ? 'posix' : 'powershell',
+        wslDistro: null,
+        routesHome: dir
+      })
+      expect(resumed?.env).toEqual({ ANTHROPIC_MODEL: 'deepseek-flash[1m]' })
+    }
+  })
 })
