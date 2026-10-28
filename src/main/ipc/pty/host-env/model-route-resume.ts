@@ -10,7 +10,6 @@ import {
 import { homedir } from 'node:os'
 import { join } from 'node:path'
 import type { AgentProviderSessionMetadata } from '../../../../shared/agent-session-resume'
-import { findClaudeExecutableIndex } from '../../../../shared/agent-resume-launch-command'
 import {
   quoteStartupArg,
   tokenizeStartupCommand,
@@ -129,10 +128,41 @@ function spliceAfter(command: string, at: number, insert: string): string {
   return `${command.slice(0, at)} ${insert}${command.slice(at)}`
 }
 
-function findCodexExecutableIndex(tokens: readonly string[]): number {
-  return tokens.findIndex((token) =>
-    /^codex(\.(exe|cmd|bat|ps1))?$/i.test(token.split(/[\\/]/).pop() ?? '')
+const SEPARATORS = new Set([';', '&&', '||', '&', '--', '|'])
+
+/** The agent's executable in command position: first, or after a separator (`cd … && claude`, `Set-Location …; claude.exe`). */
+function findAgentExecutableIndex(tokens: readonly string[], name: 'claude' | 'codex'): number {
+  const executable = new RegExp(`^${name}(\\.(exe|cmd|bat|ps1))?$`, 'i')
+  return tokens.findIndex(
+    (token, i) =>
+      executable.test(token.split(/[\\/]/).pop() ?? '') &&
+      (i === 0 || SEPARATORS.has(tokens[i - 1]) || /[;&|]$/.test(tokens[i - 1]))
   )
+}
+
+/** A local Claude session's transcript: under the pane's folder, else under whichever project holds it. */
+function findClaudeTranscript(args: Args, sessionId: string): string | undefined {
+  if (args.wslDistro) {
+    return undefined
+  }
+  const projects = join(homedir(), '.claude', 'projects')
+  const byFolder = args.cwd
+    ? join(projects, args.cwd.replace(/[^A-Za-z0-9]/g, '-'), `${sessionId}.jsonl`)
+    : undefined
+  if (byFolder && existsSync(byFolder)) {
+    return byFolder
+  }
+  try {
+    for (const project of readdirSync(projects)) {
+      const candidate = join(projects, project, `${sessionId}.jsonl`)
+      if (existsSync(candidate)) {
+        return candidate
+      }
+    }
+  } catch {
+    // No Claude projects folder.
+  }
+  return undefined
 }
 
 function findCodexRollout(args: Args, sessionId: string): string | null {
@@ -188,21 +218,20 @@ export function resolveModelRouteResume(args: Args): ModelRouteResume | null {
     return null
   }
   const claudeTranscript =
-    args.providerSession?.transcriptPath ??
-    (args.cwd && !wslDistro
-      ? join(
-          homedir(),
-          '.claude',
-          'projects',
-          args.cwd.replace(/[^A-Za-z0-9]/g, '-'),
-          `${sessionId}.jsonl`
-        )
-      : undefined)
+    args.providerSession?.transcriptPath ?? findClaudeTranscript(args, sessionId)
+  // A typed launch (`orca terminal create --command`) names no agent; the command does.
+  const agent =
+    args.launchAgent ??
+    (findAgentExecutableIndex(tokens, 'claude') !== -1
+      ? 'claude'
+      : findAgentExecutableIndex(tokens, 'codex') !== -1
+        ? 'codex'
+        : undefined)
   const routesHome = args.routesHome ?? homedir()
   const quote = (value: string): string => quoteStartupArg(value, shell)
   try {
-    if (args.launchAgent === 'claude') {
-      const at = findClaudeExecutableIndex(tokens, shell)
+    if (agent === 'claude') {
+      const at = findAgentExecutableIndex(tokens, 'claude')
       if (at === -1 || hasToken(tokens, ['--model', '--settings']) || !claudeTranscript) {
         return null
       }
@@ -227,8 +256,8 @@ export function resolveModelRouteResume(args: Args): ModelRouteResume | null {
         env: { ANTHROPIC_MODEL: routeModel }
       }
     }
-    if (args.launchAgent === 'codex') {
-      const at = findCodexExecutableIndex(tokens)
+    if (agent === 'codex') {
+      const at = findAgentExecutableIndex(tokens, 'codex')
       const resumeAt = tokens.indexOf('resume')
       if (at === -1 || resumeAt <= at || hasToken(tokens, ['-m', '--model', '--profile', '-p'])) {
         return null
