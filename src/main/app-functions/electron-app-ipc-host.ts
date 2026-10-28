@@ -32,6 +32,17 @@ function mainFrameInvokeEvent(sender: WebContents): IpcMainInvokeEvent {
   }
 }
 
+function requireSender(getSender: () => WebContents | null): WebContents {
+  const sender = getSender()
+  if (!sender || sender.isDestroyed()) {
+    throw new AppIpcUnreachableError(
+      'app_ipc_no_window',
+      'The Orca window is not open, so there is no UI to call this function as.'
+    )
+  }
+  return sender
+}
+
 export function createElectronAppIpcHost(options: {
   ipc: IpcMain
   getSender: () => WebContents | null
@@ -51,15 +62,25 @@ export function createElectronAppIpcHost(options: {
           `No IPC handler is registered for '${channel}'.`
         )
       }
-      const sender = options.getSender()
-      if (!sender || sender.isDestroyed()) {
-        throw new AppIpcUnreachableError(
-          'app_ipc_no_window',
-          'The Orca window is not open, so there is no UI to call this function as.'
-        )
-      }
+      const sender = requireSender(options.getSender)
       // Why structuredClone: Electron hands handlers a structured-clone copy of the renderer's args.
       return await handler(mainFrameInvokeEvent(sender), ...structuredClone(args))
+    },
+    callRenderer: async (operation, args) => {
+      const sender = requireSender(options.getSender)
+      // Why JSON-encoded arguments: they are spliced into the script as literals, never as code.
+      const call = `window.__orcaRendererActions.${operation}(${args.map((arg) => JSON.stringify(arg)).join(',')})`
+      const result: unknown = await sender.executeJavaScript(
+        `window.__orcaRendererActions ? Promise.resolve(${call}) : Promise.resolve(null)`,
+        true
+      )
+      if (typeof result !== 'string') {
+        throw new AppIpcUnreachableError(
+          'app_renderer_bridge_missing',
+          'The Orca window has not loaded its action bridge yet; retry once the window has started.'
+        )
+      }
+      return result
     }
   }
 }
