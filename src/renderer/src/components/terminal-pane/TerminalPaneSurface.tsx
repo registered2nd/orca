@@ -315,13 +315,7 @@ export function TerminalPaneSurface({
         canCopyAgentSessionId={menuAgentSessionId !== null}
         onCopyAgentSessionId={() => void contextMenu.onCopyAgentSessionId()}
       />
-      <TerminalSelectionAskPortal
-        tabId={tabId}
-        worktreeId={worktreeId}
-        ask={selectionAsk.askSelection}
-        panes={managedPanes}
-        onClose={selectionAsk.closeAskSelection}
-      />
+      <TerminalSelectionAskPortal controller={controller} />
       <LinkActionPopover request={terminalLinkActionRequest} onClose={closeTerminalLinkActions} />
       {quickCommandEditorOpen ? (
         <TerminalQuickCommandEditorDialog
