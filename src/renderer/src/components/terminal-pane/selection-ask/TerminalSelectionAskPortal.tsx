@@ -1,21 +1,22 @@
 import { createPortal } from 'react-dom'
 import type { ManagedPane } from '@/lib/pane-manager/pane-manager'
-import { TerminalSelectionAskPanel, type TerminalSelectionAsk } from './TerminalSelectionAskPanel'
+import { TerminalSelectionAskPanel } from './TerminalSelectionAskPanel'
+import type { TerminalSelectionAskState } from './use-terminal-selection-ask'
 
+/** Takes the pane controller whole so the pane surface, at its line limit, renders it in one line. */
 export function TerminalSelectionAskPortal({
-  tabId,
-  worktreeId,
-  ask,
-  panes,
-  onClose
+  controller
 }: {
-  tabId: string
-  worktreeId: string
-  ask: TerminalSelectionAsk | null
-  panes: readonly ManagedPane[]
-  onClose: () => void
+  controller: {
+    tabId: string
+    worktreeId: string
+    managedPanes: readonly ManagedPane[]
+    selectionAsk: TerminalSelectionAskState
+  }
 }): React.JSX.Element | null {
-  const pane = ask ? panes.find((candidate) => candidate.id === ask.paneId) : undefined
+  const { tabId, worktreeId, managedPanes, selectionAsk } = controller
+  const ask = selectionAsk.askSelection
+  const pane = ask ? managedPanes.find((candidate) => candidate.id === ask.paneId) : undefined
   if (!ask || !pane) {
     return null
   }
@@ -25,7 +26,7 @@ export function TerminalSelectionAskPortal({
       tabId={tabId}
       worktreeId={worktreeId}
       ask={ask}
-      onClose={onClose}
+      onClose={selectionAsk.closeAskSelection}
     />,
     pane.container
   )

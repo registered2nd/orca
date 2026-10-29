@@ -319,13 +319,7 @@ export function TerminalPaneSurface({
         request={terminalManager ? terminalLinkActionRequest : null}
         onClose={closeTerminalLinkActions}
       />
-      <TerminalSelectionAskPortal
-        tabId={tabId}
-        worktreeId={worktreeId}
-        ask={selectionAsk.askSelection}
-        panes={managedPanes}
-        onClose={selectionAsk.closeAskSelection}
-      />
+      <TerminalSelectionAskPortal controller={controller} />
       {quickCommandEditorOpen ? (
         <TerminalQuickCommandEditorDialog
           command={quickCommandDraft}
