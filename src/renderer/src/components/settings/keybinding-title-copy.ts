@@ -147,6 +147,8 @@ const STATIC_TITLE_COPY = {
     translate('keybindings.title.sidebarChildWorkspacesToggle', 'Toggle Child Workspaces'),
   'terminal.clearPaneTitle': () =>
     translate('keybindings.title.terminalClearPaneTitle', 'Clear Pane Title'),
+  'terminal.askAboutSelection': () =>
+    translate('keybindings.title.terminalAskAboutSelection', 'Ask agent about terminal selection'),
   'terminal.closePane': () => translate('keybindings.title.terminalClosePane', 'Close active pane'),
   'terminal.splitRight': () =>
     translate('keybindings.title.terminalSplitRight', 'Split terminal right'),
@@ -156,7 +158,11 @@ const STATIC_TITLE_COPY = {
     translate(
       'keybindings.title.terminalSwitchInputSource',
       'Switch input source / language (native)'
-    )
+    ),
+  'voice.speakReplies.toggle': () =>
+    translate('keybindings.title.voiceSpeakRepliesToggle', 'Read Replies Aloud'),
+  'voice.speakReplies.stop': () =>
+    translate('keybindings.title.voiceSpeakRepliesStop', 'Stop Reading Aloud')
 } satisfies Record<StaticKeybindingActionId, () => string>
 
 const GROUP_COPY = {

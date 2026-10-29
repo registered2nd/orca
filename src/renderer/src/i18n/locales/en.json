@@ -20775,10 +20775,13 @@
       "terminalToggleNativeChat": "Switch between Chat UI and terminal",
       "sidebarChildWorkspacesToggle": "Toggle Child Workspaces",
       "terminalClearPaneTitle": "Clear Pane Title",
+      "terminalAskAboutSelection": "Ask agent about terminal selection",
       "terminalClosePane": "Close active pane",
       "terminalSplitRight": "Split terminal right",
       "terminalSplitDown": "Split terminal down",
       "terminalSwitchInputSource": "Switch input source / language (native)",
+      "voiceSpeakRepliesToggle": "Read Replies Aloud",
+      "voiceSpeakRepliesStop": "Stop Reading Aloud",
       "newAgentTab": "New {{agent}} tab"
     },
     "group": {
