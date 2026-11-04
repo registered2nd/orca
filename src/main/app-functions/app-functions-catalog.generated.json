@@ -103,7 +103,7 @@
       }
     },
     "aiVault:cancelListSessions": {
-      "source": "src/main/ipc/ai-vault.ts:282",
+      "source": "src/main/ipc/ai-vault/ai-vault.ts:282",
       "params": [
         {
           "name": "args",
@@ -127,7 +127,7 @@
       }
     },
     "aiVault:clearSearchIndex": {
-      "source": "src/main/ipc/ai-vault-search.ts:82",
+      "source": "src/main/ipc/ai-vault/ai-vault-search.ts:82",
       "params": [],
       "preload": {
         "api": "window.api.aiVault.clearSearchIndex",
@@ -137,7 +137,7 @@
       }
     },
     "aiVault:deleteSession": {
-      "source": "src/main/ipc/ai-vault-delete.ts:36",
+      "source": "src/main/ipc/ai-vault/ai-vault-delete.ts:36",
       "params": [
         {
           "name": "args",
@@ -161,7 +161,7 @@
       }
     },
     "aiVault:getFirstUserPrompt": {
-      "source": "src/main/ipc/ai-vault.ts:296",
+      "source": "src/main/ipc/ai-vault/ai-vault.ts:296",
       "params": [
         {
           "name": "args",
@@ -185,7 +185,7 @@
       }
     },
     "aiVault:getScanProgress": {
-      "source": "src/main/ipc/ai-vault-scan-progress-broadcast.ts:12",
+      "source": "src/main/ipc/ai-vault/ai-vault-scan-progress-broadcast.ts:12",
       "params": [
         {
           "name": "scanKey",
@@ -209,7 +209,7 @@
       }
     },
     "aiVault:listSessions": {
-      "source": "src/main/ipc/ai-vault.ts:255",
+      "source": "src/main/ipc/ai-vault/ai-vault.ts:255",
       "params": [
         {
           "name": "args",
@@ -233,7 +233,7 @@
       }
     },
     "aiVault:listSubagentSessions": {
-      "source": "src/main/ipc/ai-vault.ts:291",
+      "source": "src/main/ipc/ai-vault/ai-vault.ts:291",
       "params": [
         {
           "name": "args",
@@ -257,7 +257,7 @@
       }
     },
     "aiVault:prepareSessionResume": {
-      "source": "src/main/ipc/ai-vault-resume.ts:27",
+      "source": "src/main/ipc/ai-vault/ai-vault-resume.ts:27",
       "params": [
         {
           "name": "args",
@@ -281,7 +281,7 @@
       }
     },
     "aiVault:resolveSessionTitles": {
-      "source": "src/main/ipc/ai-vault.ts:277",
+      "source": "src/main/ipc/ai-vault/ai-vault.ts:277",
       "params": [
         {
           "name": "args",
@@ -305,7 +305,7 @@
       }
     },
     "aiVault:searchSessions": {
-      "source": "src/main/ipc/ai-vault-search.ts:63",
+      "source": "src/main/ipc/ai-vault/ai-vault-search.ts:63",
       "params": [
         {
           "name": "raw",
@@ -341,7 +341,7 @@
       }
     },
     "aiVault:searchStatus": {
-      "source": "src/main/ipc/ai-vault-search.ts:71",
+      "source": "src/main/ipc/ai-vault/ai-vault-search.ts:71",
       "params": [
         {
           "name": "rawScope",
@@ -371,7 +371,7 @@
       }
     },
     "aiVault:setSearchEnabled": {
-      "source": "src/main/ipc/ai-vault-search.ts:75",
+      "source": "src/main/ipc/ai-vault/ai-vault-search.ts:75",
       "params": [
         {
           "name": "rawScope",
@@ -437,7 +437,7 @@
       }
     },
     "app:getFeatureWallAssetBaseUrl": {
-      "source": "src/main/ipc/app.ts:151",
+      "source": "src/main/ipc/app.ts:152",
       "params": [],
       "preload": {
         "api": "window.api.app.getFeatureWallAssetBaseUrl",
@@ -447,7 +447,7 @@
       }
     },
     "app:getFloatingMarkdownDirectory": {
-      "source": "src/main/ipc/app.ts:239",
+      "source": "src/main/ipc/app.ts:240",
       "params": [],
       "preload": {
         "api": "window.api.app.getFloatingMarkdownDirectory",
@@ -457,7 +457,7 @@
       }
     },
     "app:getFloatingTerminalCwd": {
-      "source": "src/main/ipc/app.ts:235",
+      "source": "src/main/ipc/app.ts:236",
       "params": [
         {
           "name": "args",
@@ -481,7 +481,7 @@
       }
     },
     "app:getIdentity": {
-      "source": "src/main/ipc/app.ts:153",
+      "source": "src/main/ipc/app.ts:154",
       "params": [],
       "preload": {
         "api": "window.api.app.getIdentity",
@@ -491,7 +491,7 @@
       }
     },
     "app:getKeyboardInputSourceId": {
-      "source": "src/main/ipc/app.ts:173",
+      "source": "src/main/ipc/app.ts:174",
       "params": [],
       "preload": {
         "api": "window.api.app.getKeyboardInputSourceId",
@@ -501,7 +501,7 @@
       }
     },
     "app:getKeyboardLayoutSnapshot": {
-      "source": "src/main/ipc/app.ts:188",
+      "source": "src/main/ipc/app.ts:189",
       "params": [],
       "preload": {
         "api": "window.api.app.getKeyboardLayoutSnapshot",
@@ -521,7 +521,7 @@
       }
     },
     "app:getSystemLanguageDetection": {
-      "source": "src/main/ipc/app.ts:132",
+      "source": "src/main/ipc/app.ts:133",
       "params": [
         {
           "name": "preferences",
@@ -545,7 +545,7 @@
       }
     },
     "app:getWindowsAdministratorStatus": {
-      "source": "src/main/ipc/app.ts:149",
+      "source": "src/main/ipc/app.ts:150",
       "params": [],
       "preload": {
         "api": "window.api.app.getWindowsAdministratorStatus",
@@ -565,7 +565,7 @@
       }
     },
     "app:isProfileStateSaveDelayed": {
-      "source": "src/main/ipc/app.ts:131",
+      "source": "src/main/ipc/app.ts:132",
       "params": [],
       "preload": {
         "api": "window.api.app.isProfileStateSaveDelayed",
@@ -575,7 +575,7 @@
       }
     },
     "app:pickFloatingMarkdownDocument": {
-      "source": "src/main/ipc/app.ts:241",
+      "source": "src/main/ipc/app.ts:242",
       "params": [],
       "preload": {
         "api": "window.api.app.pickFloatingMarkdownDocument",
@@ -585,7 +585,7 @@
       }
     },
     "app:pickFloatingWorkspaceDirectory": {
-      "source": "src/main/ipc/app.ts:243",
+      "source": "src/main/ipc/app.ts:244",
       "params": [],
       "preload": {
         "api": "window.api.app.pickFloatingWorkspaceDirectory",
@@ -615,7 +615,7 @@
       }
     },
     "app:relaunch": {
-      "source": "src/main/ipc/app.ts:199",
+      "source": "src/main/ipc/app.ts:200",
       "params": [],
       "preload": {
         "api": "window.api.app.relaunch",
@@ -625,7 +625,7 @@
       }
     },
     "app:reload": {
-      "source": "src/main/window/attach-main-window-services.ts:246",
+      "source": "src/main/window/attach-main-window-services.ts:249",
       "params": [],
       "preload": {
         "api": "window.api.app.reload",
@@ -635,7 +635,7 @@
       }
     },
     "app:restart": {
-      "source": "src/main/ipc/app.ts:211",
+      "source": "src/main/ipc/app.ts:212",
       "params": [],
       "preload": {
         "api": "window.api.app.restart",
@@ -645,7 +645,7 @@
       }
     },
     "app:restartAsAdministrator": {
-      "source": "src/main/ipc/app.ts:220",
+      "source": "src/main/ipc/app.ts:221",
       "params": [],
       "preload": {
         "api": "window.api.app.restartAsAdministrator",
@@ -655,7 +655,7 @@
       }
     },
     "app:setUnreadDockBadgeCount": {
-      "source": "src/main/ipc/app.ts:231",
+      "source": "src/main/ipc/app.ts:232",
       "params": [
         {
           "name": "count",
@@ -679,7 +679,7 @@
       }
     },
     "app:setWindowMaterialSuppressed": {
-      "source": "src/main/ipc/app.ts:190",
+      "source": "src/main/ipc/app.ts:191",
       "params": [
         {
           "name": "suppressed",
@@ -893,7 +893,7 @@
       }
     },
     "bitbucket:connect": {
-      "source": "src/main/ipc/bitbucket.ts:35",
+      "source": "src/main/ipc/source-control/bitbucket.ts:38",
       "params": [
         {
           "name": "args",
@@ -917,7 +917,7 @@
       }
     },
     "bitbucket:disconnect": {
-      "source": "src/main/ipc/bitbucket.ts:51",
+      "source": "src/main/ipc/source-control/bitbucket.ts:54",
       "params": [],
       "preload": {
         "api": "window.api.bitbucket.disconnect",
@@ -927,7 +927,7 @@
       }
     },
     "bitbucket:status": {
-      "source": "src/main/ipc/bitbucket.ts:56",
+      "source": "src/main/ipc/source-control/bitbucket.ts:59",
       "params": [],
       "preload": {
         "api": "window.api.bitbucket.status",
@@ -937,7 +937,7 @@
       }
     },
     "browser:activeTabChanged": {
-      "source": "src/main/ipc/browser.ts:226",
+      "source": "src/main/ipc/browser/browser.ts:226",
       "params": [
         {
           "name": "args",
@@ -961,7 +961,7 @@
       }
     },
     "browser:addWordToDictionary": {
-      "source": "src/main/ipc/browser-guest-view-ipc.ts:151",
+      "source": "src/main/ipc/browser/browser-guest-view-ipc.ts:151",
       "params": [
         {
           "name": "args",
@@ -985,7 +985,7 @@
       }
     },
     "browser:awaitGrabSelection": {
-      "source": "src/main/ipc/browser-grab-ipc.ts:119",
+      "source": "src/main/ipc/browser/browser-grab-ipc.ts:119",
       "params": [
         {
           "name": "args",
@@ -1009,7 +1009,7 @@
       }
     },
     "browser:cancelDownload": {
-      "source": "src/main/ipc/browser-guest-view-ipc.ts:308",
+      "source": "src/main/ipc/browser/browser-guest-view-ipc.ts:308",
       "params": [
         {
           "name": "args",
@@ -1033,7 +1033,7 @@
       }
     },
     "browser:cancelGrab": {
-      "source": "src/main/ipc/browser-grab-ipc.ts:134",
+      "source": "src/main/ipc/browser/browser-grab-ipc.ts:134",
       "params": [
         {
           "name": "args",
@@ -1057,7 +1057,7 @@
       }
     },
     "browser:captureSelectionScreenshot": {
-      "source": "src/main/ipc/browser-grab-ipc.ts:147",
+      "source": "src/main/ipc/browser/browser-grab-ipc.ts:147",
       "params": [
         {
           "name": "args",
@@ -1081,7 +1081,7 @@
       }
     },
     "browser:closeDevTools": {
-      "source": "src/main/ipc/browser-guest-view-ipc.ts:128",
+      "source": "src/main/ipc/browser/browser-guest-view-ipc.ts:128",
       "params": [
         {
           "name": "args",
@@ -1105,7 +1105,7 @@
       }
     },
     "browser:copyImageAt": {
-      "source": "src/main/ipc/browser-guest-view-ipc.ts:162",
+      "source": "src/main/ipc/browser/browser-guest-view-ipc.ts:162",
       "params": [
         {
           "name": "args",
@@ -1129,7 +1129,7 @@
       }
     },
     "browser:extractHoverPayload": {
-      "source": "src/main/ipc/browser-grab-ipc.ts:172",
+      "source": "src/main/ipc/browser/browser-grab-ipc.ts:172",
       "params": [
         {
           "name": "args",
@@ -1153,7 +1153,7 @@
       }
     },
     "browser:getPageSiteDisplay": {
-      "source": "src/main/ipc/browser-guest-view-ipc.ts:67",
+      "source": "src/main/ipc/browser/browser-guest-view-ipc.ts:67",
       "params": [
         {
           "name": "args",
@@ -1177,7 +1177,7 @@
       }
     },
     "browser:identity:get": {
-      "source": "src/main/ipc/browser-session-profile-ipc.ts:77",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:77",
       "params": [],
       "preload": {
         "api": "window.api.browser.identityGet",
@@ -1187,7 +1187,7 @@
       }
     },
     "browser:identity:set": {
-      "source": "src/main/ipc/browser-session-profile-ipc.ts:84",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:84",
       "params": [
         {
           "name": "mode",
@@ -1211,7 +1211,7 @@
       }
     },
     "browser:isGuestRegistered": {
-      "source": "src/main/ipc/browser.ts:152",
+      "source": "src/main/ipc/browser/browser.ts:152",
       "params": [
         {
           "name": "args",
@@ -1235,7 +1235,7 @@
       }
     },
     "browser:openDevTools": {
-      "source": "src/main/ipc/browser-guest-view-ipc.ts:114",
+      "source": "src/main/ipc/browser/browser-guest-view-ipc.ts:114",
       "params": [
         {
           "name": "args",
@@ -1259,7 +1259,7 @@
       }
     },
     "browser:prepareSshWorkspacePartition": {
-      "source": "src/main/ipc/browser.ts:109",
+      "source": "src/main/ipc/browser/browser.ts:109",
       "params": [
         {
           "name": "args",
@@ -1283,7 +1283,7 @@
       }
     },
     "browser:proceedCertificate": {
-      "source": "src/main/ipc/browser.ts:208",
+      "source": "src/main/ipc/browser/browser.ts:208",
       "params": [
         {
           "name": "args",
@@ -1307,7 +1307,7 @@
       }
     },
     "browser:publishClientPageMetadata": {
-      "source": "src/main/ipc/browser-guest-view-ipc.ts:281",
+      "source": "src/main/ipc/browser/browser-guest-view-ipc.ts:281",
       "params": [
         {
           "name": "args",
@@ -1331,7 +1331,7 @@
       }
     },
     "browser:registerGuest": {
-      "source": "src/main/ipc/browser.ts:104",
+      "source": "src/main/ipc/browser/browser.ts:104",
       "params": [
         {
           "name": "args",
@@ -1355,7 +1355,7 @@
       }
     },
     "browser:repairGuestRegistration": {
-      "source": "src/main/ipc/browser.ts:148",
+      "source": "src/main/ipc/browser/browser.ts:148",
       "params": [
         {
           "name": "args",
@@ -1379,7 +1379,7 @@
       }
     },
     "browser:respondPagePrompt": {
-      "source": "src/main/ipc/browser.ts:198",
+      "source": "src/main/ipc/browser/browser.ts:198",
       "params": [
         {
           "name": "response",
@@ -1403,7 +1403,7 @@
       }
     },
     "browser:respondWebAuthnAccount": {
-      "source": "src/main/ipc/browser.ts:188",
+      "source": "src/main/ipc/browser/browser.ts:188",
       "params": [
         {
           "name": "response",
@@ -1427,7 +1427,7 @@
       }
     },
     "browser:session:clearDefaultCookies": {
-      "source": "src/main/ipc/browser-session-profile-ipc.ts:190",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:190",
       "params": [],
       "preload": {
         "api": "window.api.browser.sessionClearDefaultCookies",
@@ -1437,7 +1437,7 @@
       }
     },
     "browser:session:clearGoogleCookies": {
-      "source": "src/main/ipc/browser-google-cookie-clear-ipc.ts:29",
+      "source": "src/main/ipc/browser/browser-google-cookie-clear-ipc.ts:29",
       "params": [
         {
           "name": "args",
@@ -1461,7 +1461,7 @@
       }
     },
     "browser:session:clientRouteImportSources": {
-      "source": "src/main/ipc/browser-client-host-cookie-import-ipc.ts:64",
+      "source": "src/main/ipc/browser/browser-client-host-cookie-import-ipc.ts:64",
       "params": [
         {
           "name": "args",
@@ -1485,7 +1485,7 @@
       }
     },
     "browser:session:createProfile": {
-      "source": "src/main/ipc/browser-session-profile-ipc.ts:56",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:56",
       "params": [
         {
           "name": "args",
@@ -1509,7 +1509,7 @@
       }
     },
     "browser:session:deleteProfile": {
-      "source": "src/main/ipc/browser-session-profile-ipc.ts:95",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:95",
       "params": [
         {
           "name": "args",
@@ -1533,7 +1533,7 @@
       }
     },
     "browser:session:detectBrowsers": {
-      "source": "src/main/ipc/browser-session-profile-ipc.ts:201",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:201",
       "params": [],
       "preload": {
         "api": "window.api.browser.sessionDetectBrowsers",
@@ -1543,7 +1543,7 @@
       }
     },
     "browser:session:detectBrowsersForClientHost": {
-      "source": "src/main/ipc/browser-session-profile-ipc.ts:209",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:209",
       "params": [
         {
           "name": "args",
@@ -1567,7 +1567,7 @@
       }
     },
     "browser:session:ensureManagedProfile": {
-      "source": "src/main/ipc/browser-session-profile-ipc.ts:69",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:69",
       "params": [
         {
           "name": "args",
@@ -1591,7 +1591,7 @@
       }
     },
     "browser:session:googleCookieClearTarget": {
-      "source": "src/main/ipc/browser-google-cookie-clear-ipc.ts:22",
+      "source": "src/main/ipc/browser/browser-google-cookie-clear-ipc.ts:22",
       "params": [
         {
           "name": "args",
@@ -1615,7 +1615,7 @@
       }
     },
     "browser:session:importCookies": {
-      "source": "src/main/ipc/browser-session-profile-ipc.ts:105",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:105",
       "params": [
         {
           "name": "args",
@@ -1639,7 +1639,7 @@
       }
     },
     "browser:session:importCookiesForClientHost": {
-      "source": "src/main/ipc/browser-client-host-cookie-import-ipc.ts:46",
+      "source": "src/main/ipc/browser/browser-client-host-cookie-import-ipc.ts:46",
       "params": [
         {
           "name": "args",
@@ -1663,7 +1663,7 @@
       }
     },
     "browser:session:importFromBrowser": {
-      "source": "src/main/ipc/browser-session-profile-ipc.ts:222",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:222",
       "params": [
         {
           "name": "args",
@@ -1687,7 +1687,7 @@
       }
     },
     "browser:session:importFromBrowserForClientHost": {
-      "source": "src/main/ipc/browser-client-host-cookie-import-ipc.ts:22",
+      "source": "src/main/ipc/browser/browser-client-host-cookie-import-ipc.ts:22",
       "params": [
         {
           "name": "args",
@@ -1711,7 +1711,7 @@
       }
     },
     "browser:session:listProfiles": {
-      "source": "src/main/ipc/browser-session-profile-ipc.ts:49",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:49",
       "params": [],
       "preload": {
         "api": "window.api.browser.sessionListProfiles",
@@ -1721,7 +1721,7 @@
       }
     },
     "browser:session:resolvePartition": {
-      "source": "src/main/ipc/browser-session-profile-ipc.ts:134",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:134",
       "params": [
         {
           "name": "args",
@@ -1745,7 +1745,7 @@
       }
     },
     "browser:setAnnotationViewportBridge": {
-      "source": "src/main/ipc/browser-guest-view-ipc.ts:242",
+      "source": "src/main/ipc/browser/browser-guest-view-ipc.ts:242",
       "params": [
         {
           "name": "args",
@@ -1769,7 +1769,7 @@
       }
     },
     "browser:setDevToolsDockBounds": {
-      "source": "src/main/ipc/browser-guest-view-ipc.ts:134",
+      "source": "src/main/ipc/browser/browser-guest-view-ipc.ts:134",
       "params": [
         {
           "name": "args",
@@ -1810,7 +1810,7 @@
       }
     },
     "browser:setPageAudioMuted": {
-      "source": "src/main/ipc/browser-guest-view-ipc.ts:102",
+      "source": "src/main/ipc/browser/browser-guest-view-ipc.ts:102",
       "params": [
         {
           "name": "args",
@@ -1834,7 +1834,7 @@
       }
     },
     "browser:setPageSiteColorScheme": {
-      "source": "src/main/ipc/browser-guest-view-ipc.ts:87",
+      "source": "src/main/ipc/browser/browser-guest-view-ipc.ts:87",
       "params": [
         {
           "name": "args",
@@ -1858,7 +1858,7 @@
       }
     },
     "browser:setViewportOverride": {
-      "source": "src/main/ipc/browser-guest-view-ipc.ts:174",
+      "source": "src/main/ipc/browser/browser-guest-view-ipc.ts:174",
       "params": [
         {
           "name": "args",
@@ -1882,7 +1882,7 @@
       }
     },
     "browser:sitePermissions:list": {
-      "source": "src/main/ipc/browser-session-profile-ipc.ts:144",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:144",
       "params": [
         {
           "name": "args",
@@ -1906,7 +1906,7 @@
       }
     },
     "browser:sitePermissions:set": {
-      "source": "src/main/ipc/browser-session-profile-ipc.ts:157",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:157",
       "params": [
         {
           "name": "args",
@@ -1930,7 +1930,7 @@
       }
     },
     "browser:unregisterGuest": {
-      "source": "src/main/ipc/browser.ts:169",
+      "source": "src/main/ipc/browser/browser.ts:169",
       "params": [
         {
           "name": "args",
@@ -1954,7 +1954,7 @@
       }
     },
     "browser:zoomPage": {
-      "source": "src/main/ipc/browser-guest-view-ipc.ts:75",
+      "source": "src/main/ipc/browser/browser-guest-view-ipc.ts:75",
       "params": [
         {
           "name": "args",
@@ -2038,7 +2038,7 @@
       }
     },
     "browserExtensions:actionContextMenu": {
-      "source": "src/main/ipc/browser-extension-context-menu.ts:33",
+      "source": "src/main/ipc/browser/browser-extension-context-menu.ts:33",
       "params": [
         {
           "name": "args",
@@ -2062,7 +2062,7 @@
       }
     },
     "browserExtensions:activateAction": {
-      "source": "src/main/ipc/browser-extension-toolbar.ts:70",
+      "source": "src/main/ipc/browser/browser-extension-toolbar.ts:70",
       "params": [
         {
           "name": "args",
@@ -2086,7 +2086,7 @@
       }
     },
     "browserExtensions:contextMenuClick": {
-      "source": "src/main/ipc/browser-extension-context-menu.ts:26",
+      "source": "src/main/ipc/browser/browser-extension-context-menu.ts:26",
       "params": [
         {
           "name": "args",
@@ -2110,7 +2110,7 @@
       }
     },
     "browserExtensions:installFromWebStore": {
-      "source": "src/main/ipc/browser-extension-webstore.ts:15",
+      "source": "src/main/ipc/browser/browser-extension-webstore.ts:15",
       "params": [
         {
           "name": "args",
@@ -2134,7 +2134,7 @@
       }
     },
     "browserExtensions:list": {
-      "source": "src/main/ipc/browser-extensions.ts:42",
+      "source": "src/main/ipc/browser/browser-extensions.ts:42",
       "params": [
         {
           "name": "args",
@@ -2158,7 +2158,7 @@
       }
     },
     "browserExtensions:loadUnpacked": {
-      "source": "src/main/ipc/browser-extensions.ts:67",
+      "source": "src/main/ipc/browser/browser-extensions.ts:67",
       "params": [
         {
           "name": "args",
@@ -2182,7 +2182,7 @@
       }
     },
     "browserExtensions:openOptions": {
-      "source": "src/main/ipc/browser-extensions.ts:81",
+      "source": "src/main/ipc/browser/browser-extensions.ts:81",
       "params": [
         {
           "name": "args",
@@ -2206,7 +2206,7 @@
       }
     },
     "browserExtensions:pageIcon": {
-      "source": "src/main/ipc/browser-extension-toolbar.ts:82",
+      "source": "src/main/ipc/browser/browser-extension-toolbar.ts:82",
       "params": [
         {
           "name": "args",
@@ -2230,7 +2230,7 @@
       }
     },
     "browserExtensions:reload": {
-      "source": "src/main/ipc/browser-extensions.ts:74",
+      "source": "src/main/ipc/browser/browser-extensions.ts:74",
       "params": [
         {
           "name": "args",
@@ -2254,7 +2254,7 @@
       }
     },
     "browserExtensions:remove": {
-      "source": "src/main/ipc/browser-extensions.ts:60",
+      "source": "src/main/ipc/browser/browser-extensions.ts:60",
       "params": [
         {
           "name": "args",
@@ -2278,7 +2278,7 @@
       }
     },
     "browserExtensions:respondInstallPrompt": {
-      "source": "src/main/ipc/browser-extension-webstore.ts:29",
+      "source": "src/main/ipc/browser/browser-extension-webstore.ts:29",
       "params": [
         {
           "name": "args",
@@ -2302,7 +2302,7 @@
       }
     },
     "browserExtensions:reviewUpdate": {
-      "source": "src/main/ipc/browser-extensions.ts:88",
+      "source": "src/main/ipc/browser/browser-extensions.ts:88",
       "params": [
         {
           "name": "args",
@@ -2326,7 +2326,7 @@
       }
     },
     "browserExtensions:setEnabled": {
-      "source": "src/main/ipc/browser-extensions.ts:52",
+      "source": "src/main/ipc/browser/browser-extensions.ts:52",
       "params": [
         {
           "name": "args",
@@ -2350,7 +2350,7 @@
       }
     },
     "browserExtensions:setPinned": {
-      "source": "src/main/ipc/browser-extension-toolbar.ts:52",
+      "source": "src/main/ipc/browser/browser-extension-toolbar.ts:52",
       "params": [
         {
           "name": "args",
@@ -2374,7 +2374,7 @@
       }
     },
     "browserExtensions:toolbarState": {
-      "source": "src/main/ipc/browser-extension-toolbar.ts:40",
+      "source": "src/main/ipc/browser/browser-extension-toolbar.ts:40",
       "params": [
         {
           "name": "args",
@@ -2558,7 +2558,7 @@
       }
     },
     "cli:getInstallStatus": {
-      "source": "src/main/ipc/cli.ts:97",
+      "source": "src/main/ipc/cli.ts:100",
       "params": [],
       "preload": {
         "api": "window.api.cli.getInstallStatus",
@@ -2568,7 +2568,7 @@
       }
     },
     "cli:getWslInstallStatus": {
-      "source": "src/main/ipc/cli.ts:145",
+      "source": "src/main/ipc/cli.ts:148",
       "params": [
         {
           "name": "args",
@@ -2592,7 +2592,7 @@
       }
     },
     "cli:install": {
-      "source": "src/main/ipc/cli.ts:135",
+      "source": "src/main/ipc/cli.ts:138",
       "params": [],
       "preload": {
         "api": "window.api.cli.install",
@@ -2602,7 +2602,7 @@
       }
     },
     "cli:installWsl": {
-      "source": "src/main/ipc/cli.ts:173",
+      "source": "src/main/ipc/cli.ts:176",
       "params": [
         {
           "name": "args",
@@ -2626,7 +2626,7 @@
       }
     },
     "cli:remove": {
-      "source": "src/main/ipc/cli.ts:140",
+      "source": "src/main/ipc/cli.ts:143",
       "params": [],
       "preload": {
         "api": "window.api.cli.remove",
@@ -2636,7 +2636,7 @@
       }
     },
     "cli:removeWsl": {
-      "source": "src/main/ipc/cli.ts:190",
+      "source": "src/main/ipc/cli.ts:193",
       "params": [
         {
           "name": "args",
@@ -3182,7 +3182,7 @@
       }
     },
     "crashReports:copyLatestDiagnostics": {
-      "source": "src/main/ipc/crash-reporting.ts:84",
+      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:84",
       "params": [
         {
           "name": "args",
@@ -3206,7 +3206,7 @@
       }
     },
     "crashReports:dismiss": {
-      "source": "src/main/ipc/crash-reporting.ts:58",
+      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:58",
       "params": [
         {
           "name": "args",
@@ -3230,7 +3230,7 @@
       }
     },
     "crashReports:getLatestPending": {
-      "source": "src/main/ipc/crash-reporting.ts:52",
+      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:52",
       "params": [],
       "preload": {
         "api": "window.api.crashReports.getLatestPending",
@@ -3240,7 +3240,7 @@
       }
     },
     "crashReports:getLatestReport": {
-      "source": "src/main/ipc/crash-reporting.ts:55",
+      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:55",
       "params": [],
       "preload": {
         "api": "window.api.crashReports.getLatestReport",
@@ -3250,7 +3250,7 @@
       }
     },
     "crashReports:recordRendererError": {
-      "source": "src/main/ipc/crash-reporting.ts:108",
+      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:108",
       "params": [
         {
           "name": "args",
@@ -3274,7 +3274,7 @@
       }
     },
     "crashReports:submit": {
-      "source": "src/main/ipc/crash-reporting.ts:118",
+      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:118",
       "params": [
         {
           "name": "args",
@@ -4486,7 +4486,7 @@
       }
     },
     "fs:grantRuntimeFilePreview": {
-      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:136",
+      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:139",
       "params": [
         {
           "name": "args",
@@ -4558,7 +4558,7 @@
       }
     },
     "fs:listMarkdownDocuments": {
-      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:144",
+      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:147",
       "params": [
         {
           "name": "args",
@@ -4582,7 +4582,7 @@
       }
     },
     "fs:pathExists": {
-      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:229",
+      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:232",
       "params": [
         {
           "name": "args",
@@ -4606,7 +4606,7 @@
       }
     },
     "fs:pathsExist": {
-      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:199",
+      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:202",
       "params": [
         {
           "name": "args",
@@ -4647,7 +4647,7 @@
       }
     },
     "fs:readDir": {
-      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:42",
+      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:45",
       "params": [
         {
           "name": "args",
@@ -4671,7 +4671,7 @@
       }
     },
     "fs:readFile": {
-      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:93",
+      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:96",
       "params": [
         {
           "name": "args",
@@ -4743,7 +4743,7 @@
       }
     },
     "fs:readPreviewRange": {
-      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:130",
+      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:133",
       "params": [
         {
           "name": "args",
@@ -4935,7 +4935,7 @@
       }
     },
     "fs:stat": {
-      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:173",
+      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:176",
       "params": [
         {
           "name": "args",
@@ -5127,7 +5127,7 @@
       }
     },
     "gh:addIssueComment": {
-      "source": "src/main/ipc/github-issue-mutation-handlers.ts:52",
+      "source": "src/main/ipc/source-control/github-issue-mutation-handlers.ts:56",
       "params": [
         {
           "name": "args",
@@ -5138,7 +5138,7 @@
       ],
       "preload": {
         "api": "window.api.gh.addIssueComment",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:106",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:107",
         "params": [
           {
             "name": "args",
@@ -5151,7 +5151,7 @@
       }
     },
     "gh:addIssueCommentBySlug": {
-      "source": "src/main/ipc/github-project-view-handlers.ts:77",
+      "source": "src/main/ipc/source-control/github-project-view-handlers.ts:81",
       "params": [
         {
           "name": "args",
@@ -5162,7 +5162,7 @@
       ],
       "preload": {
         "api": "window.api.gh.addIssueCommentBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:200",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:205",
         "params": [
           {
             "name": "args",
@@ -5175,7 +5175,7 @@
       }
     },
     "gh:addPRReviewComment": {
-      "source": "src/main/ipc/github-pr-review-handlers.ts:115",
+      "source": "src/main/ipc/source-control/github-pr-review-handlers.ts:124",
       "params": [
         {
           "name": "args",
@@ -5186,7 +5186,7 @@
       ],
       "preload": {
         "api": "window.api.gh.addPRReviewComment",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:130",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:131",
         "params": [
           {
             "name": "args",
@@ -5199,7 +5199,7 @@
       }
     },
     "gh:addPRReviewCommentReply": {
-      "source": "src/main/ipc/github-pr-review-handlers.ts:58",
+      "source": "src/main/ipc/source-control/github-pr-review-handlers.ts:67",
       "params": [
         {
           "name": "args",
@@ -5210,7 +5210,7 @@
       ],
       "preload": {
         "api": "window.api.gh.addPRReviewCommentReply",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:118",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:119",
         "params": [
           {
             "name": "args",
@@ -5223,17 +5223,17 @@
       }
     },
     "gh:checkOrcaStarred": {
-      "source": "src/main/ipc/github-account-handlers.ts:18",
+      "source": "src/main/ipc/source-control/github-account-handlers.ts:19",
       "params": [],
       "preload": {
         "api": "window.api.gh.checkOrcaStarred",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:156",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:161",
         "params": [],
         "returns": "Promise<boolean | null>"
       }
     },
     "gh:clearProjectItemField": {
-      "source": "src/main/ipc/github-project-view-handlers.ts:68",
+      "source": "src/main/ipc/source-control/github-project-view-handlers.ts:72",
       "params": [
         {
           "name": "args",
@@ -5244,7 +5244,7 @@
       ],
       "preload": {
         "api": "window.api.gh.clearProjectItemField",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:191",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:196",
         "params": [
           {
             "name": "args",
@@ -5257,7 +5257,7 @@
       }
     },
     "gh:countWorkItems": {
-      "source": "src/main/ipc/github-work-item-handlers.ts:128",
+      "source": "src/main/ipc/source-control/github-work-item-handlers.ts:126",
       "params": [
         {
           "name": "args",
@@ -5268,7 +5268,7 @@
       ],
       "preload": {
         "api": "window.api.gh.countWorkItems",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:112",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:116",
         "params": [
           {
             "name": "args",
@@ -5281,7 +5281,7 @@
       }
     },
     "gh:createIssue": {
-      "source": "src/main/ipc/github-work-item-handlers.ts:69",
+      "source": "src/main/ipc/source-control/github-work-item-handlers.ts:67",
       "params": [
         {
           "name": "args",
@@ -5292,7 +5292,7 @@
       ],
       "preload": {
         "api": "window.api.gh.createIssue",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:106",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:110",
         "params": [
           {
             "name": "args",
@@ -5305,7 +5305,7 @@
       }
     },
     "gh:deleteIssueCommentBySlug": {
-      "source": "src/main/ipc/github-project-view-handlers.ts:83",
+      "source": "src/main/ipc/source-control/github-project-view-handlers.ts:87",
       "params": [
         {
           "name": "args",
@@ -5316,7 +5316,7 @@
       ],
       "preload": {
         "api": "window.api.gh.deleteIssueCommentBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:208",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:213",
         "params": [
           {
             "name": "args",
@@ -5329,7 +5329,7 @@
       }
     },
     "gh:diagnoseAuth": {
-      "source": "src/main/ipc/github-account-handlers.ts:35",
+      "source": "src/main/ipc/source-control/github-account-handlers.ts:36",
       "params": [
         {
           "name": "args",
@@ -5340,7 +5340,7 @@
       ],
       "preload": {
         "api": "window.api.gh.diagnoseAuth",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:161",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:166",
         "params": [
           {
             "name": "args",
@@ -5353,7 +5353,7 @@
       }
     },
     "gh:enqueuePRRefresh": {
-      "source": "src/main/ipc/github-pr-refresh-handlers.ts:151",
+      "source": "src/main/ipc/source-control/github-pr-refresh-handlers.ts:152",
       "params": [
         {
           "name": "args",
@@ -5364,7 +5364,7 @@
       ],
       "preload": {
         "api": "window.api.gh.enqueuePRRefresh",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:36",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:37",
         "params": [
           {
             "name": "args",
@@ -5377,7 +5377,7 @@
       }
     },
     "gh:getProjectViewTable": {
-      "source": "src/main/ipc/github-project-view-handlers.ts:57",
+      "source": "src/main/ipc/source-control/github-project-view-handlers.ts:61",
       "params": [
         {
           "name": "args",
@@ -5388,7 +5388,7 @@
       ],
       "preload": {
         "api": "window.api.gh.getProjectViewTable",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:182",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:187",
         "params": [
           {
             "name": "args",
@@ -5401,7 +5401,7 @@
       }
     },
     "gh:issue": {
-      "source": "src/main/ipc/github-work-item-handlers.ts:30",
+      "source": "src/main/ipc/source-control/github-work-item-handlers.ts:28",
       "params": [
         {
           "name": "args",
@@ -5412,7 +5412,7 @@
       ],
       "preload": {
         "api": "window.api.gh.issue",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:52",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:53",
         "params": [
           {
             "name": "args",
@@ -5425,7 +5425,7 @@
       }
     },
     "gh:listAccessibleProjects": {
-      "source": "src/main/ipc/github-project-view-handlers.ts:48",
+      "source": "src/main/ipc/source-control/github-project-view-handlers.ts:52",
       "params": [
         {
           "name": "args",
@@ -5436,7 +5436,7 @@
       ],
       "preload": {
         "api": "window.api.gh.listAccessibleProjects",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:176",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:181",
         "params": [
           {
             "name": "args",
@@ -5449,22 +5449,22 @@
       }
     },
     "gh:listAssignableUsers": {
-      "source": "src/main/ipc/github-issue-mutation-handlers.ts:117",
+      "source": "src/main/ipc/source-control/github-issue-mutation-handlers.ts:138",
       "params": [
         {
           "name": "args",
-          "type": "GitHubRepoScopedArgs & { ownerRepo?: GitHubOwnerRepo; }",
+          "type": "GitHubRepoScopedArgs & { ownerRepo?: GitHubOwnerRepo; expectedGhAccount?: GhAccountBinding | null; }",
           "optional": false,
           "rest": false
         }
       ],
       "preload": {
         "api": "window.api.gh.listAssignableUsers",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:140",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:145",
         "params": [
           {
             "name": "args",
-            "type": "{ repoPath: string; repoId?: string | null; sourceContext?: TaskSourceContext | null; }",
+            "type": "{ ownerRepo?: GitHubOwnerRepo; expectedGhAccount?: GhAccountBinding | null; repoPath: string; repoId?: string | null; sourceContext?: TaskSourceContext | null; }",
             "optional": false,
             "rest": false
           }
@@ -5473,7 +5473,7 @@
       }
     },
     "gh:listAssignableUsersBySlug": {
-      "source": "src/main/ipc/github-project-view-handlers.ts:89",
+      "source": "src/main/ipc/source-control/github-project-view-handlers.ts:93",
       "params": [
         {
           "name": "args",
@@ -5484,7 +5484,7 @@
       ],
       "preload": {
         "api": "window.api.gh.listAssignableUsersBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:214",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:219",
         "params": [
           {
             "name": "args",
@@ -5497,7 +5497,7 @@
       }
     },
     "gh:listBindableAccounts": {
-      "source": "src/main/ipc/github-account-handlers.ts:39",
+      "source": "src/main/ipc/source-control/github-account-handlers.ts:40",
       "params": [
         {
           "name": "args",
@@ -5508,7 +5508,7 @@
       ],
       "preload": {
         "api": "window.api.gh.listBindableAccounts",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:166",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:171",
         "params": [
           {
             "name": "args",
@@ -5521,7 +5521,7 @@
       }
     },
     "gh:listIssueTypesBySlug": {
-      "source": "src/main/ipc/github-project-view-handlers.ts:92",
+      "source": "src/main/ipc/source-control/github-project-view-handlers.ts:96",
       "params": [
         {
           "name": "args",
@@ -5532,7 +5532,7 @@
       ],
       "preload": {
         "api": "window.api.gh.listIssueTypesBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:216",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:221",
         "params": [
           {
             "name": "args",
@@ -5545,7 +5545,7 @@
       }
     },
     "gh:listIssues": {
-      "source": "src/main/ipc/github-work-item-handlers.ts:58",
+      "source": "src/main/ipc/source-control/github-work-item-handlers.ts:56",
       "params": [
         {
           "name": "args",
@@ -5556,7 +5556,7 @@
       ],
       "preload": {
         "api": "window.api.gh.listIssues",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:97",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:101",
         "params": [
           {
             "name": "args",
@@ -5569,22 +5569,22 @@
       }
     },
     "gh:listLabels": {
-      "source": "src/main/ipc/github-issue-mutation-handlers.ts:98",
+      "source": "src/main/ipc/source-control/github-issue-mutation-handlers.ts:102",
       "params": [
         {
           "name": "args",
-          "type": "GitHubRepoScopedArgs & { ownerRepo?: GitHubOwnerRepo; }",
+          "type": "GitHubRepoScopedArgs & { ownerRepo?: GitHubOwnerRepo; expectedGhAccount?: GhAccountBinding | null; }",
           "optional": false,
           "rest": false
         }
       ],
       "preload": {
         "api": "window.api.gh.listLabels",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:135",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:138",
         "params": [
           {
             "name": "args",
-            "type": "{ repoPath: string; repoId?: string | null; sourceContext?: TaskSourceContext | null; }",
+            "type": "{ ownerRepo?: GitHubOwnerRepo; expectedGhAccount?: GhAccountBinding | null; repoPath: string; repoId?: string | null; sourceContext?: TaskSourceContext | null; }",
             "optional": false,
             "rest": false
           }
@@ -5593,7 +5593,7 @@
       }
     },
     "gh:listLabelsBySlug": {
-      "source": "src/main/ipc/github-project-view-handlers.ts:86",
+      "source": "src/main/ipc/source-control/github-project-view-handlers.ts:90",
       "params": [
         {
           "name": "args",
@@ -5604,7 +5604,7 @@
       ],
       "preload": {
         "api": "window.api.gh.listLabelsBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:210",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:215",
         "params": [
           {
             "name": "args",
@@ -5617,7 +5617,7 @@
       }
     },
     "gh:listProjectViews": {
-      "source": "src/main/ipc/github-project-view-handlers.ts:54",
+      "source": "src/main/ipc/source-control/github-project-view-handlers.ts:58",
       "params": [
         {
           "name": "args",
@@ -5628,7 +5628,7 @@
       ],
       "preload": {
         "api": "window.api.gh.listProjectViews",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:180",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:185",
         "params": [
           {
             "name": "args",
@@ -5641,7 +5641,7 @@
       }
     },
     "gh:listWorkItems": {
-      "source": "src/main/ipc/github-work-item-handlers.ts:92",
+      "source": "src/main/ipc/source-control/github-work-item-handlers.ts:90",
       "params": [
         {
           "name": "args",
@@ -5652,7 +5652,7 @@
       ],
       "preload": {
         "api": "window.api.gh.listWorkItems",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:122",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:126",
         "params": [
           {
             "name": "args",
@@ -5665,7 +5665,7 @@
       }
     },
     "gh:markPRReadyForReview": {
-      "source": "src/main/ipc/github-pr-mutation-handlers.ts:137",
+      "source": "src/main/ipc/source-control/github-pr-mutation-handlers.ts:134",
       "params": [
         {
           "name": "args",
@@ -5676,7 +5676,7 @@
       ],
       "preload": {
         "api": "window.api.gh.markPRReadyForReview",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:71",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:72",
         "params": [
           {
             "name": "args",
@@ -5689,7 +5689,7 @@
       }
     },
     "gh:mergePR": {
-      "source": "src/main/ipc/github-pr-mutation-handlers.ts:56",
+      "source": "src/main/ipc/source-control/github-pr-mutation-handlers.ts:53",
       "params": [
         {
           "name": "args",
@@ -5700,7 +5700,7 @@
       ],
       "preload": {
         "api": "window.api.gh.mergePR",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:202",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:207",
         "params": [
           {
             "name": "args",
@@ -5713,7 +5713,7 @@
       }
     },
     "gh:notifyWorkItemMutated": {
-      "source": "src/main/ipc/github-work-item-handlers.ts:195",
+      "source": "src/main/ipc/source-control/github-work-item-handlers.ts:209",
       "params": [
         {
           "name": "args",
@@ -5724,7 +5724,7 @@
       ],
       "preload": {
         "api": "window.api.gh.notifyWorkItemMutated",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:83",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:87",
         "params": [
           {
             "name": "args",
@@ -5737,7 +5737,7 @@
       }
     },
     "gh:prCheckDetails": {
-      "source": "src/main/ipc/github-pr-read-handlers.ts:80",
+      "source": "src/main/ipc/source-control/github-pr-read-handlers.ts:77",
       "params": [
         {
           "name": "args",
@@ -5748,7 +5748,7 @@
       ],
       "preload": {
         "api": "window.api.gh.prCheckDetails",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:142",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:146",
         "params": [
           {
             "name": "args",
@@ -5761,7 +5761,7 @@
       }
     },
     "gh:prChecks": {
-      "source": "src/main/ipc/github-pr-read-handlers.ts:43",
+      "source": "src/main/ipc/source-control/github-pr-read-handlers.ts:40",
       "params": [
         {
           "name": "args",
@@ -5772,7 +5772,7 @@
       ],
       "preload": {
         "api": "window.api.gh.prChecks",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:132",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:136",
         "params": [
           {
             "name": "args",
@@ -5785,7 +5785,7 @@
       }
     },
     "gh:prComments": {
-      "source": "src/main/ipc/github-pr-read-handlers.ts:111",
+      "source": "src/main/ipc/source-control/github-pr-read-handlers.ts:108",
       "params": [
         {
           "name": "args",
@@ -5796,7 +5796,7 @@
       ],
       "preload": {
         "api": "window.api.gh.prComments",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:160",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:164",
         "params": [
           {
             "name": "args",
@@ -5809,7 +5809,7 @@
       }
     },
     "gh:prFileContents": {
-      "source": "src/main/ipc/github-work-item-handlers.ts:220",
+      "source": "src/main/ipc/source-control/github-work-item-handlers.ts:234",
       "params": [
         {
           "name": "args",
@@ -5820,7 +5820,7 @@
       ],
       "preload": {
         "api": "window.api.gh.prFileContents",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:95",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:99",
         "params": [
           {
             "name": "args",
@@ -5833,7 +5833,7 @@
       }
     },
     "gh:prForBranch": {
-      "source": "src/main/ipc/github-pr-refresh-handlers.ts:59",
+      "source": "src/main/ipc/source-control/github-pr-refresh-handlers.ts:60",
       "params": [
         {
           "name": "args",
@@ -5844,7 +5844,7 @@
       ],
       "preload": {
         "api": "window.api.gh.prForBranch",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:29",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:30",
         "params": [
           {
             "name": "args",
@@ -5857,7 +5857,7 @@
       }
     },
     "gh:projectWorkItemDetailsBySlug": {
-      "source": "src/main/ipc/github-project-view-handlers.ts:60",
+      "source": "src/main/ipc/source-control/github-project-view-handlers.ts:64",
       "params": [
         {
           "name": "args",
@@ -5868,7 +5868,7 @@
       ],
       "preload": {
         "api": "window.api.gh.projectWorkItemDetailsBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:186",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:191",
         "params": [
           {
             "name": "args",
@@ -5881,7 +5881,7 @@
       }
     },
     "gh:rateLimit": {
-      "source": "src/main/ipc/github-account-handlers.ts:31",
+      "source": "src/main/ipc/source-control/github-account-handlers.ts:32",
       "params": [
         {
           "name": "args",
@@ -5892,7 +5892,7 @@
       ],
       "preload": {
         "api": "window.api.gh.rateLimit",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:159",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:164",
         "params": [
           {
             "name": "args",
@@ -5905,7 +5905,7 @@
       }
     },
     "gh:refreshPRNow": {
-      "source": "src/main/ipc/github-pr-refresh-handlers.ts:130",
+      "source": "src/main/ipc/source-control/github-pr-refresh-handlers.ts:131",
       "params": [
         {
           "name": "args",
@@ -5916,7 +5916,7 @@
       ],
       "preload": {
         "api": "window.api.gh.refreshPRNow",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:31",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:32",
         "params": [
           {
             "name": "args",
@@ -5929,7 +5929,7 @@
       }
     },
     "gh:removePRReviewers": {
-      "source": "src/main/ipc/github-pr-mutation-handlers.ts:219",
+      "source": "src/main/ipc/source-control/github-pr-mutation-handlers.ts:216",
       "params": [
         {
           "name": "args",
@@ -5940,7 +5940,7 @@
       ],
       "preload": {
         "api": "window.api.gh.removePRReviewers",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:89",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:90",
         "params": [
           {
             "name": "args",
@@ -5953,7 +5953,7 @@
       }
     },
     "gh:repoSlug": {
-      "source": "src/main/ipc/github-pr-read-handlers.ts:23",
+      "source": "src/main/ipc/source-control/github-pr-read-handlers.ts:20",
       "params": [
         {
           "name": "args",
@@ -5964,7 +5964,7 @@
       ],
       "preload": {
         "api": "window.api.gh.repoSlug",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:17",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:18",
         "params": [
           {
             "name": "args",
@@ -5977,7 +5977,7 @@
       }
     },
     "gh:repoUpstream": {
-      "source": "src/main/ipc/github-pr-read-handlers.ts:33",
+      "source": "src/main/ipc/source-control/github-pr-read-handlers.ts:30",
       "params": [
         {
           "name": "args",
@@ -5988,7 +5988,7 @@
       ],
       "preload": {
         "api": "window.api.gh.repoUpstream",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:19",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:20",
         "params": [
           {
             "name": "args",
@@ -6001,7 +6001,7 @@
       }
     },
     "gh:reportVisiblePRRefreshCandidates": {
-      "source": "src/main/ipc/github-pr-refresh-handlers.ts:170",
+      "source": "src/main/ipc/source-control/github-pr-refresh-handlers.ts:171",
       "params": [
         {
           "name": "args",
@@ -6012,7 +6012,7 @@
       ],
       "preload": {
         "api": "window.api.gh.reportVisiblePRRefreshCandidates",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:40",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:41",
         "params": [
           {
             "name": "args",
@@ -6025,7 +6025,7 @@
       }
     },
     "gh:requestPRReviewers": {
-      "source": "src/main/ipc/github-pr-mutation-handlers.ts:195",
+      "source": "src/main/ipc/source-control/github-pr-mutation-handlers.ts:192",
       "params": [
         {
           "name": "args",
@@ -6036,7 +6036,7 @@
       ],
       "preload": {
         "api": "window.api.gh.requestPRReviewers",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:80",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:81",
         "params": [
           {
             "name": "args",
@@ -6049,7 +6049,7 @@
       }
     },
     "gh:rerunPRChecks": {
-      "source": "src/main/ipc/github-pr-mutation-handlers.ts:166",
+      "source": "src/main/ipc/source-control/github-pr-mutation-handlers.ts:163",
       "params": [
         {
           "name": "args",
@@ -6060,7 +6060,7 @@
       ],
       "preload": {
         "api": "window.api.gh.rerunPRChecks",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:152",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:156",
         "params": [
           {
             "name": "args",
@@ -6073,7 +6073,7 @@
       }
     },
     "gh:resolveProjectRef": {
-      "source": "src/main/ipc/github-project-view-handlers.ts:51",
+      "source": "src/main/ipc/source-control/github-project-view-handlers.ts:55",
       "params": [
         {
           "name": "args",
@@ -6084,7 +6084,7 @@
       ],
       "preload": {
         "api": "window.api.gh.resolveProjectRef",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:178",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:183",
         "params": [
           {
             "name": "args",
@@ -6097,7 +6097,7 @@
       }
     },
     "gh:resolveReviewThread": {
-      "source": "src/main/ipc/github-pr-read-handlers.ts:165",
+      "source": "src/main/ipc/source-control/github-pr-read-handlers.ts:162",
       "params": [
         {
           "name": "args",
@@ -6108,7 +6108,7 @@
       ],
       "preload": {
         "api": "window.api.gh.resolveReviewThread",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:177",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:181",
         "params": [
           {
             "name": "args",
@@ -6121,7 +6121,7 @@
       }
     },
     "gh:setPRAutoMerge": {
-      "source": "src/main/ipc/github-pr-mutation-handlers.ts:80",
+      "source": "src/main/ipc/source-control/github-pr-mutation-handlers.ts:77",
       "params": [
         {
           "name": "args",
@@ -6132,7 +6132,7 @@
       ],
       "preload": {
         "api": "window.api.gh.setPRAutoMerge",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:54",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:55",
         "params": [
           {
             "name": "args",
@@ -6145,7 +6145,7 @@
       }
     },
     "gh:setPRCommentReaction": {
-      "source": "src/main/ipc/github-pr-read-handlers.ts:135",
+      "source": "src/main/ipc/source-control/github-pr-read-handlers.ts:132",
       "params": [
         {
           "name": "args",
@@ -6156,7 +6156,7 @@
       ],
       "preload": {
         "api": "window.api.gh.setPRCommentReaction",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:169",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:173",
         "params": [
           {
             "name": "args",
@@ -6169,22 +6169,22 @@
       }
     },
     "gh:setPRFileViewed": {
-      "source": "src/main/ipc/github-pr-review-handlers.ts:14",
+      "source": "src/main/ipc/source-control/github-pr-review-handlers.ts:20",
       "params": [
         {
           "name": "args",
-          "type": "{ repoPath: string; repoId?: string; prNumber: number; prRepo?: GitHubOwnerRepo | null; pullRequestId: string; path: string; viewed: boolean; }",
+          "type": "{ repoPath: string; repoId?: string; prNumber: number; prRepo?: GitHubOwnerRepo | null; pullRequestId: string; path: string; viewed: boolean; expectedGhAccount?: GhAccountBinding | null; }",
           "optional": false,
           "rest": false
         }
       ],
       "preload": {
         "api": "window.api.gh.setPRFileViewed",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:187",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:192",
         "params": [
           {
             "name": "args",
-            "type": "{ repoPath: string; repoId?: string | null; sourceContext?: TaskSourceContext | null; prNumber: number; prRepo?: GitHubOwnerRepo | null; pullRequestId: string; path: string; viewed: boolean; }",
+            "type": "{ expectedGhAccount?: GhAccountBinding | null; repoPath: string; repoId?: string | null; sourceContext?: TaskSourceContext | null; prNumber: number; prRepo?: GitHubOwnerRepo | null; pullRequestId: string; path: string; viewed: boolean; }",
             "optional": false,
             "rest": false
           }
@@ -6193,7 +6193,7 @@
       }
     },
     "gh:starOrca": {
-      "source": "src/main/ipc/github-account-handlers.ts:19",
+      "source": "src/main/ipc/source-control/github-account-handlers.ts:20",
       "params": [
         {
           "name": "source",
@@ -6204,7 +6204,7 @@
       ],
       "preload": {
         "api": "window.api.gh.starOrca",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:157",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:162",
         "params": [
           {
             "name": "source",
@@ -6217,7 +6217,7 @@
       }
     },
     "gh:updateIssue": {
-      "source": "src/main/ipc/github-issue-mutation-handlers.ts:16",
+      "source": "src/main/ipc/source-control/github-issue-mutation-handlers.ts:20",
       "params": [
         {
           "name": "args",
@@ -6228,7 +6228,7 @@
       ],
       "preload": {
         "api": "window.api.gh.updateIssue",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:97",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:98",
         "params": [
           {
             "name": "args",
@@ -6241,7 +6241,7 @@
       }
     },
     "gh:updateIssueBySlug": {
-      "source": "src/main/ipc/github-project-view-handlers.ts:71",
+      "source": "src/main/ipc/source-control/github-project-view-handlers.ts:75",
       "params": [
         {
           "name": "args",
@@ -6252,7 +6252,7 @@
       ],
       "preload": {
         "api": "window.api.gh.updateIssueBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:193",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:198",
         "params": [
           {
             "name": "args",
@@ -6265,7 +6265,7 @@
       }
     },
     "gh:updateIssueCommentBySlug": {
-      "source": "src/main/ipc/github-project-view-handlers.ts:80",
+      "source": "src/main/ipc/source-control/github-project-view-handlers.ts:84",
       "params": [
         {
           "name": "args",
@@ -6276,7 +6276,7 @@
       ],
       "preload": {
         "api": "window.api.gh.updateIssueCommentBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:204",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:209",
         "params": [
           {
             "name": "args",
@@ -6289,7 +6289,7 @@
       }
     },
     "gh:updateIssueTypeBySlug": {
-      "source": "src/main/ipc/github-project-view-handlers.ts:95",
+      "source": "src/main/ipc/source-control/github-project-view-handlers.ts:99",
       "params": [
         {
           "name": "args",
@@ -6300,7 +6300,7 @@
       ],
       "preload": {
         "api": "window.api.gh.updateIssueTypeBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:218",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:223",
         "params": [
           {
             "name": "args",
@@ -6313,7 +6313,7 @@
       }
     },
     "gh:updatePRState": {
-      "source": "src/main/ipc/github-pr-mutation-handlers.ts:106",
+      "source": "src/main/ipc/source-control/github-pr-mutation-handlers.ts:103",
       "params": [
         {
           "name": "args",
@@ -6324,7 +6324,7 @@
       ],
       "preload": {
         "api": "window.api.gh.updatePRState",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:63",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:64",
         "params": [
           {
             "name": "args",
@@ -6337,7 +6337,7 @@
       }
     },
     "gh:updatePRTitle": {
-      "source": "src/main/ipc/github-pr-mutation-handlers.ts:36",
+      "source": "src/main/ipc/source-control/github-pr-mutation-handlers.ts:33",
       "params": [
         {
           "name": "args",
@@ -6348,7 +6348,7 @@
       ],
       "preload": {
         "api": "window.api.gh.updatePRTitle",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:194",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:199",
         "params": [
           {
             "name": "args",
@@ -6361,7 +6361,7 @@
       }
     },
     "gh:updateProjectItemField": {
-      "source": "src/main/ipc/github-project-view-handlers.ts:65",
+      "source": "src/main/ipc/source-control/github-project-view-handlers.ts:69",
       "params": [
         {
           "name": "args",
@@ -6372,7 +6372,7 @@
       ],
       "preload": {
         "api": "window.api.gh.updateProjectItemField",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:189",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:194",
         "params": [
           {
             "name": "args",
@@ -6385,7 +6385,7 @@
       }
     },
     "gh:updatePullRequestBySlug": {
-      "source": "src/main/ipc/github-project-view-handlers.ts:74",
+      "source": "src/main/ipc/source-control/github-project-view-handlers.ts:78",
       "params": [
         {
           "name": "args",
@@ -6396,7 +6396,7 @@
       ],
       "preload": {
         "api": "window.api.gh.updatePullRequestBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:196",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:201",
         "params": [
           {
             "name": "args",
@@ -6409,7 +6409,7 @@
       }
     },
     "gh:validateAccountBinding": {
-      "source": "src/main/ipc/github-account-handlers.ts:52",
+      "source": "src/main/ipc/source-control/github-account-handlers.ts:53",
       "params": [
         {
           "name": "args",
@@ -6420,7 +6420,7 @@
       ],
       "preload": {
         "api": "window.api.gh.validateAccountBinding",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:173",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:178",
         "params": [
           {
             "name": "args",
@@ -6433,17 +6433,17 @@
       }
     },
     "gh:viewer": {
-      "source": "src/main/ipc/github-account-handlers.ts:17",
+      "source": "src/main/ipc/source-control/github-account-handlers.ts:18",
       "params": [],
       "preload": {
         "api": "window.api.gh.viewer",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:15",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:16",
         "params": [],
         "returns": null
       }
     },
     "gh:workItem": {
-      "source": "src/main/ipc/github-work-item-handlers.ts:148",
+      "source": "src/main/ipc/source-control/github-work-item-handlers.ts:146",
       "params": [
         {
           "name": "args",
@@ -6454,7 +6454,7 @@
       ],
       "preload": {
         "api": "window.api.gh.workItem",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:59",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:60",
         "params": [
           {
             "name": "args",
@@ -6467,7 +6467,7 @@
       }
     },
     "gh:workItemByOwnerRepo": {
-      "source": "src/main/ipc/github-work-item-handlers.ts:153",
+      "source": "src/main/ipc/source-control/github-work-item-handlers.ts:151",
       "params": [
         {
           "name": "args",
@@ -6478,7 +6478,7 @@
       ],
       "preload": {
         "api": "window.api.gh.workItemByOwnerRepo",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:70",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:71",
         "params": [
           {
             "name": "args",
@@ -6491,22 +6491,22 @@
       }
     },
     "gh:workItemDetails": {
-      "source": "src/main/ipc/github-work-item-handlers.ts:180",
+      "source": "src/main/ipc/source-control/github-work-item-handlers.ts:178",
       "params": [
         {
           "name": "args",
-          "type": "WorkItemArgs & { ownerRepo?: GitHubOwnerRepo; canonical?: boolean; }",
+          "type": "WorkItemArgs & { ownerRepo?: GitHubOwnerRepo; canonical?: boolean; expectedGhAccount?: GhAccountBinding | null; }",
           "optional": false,
           "rest": false
         }
       ],
       "preload": {
         "api": "window.api.gh.workItemDetails",
-        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:77",
+        "source": "src/preload/api/gh-bridge-pull-requests-and-work-items.ts:81",
         "params": [
           {
             "name": "args",
-            "type": "{ repoPath: string; repoId?: string | null; sourceContext?: TaskSourceContext | null; number: number; type?: 'issue' | 'pr'; }",
+            "type": "{ expectedGhAccount?: GhAccountBinding | null; repoPath: string; repoId?: string | null; sourceContext?: TaskSourceContext | null; number: number; type?: 'issue' | 'pr'; ownerRepo?: GitHubOwnerRepo; canonical?: boolean; }",
             "optional": false,
             "rest": false
           }
@@ -6587,7 +6587,7 @@
       }
     },
     "git:branchCompare": {
-      "source": "src/main/ipc/filesystem/git-remote/compare-handlers.ts:19",
+      "source": "src/main/ipc/filesystem/git-remote/compare-handlers.ts:20",
       "params": [
         {
           "name": "args",
@@ -6611,7 +6611,7 @@
       }
     },
     "git:branchDiff": {
-      "source": "src/main/ipc/filesystem/filesystem-git-diff-handlers.ts:12",
+      "source": "src/main/ipc/filesystem/filesystem-git-diff-handlers.ts:16",
       "params": [
         {
           "name": "args",
@@ -6635,7 +6635,7 @@
       }
     },
     "git:bulkDiscard": {
-      "source": "src/main/ipc/filesystem/filesystem-git-index-handlers.ts:113",
+      "source": "src/main/ipc/filesystem/filesystem-git-index-handlers.ts:112",
       "params": [
         {
           "name": "args",
@@ -6659,7 +6659,7 @@
       }
     },
     "git:bulkStage": {
-      "source": "src/main/ipc/filesystem/filesystem-git-index-handlers.ts:134",
+      "source": "src/main/ipc/filesystem/filesystem-git-index-handlers.ts:133",
       "params": [
         {
           "name": "args",
@@ -6683,7 +6683,7 @@
       }
     },
     "git:bulkUnstage": {
-      "source": "src/main/ipc/filesystem/filesystem-git-index-handlers.ts:165",
+      "source": "src/main/ipc/filesystem/filesystem-git-index-handlers.ts:164",
       "params": [
         {
           "name": "args",
@@ -6827,7 +6827,7 @@
       }
     },
     "git:commitCompare": {
-      "source": "src/main/ipc/filesystem/git-remote/compare-handlers.ts:47",
+      "source": "src/main/ipc/filesystem/git-remote/compare-handlers.ts:48",
       "params": [
         {
           "name": "args",
@@ -6851,7 +6851,7 @@
       }
     },
     "git:commitDiff": {
-      "source": "src/main/ipc/filesystem/filesystem-git-diff-handlers.ts:53",
+      "source": "src/main/ipc/filesystem/filesystem-git-diff-handlers.ts:57",
       "params": [
         {
           "name": "args",
@@ -6947,7 +6947,7 @@
       }
     },
     "git:discard": {
-      "source": "src/main/ipc/filesystem/filesystem-git-index-handlers.ts:95",
+      "source": "src/main/ipc/filesystem/filesystem-git-index-handlers.ts:94",
       "params": [
         {
           "name": "args",
@@ -7283,7 +7283,7 @@
       }
     },
     "git:resolveConflict": {
-      "source": "src/main/ipc/filesystem/filesystem-git-index-handlers.ts:48",
+      "source": "src/main/ipc/filesystem/filesystem-git-index-handlers.ts:47",
       "params": [
         {
           "name": "args",
@@ -7331,7 +7331,7 @@
       }
     },
     "git:stage": {
-      "source": "src/main/ipc/filesystem/filesystem-git-index-handlers.ts:30",
+      "source": "src/main/ipc/filesystem/filesystem-git-index-handlers.ts:29",
       "params": [
         {
           "name": "args",
@@ -7427,7 +7427,7 @@
       }
     },
     "git:unstage": {
-      "source": "src/main/ipc/filesystem/filesystem-git-index-handlers.ts:77",
+      "source": "src/main/ipc/filesystem/filesystem-git-index-handlers.ts:76",
       "params": [
         {
           "name": "args",
@@ -7475,7 +7475,7 @@
       }
     },
     "gitBash:isAvailable": {
-      "source": "src/main/ipc/app.ts:170",
+      "source": "src/main/ipc/app.ts:171",
       "params": [],
       "preload": {
         "api": "window.api.gitBash.isAvailable",
@@ -7485,7 +7485,7 @@
       }
     },
     "gitlab:addIssueComment": {
-      "source": "src/main/ipc/gitlab-issue-handlers.ts:120",
+      "source": "src/main/ipc/source-control/gitlab-issue-handlers.ts:119",
       "params": [
         {
           "name": "args",
@@ -7509,7 +7509,7 @@
       }
     },
     "gitlab:addMRComment": {
-      "source": "src/main/ipc/gitlab-merge-request-mutation-handlers.ts:111",
+      "source": "src/main/ipc/source-control/gitlab-merge-request-mutation-handlers.ts:114",
       "params": [
         {
           "name": "args",
@@ -7533,7 +7533,7 @@
       }
     },
     "gitlab:addMRInlineComment": {
-      "source": "src/main/ipc/gitlab-merge-request-mutation-handlers.ts:127",
+      "source": "src/main/ipc/source-control/gitlab-merge-request-mutation-handlers.ts:130",
       "params": [
         {
           "name": "args",
@@ -7557,7 +7557,7 @@
       }
     },
     "gitlab:closeMR": {
-      "source": "src/main/ipc/gitlab-merge-request-mutation-handlers.ts:20",
+      "source": "src/main/ipc/source-control/gitlab-merge-request-mutation-handlers.ts:23",
       "params": [
         {
           "name": "args",
@@ -7581,7 +7581,7 @@
       }
     },
     "gitlab:createIssue": {
-      "source": "src/main/ipc/gitlab-issue-handlers.ts:86",
+      "source": "src/main/ipc/source-control/gitlab-issue-handlers.ts:85",
       "params": [
         {
           "name": "args",
@@ -7605,7 +7605,7 @@
       }
     },
     "gitlab:diagnoseAuth": {
-      "source": "src/main/ipc/gitlab.ts:28",
+      "source": "src/main/ipc/source-control/gitlab.ts:29",
       "params": [],
       "preload": {
         "api": "window.api.gl.diagnoseAuth",
@@ -7615,7 +7615,7 @@
       }
     },
     "gitlab:issue": {
-      "source": "src/main/ipc/gitlab-issue-handlers.ts:23",
+      "source": "src/main/ipc/source-control/gitlab-issue-handlers.ts:22",
       "params": [
         {
           "name": "args",
@@ -7639,7 +7639,7 @@
       }
     },
     "gitlab:jobTrace": {
-      "source": "src/main/ipc/gitlab-ci-job-handlers.ts:10",
+      "source": "src/main/ipc/source-control/gitlab-ci-job-handlers.ts:15",
       "params": [
         {
           "name": "args",
@@ -7663,7 +7663,7 @@
       }
     },
     "gitlab:listAssignableUsers": {
-      "source": "src/main/ipc/gitlab-issue-handlers.ts:146",
+      "source": "src/main/ipc/source-control/gitlab-issue-handlers.ts:145",
       "params": [
         {
           "name": "args",
@@ -7687,7 +7687,7 @@
       }
     },
     "gitlab:listIssues": {
-      "source": "src/main/ipc/gitlab-issue-handlers.ts:36",
+      "source": "src/main/ipc/source-control/gitlab-issue-handlers.ts:35",
       "params": [
         {
           "name": "args",
@@ -7711,7 +7711,7 @@
       }
     },
     "gitlab:listLabels": {
-      "source": "src/main/ipc/gitlab-issue-handlers.ts:136",
+      "source": "src/main/ipc/source-control/gitlab-issue-handlers.ts:135",
       "params": [
         {
           "name": "args",
@@ -7735,7 +7735,7 @@
       }
     },
     "gitlab:listMRs": {
-      "source": "src/main/ipc/gitlab-merge-request-query-handlers.ts:46",
+      "source": "src/main/ipc/source-control/gitlab-merge-request-query-handlers.ts:48",
       "params": [
         {
           "name": "args",
@@ -7759,7 +7759,7 @@
       }
     },
     "gitlab:listWorkItems": {
-      "source": "src/main/ipc/gitlab-work-item-handlers.ts:18",
+      "source": "src/main/ipc/source-control/gitlab-work-item-handlers.ts:23",
       "params": [
         {
           "name": "args",
@@ -7783,7 +7783,7 @@
       }
     },
     "gitlab:mergeMR": {
-      "source": "src/main/ipc/gitlab-merge-request-mutation-handlers.ts:50",
+      "source": "src/main/ipc/source-control/gitlab-merge-request-mutation-handlers.ts:53",
       "params": [
         {
           "name": "args",
@@ -7807,7 +7807,7 @@
       }
     },
     "gitlab:mr": {
-      "source": "src/main/ipc/gitlab-merge-request-query-handlers.ts:36",
+      "source": "src/main/ipc/source-control/gitlab-merge-request-query-handlers.ts:38",
       "params": [
         {
           "name": "args",
@@ -7831,7 +7831,7 @@
       }
     },
     "gitlab:mrForBranch": {
-      "source": "src/main/ipc/gitlab-merge-request-query-handlers.ts:19",
+      "source": "src/main/ipc/source-control/gitlab-merge-request-query-handlers.ts:21",
       "params": [
         {
           "name": "args",
@@ -7855,7 +7855,7 @@
       }
     },
     "gitlab:projectSlug": {
-      "source": "src/main/ipc/gitlab.ts:36",
+      "source": "src/main/ipc/source-control/gitlab.ts:37",
       "params": [
         {
           "name": "args",
@@ -7879,7 +7879,7 @@
       }
     },
     "gitlab:rateLimit": {
-      "source": "src/main/ipc/gitlab.ts:30",
+      "source": "src/main/ipc/source-control/gitlab.ts:31",
       "params": [
         {
           "name": "args",
@@ -7903,7 +7903,7 @@
       }
     },
     "gitlab:reopenMR": {
-      "source": "src/main/ipc/gitlab-merge-request-mutation-handlers.ts:35",
+      "source": "src/main/ipc/source-control/gitlab-merge-request-mutation-handlers.ts:38",
       "params": [
         {
           "name": "args",
@@ -7927,7 +7927,7 @@
       }
     },
     "gitlab:resolveMRDiscussion": {
-      "source": "src/main/ipc/gitlab-merge-request-mutation-handlers.ts:153",
+      "source": "src/main/ipc/source-control/gitlab-merge-request-mutation-handlers.ts:156",
       "params": [
         {
           "name": "args",
@@ -7951,7 +7951,7 @@
       }
     },
     "gitlab:retryJob": {
-      "source": "src/main/ipc/gitlab-ci-job-handlers.ts:33",
+      "source": "src/main/ipc/source-control/gitlab-ci-job-handlers.ts:38",
       "params": [
         {
           "name": "args",
@@ -7975,7 +7975,7 @@
       }
     },
     "gitlab:todos": {
-      "source": "src/main/ipc/gitlab.ts:48",
+      "source": "src/main/ipc/source-control/gitlab.ts:49",
       "params": [
         {
           "name": "args",
@@ -7999,7 +7999,7 @@
       }
     },
     "gitlab:updateIssue": {
-      "source": "src/main/ipc/gitlab-issue-handlers.ts:101",
+      "source": "src/main/ipc/source-control/gitlab-issue-handlers.ts:100",
       "params": [
         {
           "name": "args",
@@ -8023,7 +8023,7 @@
       }
     },
     "gitlab:updateMR": {
-      "source": "src/main/ipc/gitlab-merge-request-mutation-handlers.ts:69",
+      "source": "src/main/ipc/source-control/gitlab-merge-request-mutation-handlers.ts:72",
       "params": [
         {
           "name": "args",
@@ -8047,7 +8047,7 @@
       }
     },
     "gitlab:updateMRReviewers": {
-      "source": "src/main/ipc/gitlab-merge-request-mutation-handlers.ts:85",
+      "source": "src/main/ipc/source-control/gitlab-merge-request-mutation-handlers.ts:88",
       "params": [
         {
           "name": "args",
@@ -8071,7 +8071,7 @@
       }
     },
     "gitlab:viewer": {
-      "source": "src/main/ipc/gitlab.ts:24",
+      "source": "src/main/ipc/source-control/gitlab.ts:25",
       "params": [],
       "preload": {
         "api": "window.api.gl.viewer",
@@ -8081,7 +8081,7 @@
       }
     },
     "gitlab:workItemByPath": {
-      "source": "src/main/ipc/gitlab-work-item-handlers.ts:78",
+      "source": "src/main/ipc/source-control/gitlab-work-item-handlers.ts:83",
       "params": [
         {
           "name": "args",
@@ -8105,7 +8105,7 @@
       }
     },
     "gitlab:workItemDetails": {
-      "source": "src/main/ipc/gitlab-work-item-handlers.ts:46",
+      "source": "src/main/ipc/source-control/gitlab-work-item-handlers.ts:51",
       "params": [
         {
           "name": "args",
@@ -8235,7 +8235,7 @@
       }
     },
     "hostedReview:create": {
-      "source": "src/main/ipc/hosted-review.ts:177",
+      "source": "src/main/ipc/source-control/hosted-review.ts:178",
       "params": [
         {
           "name": "args",
@@ -8259,7 +8259,7 @@
       }
     },
     "hostedReview:createStacked": {
-      "source": "src/main/ipc/hosted-review.ts:219",
+      "source": "src/main/ipc/source-control/hosted-review.ts:220",
       "params": [
         {
           "name": "args",
@@ -8283,7 +8283,7 @@
       }
     },
     "hostedReview:forBranch": {
-      "source": "src/main/ipc/hosted-review.ts:113",
+      "source": "src/main/ipc/source-control/hosted-review.ts:114",
       "params": [
         {
           "name": "args",
@@ -8307,7 +8307,7 @@
       }
     },
     "hostedReview:getCreationEligibility": {
-      "source": "src/main/ipc/hosted-review.ts:155",
+      "source": "src/main/ipc/source-control/hosted-review.ts:156",
       "params": [
         {
           "name": "args",
@@ -10662,7 +10662,7 @@
       }
     },
     "orcaProfiles:authStatus": {
-      "source": "src/main/ipc/orca-profiles.ts:160",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:160",
       "params": [],
       "preload": {
         "api": "window.api.orcaProfiles.authStatus",
@@ -10672,7 +10672,7 @@
       }
     },
     "orcaProfiles:cancelSignIn": {
-      "source": "src/main/ipc/orca-profiles.ts:268",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:268",
       "params": [],
       "preload": {
         "api": "window.api.orcaProfiles.cancelSignIn",
@@ -10682,7 +10682,7 @@
       }
     },
     "orcaProfiles:connectCurrent": {
-      "source": "src/main/ipc/orca-profiles.ts:253",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:253",
       "params": [],
       "preload": {
         "api": "window.api.orcaProfiles.connectCurrent",
@@ -10692,7 +10692,7 @@
       }
     },
     "orcaProfiles:createCloudLinked": {
-      "source": "src/main/ipc/orca-profiles.ts:270",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:270",
       "params": [
         {
           "name": "rawArgs",
@@ -10716,7 +10716,7 @@
       }
     },
     "orcaProfiles:createLocal": {
-      "source": "src/main/ipc/orca-profiles.ts:168",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:168",
       "params": [
         {
           "name": "args",
@@ -10740,7 +10740,7 @@
       }
     },
     "orcaProfiles:findProjectProfiles": {
-      "source": "src/main/ipc/orca-profiles.ts:244",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:244",
       "params": [
         {
           "name": "rawArgs",
@@ -10764,7 +10764,7 @@
       }
     },
     "orcaProfiles:list": {
-      "source": "src/main/ipc/orca-profiles.ts:155",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:155",
       "params": [],
       "preload": {
         "api": "window.api.orcaProfiles.list",
@@ -10774,7 +10774,7 @@
       }
     },
     "orcaProfiles:orgInviteRevoke": {
-      "source": "src/main/ipc/orca-profile-org-members-handlers.ts:99",
+      "source": "src/main/ipc/profiles/orca-profile-org-members-handlers.ts:99",
       "params": [
         {
           "name": "rawArgs",
@@ -10798,7 +10798,7 @@
       }
     },
     "orcaProfiles:orgMemberChangeRole": {
-      "source": "src/main/ipc/orca-profile-org-members-handlers.ts:108",
+      "source": "src/main/ipc/profiles/orca-profile-org-members-handlers.ts:108",
       "params": [
         {
           "name": "rawArgs",
@@ -10822,7 +10822,7 @@
       }
     },
     "orcaProfiles:orgMemberInvite": {
-      "source": "src/main/ipc/orca-profile-org-members-handlers.ts:90",
+      "source": "src/main/ipc/profiles/orca-profile-org-members-handlers.ts:90",
       "params": [
         {
           "name": "rawArgs",
@@ -10846,7 +10846,7 @@
       }
     },
     "orcaProfiles:orgMemberRemove": {
-      "source": "src/main/ipc/orca-profile-org-members-handlers.ts:120",
+      "source": "src/main/ipc/profiles/orca-profile-org-members-handlers.ts:120",
       "params": [
         {
           "name": "rawArgs",
@@ -10870,7 +10870,7 @@
       }
     },
     "orcaProfiles:orgMembersList": {
-      "source": "src/main/ipc/orca-profile-org-members-handlers.ts:81",
+      "source": "src/main/ipc/profiles/orca-profile-org-members-handlers.ts:81",
       "params": [
         {
           "name": "rawArgs",
@@ -10894,7 +10894,7 @@
       }
     },
     "orcaProfiles:refreshAuth": {
-      "source": "src/main/ipc/orca-profiles.ts:288",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:288",
       "params": [],
       "preload": {
         "api": "window.api.orcaProfiles.refreshAuth",
@@ -10904,7 +10904,7 @@
       }
     },
     "orcaProfiles:selectOrg": {
-      "source": "src/main/ipc/orca-profiles.ts:307",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:307",
       "params": [
         {
           "name": "rawArgs",
@@ -10928,7 +10928,7 @@
       }
     },
     "orcaProfiles:signInProgress": {
-      "source": "src/main/ipc/orca-profiles.ts:264",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:264",
       "params": [],
       "preload": {
         "api": "window.api.orcaProfiles.signInProgress",
@@ -10938,7 +10938,7 @@
       }
     },
     "orcaProfiles:signOutCurrent": {
-      "source": "src/main/ipc/orca-profiles.ts:299",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:299",
       "params": [],
       "preload": {
         "api": "window.api.orcaProfiles.signOutCurrent",
@@ -10948,7 +10948,7 @@
       }
     },
     "orcaProfiles:switch": {
-      "source": "src/main/ipc/orca-profiles.ts:177",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:177",
       "params": [
         {
           "name": "args",
@@ -10965,7 +10965,7 @@
       }
     },
     "orcaProfiles:transferProject": {
-      "source": "src/main/ipc/orca-profiles.ts:197",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:197",
       "params": [
         {
           "name": "rawArgs",
@@ -10982,7 +10982,7 @@
       }
     },
     "pet:delete": {
-      "source": "src/main/ipc/pet.ts:140",
+      "source": "src/main/ipc/pets/pet.ts:140",
       "params": [
         {
           "name": "id",
@@ -11030,7 +11030,7 @@
       }
     },
     "pet:import": {
-      "source": "src/main/ipc/pet.ts:40",
+      "source": "src/main/ipc/pets/pet.ts:40",
       "params": [],
       "preload": {
         "api": "window.api.pet.import",
@@ -11040,7 +11040,7 @@
       }
     },
     "pet:importPetBundle": {
-      "source": "src/main/ipc/pet.ts:107",
+      "source": "src/main/ipc/pets/pet.ts:107",
       "params": [],
       "preload": {
         "api": "window.api.pet.importPetBundle",
@@ -11050,7 +11050,7 @@
       }
     },
     "pet:read": {
-      "source": "src/main/ipc/pet.ts:111",
+      "source": "src/main/ipc/pets/pet.ts:111",
       "params": [
         {
           "name": "id",
@@ -13222,7 +13222,7 @@
       }
     },
     "pwsh:isAvailable": {
-      "source": "src/main/ipc/app.ts:169",
+      "source": "src/main/ipc/app.ts:170",
       "params": [],
       "preload": {
         "api": "window.api.pwsh.isAvailable",
@@ -13650,7 +13650,7 @@
       "params": [
         {
           "name": "args",
-          "type": "{ repoId: string; hostId?: ExecutionHostId; updates: Partial<Pick<Repo, 'displayName' | 'badgeColor' | 'repoIcon' | 'upstream' | 'hookSettings' | 'worktreeBaseRef' | 'worktreeBasePath' | 'kind' | 'symlinkPaths' | 'issueSourcePreference' | 'forkSyncMode' | 'externalWorktreeVisibilityPromptDismissedAt' | 'externalWorktreeInboxBaselinePaths' | 'importedExternalWorktreePaths' | 'customWorktreeVisibilitySources' | 'worktreeVisibilitySourcePreferences' | 'projectGroupId' | 'projectGroupOrder'>> & { externalWorktreeVisibility?: Repo['externalWorktreeVisibility'] | null; agentWorktreeVisibility?: Repo['agentWorktreeVisibility'] | null; sourceControlAi?: Repo['sourceControlAi'] | null; externalWorktreeDiscoverySuppressedAt?: Repo['externalWorktreeDiscoverySuppressedAt'] | null; ghAccount?: GhAccountBinding | null; }; }",
+          "type": "{ repoId: string; hostId?: ExecutionHostId; updates: Partial<Pick<Repo, 'displayName' | 'badgeColor' | 'repoIcon' | 'upstream' | 'hookSettings' | 'editorFormatter' | 'worktreeBaseRef' | 'worktreeBasePath' | 'kind' | 'symlinkPaths' | 'issueSourcePreference' | 'forkSyncMode' | 'externalWorktreeVisibilityPromptDismissedAt' | 'externalWorktreeInboxBaselinePaths' | 'importedExternalWorktreePaths' | 'customWorktreeVisibilitySources' | 'worktreeVisibilitySourcePreferences' | 'projectGroupId' | 'projectGroupOrder'>> & { externalWorktreeVisibility?: Repo['externalWorktreeVisibility'] | null; agentWorktreeVisibility?: Repo['agentWorktreeVisibility'] | null; sourceControlAi?: Repo['sourceControlAi'] | null; externalWorktreeDiscoverySuppressedAt?: Repo['externalWorktreeDiscoverySuppressedAt'] | null; ghAccount?: GhAccountBinding | null; }; }",
           "optional": false,
           "rest": false
         }
@@ -14232,7 +14232,7 @@
       }
     },
     "runtimeEnvironments:prepareBrowserClientHostPlacement": {
-      "source": "src/main/ipc/runtime-environments/runtime-environment-browser-client-host-handler.ts:20",
+      "source": "src/main/ipc/runtime-environments/runtime-environment-browser-client-host-handler.ts:13",
       "params": [
         {
           "name": "input",
@@ -17028,7 +17028,7 @@
       }
     },
     "updater:check": {
-      "source": "src/main/window/main-window-updater.ts:155",
+      "source": "src/main/window/main-window-updater.ts:159",
       "params": [
         {
           "name": "options",
@@ -17052,7 +17052,7 @@
       }
     },
     "updater:dismissAvailableUpdate": {
-      "source": "src/main/window/main-window-updater.ts:162",
+      "source": "src/main/window/main-window-updater.ts:166",
       "params": [],
       "preload": {
         "api": "window.api.updater.dismissAvailableUpdate",
@@ -17062,7 +17062,7 @@
       }
     },
     "updater:dismissNudge": {
-      "source": "src/main/window/main-window-updater.ts:161",
+      "source": "src/main/window/main-window-updater.ts:165",
       "params": [],
       "preload": {
         "api": "window.api.updater.dismissNudge",
@@ -17072,7 +17072,7 @@
       }
     },
     "updater:download": {
-      "source": "src/main/window/main-window-updater.ts:159",
+      "source": "src/main/window/main-window-updater.ts:163",
       "params": [],
       "preload": {
         "api": "window.api.updater.download",
@@ -17082,7 +17082,7 @@
       }
     },
     "updater:getLinuxPackageInstallInstructions": {
-      "source": "src/main/window/main-window-updater.ts:164",
+      "source": "src/main/window/main-window-updater.ts:168",
       "params": [],
       "preload": {
         "api": "window.api.updater.getLinuxPackageInstallInstructions",
@@ -17092,7 +17092,7 @@
       }
     },
     "updater:getStatus": {
-      "source": "src/main/window/main-window-updater.ts:153",
+      "source": "src/main/window/main-window-updater.ts:157",
       "params": [],
       "preload": {
         "api": "window.api.updater.getStatus",
@@ -17102,7 +17102,7 @@
       }
     },
     "updater:getVersion": {
-      "source": "src/main/window/main-window-updater.ts:154",
+      "source": "src/main/window/main-window-updater.ts:158",
       "params": [],
       "preload": {
         "api": "window.api.updater.getVersion",
@@ -17112,7 +17112,7 @@
       }
     },
     "updater:listBuilds": {
-      "source": "src/main/window/main-window-updater.ts:172",
+      "source": "src/main/window/main-window-updater.ts:176",
       "params": [
         {
           "name": "channel",
@@ -17148,7 +17148,7 @@
       }
     },
     "updater:quitAndInstall": {
-      "source": "src/main/window/main-window-updater.ts:160",
+      "source": "src/main/window/main-window-updater.ts:164",
       "params": [],
       "preload": {
         "api": "window.api.updater.quitAndInstall",
@@ -17158,7 +17158,7 @@
       }
     },
     "updater:showLinuxPackage": {
-      "source": "src/main/window/main-window-updater.ts:168",
+      "source": "src/main/window/main-window-updater.ts:172",
       "params": [],
       "preload": {
         "api": "window.api.updater.showLinuxPackage",
@@ -17178,7 +17178,7 @@
       }
     },
     "workspaceCleanup:beginRemovalSnapshotPruneBatch": {
-      "source": "src/main/ipc/workspace-cleanup.ts:140",
+      "source": "src/main/ipc/workspace-cleanup/workspace-cleanup.ts:138",
       "params": [
         {
           "name": "args",
@@ -17202,7 +17202,7 @@
       }
     },
     "workspaceCleanup:cancelScan": {
-      "source": "src/main/ipc/workspace-cleanup.ts:96",
+      "source": "src/main/ipc/workspace-cleanup/workspace-cleanup.ts:94",
       "params": [
         {
           "name": "scanId",
@@ -17226,7 +17226,7 @@
       }
     },
     "workspaceCleanup:clearDismissals": {
-      "source": "src/main/ipc/workspace-cleanup.ts:136",
+      "source": "src/main/ipc/workspace-cleanup/workspace-cleanup.ts:134",
       "params": [],
       "preload": {
         "api": "window.api.workspaceCleanup.clearDismissals",
@@ -17236,7 +17236,7 @@
       }
     },
     "workspaceCleanup:dismiss": {
-      "source": "src/main/ipc/workspace-cleanup.ts:110",
+      "source": "src/main/ipc/workspace-cleanup/workspace-cleanup.ts:108",
       "params": [
         {
           "name": "args",
@@ -17260,7 +17260,7 @@
       }
     },
     "workspaceCleanup:finishRemovalSnapshotPruneBatch": {
-      "source": "src/main/ipc/workspace-cleanup.ts:163",
+      "source": "src/main/ipc/workspace-cleanup/workspace-cleanup.ts:161",
       "params": [
         {
           "name": "args",
@@ -17284,7 +17284,7 @@
       }
     },
     "workspaceCleanup:getCachedScan": {
-      "source": "src/main/ipc/workspace-cleanup.ts:106",
+      "source": "src/main/ipc/workspace-cleanup/workspace-cleanup.ts:104",
       "params": [],
       "preload": {
         "api": "window.api.workspaceCleanup.getCachedScan",
@@ -17294,7 +17294,7 @@
       }
     },
     "workspaceCleanup:recordRemovalSnapshotPrune": {
-      "source": "src/main/ipc/workspace-cleanup.ts:149",
+      "source": "src/main/ipc/workspace-cleanup/workspace-cleanup.ts:147",
       "params": [
         {
           "name": "args",
@@ -17318,7 +17318,7 @@
       }
     },
     "workspaceCleanup:scan": {
-      "source": "src/main/ipc/workspace-cleanup.ts:48",
+      "source": "src/main/ipc/workspace-cleanup/workspace-cleanup.ts:46",
       "params": [
         {
           "name": "args",
@@ -17420,7 +17420,7 @@
       }
     },
     "workspaceSpace:analyze": {
-      "source": "src/main/ipc/workspace-space.ts:33",
+      "source": "src/main/ipc/workspace-space/workspace-space.ts:31",
       "params": [],
       "preload": {
         "api": "window.api.workspaceSpace.analyze",
@@ -17430,7 +17430,7 @@
       }
     },
     "workspaceSpace:cancel": {
-      "source": "src/main/ipc/workspace-space.ts:118",
+      "source": "src/main/ipc/workspace-space/workspace-space.ts:116",
       "params": [],
       "preload": {
         "api": "window.api.workspaceSpace.cancel",
@@ -17440,7 +17440,7 @@
       }
     },
     "workspaceSpace:getCachedAnalysis": {
-      "source": "src/main/ipc/workspace-space.ts:114",
+      "source": "src/main/ipc/workspace-space/workspace-space.ts:112",
       "params": [],
       "preload": {
         "api": "window.api.workspaceSpace.getCachedAnalysis",
@@ -17450,7 +17450,7 @@
       }
     },
     "workspaceSpace:openWindow": {
-      "source": "src/main/ipc/workspace-space-window.ts:26",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:26",
       "params": [],
       "preload": {
         "api": "window.api.workspaceSpace.openWindow",
@@ -17460,7 +17460,7 @@
       }
     },
     "workspaceSpace:publishWindowAnalysis": {
-      "source": "src/main/ipc/workspace-space-window.ts:75",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:75",
       "params": [
         {
           "name": "analysis",
@@ -17484,7 +17484,7 @@
       }
     },
     "workspaceSpace:publishWindowState": {
-      "source": "src/main/ipc/workspace-space-window.ts:31",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:31",
       "params": [
         {
           "name": "state",
@@ -17508,7 +17508,7 @@
       }
     },
     "workspaceSpace:requestWindowState": {
-      "source": "src/main/ipc/workspace-space-window.ts:36",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:36",
       "params": [],
       "preload": {
         "api": "window.api.workspaceSpace.requestWindowState",
@@ -17518,7 +17518,7 @@
       }
     },
     "workspaceSpace:requestWorktreeRefresh": {
-      "source": "src/main/ipc/workspace-space-window.ts:70",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:70",
       "params": [],
       "preload": {
         "api": "window.api.workspaceSpace.requestWorktreeRefresh",
@@ -17528,7 +17528,7 @@
       }
     },
     "workspaceSpace:revealWorktree": {
-      "source": "src/main/ipc/workspace-space-window.ts:41",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:41",
       "params": [
         {
           "name": "worktreeId",
@@ -18150,7 +18150,7 @@
       }
     },
     "wsl:isAvailable": {
-      "source": "src/main/ipc/app.ts:167",
+      "source": "src/main/ipc/app.ts:168",
       "params": [],
       "preload": {
         "api": "window.api.wsl.isAvailable",
@@ -18160,7 +18160,7 @@
       }
     },
     "wsl:listDistros": {
-      "source": "src/main/ipc/app.ts:168",
+      "source": "src/main/ipc/app.ts:169",
       "params": [],
       "preload": {
         "api": "window.api.wsl.listDistros",
@@ -18170,7 +18170,7 @@
       }
     },
     "wslDriveProject:convert": {
-      "source": "src/main/ipc/wsl-drive-project-handlers.ts:33",
+      "source": "src/main/ipc/wsl/wsl-drive-project-handlers.ts:33",
       "params": [
         {
           "name": "args",
@@ -18194,7 +18194,7 @@
       }
     },
     "wslDriveProject:preview": {
-      "source": "src/main/ipc/wsl-drive-project-handlers.ts:30",
+      "source": "src/main/ipc/wsl/wsl-drive-project-handlers.ts:30",
       "params": [
         {
           "name": "projectId",
@@ -18218,7 +18218,7 @@
       }
     },
     "wslDriveUnc:convert": {
-      "source": "src/main/ipc/wsl-drive-unc-conversion-handlers.ts:53",
+      "source": "src/main/ipc/wsl/wsl-drive-unc-conversion-handlers.ts:53",
       "params": [
         {
           "name": "args",
@@ -18242,12 +18242,12 @@
       }
     },
     "wslDriveUnc:lastOutcomes": {
-      "source": "src/main/ipc/wsl-drive-unc-conversion-handlers.ts:96",
+      "source": "src/main/ipc/wsl/wsl-drive-unc-conversion-handlers.ts:96",
       "params": [],
       "preload": null
     },
     "wslDriveUnc:listPendingRendererRewrites": {
-      "source": "src/main/ipc/wsl-drive-unc-conversion-handlers.ts:99",
+      "source": "src/main/ipc/wsl/wsl-drive-unc-conversion-handlers.ts:99",
       "params": [],
       "preload": {
         "api": "window.api.wslDriveUnc.listPendingRendererRewrites",
@@ -18257,7 +18257,7 @@
       }
     },
     "wslDriveUnc:recordStoreRewritten": {
-      "source": "src/main/ipc/wsl-drive-unc-conversion-handlers.ts:104",
+      "source": "src/main/ipc/wsl/wsl-drive-unc-conversion-handlers.ts:104",
       "params": [
         {
           "name": "args",
@@ -18281,7 +18281,7 @@
       }
     },
     "wslHosts:add": {
-      "source": "src/main/ipc/wsl-host-handlers.ts:244",
+      "source": "src/main/ipc/wsl/wsl-host-handlers.ts:247",
       "params": [
         {
           "name": "request",
@@ -18305,7 +18305,7 @@
       }
     },
     "wslHosts:connect": {
-      "source": "src/main/ipc/wsl-host-handlers.ts:269",
+      "source": "src/main/ipc/wsl/wsl-host-handlers.ts:272",
       "params": [
         {
           "name": "request",
@@ -18329,7 +18329,7 @@
       }
     },
     "wslHosts:focusHost": {
-      "source": "src/main/ipc/wsl-host-handlers.ts:299",
+      "source": "src/main/ipc/wsl/wsl-host-handlers.ts:302",
       "params": [
         {
           "name": "request",
@@ -18353,7 +18353,7 @@
       }
     },
     "wslHosts:getCapability": {
-      "source": "src/main/ipc/wsl-host-handlers.ts:280",
+      "source": "src/main/ipc/wsl/wsl-host-handlers.ts:283",
       "params": null,
       "preload": {
         "api": "wslHostsApi.getCapability",
@@ -18363,7 +18363,7 @@
       }
     },
     "wslHosts:getStatuses": {
-      "source": "src/main/ipc/wsl-host-handlers.ts:282",
+      "source": "src/main/ipc/wsl/wsl-host-handlers.ts:285",
       "params": [],
       "preload": {
         "api": "wslHostsApi.getStatuses",
@@ -18373,7 +18373,7 @@
       }
     },
     "wslHosts:listDistros": {
-      "source": "src/main/ipc/wsl-host-handlers.ts:243",
+      "source": "src/main/ipc/wsl/wsl-host-handlers.ts:246",
       "params": [],
       "preload": {
         "api": "wslHostsApi.listDistros",
@@ -18383,7 +18383,7 @@
       }
     },
     "wslHosts:remove": {
-      "source": "src/main/ipc/wsl-host-handlers.ts:261",
+      "source": "src/main/ipc/wsl/wsl-host-handlers.ts:264",
       "params": [
         {
           "name": "request",
@@ -18407,7 +18407,7 @@
       }
     },
     "wslHosts:setVisibleWork": {
-      "source": "src/main/ipc/wsl-host-handlers.ts:284",
+      "source": "src/main/ipc/wsl/wsl-host-handlers.ts:287",
       "params": [
         {
           "name": "request",
@@ -18431,7 +18431,7 @@
       }
     },
     "wslMove:cancel": {
-      "source": "src/main/ipc/wsl-move-handlers.ts:156",
+      "source": "src/main/ipc/wsl/wsl-move-handlers.ts:157",
       "params": [
         {
           "name": "distro",
@@ -18455,7 +18455,7 @@
       }
     },
     "wslMove:isRunning": {
-      "source": "src/main/ipc/wsl-move-handlers.ts:155",
+      "source": "src/main/ipc/wsl/wsl-move-handlers.ts:156",
       "params": [],
       "preload": {
         "api": "window.api.wslMove.isRunning",
@@ -18465,7 +18465,7 @@
       }
     },
     "wslMove:listPendingRendererRewrites": {
-      "source": "src/main/ipc/wsl-move-handlers.ts:71",
+      "source": "src/main/ipc/wsl/wsl-move-handlers.ts:72",
       "params": [],
       "preload": {
         "api": "window.api.wslMove.listPendingRendererRewrites",
@@ -18475,7 +18475,7 @@
       }
     },
     "wslMove:listUnfinished": {
-      "source": "src/main/ipc/wsl-move-handlers.ts:151",
+      "source": "src/main/ipc/wsl/wsl-move-handlers.ts:152",
       "params": [],
       "preload": {
         "api": "window.api.wslMove.listUnfinished",
@@ -18485,7 +18485,7 @@
       }
     },
     "wslMove:preview": {
-      "source": "src/main/ipc/wsl-move-handlers.ts:129",
+      "source": "src/main/ipc/wsl/wsl-move-handlers.ts:130",
       "params": [
         {
           "name": "request",
@@ -18509,7 +18509,7 @@
       }
     },
     "wslMove:recordStoreRewritten": {
-      "source": "src/main/ipc/wsl-move-handlers.ts:74",
+      "source": "src/main/ipc/wsl/wsl-move-handlers.ts:75",
       "params": [
         {
           "name": "request",
@@ -18533,7 +18533,7 @@
       }
     },
     "wslMove:start": {
-      "source": "src/main/ipc/wsl-move-handlers.ts:139",
+      "source": "src/main/ipc/wsl/wsl-move-handlers.ts:140",
       "params": [
         {
           "name": "request",
@@ -18557,7 +18557,7 @@
       }
     },
     "wslMove:useProjectHereAgain": {
-      "source": "src/main/ipc/wsl-move-handlers.ts:174",
+      "source": "src/main/ipc/wsl/wsl-move-handlers.ts:175",
       "params": [
         {
           "name": "request",
@@ -18581,7 +18581,7 @@
       }
     },
     "wslMoveOrchestrator:answerSleptPanes": {
-      "source": "src/main/ipc/wsl-move-orchestrator-wiring.ts:262",
+      "source": "src/main/ipc/wsl/wsl-move-orchestrator-wiring.ts:267",
       "params": [
         {
           "name": "request",
@@ -18611,7 +18611,7 @@
       }
     },
     "wslMoveOrchestrator:list": {
-      "source": "src/main/ipc/wsl-move-orchestrator-wiring.ts:218",
+      "source": "src/main/ipc/wsl/wsl-move-orchestrator-wiring.ts:223",
       "params": [],
       "preload": {
         "api": "window.api.wslMove.listOrchestrator",
@@ -18621,7 +18621,7 @@
       }
     },
     "wslMoveOrchestrator:projectOpened": {
-      "source": "src/main/ipc/wsl-move-orchestrator-wiring.ts:222",
+      "source": "src/main/ipc/wsl/wsl-move-orchestrator-wiring.ts:227",
       "params": [
         {
           "name": "distro",
@@ -18645,7 +18645,7 @@
       }
     },
     "wslMoveOrchestrator:userAction": {
-      "source": "src/main/ipc/wsl-move-orchestrator-wiring.ts:235",
+      "source": "src/main/ipc/wsl/wsl-move-orchestrator-wiring.ts:240",
       "params": [
         {
           "name": "request",
