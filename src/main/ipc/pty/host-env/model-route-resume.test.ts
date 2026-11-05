@@ -2,7 +2,7 @@ import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { quoteStartupArg } from '../../../../shared/tui-agent-startup-shell'
+import { quoteStartupArg } from '../../../../shared/agent-launch/startup/tui-agent-startup-shell'
 import {
   codexRolloutRoute,
   lastClaudeTranscriptModel,
