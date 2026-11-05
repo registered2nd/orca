@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import type { AgentStatusEntry } from '../../../../shared/agent-status-types'
+import type { AgentStatusEntry } from '../../../../shared/agent-status/contracts/agent-status-types'
 import { finishedTurnReply, startedNewTurn } from './speak-replies-trigger'
 
 function entry(overrides: Partial<AgentStatusEntry>): AgentStatusEntry {
