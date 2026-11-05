@@ -1,4 +1,4 @@
-import { advanceTerminalEscapeBoundary } from '../../../../shared/terminal-partial-escape-tail'
+import { advanceTerminalEscapeBoundary } from '../../../../shared/terminal/protocol/escape/terminal-partial-escape-tail'
 import { recordRendererCrashBreadcrumb } from '@/lib/crash-breadcrumb-recorder'
 
 /** Logs a write that would print an escape's tail (`1002h`, `2026h`, `>4;2m`) as text, with the writes before it (#33766). */
