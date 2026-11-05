@@ -10,7 +10,7 @@ import type { BrowserFindTarget } from '../../../../shared/browser-find-source'
 import type { BrowserPageTabShortcut } from '../../../../shared/browser-page-command-target'
 import type { ResolveRenderer } from '../browser-guest-renderer-target'
 import { matchesGuestTabShortcut } from './browser-guest-tab-shortcut'
-import { handleSpeakRepliesShortcut } from '../speech/speak-replies-shortcut'
+import { handleSpeakRepliesShortcut } from '../../../speech/speak-replies-shortcut'
 
 export type ShouldForwardDictationShortcut = () => boolean
 export type IsMobileEmulatorEnabled = () => boolean

@@ -10,7 +10,7 @@ import {
   subscribeLastFocusedAgentPane
 } from '@/lib/last-focused-agent-pane'
 import { useAppStore } from '@/store'
-import { makePaneKey, parsePaneKey } from '../../../../shared/stable-pane-id'
+import { makePaneKey, parsePaneKey } from '../../../../shared/workspace-layout/stable-pane-id'
 import {
   buildTerminalSelectionAskPrompt,
   cleanTerminalSelection
