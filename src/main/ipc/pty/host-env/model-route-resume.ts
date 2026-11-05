@@ -14,7 +14,7 @@ import {
   quoteStartupArg,
   tokenizeStartupCommand,
   type AgentStartupShell
-} from '../../../../shared/tui-agent-startup-shell'
+} from '../../../../shared/agent-launch/startup/tui-agent-startup-shell'
 
 // Why: a session that ran on a model outside the CLI's own login (DeepSeek, GLM, the Neptune relay) comes
 // back on the default model when resumed, because the resume restores only models the CLI knows. A route file
