@@ -54,10 +54,20 @@ export async function downloadAndOpenRemoteTerminalFile(
     // Why: cancelling the native save dialog is a deliberate no-op, not a failure; a newer link
     // click during the download supersedes this one.
     if (!download?.canceled && isCurrent()) {
-      await window.api.shell.openFilePath(
+      const opened = await window.api.shell.openFilePath(
         download?.destinationPath ?? filePath,
         LOCAL_EXECUTION_HOST_ID
       )
+      // Why: the copy is saved where the user chose, so say where when no app took it.
+      if (download && !opened && isCurrent()) {
+        toast.error(
+          translate(
+            'auto.components.terminal.pane.TerminalLinkActionPopover.downloadedNoDefaultApp',
+            "Saved '{{value0}}', but no app opened it.",
+            { value0: download.destinationPath }
+          )
+        )
+      }
     }
   } catch (error) {
     toast.error(
