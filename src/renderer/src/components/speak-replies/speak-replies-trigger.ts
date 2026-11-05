@@ -1,4 +1,4 @@
-import type { AgentStatusEntry } from '../../../../shared/agent-status-types'
+import type { AgentStatusEntry } from '../../../../shared/agent-status/contracts/agent-status-types'
 
 /** The reply to read aloud when `entry` just finished a turn, else null. */
 export function finishedTurnReply(
