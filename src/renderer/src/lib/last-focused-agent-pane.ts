@@ -1,4 +1,4 @@
-import { getFocusedAgentPaneKeyForWorktree } from '@/components/sidebar/focused-agent-row-highlight'
+import { getFocusedAgentPaneKeyForWorktree } from '@/components/sidebar/workspace-card/activity/focused-agent-row-highlight'
 import { useAppStore } from '@/store'
 
 export type FocusedAgentPane = { paneKey: string; worktreeId: string }
