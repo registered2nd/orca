@@ -17,7 +17,7 @@ import {
 import path from 'node:path'
 import process from 'node:process'
 import ts from 'typescript-api'
-import { resolveOxcCliInvocation } from './oxc-cli-invocation.mjs'
+import { resolveOxcCliInvocation } from './tool-invocation/oxc-cli-invocation.mjs'
 
 const REPO_ROOT = path.resolve(import.meta.dirname, '..', '..')
 const OUTPUT_PATH = path.join(
