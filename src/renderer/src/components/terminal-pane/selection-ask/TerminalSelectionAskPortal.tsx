@@ -3,7 +3,7 @@ import type { ManagedPane } from '@/lib/pane-manager/pane-manager'
 import { TerminalSelectionAskPanel } from './TerminalSelectionAskPanel'
 import type { TerminalSelectionAskState } from './use-terminal-selection-ask'
 
-/** Takes the pane controller whole so the pane surface, at its line limit, renders it in one line. */
+/** Mounted beside the pane surface, which is at its line limit; reads the pane controller whole. */
 export function TerminalSelectionAskPortal({
   controller
 }: {
