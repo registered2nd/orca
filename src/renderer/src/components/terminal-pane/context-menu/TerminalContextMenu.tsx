@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react'
+import { useContext, useMemo, useRef } from 'react'
 import {
   Clipboard,
   Copy,
@@ -43,6 +43,7 @@ import { TerminalQuickCommandsSubmenu } from '../quick-commands/TerminalQuickCom
 import { AddToChatSubmenu } from '../../native-chat/selection-quotes/AddToChatMenu'
 import type { TerminalPaneAgentIdCopy } from './terminal-pane-context-menu-types'
 import { CopyOrcaIdMenuItem } from '../../native-chat/pane/actions/NativeChatCopyOrcaSessionIdMenuItem'
+import { TerminalSelectionAskContext } from '../selection-ask/terminal-selection-ask-context'
 
 type TerminalContextMenuProps = {
   open: boolean
@@ -56,8 +57,6 @@ type TerminalContextMenuProps = {
   onCopy: () => void
   /** The selection to add and the workspace whose chats can take it; null with no selection. */
   addToChat: { worktreeId: string; quote: string } | null
-  canAskAboutSelection: boolean
-  onAskAboutSelection: () => void
   onSelectAll: () => void
   onPaste: () => void
   onSplitRight: () => void
@@ -162,8 +161,6 @@ function TerminalContextMenuItems({
   menuPaneIsExpanded,
   onCopy,
   addToChat,
-  canAskAboutSelection,
-  onAskAboutSelection,
   onSelectAll,
   onPaste,
   onSplitRight,
@@ -198,6 +195,7 @@ function TerminalContextMenuItems({
   agentIdCopy
 }: TerminalContextMenuProps): React.JSX.Element {
   const t = useTranslate()
+  const selectionAsk = useContext(TerminalSelectionAskContext)
   // Why: one primary binding prevents Windows/Linux shortcut labels from forcing row wraps.
   const shortcuts = useMemo(
     () => ({
@@ -235,16 +233,16 @@ function TerminalContextMenuItems({
           {t('components.native-chat.addSelectionToChat', 'Add to chat')}
         </DropdownMenuItem>
       )}
-      {canAskAboutSelection ? (
+      {selectionAsk?.canAskAboutSelection ? (
         <DropdownMenuItem
           onSelect={() => {
             // Why: the Ask box takes focus; close first so the menu's focus guards let go.
             onOpenChange(false)
-            onAskAboutSelection()
+            selectionAsk.onAskAboutSelection()
           }}
         >
           <MessageCircleQuestion />
-          {translate(
+          {t(
             'auto.components.terminal.pane.TerminalContextMenu.askAboutSelection',
             'Ask About Selection…'
           )}
