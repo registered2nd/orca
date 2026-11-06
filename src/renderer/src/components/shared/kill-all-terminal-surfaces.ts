@@ -8,7 +8,7 @@ import {
   type TerminalTabRetirementState
 } from '@/store/terminals/retirement/terminal-tab-retirement'
 import { reserveTerminalRetirementTeardowns } from '@/store/terminals/retirement/terminal-retirement-teardown-reservation'
-import { resolveTerminalCloseRoute } from '@/lib/terminal-close-route'
+import { isPairedServerTerminal } from './kill-all-paired-server-terminal'
 import { notifyDaemonSessionInventoryInvalidated } from '../status-bar/resources/inventory/daemon-session-inventory-invalidation'
 
 const CLOSE_BATCH_SIZE = 2
@@ -60,15 +60,6 @@ type KillAllTerminalSurfaceDependencies = {
   now: () => number
   yieldToRenderer: () => Promise<void>
   reportSummary: (summary: KillAllTerminalSurfacesSummary) => void
-}
-
-/** A paired server's tab mirrors that server's terminal, and closing it stops the terminal there. */
-function isPairedServerTerminal(
-  state: KillAllTerminalSurfaceState,
-  worktreeId: string,
-  tabId: string
-) {
-  return Boolean(resolveTerminalCloseRoute(state, worktreeId, tabId)?.runtimeEnvironmentId)
 }
 
 /** The terminal tabs Kill all closes: every one but a paired server's, which stay with that server. */
