@@ -1,0 +1,116 @@
+name: Personal fork macOS build
+
+# Builds the unsigned macOS app for one personal-fork release from patched/release and attaches its dmgs
+# to that release. Same build steps as upstream's adhoc-mac-build.yml without Developer ID signing or
+# notarization: electron-builder leaves the app ad-hoc signed. Dispatched by the release job after it
+# publishes the Windows build (C:\Projects\_scripts\orca_patched_release.ps1).
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to build and attach to (e.g. v1.4.251)
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: personal-fork-mac-${{ inputs.tag }}
+  cancel-in-progress: false
+
+env:
+  ORCA_BACKGROUND_LAUNCH: '1'
+  CSC_IDENTITY_AUTO_DISCOVERY: 'false'
+  NODE_OPTIONS: --max-old-space-size=4096
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        arch: [arm64, x64]
+    runs-on: macos-15
+    timeout-minutes: 150
+    steps:
+      - name: Checkout patched/release
+        uses: actions/checkout@v6
+        with:
+          ref: patched/release
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Check the branch is this release
+        env:
+          TAG: ${{ inputs.tag }}
+        run: |
+          version="$(node -p 'require("./package.json").version')"
+          test "v$version" = "$TAG" || { echo "::error::patched/release is $version, not $TAG"; exit 1; }
+
+      - name: Setup pnpm
+        uses: pnpm/setup@v2
+        with:
+          install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: package.json
+          check-latest: true
+          cache: pnpm
+          cache-dependency-path: |
+            pnpm-lock.yaml
+            mobile/pnpm-lock.yaml
+
+      - name: Install dependencies
+        uses: nick-fields/retry@v4
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          retry_wait_seconds: 30
+          command: pnpm install --frozen-lockfile --cpu=current,x64,arm64
+
+      - uses: ./.github/actions/install-mobile-dependencies
+
+      - name: Regenerate the app functions catalog (fork feature)
+        run: |
+          if [ -f config/scripts/generate-app-functions-catalog.mjs ]; then
+            node config/scripts/generate-app-functions-catalog.mjs || echo "::warning::app functions catalog not regenerated"
+          fi
+
+      - name: Build app
+        run: pnpm build:release
+
+      - name: Package the unsigned app
+        run: |
+          node --disable-warning=MODULE_TYPELESS_PACKAGE_JSON "$(if [ -f config/scripts/orcad-distribution/prebuilds/pinned-node-downloads.mjs ]; then printf %s config/scripts/orcad-distribution/prebuilds/pinned-node-downloads.mjs; else printf %s config/scripts/pinned-node-downloads.mjs; fi)" darwin-arm64 darwin-x64
+          node "$(if [ -f config/scripts/native-build/node-addons/ensure-native-runtime.mjs ]; then printf %s config/scripts/native-build/node-addons/ensure-native-runtime.mjs; else printf %s config/scripts/ensure-native-runtime.mjs; fi)" --runtime=electron
+          pnpm exec electron-builder --config config/electron-builder.config.cjs --mac dmg --${{ matrix.arch }} --publish never
+          ls -la dist
+
+      - name: Launch smoke test
+        if: matrix.arch == 'arm64'
+        run: |
+          app="$(ls -d dist/mac*/Orca.app | head -1)"
+          codesign -dv "$app" 2>&1 | sed -n '1,8p' || true
+          mkdir -p smoke
+          "$app/Contents/MacOS/Orca" >smoke/stdout.log 2>&1 &
+          pid=$!
+          sleep 60
+          screencapture -x smoke/screen.png || true
+          if kill -0 "$pid" 2>/dev/null; then echo "Orca still running after 60 s"; kill "$pid"; else echo "::error::Orca exited"; cat smoke/stdout.log; exit 1; fi
+
+      - name: Upload smoke evidence
+        if: always() && matrix.arch == 'arm64'
+        uses: actions/upload-artifact@v7
+        with:
+          name: smoke-${{ matrix.arch }}
+          path: smoke/
+          if-no-files-found: ignore
+
+      - name: Attach the dmg to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: gh release upload "$TAG" -R "$GITHUB_REPOSITORY" --clobber "dist/orca-macos-${{ matrix.arch }}.dmg"
