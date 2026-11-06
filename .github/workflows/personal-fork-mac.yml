@@ -99,11 +99,23 @@ jobs:
           app="$(ls -d dist/mac*/Orca.app | head -1)"
           codesign -dv "$app" 2>&1 | sed -n '1,8p' || true
           mkdir -p smoke
-          "$app/Contents/MacOS/Orca" >smoke/stdout.log 2>&1 &
+          # Packaging runs Orca windowless; the smoke test wants its window.
+          env -u ORCA_BACKGROUND_LAUNCH "$app/Contents/MacOS/Orca" >smoke/stdout.log 2>&1 &
           pid=$!
           sleep 60
+          osascript -e 'tell application "Orca" to activate' || true
+          sleep 5
+          cat >smoke/windows.swift <<'SWIFT'
+          import CoreGraphics
+          let l = CGWindowListCopyWindowInfo(.optionOnScreenOnly, kCGNullWindowID) as! [[String: Any]]
+          let o = l.filter { ($0["kCGWindowOwnerName"] as? String) == "Orca" && ($0["kCGWindowLayer"] as? Int) == 0 }
+          for w in o { print("window", w["kCGWindowBounds"] ?? "") }
+          print("orca windows on screen:", o.count)
+          SWIFT
+          swift smoke/windows.swift | tee smoke/windows.txt || true
           screencapture -x smoke/screen.png || true
-          if kill -0 "$pid" 2>/dev/null; then echo "Orca still running after 60 s"; kill "$pid"; else echo "::error::Orca exited"; cat smoke/stdout.log; exit 1; fi
+          if kill -0 "$pid" 2>/dev/null; then echo "Orca still running after 65 s"; kill "$pid"; else echo "::error::Orca exited"; cat smoke/stdout.log; exit 1; fi
+          grep -q "orca windows on screen: [1-9]" smoke/windows.txt || { echo "::error::no Orca window on screen"; exit 1; }
 
       - name: Upload smoke evidence
         if: always()
