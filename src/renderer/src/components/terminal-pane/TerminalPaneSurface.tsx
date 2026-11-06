@@ -8,7 +8,6 @@ import { AgentSessionContinuationDialog } from '@/components/agent-session-conti
 import { WORKSPACE_FILE_PATH_MIME, WORKSPACE_FILE_PATHS_MIME } from '@/lib/workspace-file-drag'
 import CloseTerminalDialog from './CloseTerminalDialog'
 import TerminalContextMenu from './TerminalContextMenu'
-import { TerminalSelectionAskPortal } from './TerminalSelectionAskPortal'
 import TerminalPaneHeaderOverlay from './TerminalPaneHeaderOverlay'
 import { isPaneOwnerRecoveryError, TerminalErrorToast } from './TerminalErrorToast'
 import { openTerminalBesideTab } from './open-terminal-beside-tab'
@@ -104,7 +103,6 @@ export function TerminalPaneSurface({
     searchOpen,
     searchStateRef,
     searchInputRef,
-    selectionAsk,
     sessionRestoredBannerPaneIds,
     sessionStateSaveFailureMessage,
     setAgentSessionContinuation,
@@ -287,8 +285,6 @@ export function TerminalPaneSurface({
             ? terminalPaneMenuAddToChat(contextMenu.menuPane, tabId, worktreeId)
             : null
         }
-        canAskAboutSelection={selectionAsk.canAskAboutSelection}
-        onAskAboutSelection={selectionAsk.onAskAboutSelection}
         onSelectAll={contextMenu.onSelectAll}
         onPaste={() => void contextMenu.onPaste()}
         onSplitRight={contextMenu.onSplitRight}
@@ -324,7 +320,6 @@ export function TerminalPaneSurface({
         canCopyAgentSessionId={menuAgentSessionId !== null}
         onCopyAgentSessionId={() => void contextMenu.onCopyAgentSessionId()}
       />
-      <TerminalSelectionAskPortal controller={controller} />
       <LinkActionPopover request={terminalLinkActionRequest} onClose={closeTerminalLinkActions} />
       {quickCommandEditorOpen ? (
         <TerminalQuickCommandEditorDialog

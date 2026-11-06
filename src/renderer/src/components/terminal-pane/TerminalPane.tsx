@@ -1,11 +1,19 @@
 import { TerminalPaneSurface } from './TerminalPaneSurface'
 import { TerminalRestoringPlaceholder } from './TerminalRestoringPlaceholder'
+import { TerminalSelectionAskPortal } from './TerminalSelectionAskPortal'
+import { TerminalSelectionAskContext } from './terminal-selection-ask-context'
 import { useTerminalPaneController } from './use-terminal-pane-controller'
 import { useHostTerminalScrollbackHold } from './use-host-terminal-scrollback-hold'
 import type { TerminalPaneProps } from './terminal-pane-types'
 
 function MountedTerminalPane(props: TerminalPaneProps): React.JSX.Element {
-  return <TerminalPaneSurface controller={useTerminalPaneController(props)} />
+  const controller = useTerminalPaneController(props)
+  return (
+    <TerminalSelectionAskContext.Provider value={controller.selectionAsk}>
+      <TerminalPaneSurface controller={controller} />
+      <TerminalSelectionAskPortal controller={controller} />
+    </TerminalSelectionAskContext.Provider>
+  )
 }
 
 export default function TerminalPane(props: TerminalPaneProps): React.JSX.Element {
