@@ -30,8 +30,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        arch: [arm64, x64]
-    runs-on: macos-15
+        include:
+          - arch: arm64
+            runner: macos-15
+          # Native Intel runner: packaging boots the x64 terminal host, which times out under Rosetta here.
+          - arch: x64
+            runner: macos-15-intel
+    runs-on: ${{ matrix.runner }}
     timeout-minutes: 150
     steps:
       - name: Checkout patched/release
@@ -90,7 +95,6 @@ jobs:
           ls -la dist
 
       - name: Launch smoke test
-        if: matrix.arch == 'arm64'
         run: |
           app="$(ls -d dist/mac*/Orca.app | head -1)"
           codesign -dv "$app" 2>&1 | sed -n '1,8p' || true
@@ -102,7 +106,7 @@ jobs:
           if kill -0 "$pid" 2>/dev/null; then echo "Orca still running after 60 s"; kill "$pid"; else echo "::error::Orca exited"; cat smoke/stdout.log; exit 1; fi
 
       - name: Upload smoke evidence
-        if: always() && matrix.arch == 'arm64'
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: smoke-${{ matrix.arch }}
