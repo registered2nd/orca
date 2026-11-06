@@ -1,5 +1,5 @@
 import { ipcMain } from 'electron'
-import type { OrcaRuntimeRpcServer } from '../runtime/runtime-rpc'
+import type { OrcaRuntimeRpcServer } from '../runtime/rpc/server/runtime-rpc'
 
 // Why its own channel: the direct-address link widens the listener; a relay link never does.
 export function registerRuntimeRelayPairingHandler(rpcServer: OrcaRuntimeRpcServer): void {
