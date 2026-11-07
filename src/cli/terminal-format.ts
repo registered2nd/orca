@@ -208,9 +208,9 @@ function promptObservationWarning(
   if (prompt.observation === 'incarnation_replaced') {
     return 'delivery was not observed because the terminal process was replaced. Inspect the current terminal before sending a new prompt; do not retry with this request ID.'
   }
-  // Providers need swallowed-Enter recovery without turn_started, even if submit observation failed.
+  // Providers need swallowed-Enter recovery unless the turn started or a mid-turn agent took the prompt.
   if (prompt.provider !== 'unsupported' && prompt.provider !== 'old-host') {
-    return prompt.stages.includes('turn_started')
+    return prompt.stages.includes('turn_started') || prompt.stages.includes('queued')
       ? null
       : `input was accepted, but no turn start was observed yet (a send without --wait-submit does not wait for one). Confirm delivery by reissuing the exact command with --retry-request ${prompt.requestId} --wait-submit <seconds>; the same request ID observes this prompt instead of sending it again.`
   }
