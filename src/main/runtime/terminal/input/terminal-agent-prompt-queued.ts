@@ -8,9 +8,9 @@ export const AGENT_PROMPT_QUEUE_SETTLE_MS = 2000
 const AGENT_PROMPT_QUEUE_POLL_MS = 50
 
 export abstract class OrcaRuntimeWithObserveQueuedAgentPrompt extends OrcaRuntimeWithResubmitHeldAgentPrompt {
-  /** A prompt sent mid-turn starts no turn of its own: the agent queues it, or takes it into the
-   *  running turn at its next step. An empty composer after Enter shows the agent took it; the
-   *  prompt still there, or no composer on screen, leaves the receipt at input_accepted. The
+  /** A prompt sent mid-turn may start no turn of its own: the agent queues it, or takes it into
+   *  the running turn at its next step. An empty composer after Enter shows the agent took it;
+   *  the prompt still there, or no composer on screen, leaves the receipt at input_accepted. The
    *  wait is bounded by AGENT_PROMPT_QUEUE_SETTLE_MS, so it needs no abort signal. */
   protected async settleUnstartedAgentPrompt(
     ptyId: string,
@@ -27,6 +27,9 @@ export abstract class OrcaRuntimeWithObserveQueuedAgentPrompt extends OrcaRuntim
         return prompt
       }
       if (screen && this.readCaughtUpComposerTypedText(ptyId) === '') {
+        // Settled: taken into the running turn, it has no turn start to claim, and left
+        // registered it would claim the next prompt's turn start in its place.
+        this.forgetAgentPromptRequest(ptyId, prompt.generation, prompt.requestId)
         return { ...prompt, stages: ['input_accepted', 'queued'] }
       }
       if (Date.now() >= deadline) {
