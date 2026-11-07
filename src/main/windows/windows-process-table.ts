@@ -252,16 +252,21 @@ function readOneSnapshot<Row>(projection: ProcessRowProjection<Row>): Promise<Ro
           reject(new Error('windows process table returned no snapshot'))
           return
         }
-        // Missing self means unreadable/truncated data, never proof that no processes run.
-        if (!processes.some((row) => row.pid === process.pid)) {
-          reject(new Error('windows process table is unreadable'))
-          return
+        // Why the try: a malformed row throws in that same loop; it must only fail this read.
+        try {
+          // Missing self means unreadable/truncated data, never proof that no processes run.
+          if (!processes.some((row) => row.pid === process.pid)) {
+            reject(new Error('windows process table is unreadable'))
+            return
+          }
+          // Only meaningful when a command line was actually asked for.
+          if ((flags & native.ProcessDataFlag.CommandLine) !== 0) {
+            reportWindowsCommandLineRecoveryHealth(processes)
+          }
+          resolve(processes.map(projection.fromNative))
+        } catch (error) {
+          reject(error instanceof Error ? error : new Error(String(error)))
         }
-        // Only meaningful when a command line was actually asked for.
-        if ((flags & native.ProcessDataFlag.CommandLine) !== 0) {
-          reportWindowsCommandLineRecoveryHealth(processes)
-        }
-        resolve(processes.map(projection.fromNative))
       }, flags)
     } catch (error) {
       clearTimeout(deadline)
