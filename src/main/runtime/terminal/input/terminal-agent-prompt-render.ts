@@ -5,7 +5,6 @@ import type {
 } from '../../../../shared/runtime-terminal-contracts'
 import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../../../shared/layout-owner-switch'
 import { isCompleteAgentPromptDraft } from '../../../../shared/agent-launch/startup/agent-prompt-injection'
-import { readTerminalComposerTypedText } from '../../../../shared/terminal/input/terminal-composer-draft'
 const CLAUDE_AGENT_PROMPT_RENDER_TIMEOUT_MS = 8000
 
 const CLAUDE_AGENT_PROMPT_RENDER_QUIET_MS = 1500
@@ -180,14 +179,6 @@ export abstract class OrcaRuntimeWithCreateAgentPromptRenderGate extends OrcaRun
         clearGateTimers()
       }
     }
-  }
-
-  /** The user's text in a composer the screen model has fully caught up on; null when unknown. */
-  private readCaughtUpComposerTypedText(ptyId: string): string | null {
-    const state = this.readWholeScreenModel(ptyId)
-    return state && state.outputSequence === this.getPtyOutputSequence(ptyId)
-      ? readTerminalComposerTypedText(state.emulator.getCursorLineContext())
-      : null
   }
 
   waitForTerminal(
