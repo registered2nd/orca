@@ -9,7 +9,9 @@ export type RuntimeTerminalSend = {
   writeSettlement?: WriteSettlement
 }
 
-export type RuntimeTerminalPromptStage = 'input_accepted' | 'turn_started'
+/** `queued`: the agent was mid-turn and took the prompt out of its composer; it runs within that
+ *  turn or after it, so no turn start of its own may follow. */
+export type RuntimeTerminalPromptStage = 'input_accepted' | 'queued' | 'turn_started'
 
 export type RuntimeTerminalPromptDelivery = {
   requestId: string
