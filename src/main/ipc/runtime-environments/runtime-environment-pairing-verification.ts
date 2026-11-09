@@ -104,11 +104,15 @@ export async function verifyAndAddRuntimeEnvironmentFromPairingCode(
   const { link, runtimeStatus } = verified
   const usesSshTunnel = link.endpointKind === 'loopback' && args.allowLoopback === true
   // Save a token only this computer holds; the link stops working once it is used.
-  const pairingCode = await exchangeRemotePairingTicket({
-    pairingCode: args.pairingCode,
-    offer: link.pairing,
-    hostCapabilities: runtimeStatus.capabilities
-  })
+  // Why not over relay: the exchange's two connections would spend the relay's one-time invite
+  // before the save installs this client's resume credential.
+  const pairingCode = link.pairing.relay
+    ? args.pairingCode
+    : await exchangeRemotePairingTicket({
+        pairingCode: args.pairingCode,
+        offer: link.pairing,
+        hostCapabilities: runtimeStatus.capabilities
+      })
   let outcome: AddEnvironmentOutcome
   try {
     outcome = link.pairing.relay
@@ -164,11 +168,13 @@ export async function verifyAndRepairRuntimeEnvironmentFromPairingCode(
       message: 'This pairing link is for a different server.'
     }
   }
-  const pairingCode = await exchangeRemotePairingTicket({
-    pairingCode: args.pairingCode,
-    offer: verified.link.pairing,
-    hostCapabilities: verified.runtimeStatus.capabilities
-  })
+  const pairingCode = verified.link.pairing.relay
+    ? args.pairingCode
+    : await exchangeRemotePairingTicket({
+        pairingCode: args.pairingCode,
+        offer: verified.link.pairing,
+        hostCapabilities: verified.runtimeStatus.capabilities
+      })
   let environment: ReturnType<typeof updateEnvironmentFromPairingCode>
   try {
     environment = updateEnvironmentFromPairingCode(userDataPath, existing.id, {
