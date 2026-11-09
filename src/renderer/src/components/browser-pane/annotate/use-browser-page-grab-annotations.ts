@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { translate } from '@/i18n/i18n'
 import { useMountedRef } from '@/hooks/useMountedRef'
 import { useAppStore } from '@/store'
 import { imageCopyFailedMessage } from '@/lib/clipboard/images/clipboard-image-copy'
@@ -24,22 +23,11 @@ import type {
   BrowserPageGrabAnnotationsOptions,
   BrowserPageGrabToastState
 } from '../describe-page/browser-page-types'
-
-const copiedGrabToastMessage = (): string =>
-  translate(
-    'auto.components.browser.pane.annotate.use.browser.page.grab.annotations.0c7b9b2b7a',
-    'Copied'
-  )
-const screenshottedGrabToastMessage = (): string =>
-  translate(
-    'auto.components.browser.pane.annotate.use.browser.page.grab.annotations.c937229f19',
-    'Screenshotted'
-  )
-const annotationAddedGrabToastMessage = (): string =>
-  translate(
-    'auto.components.browser.pane.annotate.use.browser.page.grab.annotations.1f5cb19034',
-    'Annotation added'
-  )
+import {
+  annotationAddedGrabToastMessage,
+  copiedGrabToastMessage,
+  screenshottedGrabToastMessage
+} from './browser-grab-toast-messages'
 
 export function useBrowserPageGrabAnnotations({
   browserTabId,
