@@ -64,7 +64,11 @@ export const ENVIRONMENT_HANDLERS: Record<string, CommandHandler> = {
   'environment add': async ({ flags, json }) => {
     const name = getRequiredStringFlag(flags, 'name')
     refuseReservedEnvironmentName(name)
-    const pairingCode = await exchangeCliPairingCode(getRequiredStringFlag(flags, 'pairing-code'))
+    const linkCode = getRequiredStringFlag(flags, 'pairing-code')
+    // Why not over relay: the exchange would spend the relay's one-time invite before the save.
+    const pairingCode = isRelayPairingCode(linkCode)
+      ? linkCode
+      : await exchangeCliPairingCode(linkCode)
     // Why async for relay links: the one-time invite is traded for a resume credential before saving.
     const environment = redactRuntimeEnvironment(
       isRelayPairingCode(pairingCode)
