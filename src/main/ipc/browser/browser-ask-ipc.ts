@@ -3,7 +3,7 @@ import { mkdirSync, readdirSync, rmSync, statSync, writeFileSync } from 'node:fs
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { ipcMain } from 'electron'
-import { browserManager } from '../../browser/browser-manager'
+import { browserManager } from '../../browser/guest-lifecycle/manager/browser-manager'
 import { askReadPageScript } from './browser-ask-page-scripts'
 import { isTrustedBrowserRenderer } from './browser-renderer-trust'
 import type {
