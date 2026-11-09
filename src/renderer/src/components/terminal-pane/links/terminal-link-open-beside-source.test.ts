@@ -16,7 +16,14 @@ import type { PendingEditorReveal } from '@/store/slices/editor/types/pending-ed
 const findWorkspaceFileRouteMock = vi.hoisted(() => vi.fn())
 const toastErrorMock = vi.hoisted(() => vi.fn())
 const doubles = createTerminalLinkTestDoubles()
-const { storeState, deps, openFileForLinkMock, setPendingEditorRevealMock, statMock } = doubles
+const {
+  storeState,
+  deps,
+  openFileForLinkMock,
+  openFilePathMock,
+  setPendingEditorRevealMock,
+  statMock
+} = doubles
 
 vi.mock('@/store/index', () => ({
   useAppStore: {
