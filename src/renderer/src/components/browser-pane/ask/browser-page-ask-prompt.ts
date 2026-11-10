@@ -1,4 +1,4 @@
-import type { BrowserGrabPayload } from '../../../../../shared/browser-grab-types'
+import type { BrowserGrabPayload } from '../../../../../shared/browser/element-grab/browser-grab-types'
 
 const ELEMENT_TEXT_MAX_CHARS = 1500
 const FENCE = '```'
