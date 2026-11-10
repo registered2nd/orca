@@ -6,7 +6,7 @@ import {
   type BrowserAskItem
 } from './browser-page-ask-basket'
 import { elementText, type AskPromptItem } from './browser-page-ask-prompt'
-import type { GrabIntent } from '../describe-page/browser-page-types'
+import type { GrabIntent } from '../../../../../shared/browser/element-grab/browser-grab-types'
 
 /** Content reads a highlight as text; Elements reads the blocks it covers, for design questions. */
 export type AskMode = 'content' | 'elements'
