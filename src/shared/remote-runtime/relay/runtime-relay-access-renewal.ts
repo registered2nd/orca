@@ -1,7 +1,7 @@
 import { randomBytes } from 'node:crypto'
 import { PairingGetEndpointsResultSchema } from './mobile-relay-credential-contract'
 import type { RuntimeCapability } from '../../protocol-version'
-import { sendRemoteRuntimeRequest } from '../remote-runtime-client'
+import { sendRemoteRuntimeRequestOnSocket } from '../requests/remote-runtime-request-socket'
 import { writeEnvironmentRelayAccess } from '../host-store/runtime-environment-relay-store'
 import {
   getPreferredPairedRuntimeConnection,
@@ -29,11 +29,12 @@ export async function renewEnvironmentRelayAccessIfDue(
     return
   }
   lastAttemptAt.set(environment.id, now)
-  const response = await sendRemoteRuntimeRequest<unknown>(
+  const response = await sendRemoteRuntimeRequestOnSocket<unknown>(
     getPreferredPairedRuntimeConnection(environment),
     'pairing.getEndpoints',
     { resumeConfirmReqId: `confirm-${randomBytes(16).toString('base64url')}` },
     CONFIRM_TIMEOUT_MS,
+    undefined,
     undefined,
     undefined,
     clientCapabilities
