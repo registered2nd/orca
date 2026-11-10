@@ -9,7 +9,7 @@ import type {
 } from '../pairing/paired-runtime-connection'
 import type { PairingOffer } from '../pairing/mobile-relay-pairing-offer'
 import type { RuntimeCapability } from '../../protocol-version'
-import { sendRemoteRuntimeRequest } from '../remote-runtime-client'
+import { sendRemoteRuntimeRequestOnSocket } from '../requests/remote-runtime-request-socket'
 import { RemoteRuntimeClientError } from '../remote-runtime-client-error'
 import type { RuntimeRelayAccess } from './runtime-relay-access-schema'
 
@@ -38,7 +38,7 @@ export async function installRuntimeRelayAccess(
   }
   const resumeToken = base64Url(randomBytes(32))
   const reqId = `install-${base64Url(randomBytes(12))}`
-  const installed = await sendRemoteRuntimeRequest<unknown>(
+  const installed = await sendRemoteRuntimeRequestOnSocket<unknown>(
     inviteConnection,
     'pairing.provisionRelay',
     {
@@ -46,6 +46,7 @@ export async function installRuntimeRelayAccess(
       newResumeTokenHash: base64Url(createHash('sha256').update(resumeToken, 'utf8').digest())
     },
     INSTALL_TIMEOUT_MS,
+    undefined,
     undefined,
     undefined,
     clientCapabilities
@@ -63,11 +64,12 @@ export async function installRuntimeRelayAccess(
     credential: resumeToken,
     credentialKind: 'resume'
   }
-  const endpoints = await sendRemoteRuntimeRequest<unknown>(
+  const endpoints = await sendRemoteRuntimeRequestOnSocket<unknown>(
     { ...inviteConnection, relay: route },
     'pairing.getEndpoints',
     { installReqId: reqId },
     INSTALL_TIMEOUT_MS,
+    undefined,
     undefined,
     undefined,
     clientCapabilities
