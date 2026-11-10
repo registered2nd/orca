@@ -1,4 +1,4 @@
-import type { BrowserAskReadPageArgs } from '../../../shared/browser-grab-types'
+import type { BrowserAskReadPageArgs } from '../../../shared/browser/element-grab/browser-grab-types'
 
 const PAGE_TEXT_MAX_CHARS = 200_000
 const ELEMENT_MARKUP_MAX_CHARS = 4000
