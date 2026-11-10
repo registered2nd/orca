@@ -1,5 +1,5 @@
 import { createNonSecureContextUuid as createBrowserUuid } from '../../../../../shared/non-secure-context-uuid'
-import type { BrowserGrabPayload } from '../../../../../shared/browser-grab-types'
+import type { BrowserGrabPayload } from '../../../../../shared/browser/element-grab/browser-grab-types'
 
 export type BrowserAskItem =
   | { id: string; kind: 'element'; payload: BrowserGrabPayload }

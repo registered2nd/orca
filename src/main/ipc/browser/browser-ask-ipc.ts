@@ -10,7 +10,7 @@ import type {
   BrowserAskReadPageArgs,
   BrowserAskReadPageResult,
   BrowserAskSaveAttachmentArgs
-} from '../../../shared/browser-grab-types'
+} from '../../../shared/browser/element-grab/browser-grab-types'
 
 const ATTACHMENT_MAX_AGE_MS = 24 * 60 * 60 * 1000
 
