@@ -3,8 +3,8 @@ import { Crosshair, FileText, Highlighter, Send, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group'
 import { translate } from '@/i18n/i18n'
-import { activeAgentNotesSendFailureMessage } from '@/lib/active-agent-note-send-result'
-import { sendMessageToAgent } from '@/lib/agent-message-send'
+import { activeAgentNotesSendFailureMessage } from '@/lib/agent-session/messaging/terminal/active-agent-note-send-result'
+import { sendMessageToAgent } from '@/lib/agent-session/messaging/agent-message-send'
 import { ImeTextarea } from '@/lib/ime-text-field'
 import {
   getLastFocusedAgentPane,
