@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import type { BrowserGrabPayload } from '../../../../../shared/browser-grab-types'
+import type { BrowserGrabPayload } from '../../../../../shared/browser/element-grab/browser-grab-types'
 import { buildAskPrompt, elementText } from './browser-page-ask-prompt'
 
 function payload(overrides: Partial<BrowserGrabPayload['target']> = {}): BrowserGrabPayload {
