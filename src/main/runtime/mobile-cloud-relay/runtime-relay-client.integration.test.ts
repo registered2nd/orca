@@ -4,7 +4,7 @@ import { join } from 'node:path'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import nacl from 'tweetnacl'
 import { WebSocketServer, type RawData, type WebSocket } from 'ws'
-import { sendRemoteRuntimeRequest } from '../../../shared/remote-runtime/remote-runtime-client'
+import { sendRemoteRuntimeRequestOnSocket } from '../../../shared/remote-runtime/requests/remote-runtime-request-socket'
 import type { PairedRuntimeRelayRoute } from '../../../shared/remote-runtime/pairing/paired-runtime-connection'
 import { DeviceRegistry } from '../rpc/server/pairing/device-registry'
 import { MobileSocketWiring } from '../rpc/mobile-socket-wiring'
@@ -152,11 +152,12 @@ describe('desktop runtime client over Orca Relay', () => {
       leaseExpiresAt: Date.now() + 60_000
     })
 
-    const response = await sendRemoteRuntimeRequest(
+    const response = await sendRemoteRuntimeRequestOnSocket(
       connection,
       'host.platform',
       undefined,
       10_000,
+      undefined,
       undefined,
       undefined,
       ['runtime.status.compat.v1']
@@ -180,7 +181,7 @@ describe('desktop runtime client over Orca Relay', () => {
     const { connection } = await relayHost(null)
 
     await expect(
-      sendRemoteRuntimeRequest(connection, 'host.platform', undefined, 10_000)
+      sendRemoteRuntimeRequestOnSocket(connection, 'host.platform', undefined, 10_000)
     ).rejects.toThrow('Orca Relay refused the connection (4404).')
   }, 20_000)
 })
