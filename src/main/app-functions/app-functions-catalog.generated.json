@@ -1,7 +1,7 @@
 {
   "ipc": {
     "agentAwake:getStatus": {
-      "source": "src/main/ipc/settings.ts:64",
+      "source": "src/main/ipc/settings.ts:66",
       "params": [],
       "preload": {
         "api": "window.api.agentAwake.getStatus",
@@ -15,7 +15,7 @@
       "params": [],
       "preload": {
         "api": "window.api.agentStatus.getMigrationUnsupportedSnapshot",
-        "source": "src/preload/api/agent-status-bridge.ts:65",
+        "source": "src/preload/api/agent-status-bridge.ts:66",
         "params": [],
         "returns": "Promise<MigrationUnsupportedPtyEntry[]>"
       }
@@ -25,7 +25,7 @@
       "params": [],
       "preload": {
         "api": "window.api.agentStatus.getSnapshot",
-        "source": "src/preload/api/agent-status-bridge.ts:26",
+        "source": "src/preload/api/agent-status-bridge.ts:27",
         "params": [],
         "returns": "Promise<AgentStatusIpcPayload[]>"
       }
@@ -42,7 +42,7 @@
       ],
       "preload": {
         "api": "window.api.agentStatus.hasVerifiableAgentProcess",
-        "source": "src/preload/api/agent-status-bridge.ts:30",
+        "source": "src/preload/api/agent-status-bridge.ts:31",
         "params": [
           {
             "name": "paneKey",
@@ -66,7 +66,7 @@
       ],
       "preload": {
         "api": "window.api.agentStatus.inferInterrupt",
-        "source": "src/preload/api/agent-status-bridge.ts:28",
+        "source": "src/preload/api/agent-status-bridge.ts:29",
         "params": [
           {
             "name": "request",
@@ -90,7 +90,7 @@
       ],
       "preload": {
         "api": "window.api.agentStatus.inferQuestionAnswered",
-        "source": "src/preload/api/agent-status-bridge.ts:32",
+        "source": "src/preload/api/agent-status-bridge.ts:33",
         "params": [
           {
             "name": "request",
@@ -103,7 +103,7 @@
       }
     },
     "aiVault:cancelListSessions": {
-      "source": "src/main/ipc/ai-vault/ai-vault.ts:282",
+      "source": "src/main/ipc/ai-vault/ai-vault.ts:281",
       "params": [
         {
           "name": "args",
@@ -161,7 +161,7 @@
       }
     },
     "aiVault:getFirstUserPrompt": {
-      "source": "src/main/ipc/ai-vault/ai-vault.ts:296",
+      "source": "src/main/ipc/ai-vault/ai-vault.ts:295",
       "params": [
         {
           "name": "args",
@@ -209,7 +209,7 @@
       }
     },
     "aiVault:listSessions": {
-      "source": "src/main/ipc/ai-vault/ai-vault.ts:255",
+      "source": "src/main/ipc/ai-vault/ai-vault.ts:256",
       "params": [
         {
           "name": "args",
@@ -233,7 +233,7 @@
       }
     },
     "aiVault:listSubagentSessions": {
-      "source": "src/main/ipc/ai-vault/ai-vault.ts:291",
+      "source": "src/main/ipc/ai-vault/ai-vault.ts:290",
       "params": [
         {
           "name": "args",
@@ -281,7 +281,7 @@
       }
     },
     "aiVault:resolveSessionTitles": {
-      "source": "src/main/ipc/ai-vault/ai-vault.ts:277",
+      "source": "src/main/ipc/ai-vault/ai-vault.ts:276",
       "params": [
         {
           "name": "args",
@@ -762,8 +762,38 @@
         "returns": "Promise<void>"
       }
     },
+    "appIcon:importCustom": {
+      "source": "src/main/ipc/custom-app-icon.ts:15",
+      "params": [],
+      "preload": {
+        "api": "window.api.appIcon.importCustom",
+        "source": "src/preload/api/app-icon-bridge.ts:5",
+        "params": [],
+        "returns": null
+      }
+    },
+    "appIcon:readCustomPreview": {
+      "source": "src/main/ipc/custom-app-icon.ts:44",
+      "params": [],
+      "preload": {
+        "api": "window.api.appIcon.readCustomPreview",
+        "source": "src/preload/api/app-icon-bridge.ts:6",
+        "params": [],
+        "returns": null
+      }
+    },
+    "appIcon:removeCustom": {
+      "source": "src/main/ipc/custom-app-icon.ts:46",
+      "params": [],
+      "preload": {
+        "api": "window.api.appIcon.removeCustom",
+        "source": "src/preload/api/app-icon-bridge.ts:7",
+        "params": [],
+        "returns": null
+      }
+    },
     "automations:listExternalManagerForOwner": {
-      "source": "src/main/ipc/automations.ts:66",
+      "source": "src/main/ipc/automations.ts:61",
       "params": [
         {
           "name": "request",
@@ -774,7 +804,7 @@
       ],
       "preload": {
         "api": "window.api.automations.listExternalManagerForOwner",
-        "source": "src/preload/api/automations-bridge.ts:21",
+        "source": "src/preload/api/automations-bridge.ts:15",
         "params": [
           {
             "name": "request",
@@ -786,42 +816,8 @@
         "returns": "Promise<ExternalAutomationManagerResult>"
       }
     },
-    "automations:markDispatchResult": {
-      "source": "src/main/ipc/automations.ts:94",
-      "params": [
-        {
-          "name": "result",
-          "type": "AutomationDispatchResult",
-          "optional": false,
-          "rest": false
-        }
-      ],
-      "preload": {
-        "api": "window.api.automations.markDispatchResult",
-        "source": "src/preload/api/automations-bridge.ts:32",
-        "params": [
-          {
-            "name": "result",
-            "type": "AutomationDispatchResult",
-            "optional": false,
-            "rest": false
-          }
-        ],
-        "returns": "Promise<AutomationRun>"
-      }
-    },
-    "automations:rendererReady": {
-      "source": "src/main/ipc/automations.ts:112",
-      "params": [],
-      "preload": {
-        "api": "window.api.automations.rendererReady",
-        "source": "src/preload/api/automations-bridge.ts:38",
-        "params": [],
-        "returns": "Promise<void>"
-      }
-    },
     "automations:retainExternalScopes": {
-      "source": "src/main/ipc/automations.ts:80",
+      "source": "src/main/ipc/automations.ts:75",
       "params": [
         {
           "name": "request",
@@ -832,7 +828,7 @@
       ],
       "preload": {
         "api": "window.api.automations.retainExternalScopes",
-        "source": "src/preload/api/automations-bridge.ts:25",
+        "source": "src/preload/api/automations-bridge.ts:19",
         "params": [
           {
             "name": "request",
@@ -845,7 +841,7 @@
       }
     },
     "automations:runExternalActionForOwner": {
-      "source": "src/main/ipc/automations.ts:74",
+      "source": "src/main/ipc/automations.ts:69",
       "params": [
         {
           "name": "request",
@@ -856,7 +852,7 @@
       ],
       "preload": {
         "api": "window.api.automations.runExternalActionForOwner",
-        "source": "src/preload/api/automations-bridge.ts:23",
+        "source": "src/preload/api/automations-bridge.ts:17",
         "params": [
           {
             "name": "request",
@@ -868,32 +864,8 @@
         "returns": "Promise<void>"
       }
     },
-    "automations:runPrecheck": {
-      "source": "src/main/ipc/automations.ts:86",
-      "params": [
-        {
-          "name": "args",
-          "type": "{ automationId: string; runId: string; }",
-          "optional": false,
-          "rest": false
-        }
-      ],
-      "preload": {
-        "api": "window.api.automations.runPrecheck",
-        "source": "src/preload/api/automations-bridge.ts:30",
-        "params": [
-          {
-            "name": "args",
-            "type": "{ automationId: string; runId: string; }",
-            "optional": false,
-            "rest": false
-          }
-        ],
-        "returns": "Promise<AutomationPrecheckResult | null>"
-      }
-    },
     "automations:snapshotWorkspaceName": {
-      "source": "src/main/ipc/automations.ts:99",
+      "source": "src/main/ipc/automations.ts:81",
       "params": [
         {
           "name": "args",
@@ -904,7 +876,7 @@
       ],
       "preload": {
         "api": "window.api.automations.snapshotWorkspaceName",
-        "source": "src/preload/api/automations-bridge.ts:37",
+        "source": "src/preload/api/automations-bridge.ts:24",
         "params": [
           {
             "name": "args",
@@ -961,7 +933,7 @@
       }
     },
     "browser:activeTabChanged": {
-      "source": "src/main/ipc/browser/browser.ts:229",
+      "source": "src/main/ipc/browser/browser.ts:233",
       "params": [
         {
           "name": "args",
@@ -1188,7 +1160,7 @@
       ],
       "preload": {
         "api": "window.api.browser.getPageSiteDisplay",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:110",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:112",
         "params": [
           {
             "name": "args",
@@ -1234,8 +1206,32 @@
         "returns": null
       }
     },
+    "browser:insertDictationText": {
+      "source": "src/main/ipc/browser/browser-dictation-ipc.ts:7",
+      "params": [
+        {
+          "name": "args",
+          "type": "{ browserPageId: string; text: unknown; }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.browser.insertDictationText",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:106",
+        "params": [
+          {
+            "name": "args",
+            "type": "{ browserPageId: string; text: string; }",
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": "Promise<boolean>"
+      }
+    },
     "browser:isGuestRegistered": {
-      "source": "src/main/ipc/browser/browser.ts:155",
+      "source": "src/main/ipc/browser/browser.ts:159",
       "params": [
         {
           "name": "args",
@@ -1283,7 +1279,7 @@
       }
     },
     "browser:prepareSshWorkspacePartition": {
-      "source": "src/main/ipc/browser/browser.ts:113",
+      "source": "src/main/ipc/browser/browser.ts:117",
       "params": [
         {
           "name": "args",
@@ -1307,7 +1303,7 @@
       }
     },
     "browser:proceedCertificate": {
-      "source": "src/main/ipc/browser/browser.ts:211",
+      "source": "src/main/ipc/browser/browser.ts:215",
       "params": [
         {
           "name": "args",
@@ -1318,7 +1314,7 @@
       ],
       "preload": {
         "api": "window.api.browser.proceedCertificate",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:167",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:169",
         "params": [
           {
             "name": "args",
@@ -1342,7 +1338,7 @@
       ],
       "preload": {
         "api": "window.api.browser.publishClientPageMetadata",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:134",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:136",
         "params": [
           {
             "name": "args",
@@ -1355,7 +1351,7 @@
       }
     },
     "browser:registerGuest": {
-      "source": "src/main/ipc/browser/browser.ts:108",
+      "source": "src/main/ipc/browser/browser.ts:112",
       "params": [
         {
           "name": "args",
@@ -1427,7 +1423,7 @@
       }
     },
     "browser:repairGuestRegistration": {
-      "source": "src/main/ipc/browser/browser.ts:151",
+      "source": "src/main/ipc/browser/browser.ts:155",
       "params": [
         {
           "name": "args",
@@ -1451,7 +1447,7 @@
       }
     },
     "browser:respondPagePrompt": {
-      "source": "src/main/ipc/browser/browser.ts:201",
+      "source": "src/main/ipc/browser/browser.ts:205",
       "params": [
         {
           "name": "response",
@@ -1475,7 +1471,7 @@
       }
     },
     "browser:respondWebAuthnAccount": {
-      "source": "src/main/ipc/browser/browser.ts:191",
+      "source": "src/main/ipc/browser/browser.ts:195",
       "params": [
         {
           "name": "response",
@@ -1828,7 +1824,7 @@
       ],
       "preload": {
         "api": "window.api.browser.setAnnotationViewportBridge",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:132",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:134",
         "params": [
           {
             "name": "args",
@@ -1893,7 +1889,7 @@
       ],
       "preload": {
         "api": "window.api.browser.setPageAudioMuted",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:121",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:123",
         "params": [
           {
             "name": "args",
@@ -1917,7 +1913,7 @@
       ],
       "preload": {
         "api": "window.api.browser.setPageSiteColorScheme",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:119",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:121",
         "params": [
           {
             "name": "args",
@@ -1941,7 +1937,7 @@
       ],
       "preload": {
         "api": "window.api.browser.setViewportOverride",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:108",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:110",
         "params": [
           {
             "name": "args",
@@ -2002,7 +1998,7 @@
       }
     },
     "browser:unregisterGuest": {
-      "source": "src/main/ipc/browser/browser.ts:172",
+      "source": "src/main/ipc/browser/browser.ts:176",
       "params": [
         {
           "name": "args",
@@ -2037,7 +2033,7 @@
       ],
       "preload": {
         "api": "window.api.browser.zoomPage",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:114",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:116",
         "params": [
           {
             "name": "args",
@@ -2067,7 +2063,7 @@
       ],
       "preload": {
         "api": null,
-        "source": "src/preload/browser-extension-preload.ts:60",
+        "source": "src/preload/browser-extension-preload.ts:59",
         "params": [
           {
             "name": "request",
@@ -2091,7 +2087,7 @@
       ],
       "preload": {
         "api": "bridge.call",
-        "source": "src/preload/browser-extension-web-store-bridge.ts:38",
+        "source": "src/preload/browser-extension-web-store-bridge.ts:37",
         "params": [
           {
             "name": "method",
@@ -2708,7 +2704,7 @@
       }
     },
     "cache:getGitHub": {
-      "source": "src/main/ipc/settings.ts:308",
+      "source": "src/main/ipc/settings.ts:310",
       "params": [],
       "preload": {
         "api": "window.api.cache.getGitHub",
@@ -2718,7 +2714,7 @@
       }
     },
     "cache:setGitHub": {
-      "source": "src/main/ipc/settings.ts:312",
+      "source": "src/main/ipc/settings.ts:314",
       "params": [
         {
           "name": "args",
@@ -2970,37 +2966,47 @@
       }
     },
     "clipboard:hasImage": {
-      "source": "src/main/window/clipboard-ipc-handlers.ts:158",
+      "source": "src/main/window/clipboard-ipc-handlers.ts:157",
       "params": [],
       "preload": {
         "api": "window.api.ui.clipboardHasImage",
-        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:110",
+        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:124",
         "params": [],
         "returns": "Promise<boolean>"
       }
     },
     "clipboard:readFilePaths": {
-      "source": "src/main/window/clipboard-ipc-handlers.ts:163",
+      "source": "src/main/window/clipboard-ipc-handlers.ts:162",
       "params": [],
       "preload": {
         "api": "window.api.ui.readClipboardFilePaths",
-        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:111",
+        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:125",
         "params": [],
         "returns": "Promise<string[]>"
       }
     },
     "clipboard:readImageThumbnail": {
-      "source": "src/main/window/clipboard-ipc-handlers.ts:149",
+      "source": "src/main/window/clipboard-ipc-handlers.ts:148",
       "params": [],
       "preload": {
         "api": "window.api.ui.readClipboardImageThumbnail",
-        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:123",
+        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:137",
         "params": [],
         "returns": "Promise<ClipboardImageThumbnail | null>"
       }
     },
+    "clipboard:readLinkHtml": {
+      "source": "src/main/window/clipboard-ipc-handlers.ts:131",
+      "params": [],
+      "preload": {
+        "api": "window.api.ui.readClipboardLinkHtml",
+        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:109",
+        "params": [],
+        "returns": "Promise<string>"
+      }
+    },
     "clipboard:readSelectionText": {
-      "source": "src/main/window/clipboard-ipc-handlers.ts:137",
+      "source": "src/main/window/clipboard-ipc-handlers.ts:136",
       "params": [
         {
           "name": "options",
@@ -3011,7 +3017,7 @@
       ],
       "preload": {
         "api": "window.api.ui.readSelectionClipboardText",
-        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:97",
+        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:111",
         "params": [
           {
             "name": "options",
@@ -3024,7 +3030,7 @@
       }
     },
     "clipboard:readText": {
-      "source": "src/main/window/clipboard-ipc-handlers.ts:133",
+      "source": "src/main/window/clipboard-ipc-handlers.ts:126",
       "params": [
         {
           "name": "options",
@@ -3035,7 +3041,7 @@
       ],
       "preload": {
         "api": "window.api.ui.readClipboardText",
-        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:95",
+        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:108",
         "params": [
           {
             "name": "options",
@@ -3048,7 +3054,7 @@
       }
     },
     "clipboard:restoreNativeChatPastes": {
-      "source": "src/main/window/clipboard-ipc-handlers.ts:144",
+      "source": "src/main/window/clipboard-ipc-handlers.ts:143",
       "params": [
         {
           "name": "paths",
@@ -3059,7 +3065,7 @@
       ],
       "preload": {
         "api": "window.api.ui.restoreNativeChatPastes",
-        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:115",
+        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:129",
         "params": [
           {
             "name": "paths",
@@ -3072,7 +3078,7 @@
       }
     },
     "clipboard:saveImageAsTempFile": {
-      "source": "src/main/window/clipboard-ipc-handlers.ts:168",
+      "source": "src/main/window/clipboard-ipc-handlers.ts:167",
       "params": [
         {
           "name": "args",
@@ -3083,7 +3089,7 @@
       ],
       "preload": {
         "api": "window.api.ui.saveClipboardImageAsTempFile",
-        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:104",
+        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:118",
         "params": [
           {
             "name": "args",
@@ -3096,7 +3102,7 @@
       }
     },
     "clipboard:savePastedTextAsFile": {
-      "source": "src/main/window/clipboard-ipc-handlers.ts:189",
+      "source": "src/main/window/clipboard-ipc-handlers.ts:188",
       "params": [
         {
           "name": "args",
@@ -3107,7 +3113,7 @@
       ],
       "preload": {
         "api": "window.api.ui.savePastedTextAsFile",
-        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:109",
+        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:123",
         "params": [
           {
             "name": "args",
@@ -3120,7 +3126,7 @@
       }
     },
     "clipboard:writeFile": {
-      "source": "src/main/window/clipboard-ipc-handlers.ts:194",
+      "source": "src/main/window/clipboard-ipc-handlers.ts:193",
       "params": [
         {
           "name": "args",
@@ -3131,7 +3137,7 @@
       ],
       "preload": {
         "api": "window.api.ui.writeClipboardFile",
-        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:147",
+        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:161",
         "params": [
           {
             "name": "args",
@@ -3144,7 +3150,7 @@
       }
     },
     "clipboard:writeImage": {
-      "source": "src/main/window/clipboard-ipc-handlers.ts:255",
+      "source": "src/main/window/clipboard-ipc-handlers.ts:254",
       "params": [
         {
           "name": "dataUrl",
@@ -3155,7 +3161,7 @@
       ],
       "preload": {
         "api": "window.api.ui.writeClipboardImage",
-        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:131",
+        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:145",
         "params": [
           {
             "name": "dataUrl",
@@ -3168,7 +3174,7 @@
       }
     },
     "clipboard:writeSelectionText": {
-      "source": "src/main/window/clipboard-ipc-handlers.ts:248",
+      "source": "src/main/window/clipboard-ipc-handlers.ts:247",
       "params": [
         {
           "name": "text",
@@ -3179,7 +3185,7 @@
       ],
       "preload": {
         "api": "window.api.ui.writeSelectionClipboardText",
-        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:129",
+        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:143",
         "params": [
           {
             "name": "text",
@@ -3192,7 +3198,7 @@
       }
     },
     "clipboard:writeTerminalText": {
-      "source": "src/main/window/clipboard-ipc-handlers.ts:244",
+      "source": "src/main/window/clipboard-ipc-handlers.ts:243",
       "params": [
         {
           "name": "text",
@@ -3203,7 +3209,7 @@
       ],
       "preload": {
         "api": "window.api.ui.writeTerminalClipboardText",
-        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:127",
+        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:141",
         "params": [
           {
             "name": "text",
@@ -3216,7 +3222,7 @@
       }
     },
     "clipboard:writeText": {
-      "source": "src/main/window/clipboard-ipc-handlers.ts:233",
+      "source": "src/main/window/clipboard-ipc-handlers.ts:232",
       "params": [
         {
           "name": "text",
@@ -3227,7 +3233,7 @@
       ],
       "preload": {
         "api": "window.api.ui.writeClipboardText",
-        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:125",
+        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:139",
         "params": [
           {
             "name": "text",
@@ -4142,7 +4148,7 @@
       }
     },
     "ephemeralVm:attachWorkspace": {
-      "source": "src/main/ipc/ephemeral-vm-runtime-handlers.ts:45",
+      "source": "src/main/ipc/ephemeral-vm-runtime-handlers.ts:122",
       "params": [
         {
           "name": "args",
@@ -4153,7 +4159,7 @@
       ],
       "preload": {
         "api": "window.api.ephemeralVm.attachWorkspace",
-        "source": "src/preload/api/ephemeral-vm-bridge.ts:19",
+        "source": "src/preload/api/ephemeral-vm-bridge.ts:24",
         "params": [
           {
             "name": "args",
@@ -4166,7 +4172,7 @@
       }
     },
     "ephemeralVm:cancelProvision": {
-      "source": "src/main/ipc/ephemeral-vm.ts:286",
+      "source": "src/main/ipc/ephemeral-vm.ts:291",
       "params": [
         {
           "name": "args",
@@ -4177,7 +4183,7 @@
       ],
       "preload": {
         "api": "window.api.ephemeralVm.cancelProvision",
-        "source": "src/preload/api/ephemeral-vm-bridge.ts:9",
+        "source": "src/preload/api/ephemeral-vm-bridge.ts:14",
         "params": [
           {
             "name": "args",
@@ -4190,7 +4196,7 @@
       }
     },
     "ephemeralVm:cleanup": {
-      "source": "src/main/ipc/ephemeral-vm-runtime-handlers.ts:56",
+      "source": "src/main/ipc/ephemeral-vm-runtime-handlers.ts:133",
       "params": [
         {
           "name": "args",
@@ -4201,7 +4207,7 @@
       ],
       "preload": {
         "api": "window.api.ephemeralVm.cleanup",
-        "source": "src/preload/api/ephemeral-vm-bridge.ts:21",
+        "source": "src/preload/api/ephemeral-vm-bridge.ts:32",
         "params": [
           {
             "name": "args",
@@ -4214,7 +4220,7 @@
       }
     },
     "ephemeralVm:doctor": {
-      "source": "src/main/ipc/ephemeral-vm.ts:92",
+      "source": "src/main/ipc/ephemeral-vm.ts:97",
       "params": [
         {
           "name": "args",
@@ -4225,7 +4231,31 @@
       ],
       "preload": {
         "api": "window.api.ephemeralVm.doctor",
-        "source": "src/preload/api/ephemeral-vm-bridge.ts:7",
+        "source": "src/preload/api/ephemeral-vm-bridge.ts:12",
+        "params": [
+          {
+            "name": "args",
+            "type": null,
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": null
+      }
+    },
+    "ephemeralVm:forgetRuntime": {
+      "source": "src/main/ipc/ephemeral-vm-runtime-handlers.ts:169",
+      "params": [
+        {
+          "name": "args",
+          "type": "{ runtimeId: string; }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.ephemeralVm.forgetRuntime",
+        "source": "src/preload/api/ephemeral-vm-bridge.ts:34",
         "params": [
           {
             "name": "args",
@@ -4238,7 +4268,7 @@
       }
     },
     "ephemeralVm:getCleanupCommand": {
-      "source": "src/main/ipc/ephemeral-vm-runtime-handlers.ts:151",
+      "source": "src/main/ipc/ephemeral-vm-runtime-handlers.ts:173",
       "params": [
         {
           "name": "args",
@@ -4249,7 +4279,7 @@
       ],
       "preload": {
         "api": "window.api.ephemeralVm.getCleanupCommand",
-        "source": "src/preload/api/ephemeral-vm-bridge.ts:23",
+        "source": "src/preload/api/ephemeral-vm-bridge.ts:35",
         "params": [
           {
             "name": "args",
@@ -4261,18 +4291,28 @@
         "returns": null
       }
     },
+    "ephemeralVm:listPendingCheckouts": {
+      "source": "src/main/ipc/ephemeral-vm-runtime-handlers.ts:102",
+      "params": [],
+      "preload": {
+        "api": "window.api.ephemeralVm.listPendingCheckouts",
+        "source": "src/preload/api/ephemeral-vm-bridge.ts:39",
+        "params": [],
+        "returns": null
+      }
+    },
     "ephemeralVm:listRecipeCatalog": {
-      "source": "src/main/ipc/ephemeral-vm.ts:85",
+      "source": "src/main/ipc/ephemeral-vm.ts:90",
       "params": [],
       "preload": {
         "api": "window.api.ephemeralVm.listRecipeCatalog",
-        "source": "src/preload/api/ephemeral-vm-bridge.ts:6",
+        "source": "src/preload/api/ephemeral-vm-bridge.ts:11",
         "params": [],
         "returns": null
       }
     },
     "ephemeralVm:listRecipes": {
-      "source": "src/main/ipc/ephemeral-vm.ts:81",
+      "source": "src/main/ipc/ephemeral-vm.ts:86",
       "params": [
         {
           "name": "args",
@@ -4283,7 +4323,7 @@
       ],
       "preload": {
         "api": "window.api.ephemeralVm.listRecipes",
-        "source": "src/preload/api/ephemeral-vm-bridge.ts:5",
+        "source": "src/preload/api/ephemeral-vm-bridge.ts:10",
         "params": [
           {
             "name": "args",
@@ -4296,17 +4336,17 @@
       }
     },
     "ephemeralVm:listRuntimes": {
-      "source": "src/main/ipc/ephemeral-vm-runtime-handlers.ts:41",
+      "source": "src/main/ipc/ephemeral-vm-runtime-handlers.ts:118",
       "params": [],
       "preload": {
         "api": "window.api.ephemeralVm.listRuntimes",
-        "source": "src/preload/api/ephemeral-vm-bridge.ts:18",
+        "source": "src/preload/api/ephemeral-vm-bridge.ts:23",
         "params": [],
         "returns": null
       }
     },
     "ephemeralVm:provision": {
-      "source": "src/main/ipc/ephemeral-vm.ts:112",
+      "source": "src/main/ipc/ephemeral-vm.ts:117",
       "params": [
         {
           "name": "args",
@@ -4317,7 +4357,7 @@
       ],
       "preload": {
         "api": "window.api.ephemeralVm.provision",
-        "source": "src/preload/api/ephemeral-vm-bridge.ts:8",
+        "source": "src/preload/api/ephemeral-vm-bridge.ts:13",
         "params": [
           {
             "name": "args",
@@ -4329,8 +4369,32 @@
         "returns": null
       }
     },
+    "ephemeralVm:publishPendingCheckouts": {
+      "source": "src/main/ipc/ephemeral-vm-runtime-handlers.ts:85",
+      "params": [
+        {
+          "name": "value",
+          "type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.ephemeralVm.publishPendingCheckouts",
+        "source": "src/preload/api/ephemeral-vm-bridge.ts:37",
+        "params": [
+          {
+            "name": "checkouts",
+            "type": null,
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": null
+      }
+    },
     "ephemeralVm:resumeWorkspace": {
-      "source": "src/main/ipc/runtime.ts:40",
+      "source": "src/main/ipc/runtime.ts:41",
       "params": [
         {
           "name": "args",
@@ -4341,7 +4405,7 @@
       ],
       "preload": {
         "api": "window.api.ephemeralVm.resumeWorkspace",
-        "source": "src/preload/api/ephemeral-vm-bridge.ts:20",
+        "source": "src/preload/api/ephemeral-vm-bridge.ts:25",
         "params": [
           {
             "name": "args",
@@ -4354,7 +4418,7 @@
       }
     },
     "ephemeralVm:stopCleanup": {
-      "source": "src/main/ipc/ephemeral-vm-runtime-handlers.ts:122",
+      "source": "src/main/ipc/ephemeral-vm-runtime-handlers.ts:140",
       "params": [
         {
           "name": "args",
@@ -4365,7 +4429,31 @@
       ],
       "preload": {
         "api": "window.api.ephemeralVm.stopCleanup",
-        "source": "src/preload/api/ephemeral-vm-bridge.ts:22",
+        "source": "src/preload/api/ephemeral-vm-bridge.ts:33",
+        "params": [
+          {
+            "name": "args",
+            "type": null,
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": null
+      }
+    },
+    "ephemeralVm:suspendWorkspace": {
+      "source": "src/main/ipc/runtime.ts:45",
+      "params": [
+        {
+          "name": "args",
+          "type": "{ workspaceId: string; }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.ephemeralVm.suspendWorkspace",
+        "source": "src/preload/api/ephemeral-vm-bridge.ts:26",
         "params": [
           {
             "name": "args",
@@ -4543,7 +4631,7 @@
       ],
       "preload": {
         "api": "window.api.fs.appendDownloadedFileChunk",
-        "source": "src/preload/api/fs-bridge.ts:123",
+        "source": "src/preload/api/fs-bridge.ts:125",
         "params": [
           {
             "name": "args",
@@ -4567,7 +4655,7 @@
       ],
       "preload": {
         "api": "window.api.fs.cancelDownloadedFile",
-        "source": "src/preload/api/fs-bridge.ts:129",
+        "source": "src/preload/api/fs-bridge.ts:131",
         "params": [
           {
             "name": "args",
@@ -4591,7 +4679,7 @@
       ],
       "preload": {
         "api": "window.api.fs.cancelListFiles",
-        "source": "src/preload/api/fs-bridge.ts:216",
+        "source": "src/preload/api/fs-bridge.ts:218",
         "params": [
           {
             "name": "args",
@@ -4615,7 +4703,7 @@
       ],
       "preload": {
         "api": "window.api.fs.cancelSearch",
-        "source": "src/preload/api/fs-bridge.ts:218",
+        "source": "src/preload/api/fs-bridge.ts:220",
         "params": [
           {
             "name": "args",
@@ -4628,7 +4716,7 @@
       }
     },
     "fs:copy": {
-      "source": "src/main/ipc/filesystem/filesystem-mutations.ts:115",
+      "source": "src/main/ipc/filesystem/filesystem-mutations.ts:117",
       "params": [
         {
           "name": "args",
@@ -4639,7 +4727,7 @@
       ],
       "preload": {
         "api": "window.api.fs.copy",
-        "source": "src/preload/api/fs-bridge.ts:177",
+        "source": "src/preload/api/fs-bridge.ts:179",
         "params": [
           {
             "name": "args",
@@ -4652,7 +4740,7 @@
       }
     },
     "fs:createDir": {
-      "source": "src/main/ipc/filesystem/filesystem-mutations.ts:62",
+      "source": "src/main/ipc/filesystem/filesystem-mutations.ts:64",
       "params": [
         {
           "name": "args",
@@ -4663,7 +4751,7 @@
       ],
       "preload": {
         "api": "window.api.fs.createDir",
-        "source": "src/preload/api/fs-bridge.ts:162",
+        "source": "src/preload/api/fs-bridge.ts:164",
         "params": [
           {
             "name": "args",
@@ -4676,7 +4764,7 @@
       }
     },
     "fs:createFile": {
-      "source": "src/main/ipc/filesystem/filesystem-mutations.ts:36",
+      "source": "src/main/ipc/filesystem/filesystem-mutations.ts:38",
       "params": [
         {
           "name": "args",
@@ -4687,7 +4775,7 @@
       ],
       "preload": {
         "api": "window.api.fs.createFile",
-        "source": "src/preload/api/fs-bridge.ts:155",
+        "source": "src/preload/api/fs-bridge.ts:157",
         "params": [
           {
             "name": "args",
@@ -4711,7 +4799,7 @@
       ],
       "preload": {
         "api": "window.api.fs.deletePath",
-        "source": "src/preload/api/fs-bridge.ts:185",
+        "source": "src/preload/api/fs-bridge.ts:187",
         "params": [
           {
             "name": "args",
@@ -4735,7 +4823,7 @@
       ],
       "preload": {
         "api": "window.api.fs.downloadFile",
-        "source": "src/preload/api/fs-bridge.ts:103",
+        "source": "src/preload/api/fs-bridge.ts:105",
         "params": [
           {
             "name": "args",
@@ -4759,7 +4847,7 @@
       ],
       "preload": {
         "api": "window.api.fs.downloadFolder",
-        "source": "src/preload/api/fs-bridge.ts:108",
+        "source": "src/preload/api/fs-bridge.ts:110",
         "params": [
           {
             "name": "args",
@@ -4783,7 +4871,7 @@
       ],
       "preload": {
         "api": "window.api.fs.finishDownloadedFile",
-        "source": "src/preload/api/fs-bridge.ts:127",
+        "source": "src/preload/api/fs-bridge.ts:129",
         "params": [
           {
             "name": "args",
@@ -4796,7 +4884,7 @@
       }
     },
     "fs:grantRuntimeFilePreview": {
-      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:139",
+      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:140",
       "params": [
         {
           "name": "args",
@@ -4807,7 +4895,7 @@
       ],
       "preload": {
         "api": "window.api.fs.grantRuntimeFilePreview",
-        "source": "src/preload/api/fs-bridge.ts:82",
+        "source": "src/preload/api/fs-bridge.ts:84",
         "params": [
           {
             "name": "args",
@@ -4820,7 +4908,7 @@
       }
     },
     "fs:importExternalPaths": {
-      "source": "src/main/ipc/filesystem/filesystem-mutations.ts:150",
+      "source": "src/main/ipc/filesystem/filesystem-mutations.ts:152",
       "params": [
         {
           "name": "args",
@@ -4831,7 +4919,7 @@
       ],
       "preload": {
         "api": "window.api.fs.importExternalPaths",
-        "source": "src/preload/api/fs-bridge.ts:239",
+        "source": "src/preload/api/fs-bridge.ts:241",
         "params": [
           {
             "name": "args",
@@ -4855,7 +4943,7 @@
       ],
       "preload": {
         "api": "window.api.fs.listFiles",
-        "source": "src/preload/api/fs-bridge.ts:214",
+        "source": "src/preload/api/fs-bridge.ts:216",
         "params": [
           {
             "name": "args",
@@ -4868,7 +4956,7 @@
       }
     },
     "fs:listMarkdownDocuments": {
-      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:147",
+      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:148",
       "params": [
         {
           "name": "args",
@@ -4879,7 +4967,7 @@
       ],
       "preload": {
         "api": "window.api.fs.listMarkdownDocuments",
-        "source": "src/preload/api/fs-bridge.ts:134",
+        "source": "src/preload/api/fs-bridge.ts:136",
         "params": [
           {
             "name": "args",
@@ -4892,7 +4980,7 @@
       }
     },
     "fs:pathExists": {
-      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:232",
+      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:233",
       "params": [
         {
           "name": "args",
@@ -4903,7 +4991,7 @@
       ],
       "preload": {
         "api": "window.api.fs.pathExists",
-        "source": "src/preload/api/fs-bridge.ts:201",
+        "source": "src/preload/api/fs-bridge.ts:203",
         "params": [
           {
             "name": "args",
@@ -4916,7 +5004,7 @@
       }
     },
     "fs:pathsExist": {
-      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:202",
+      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:203",
       "params": [
         {
           "name": "args",
@@ -4927,7 +5015,7 @@
       ],
       "preload": {
         "api": "window.api.fs.pathsExist",
-        "source": "src/preload/api/fs-bridge.ts:196",
+        "source": "src/preload/api/fs-bridge.ts:198",
         "params": [
           {
             "name": "args",
@@ -4944,7 +5032,7 @@
       "params": null,
       "preload": {
         "api": "window.api.fs.prepareDroppedPaths",
-        "source": "src/preload/api/fs-bridge.ts:38",
+        "source": "src/preload/api/fs-bridge.ts:40",
         "params": [
           {
             "name": "args",
@@ -4957,7 +5045,7 @@
       }
     },
     "fs:readDir": {
-      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:45",
+      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:46",
       "params": [
         {
           "name": "args",
@@ -4968,7 +5056,7 @@
       ],
       "preload": {
         "api": "window.api.fs.readDir",
-        "source": "src/preload/api/fs-bridge.ts:54",
+        "source": "src/preload/api/fs-bridge.ts:56",
         "params": [
           {
             "name": "args",
@@ -4981,7 +5069,7 @@
       }
     },
     "fs:readFile": {
-      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:96",
+      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:97",
       "params": [
         {
           "name": "args",
@@ -4992,7 +5080,7 @@
       ],
       "preload": {
         "api": "window.api.fs.readFile",
-        "source": "src/preload/api/fs-bridge.ts:70",
+        "source": "src/preload/api/fs-bridge.ts:72",
         "params": [
           {
             "name": "args",
@@ -5016,7 +5104,7 @@
       ],
       "preload": {
         "api": "window.api.fs.readFileChunk",
-        "source": "src/preload/api/fs-bridge.ts:46",
+        "source": "src/preload/api/fs-bridge.ts:48",
         "params": [
           {
             "name": "args",
@@ -5040,7 +5128,7 @@
       ],
       "preload": {
         "api": "window.api.fs.readLocalLogTail",
-        "source": "src/preload/api/fs-bridge.ts:84",
+        "source": "src/preload/api/fs-bridge.ts:86",
         "params": [
           {
             "name": "args",
@@ -5053,7 +5141,7 @@
       }
     },
     "fs:readPreviewRange": {
-      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:133",
+      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:134",
       "params": [
         {
           "name": "args",
@@ -5064,7 +5152,7 @@
       ],
       "preload": {
         "api": "window.api.fs.readPreviewRange",
-        "source": "src/preload/api/fs-bridge.ts:72",
+        "source": "src/preload/api/fs-bridge.ts:74",
         "params": [
           {
             "name": "args",
@@ -5077,7 +5165,7 @@
       }
     },
     "fs:rename": {
-      "source": "src/main/ipc/filesystem/filesystem-mutations.ts:84",
+      "source": "src/main/ipc/filesystem/filesystem-mutations.ts:86",
       "params": [
         {
           "name": "args",
@@ -5088,7 +5176,7 @@
       ],
       "preload": {
         "api": "window.api.fs.rename",
-        "source": "src/preload/api/fs-bridge.ts:170",
+        "source": "src/preload/api/fs-bridge.ts:172",
         "params": [
           {
             "name": "args",
@@ -5101,7 +5189,7 @@
       }
     },
     "fs:resolveDroppedPathsForAgent": {
-      "source": "src/main/ipc/filesystem/filesystem-mutations.ts:246",
+      "source": "src/main/ipc/filesystem/filesystem-mutations.ts:248",
       "params": [
         {
           "name": "args",
@@ -5112,7 +5200,7 @@
       ],
       "preload": {
         "api": "window.api.fs.resolveDroppedPathsForAgent",
-        "source": "src/preload/api/fs-bridge.ts:255",
+        "source": "src/preload/api/fs-bridge.ts:257",
         "params": [
           {
             "name": "args",
@@ -5136,7 +5224,7 @@
       ],
       "preload": {
         "api": "window.api.fs.saveDownloadedFile",
-        "source": "src/preload/api/fs-bridge.ts:114",
+        "source": "src/preload/api/fs-bridge.ts:116",
         "params": [
           {
             "name": "args",
@@ -5160,7 +5248,7 @@
       ],
       "preload": {
         "api": "window.api.fs.search",
-        "source": "src/preload/api/fs-bridge.ts:230",
+        "source": "src/preload/api/fs-bridge.ts:232",
         "params": [
           {
             "name": "args",
@@ -5173,7 +5261,7 @@
       }
     },
     "fs:stageExternalPathsForRuntimeUpload": {
-      "source": "src/main/ipc/filesystem/filesystem-mutations.ts:195",
+      "source": "src/main/ipc/filesystem/filesystem-mutations.ts:197",
       "params": [
         {
           "name": "args",
@@ -5184,7 +5272,7 @@
       ],
       "preload": {
         "api": "window.api.fs.stageExternalPathsForRuntimeUpload",
-        "source": "src/preload/api/fs-bridge.ts:244",
+        "source": "src/preload/api/fs-bridge.ts:246",
         "params": [
           {
             "name": "args",
@@ -5208,7 +5296,7 @@
       ],
       "preload": {
         "api": "window.api.fs.startDownloadedFile",
-        "source": "src/preload/api/fs-bridge.ts:119",
+        "source": "src/preload/api/fs-bridge.ts:121",
         "params": [
           {
             "name": "args",
@@ -5232,7 +5320,7 @@
       ],
       "preload": {
         "api": "window.api.fs.startLocalLogTail",
-        "source": "src/preload/api/fs-bridge.ts:86",
+        "source": "src/preload/api/fs-bridge.ts:88",
         "params": [
           {
             "name": "args",
@@ -5245,7 +5333,7 @@
       }
     },
     "fs:stat": {
-      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:176",
+      "source": "src/main/ipc/filesystem/filesystem-read-handlers.ts:177",
       "params": [
         {
           "name": "args",
@@ -5256,7 +5344,7 @@
       ],
       "preload": {
         "api": "window.api.fs.stat",
-        "source": "src/preload/api/fs-bridge.ts:192",
+        "source": "src/preload/api/fs-bridge.ts:194",
         "params": [
           {
             "name": "args",
@@ -5280,7 +5368,7 @@
       ],
       "preload": {
         "api": "window.api.fs.stopLocalLogTail",
-        "source": "src/preload/api/fs-bridge.ts:88",
+        "source": "src/preload/api/fs-bridge.ts:90",
         "params": [
           {
             "name": "args",
@@ -5304,7 +5392,7 @@
       ],
       "preload": {
         "api": "window.api.fs.unwatchWorktree",
-        "source": "src/preload/api/fs-bridge.ts:263",
+        "source": "src/preload/api/fs-bridge.ts:265",
         "params": [
           {
             "name": "args",
@@ -5317,7 +5405,7 @@
       }
     },
     "fs:uploadExternalFileToRuntime": {
-      "source": "src/main/ipc/filesystem/filesystem-mutations.ts:216",
+      "source": "src/main/ipc/filesystem/filesystem-mutations.ts:218",
       "params": [
         {
           "name": "args",
@@ -5328,7 +5416,7 @@
       ],
       "preload": {
         "api": "window.api.fs.uploadExternalFileToRuntime",
-        "source": "src/preload/api/fs-bridge.ts:247",
+        "source": "src/preload/api/fs-bridge.ts:249",
         "params": [
           {
             "name": "args",
@@ -5352,7 +5440,7 @@
       ],
       "preload": {
         "api": "window.api.fs.uploadPathsToAgentSessionAttachments",
-        "source": "src/preload/api/fs-bridge.ts:259",
+        "source": "src/preload/api/fs-bridge.ts:261",
         "params": [
           {
             "name": "args",
@@ -5376,7 +5464,7 @@
       ],
       "preload": {
         "api": "window.api.fs.watchWorktree",
-        "source": "src/preload/api/fs-bridge.ts:261",
+        "source": "src/preload/api/fs-bridge.ts:263",
         "params": [
           {
             "name": "args",
@@ -5400,7 +5488,7 @@
       ],
       "preload": {
         "api": "window.api.fs.writeFile",
-        "source": "src/preload/api/fs-bridge.ts:143",
+        "source": "src/preload/api/fs-bridge.ts:145",
         "params": [
           {
             "name": "args",
@@ -5424,7 +5512,7 @@
       ],
       "preload": {
         "api": "window.api.fs.writeFileBytes",
-        "source": "src/preload/api/fs-bridge.ts:152",
+        "source": "src/preload/api/fs-bridge.ts:154",
         "params": [
           {
             "name": "args",
@@ -5448,7 +5536,7 @@
       ],
       "preload": {
         "api": "window.api.gh.addIssueComment",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:107",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:108",
         "params": [
           {
             "name": "args",
@@ -5472,7 +5560,7 @@
       ],
       "preload": {
         "api": "window.api.gh.addIssueCommentBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:205",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:206",
         "params": [
           {
             "name": "args",
@@ -5496,7 +5584,7 @@
       ],
       "preload": {
         "api": "window.api.gh.addPRReviewComment",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:131",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:132",
         "params": [
           {
             "name": "args",
@@ -5520,7 +5608,7 @@
       ],
       "preload": {
         "api": "window.api.gh.addPRReviewCommentReply",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:119",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:120",
         "params": [
           {
             "name": "args",
@@ -5537,7 +5625,7 @@
       "params": [],
       "preload": {
         "api": "window.api.gh.checkOrcaStarred",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:161",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:162",
         "params": [],
         "returns": "Promise<boolean | null>"
       }
@@ -5554,7 +5642,7 @@
       ],
       "preload": {
         "api": "window.api.gh.clearProjectItemField",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:196",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:197",
         "params": [
           {
             "name": "args",
@@ -5626,7 +5714,7 @@
       ],
       "preload": {
         "api": "window.api.gh.deleteIssueCommentBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:213",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:214",
         "params": [
           {
             "name": "args",
@@ -5650,7 +5738,7 @@
       ],
       "preload": {
         "api": "window.api.gh.diagnoseAuth",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:166",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:167",
         "params": [
           {
             "name": "args",
@@ -5663,7 +5751,7 @@
       }
     },
     "gh:enqueuePRRefresh": {
-      "source": "src/main/ipc/source-control/github-pr-refresh-handlers.ts:152",
+      "source": "src/main/ipc/source-control/github-pr-refresh-handlers.ts:166",
       "params": [
         {
           "name": "args",
@@ -5698,7 +5786,7 @@
       ],
       "preload": {
         "api": "window.api.gh.getProjectViewTable",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:187",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:188",
         "params": [
           {
             "name": "args",
@@ -5746,7 +5834,7 @@
       ],
       "preload": {
         "api": "window.api.gh.listAccessibleProjects",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:181",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:182",
         "params": [
           {
             "name": "args",
@@ -5770,7 +5858,7 @@
       ],
       "preload": {
         "api": "window.api.gh.listAssignableUsers",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:145",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:146",
         "params": [
           {
             "name": "args",
@@ -5794,7 +5882,7 @@
       ],
       "preload": {
         "api": "window.api.gh.listAssignableUsersBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:219",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:220",
         "params": [
           {
             "name": "args",
@@ -5818,7 +5906,7 @@
       ],
       "preload": {
         "api": "window.api.gh.listBindableAccounts",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:171",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:172",
         "params": [
           {
             "name": "args",
@@ -5842,7 +5930,7 @@
       ],
       "preload": {
         "api": "window.api.gh.listIssueTypesBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:221",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:222",
         "params": [
           {
             "name": "args",
@@ -5890,7 +5978,7 @@
       ],
       "preload": {
         "api": "window.api.gh.listLabels",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:138",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:139",
         "params": [
           {
             "name": "args",
@@ -5914,7 +6002,7 @@
       ],
       "preload": {
         "api": "window.api.gh.listLabelsBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:215",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:216",
         "params": [
           {
             "name": "args",
@@ -5938,7 +6026,7 @@
       ],
       "preload": {
         "api": "window.api.gh.listProjectViews",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:185",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:186",
         "params": [
           {
             "name": "args",
@@ -6143,7 +6231,7 @@
       }
     },
     "gh:prForBranch": {
-      "source": "src/main/ipc/source-control/github-pr-refresh-handlers.ts:60",
+      "source": "src/main/ipc/source-control/github-pr-refresh-handlers.ts:74",
       "params": [
         {
           "name": "args",
@@ -6178,7 +6266,7 @@
       ],
       "preload": {
         "api": "window.api.gh.projectWorkItemDetailsBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:191",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:192",
         "params": [
           {
             "name": "args",
@@ -6202,7 +6290,7 @@
       ],
       "preload": {
         "api": "window.api.gh.rateLimit",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:164",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:165",
         "params": [
           {
             "name": "args",
@@ -6215,7 +6303,7 @@
       }
     },
     "gh:refreshPRNow": {
-      "source": "src/main/ipc/source-control/github-pr-refresh-handlers.ts:131",
+      "source": "src/main/ipc/source-control/github-pr-refresh-handlers.ts:145",
       "params": [
         {
           "name": "args",
@@ -6311,7 +6399,7 @@
       }
     },
     "gh:reportVisiblePRRefreshCandidates": {
-      "source": "src/main/ipc/source-control/github-pr-refresh-handlers.ts:171",
+      "source": "src/main/ipc/source-control/github-pr-refresh-handlers.ts:185",
       "params": [
         {
           "name": "args",
@@ -6394,7 +6482,7 @@
       ],
       "preload": {
         "api": "window.api.gh.resolveProjectRef",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:183",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:184",
         "params": [
           {
             "name": "args",
@@ -6514,7 +6602,7 @@
       ],
       "preload": {
         "api": "window.api.gh.starOrca",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:162",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:163",
         "params": [
           {
             "name": "source",
@@ -6538,7 +6626,7 @@
       ],
       "preload": {
         "api": "window.api.gh.updateIssue",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:98",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:99",
         "params": [
           {
             "name": "args",
@@ -6547,7 +6635,7 @@
             "rest": false
           }
         ],
-        "returns": "Promise<{ ok: true; } | { ok: false; error: string; }>"
+        "returns": "Promise<{ ok: true; bodyImageUrls?: Record<string, string>; } | { ok: false; error: string; }>"
       }
     },
     "gh:updateIssueBySlug": {
@@ -6562,7 +6650,7 @@
       ],
       "preload": {
         "api": "window.api.gh.updateIssueBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:198",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:199",
         "params": [
           {
             "name": "args",
@@ -6586,7 +6674,7 @@
       ],
       "preload": {
         "api": "window.api.gh.updateIssueCommentBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:209",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:210",
         "params": [
           {
             "name": "args",
@@ -6610,7 +6698,7 @@
       ],
       "preload": {
         "api": "window.api.gh.updateIssueTypeBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:223",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:224",
         "params": [
           {
             "name": "args",
@@ -6682,7 +6770,7 @@
       ],
       "preload": {
         "api": "window.api.gh.updateProjectItemField",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:194",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:195",
         "params": [
           {
             "name": "args",
@@ -6706,7 +6794,7 @@
       ],
       "preload": {
         "api": "window.api.gh.updatePullRequestBySlug",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:201",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:202",
         "params": [
           {
             "name": "args",
@@ -6730,7 +6818,7 @@
       ],
       "preload": {
         "api": "window.api.gh.validateAccountBinding",
-        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:178",
+        "source": "src/preload/api/gh-bridge-mutations-and-projects.ts:179",
         "params": [
           {
             "name": "args",
@@ -6825,7 +6913,7 @@
       }
     },
     "git:abortMerge": {
-      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:257",
+      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:227",
       "params": [
         {
           "name": "args",
@@ -6836,7 +6924,7 @@
       ],
       "preload": {
         "api": "window.api.git.abortMerge",
-        "source": "src/preload/api/git-bridge.ts:64",
+        "source": "src/preload/api/git-bridge.ts:74",
         "params": [
           {
             "name": "args",
@@ -6849,7 +6937,7 @@
       }
     },
     "git:abortRebase": {
-      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:271",
+      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:241",
       "params": [
         {
           "name": "args",
@@ -6860,7 +6948,7 @@
       ],
       "preload": {
         "api": "window.api.git.abortRebase",
-        "source": "src/preload/api/git-bridge.ts:66",
+        "source": "src/preload/api/git-bridge.ts:76",
         "params": [
           {
             "name": "args",
@@ -6873,7 +6961,7 @@
       }
     },
     "git:appendGitignore": {
-      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:185",
+      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:182",
       "params": [
         {
           "name": "args",
@@ -6884,7 +6972,7 @@
       ],
       "preload": {
         "api": "window.api.git.appendGitignore",
-        "source": "src/preload/api/git-bridge.ts:51",
+        "source": "src/preload/api/git-bridge.ts:56",
         "params": [
           {
             "name": "args",
@@ -6908,7 +6996,7 @@
       ],
       "preload": {
         "api": "window.api.git.branchCompare",
-        "source": "src/preload/api/git-bridge.ts:77",
+        "source": "src/preload/api/git-bridge.ts:87",
         "params": [
           {
             "name": "args",
@@ -6932,7 +7020,7 @@
       ],
       "preload": {
         "api": "window.api.git.branchDiff",
-        "source": "src/preload/api/git-bridge.ts:128",
+        "source": "src/preload/api/git-bridge.ts:138",
         "params": [
           {
             "name": "args",
@@ -6956,7 +7044,7 @@
       ],
       "preload": {
         "api": "window.api.git.bulkDiscard",
-        "source": "src/preload/api/git-bridge.ts:218",
+        "source": "src/preload/api/git-bridge.ts:254",
         "params": [
           {
             "name": "args",
@@ -6980,7 +7068,7 @@
       ],
       "preload": {
         "api": "window.api.git.bulkStage",
-        "source": "src/preload/api/git-bridge.ts:198",
+        "source": "src/preload/api/git-bridge.ts:234",
         "params": [
           {
             "name": "args",
@@ -7004,7 +7092,7 @@
       ],
       "preload": {
         "api": "window.api.git.bulkUnstage",
-        "source": "src/preload/api/git-bridge.ts:208",
+        "source": "src/preload/api/git-bridge.ts:244",
         "params": [
           {
             "name": "args",
@@ -7028,7 +7116,7 @@
       ],
       "preload": {
         "api": "window.api.git.cancelGenerateCommitMessage",
-        "source": "src/preload/api/git-bridge.ts:165",
+        "source": "src/preload/api/git-bridge.ts:201",
         "params": [
           {
             "name": "args",
@@ -7052,7 +7140,7 @@
       ],
       "preload": {
         "api": "window.api.git.cancelGeneratePullRequestFields",
-        "source": "src/preload/api/git-bridge.ts:184",
+        "source": "src/preload/api/git-bridge.ts:220",
         "params": [
           {
             "name": "args",
@@ -7065,7 +7153,7 @@
       }
     },
     "git:cancelStatus": {
-      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:119",
+      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:116",
       "params": [
         {
           "name": "args",
@@ -7076,7 +7164,7 @@
       ],
       "preload": {
         "api": "window.api.git.cancelStatus",
-        "source": "src/preload/api/git-bridge.ts:28",
+        "source": "src/preload/api/git-bridge.ts:33",
         "params": [
           {
             "name": "args",
@@ -7089,7 +7177,7 @@
       }
     },
     "git:checkIgnored": {
-      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:156",
+      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:153",
       "params": [
         {
           "name": "args",
@@ -7100,7 +7188,7 @@
       ],
       "preload": {
         "api": "window.api.git.checkIgnored",
-        "source": "src/preload/api/git-bridge.ts:47",
+        "source": "src/preload/api/git-bridge.ts:52",
         "params": [
           {
             "name": "args",
@@ -7112,8 +7200,25 @@
         "returns": "Promise<string[]>"
       }
     },
+    "git:cherryPick": {
+      "source": null,
+      "params": null,
+      "preload": {
+        "api": "window.api.git.cherryPick",
+        "source": "src/preload/api/git-bridge.ts:163",
+        "params": [
+          {
+            "name": "args",
+            "type": "{ worktreePath: string; commitId: string; connectionId?: string; }",
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": "Promise<GitCommitActionResult>"
+      }
+    },
     "git:commit": {
-      "source": "src/main/ipc/filesystem/filesystem-git-commit-handlers.ts:11",
+      "source": "src/main/ipc/filesystem/filesystem-git-commit-handlers.ts:71",
       "params": [
         {
           "name": "args",
@@ -7124,7 +7229,7 @@
       ],
       "preload": {
         "api": "window.api.git.commit",
-        "source": "src/preload/api/git-bridge.ts:142",
+        "source": "src/preload/api/git-bridge.ts:152",
         "params": [
           {
             "name": "args",
@@ -7148,7 +7253,7 @@
       ],
       "preload": {
         "api": "window.api.git.commitCompare",
-        "source": "src/preload/api/git-bridge.ts:79",
+        "source": "src/preload/api/git-bridge.ts:89",
         "params": [
           {
             "name": "args",
@@ -7172,7 +7277,7 @@
       ],
       "preload": {
         "api": "window.api.git.commitDiff",
-        "source": "src/preload/api/git-bridge.ts:137",
+        "source": "src/preload/api/git-bridge.ts:147",
         "params": [
           {
             "name": "args",
@@ -7185,7 +7290,7 @@
       }
     },
     "git:completeMerge": {
-      "source": "src/main/ipc/filesystem/filesystem-git-commit-handlers.ts:34",
+      "source": "src/main/ipc/filesystem/filesystem-git-commit-handlers.ts:94",
       "params": [
         {
           "name": "args",
@@ -7196,7 +7301,7 @@
       ],
       "preload": {
         "api": "window.api.git.completeMerge",
-        "source": "src/preload/api/git-bridge.ts:147",
+        "source": "src/preload/api/git-bridge.ts:183",
         "params": [
           {
             "name": "args",
@@ -7209,7 +7314,7 @@
       }
     },
     "git:conflictOperation": {
-      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:221",
+      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:191",
       "params": [
         {
           "name": "args",
@@ -7220,7 +7325,7 @@
       ],
       "preload": {
         "api": "window.api.git.conflictOperation",
-        "source": "src/preload/api/git-bridge.ts:60",
+        "source": "src/preload/api/git-bridge.ts:70",
         "params": [
           {
             "name": "args",
@@ -7232,8 +7337,32 @@
         "returns": null
       }
     },
+    "git:createBranch": {
+      "source": "src/main/ipc/filesystem/filesystem-git-commit-handlers.ts:14",
+      "params": [
+        {
+          "name": "args",
+          "type": "{ worktreePath: string; name: string; startPoint: string; connectionId?: string; }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.git.createBranch",
+        "source": "src/preload/api/git-bridge.ts:158",
+        "params": [
+          {
+            "name": "args",
+            "type": "{ worktreePath: string; name: string; startPoint: string; connectionId?: string; }",
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": "Promise<GitCommitActionResult>"
+      }
+    },
     "git:diff": {
-      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:285",
+      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:255",
       "params": [
         {
           "name": "args",
@@ -7244,7 +7373,7 @@
       ],
       "preload": {
         "api": "window.api.git.diff",
-        "source": "src/preload/api/git-bridge.ts:75",
+        "source": "src/preload/api/git-bridge.ts:85",
         "params": [
           {
             "name": "args",
@@ -7268,7 +7397,7 @@
       ],
       "preload": {
         "api": "window.api.git.discard",
-        "source": "src/preload/api/git-bridge.ts:213",
+        "source": "src/preload/api/git-bridge.ts:249",
         "params": [
           {
             "name": "args",
@@ -7292,7 +7421,7 @@
       ],
       "preload": {
         "api": "window.api.git.discoverCommitMessageModels",
-        "source": "src/preload/api/git-bridge.ts:161",
+        "source": "src/preload/api/git-bridge.ts:197",
         "params": [
           {
             "name": "args",
@@ -7316,7 +7445,7 @@
       ],
       "preload": {
         "api": "window.api.git.fastForward",
-        "source": "src/preload/api/git-bridge.ts:115",
+        "source": "src/preload/api/git-bridge.ts:125",
         "params": [
           {
             "name": "args",
@@ -7340,7 +7469,7 @@
       ],
       "preload": {
         "api": "window.api.git.fetch",
-        "source": "src/preload/api/git-bridge.ts:90",
+        "source": "src/preload/api/git-bridge.ts:100",
         "params": [
           {
             "name": "args",
@@ -7353,7 +7482,7 @@
       }
     },
     "git:findHugeFoldersToIgnore": {
-      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:177",
+      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:174",
       "params": [
         {
           "name": "args",
@@ -7364,7 +7493,7 @@
       ],
       "preload": {
         "api": "window.api.git.findHugeFoldersToIgnore",
-        "source": "src/preload/api/git-bridge.ts:49",
+        "source": "src/preload/api/git-bridge.ts:54",
         "params": [
           {
             "name": "args",
@@ -7388,7 +7517,7 @@
       ],
       "preload": {
         "api": "window.api.git.generateCommitMessage",
-        "source": "src/preload/api/git-bridge.ts:156",
+        "source": "src/preload/api/git-bridge.ts:192",
         "params": [
           {
             "name": "args",
@@ -7412,7 +7541,7 @@
       ],
       "preload": {
         "api": "window.api.git.generatePullRequestFields",
-        "source": "src/preload/api/git-bridge.ts:180",
+        "source": "src/preload/api/git-bridge.ts:216",
         "params": [
           {
             "name": "args",
@@ -7425,7 +7554,7 @@
       }
     },
     "git:history": {
-      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:193",
+      "source": "src/main/ipc/filesystem/filesystem-git-history-handlers.ts:26",
       "params": [
         {
           "name": "args",
@@ -7436,7 +7565,7 @@
       ],
       "preload": {
         "api": "window.api.git.history",
-        "source": "src/preload/api/git-bridge.ts:58",
+        "source": "src/preload/api/git-bridge.ts:68",
         "params": [
           {
             "name": "args",
@@ -7449,7 +7578,7 @@
       }
     },
     "git:mutationInFlight": {
-      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:240",
+      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:210",
       "params": [
         {
           "name": "args",
@@ -7460,7 +7589,7 @@
       ],
       "preload": {
         "api": "window.api.git.mutationInFlight",
-        "source": "src/preload/api/git-bridge.ts:62",
+        "source": "src/preload/api/git-bridge.ts:72",
         "params": [
           {
             "name": "args",
@@ -7484,7 +7613,7 @@
       ],
       "preload": {
         "api": "window.api.git.pull",
-        "source": "src/preload/api/git-bridge.ts:109",
+        "source": "src/preload/api/git-bridge.ts:119",
         "params": [
           {
             "name": "args",
@@ -7508,7 +7637,7 @@
       ],
       "preload": {
         "api": "window.api.git.push",
-        "source": "src/preload/api/git-bridge.ts:103",
+        "source": "src/preload/api/git-bridge.ts:113",
         "params": [
           {
             "name": "args",
@@ -7532,7 +7661,7 @@
       ],
       "preload": {
         "api": "window.api.git.rebaseFromBase",
-        "source": "src/preload/api/git-bridge.ts:120",
+        "source": "src/preload/api/git-bridge.ts:130",
         "params": [
           {
             "name": "args",
@@ -7542,6 +7671,30 @@
           }
         ],
         "returns": "Promise<void>"
+      }
+    },
+    "git:refs": {
+      "source": "src/main/ipc/filesystem/filesystem-git-history-handlers.ts:13",
+      "params": [
+        {
+          "name": "args",
+          "type": "{ worktreePath: string; connectionId?: string; query?: string; }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.git.refs",
+        "source": "src/preload/api/git-bridge.ts:61",
+        "params": [
+          {
+            "name": "args",
+            "type": "{ worktreePath: string; connectionId?: string; query?: string; }",
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": "Promise<GitHistoryItemRef[]>"
       }
     },
     "git:remoteCommitUrl": {
@@ -7556,7 +7709,7 @@
       ],
       "preload": {
         "api": "window.api.git.remoteCommitUrl",
-        "source": "src/preload/api/git-bridge.ts:230",
+        "source": "src/preload/api/git-bridge.ts:266",
         "params": [
           {
             "name": "args",
@@ -7580,7 +7733,7 @@
       ],
       "preload": {
         "api": "window.api.git.remoteFileUrl",
-        "source": "src/preload/api/git-bridge.ts:225",
+        "source": "src/preload/api/git-bridge.ts:261",
         "params": [
           {
             "name": "args",
@@ -7604,7 +7757,7 @@
       ],
       "preload": {
         "api": "window.api.git.resolveConflict",
-        "source": "src/preload/api/git-bridge.ts:192",
+        "source": "src/preload/api/git-bridge.ts:228",
         "params": [
           {
             "name": "args",
@@ -7616,8 +7769,59 @@
         "returns": "Promise<void>"
       }
     },
+    "git:revert": {
+      "source": null,
+      "params": null,
+      "preload": {
+        "api": "window.api.git.revert",
+        "source": "src/preload/api/git-bridge.ts:168",
+        "params": [
+          {
+            "name": "args",
+            "type": "{ worktreePath: string; commitId: string; connectionId?: string; }",
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": "Promise<GitCommitActionResult>"
+      }
+    },
+    "git:sequencerAbort": {
+      "source": null,
+      "params": null,
+      "preload": {
+        "api": "window.api.git.sequencerAbort",
+        "source": "src/preload/api/git-bridge.ts:173",
+        "params": [
+          {
+            "name": "args",
+            "type": "{ worktreePath: string; operation: GitCommitAction; connectionId?: string; }",
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": "Promise<void>"
+      }
+    },
+    "git:sequencerContinue": {
+      "source": null,
+      "params": null,
+      "preload": {
+        "api": "window.api.git.sequencerContinue",
+        "source": "src/preload/api/git-bridge.ts:178",
+        "params": [
+          {
+            "name": "args",
+            "type": "{ worktreePath: string; operation: GitCommitAction; connectionId?: string; }",
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": "Promise<GitCommitActionResult | void>"
+      }
+    },
     "git:setStatusUpstreamRefWatch": {
-      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:123",
+      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:120",
       "params": [
         {
           "name": "args",
@@ -7628,7 +7832,7 @@
       ],
       "preload": {
         "api": "window.api.git.setStatusUpstreamRefWatch",
-        "source": "src/preload/api/git-bridge.ts:36",
+        "source": "src/preload/api/git-bridge.ts:41",
         "params": [
           {
             "name": "args",
@@ -7652,7 +7856,7 @@
       ],
       "preload": {
         "api": "window.api.git.stage",
-        "source": "src/preload/api/git-bridge.ts:186",
+        "source": "src/preload/api/git-bridge.ts:222",
         "params": [
           {
             "name": "args",
@@ -7665,7 +7869,7 @@
       }
     },
     "git:status": {
-      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:52",
+      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:49",
       "params": [
         {
           "name": "args",
@@ -7676,7 +7880,7 @@
       ],
       "preload": {
         "api": "window.api.git.status",
-        "source": "src/preload/api/git-bridge.ts:26",
+        "source": "src/preload/api/git-bridge.ts:31",
         "params": [
           {
             "name": "args",
@@ -7689,7 +7893,7 @@
       }
     },
     "git:submoduleStatus": {
-      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:130",
+      "source": "src/main/ipc/filesystem/filesystem-git-status-handlers.ts:127",
       "params": [
         {
           "name": "args",
@@ -7700,7 +7904,7 @@
       ],
       "preload": {
         "api": "window.api.git.submoduleStatus",
-        "source": "src/preload/api/git-bridge.ts:42",
+        "source": "src/preload/api/git-bridge.ts:47",
         "params": [
           {
             "name": "args",
@@ -7724,7 +7928,7 @@
       ],
       "preload": {
         "api": "window.api.git.syncFork",
-        "source": "src/preload/api/git-bridge.ts:95",
+        "source": "src/preload/api/git-bridge.ts:105",
         "params": [
           {
             "name": "args",
@@ -7748,7 +7952,7 @@
       ],
       "preload": {
         "api": "window.api.git.unstage",
-        "source": "src/preload/api/git-bridge.ts:203",
+        "source": "src/preload/api/git-bridge.ts:239",
         "params": [
           {
             "name": "args",
@@ -7772,7 +7976,7 @@
       ],
       "preload": {
         "api": "window.api.git.upstreamStatus",
-        "source": "src/preload/api/git-bridge.ts:84",
+        "source": "src/preload/api/git-bridge.ts:94",
         "params": [
           {
             "name": "args",
@@ -8391,7 +8595,7 @@
       }
     },
     "gitlab:workItemByPath": {
-      "source": "src/main/ipc/source-control/gitlab-work-item-handlers.ts:83",
+      "source": "src/main/ipc/source-control/gitlab-work-item-handlers.ts:84",
       "params": [
         {
           "name": "args",
@@ -8449,7 +8653,7 @@
       }
     },
     "hooks:check": {
-      "source": "src/main/ipc/hooks/register-worktree-hook-check-handler.ts:12",
+      "source": "src/main/ipc/hooks/register-worktree-hook-check-handler.ts:17",
       "params": [
         {
           "name": "args",
@@ -9359,7 +9563,7 @@
       }
     },
     "legacyRelayBridge:attach": {
-      "source": "src/main/ssh/legacy-relay/legacy-relay-bridge-ipc.ts:127",
+      "source": "src/main/ssh/legacy-relay/bridge/legacy-relay-bridge-ipc.ts:127",
       "params": [
         {
           "name": "payload",
@@ -9383,7 +9587,7 @@
       }
     },
     "legacyRelayBridge:close": {
-      "source": "src/main/ssh/legacy-relay/legacy-relay-bridge-ipc.ts:134",
+      "source": "src/main/ssh/legacy-relay/bridge/legacy-relay-bridge-ipc.ts:134",
       "params": [
         {
           "name": "payload",
@@ -9407,7 +9611,7 @@
       }
     },
     "legacyRelayBridge:listPanes": {
-      "source": "src/main/ssh/legacy-relay/legacy-relay-bridge-ipc.ts:126",
+      "source": "src/main/ssh/legacy-relay/bridge/legacy-relay-bridge-ipc.ts:126",
       "params": [],
       "preload": {
         "api": "window.api.legacyRelayBridge.listPanes",
@@ -10234,17 +10438,17 @@
       }
     },
     "mobile:consumePendingUnpairedDeviceAuthFailure": {
-      "source": "src/main/ipc/mobile.ts:281",
+      "source": "src/main/ipc/mobile.ts:239",
       "params": [],
       "preload": {
         "api": "window.api.mobile.consumePendingUnpairedDeviceAuthFailure",
-        "source": "src/preload/api/mobile-bridge.ts:84",
+        "source": "src/preload/api/mobile-bridge.ts:91",
         "params": [],
         "returns": "Promise<boolean>"
       }
     },
     "mobile:getPairingQR": {
-      "source": "src/main/ipc/mobile.ts:82",
+      "source": "src/main/ipc/mobile.ts:80",
       "params": [
         {
           "name": "args",
@@ -10268,17 +10472,17 @@
       }
     },
     "mobile:getRelayStatus": {
-      "source": "src/main/ipc/mobile.ts:276",
+      "source": "src/main/ipc/mobile.ts:234",
       "params": [],
       "preload": {
         "api": "window.api.mobile.getRelayStatus",
-        "source": "src/preload/api/mobile-bridge.ts:74",
+        "source": "src/preload/api/mobile-bridge.ts:81",
         "params": [],
         "returns": "Promise<MobileRelayStatusDetail>"
       }
     },
     "mobile:getRuntimePairingUrl": {
-      "source": "src/main/ipc/mobile.ts:144",
+      "source": "src/main/ipc/mobile.ts:126",
       "params": [
         {
           "name": "args",
@@ -10302,7 +10506,7 @@
       }
     },
     "mobile:getWindowsFirewallStatus": {
-      "source": "src/main/ipc/mobile.ts:251",
+      "source": "src/main/ipc/mobile.ts:209",
       "params": [
         {
           "name": "args",
@@ -10326,17 +10530,17 @@
       }
     },
     "mobile:listDevices": {
-      "source": "src/main/ipc/mobile.ts:201",
+      "source": "src/main/ipc/mobile.ts:157",
       "params": [],
       "preload": {
         "api": "window.api.mobile.listDevices",
-        "source": "src/preload/api/mobile-bridge.ts:63",
+        "source": "src/preload/api/mobile-bridge.ts:70",
         "params": [],
-        "returns": "Promise<{ devices: { deviceId: string; name: string; pairedAt: number; lastSeenAt: number; }[]; }>"
+        "returns": "Promise<{ devices: { deviceId: string; name: string; pairedAt: number; lastSeenAt: number; usesLegacyEncryption?: boolean; olderPairingMethod?: true; }[]; }>"
       }
     },
     "mobile:listNetworkInterfaces": {
-      "source": "src/main/ipc/mobile.ts:72",
+      "source": "src/main/ipc/mobile.ts:70",
       "params": [],
       "preload": {
         "api": "window.api.mobile.listNetworkInterfaces",
@@ -10346,17 +10550,17 @@
       }
     },
     "mobile:listRuntimeAccessGrants": {
-      "source": "src/main/ipc/mobile.ts:220",
+      "source": "src/main/ipc/mobile.ts:178",
       "params": [],
       "preload": {
         "api": "window.api.mobile.listRuntimeAccessGrants",
-        "source": "src/preload/api/mobile-bridge.ts:68",
+        "source": "src/preload/api/mobile-bridge.ts:75",
         "params": [],
         "returns": null
       }
     },
     "mobile:openWindowsNetworkSettings": {
-      "source": "src/main/ipc/mobile.ts:265",
+      "source": "src/main/ipc/mobile.ts:223",
       "params": [],
       "preload": {
         "api": "window.api.mobile.openWindowsNetworkSettings",
@@ -10366,7 +10570,7 @@
       }
     },
     "mobile:repairWindowsFirewall": {
-      "source": "src/main/ipc/mobile.ts:256",
+      "source": "src/main/ipc/mobile.ts:214",
       "params": [],
       "preload": {
         "api": "window.api.mobile.repairWindowsFirewall",
@@ -10376,7 +10580,7 @@
       }
     },
     "mobile:revokeDevice": {
-      "source": "src/main/ipc/mobile.ts:235",
+      "source": "src/main/ipc/mobile.ts:193",
       "params": [
         {
           "name": "args",
@@ -10387,7 +10591,7 @@
       ],
       "preload": {
         "api": "window.api.mobile.revokeDevice",
-        "source": "src/preload/api/mobile-bridge.ts:66",
+        "source": "src/preload/api/mobile-bridge.ts:73",
         "params": [
           {
             "name": "args",
@@ -10400,7 +10604,7 @@
       }
     },
     "mobile:revokeRuntimeAccess": {
-      "source": "src/main/ipc/mobile.ts:243",
+      "source": "src/main/ipc/mobile.ts:201",
       "params": [
         {
           "name": "args",
@@ -10411,7 +10615,7 @@
       ],
       "preload": {
         "api": "window.api.mobile.revokeRuntimeAccess",
-        "source": "src/preload/api/mobile-bridge.ts:71",
+        "source": "src/preload/api/mobile-bridge.ts:78",
         "params": [
           {
             "name": "args",
@@ -11606,7 +11810,7 @@
       }
     },
     "plugins:getLogs": {
-      "source": "src/main/ipc/plugins.ts:248",
+      "source": "src/main/ipc/plugins.ts:250",
       "params": [
         {
           "name": "args",
@@ -11678,7 +11882,7 @@
       }
     },
     "plugins:install": {
-      "source": "src/main/ipc/plugins.ts:204",
+      "source": "src/main/ipc/plugins.ts:206",
       "params": [
         {
           "name": "args",
@@ -12086,7 +12290,7 @@
       }
     },
     "plugins:refresh": {
-      "source": "src/main/ipc/plugins.ts:253",
+      "source": "src/main/ipc/plugins.ts:255",
       "params": [],
       "preload": {
         "api": "window.api.plugins.refresh",
@@ -12120,7 +12324,7 @@
       }
     },
     "plugins:remove": {
-      "source": "src/main/ipc/plugins.ts:233",
+      "source": "src/main/ipc/plugins.ts:235",
       "params": [
         {
           "name": "args",
@@ -12168,7 +12372,7 @@
       }
     },
     "plugins:resolveGitSource": {
-      "source": "src/main/ipc/plugins.ts:200",
+      "source": "src/main/ipc/plugins.ts:202",
       "params": [
         {
           "name": "args",
@@ -12450,7 +12654,7 @@
       }
     },
     "projectGroups:cancelNestedScan": {
-      "source": "src/main/ipc/repos/project-group-handlers.ts:104",
+      "source": "src/main/ipc/repos/project-group-handlers.ts:118",
       "params": [
         {
           "name": "rawArgs",
@@ -12461,7 +12665,7 @@
       ],
       "preload": {
         "api": "window.api.projectGroups.cancelNestedScan",
-        "source": "src/preload/api/project-groups-bridge.ts:12",
+        "source": "src/preload/api/project-groups-bridge.ts:13",
         "params": [
           {
             "name": "args",
@@ -12474,7 +12678,7 @@
       }
     },
     "projectGroups:create": {
-      "source": "src/main/ipc/repos/project-group-handlers.ts:27",
+      "source": "src/main/ipc/repos/project-group-handlers.ts:28",
       "params": [
         {
           "name": "rawArgs",
@@ -12498,7 +12702,7 @@
       }
     },
     "projectGroups:delete": {
-      "source": "src/main/ipc/repos/project-group-handlers.ts:57",
+      "source": "src/main/ipc/repos/project-group-handlers.ts:71",
       "params": [
         {
           "name": "rawArgs",
@@ -12509,64 +12713,6 @@
       ],
       "preload": {
         "api": "window.api.projectGroups.delete",
-        "source": "src/preload/api/project-groups-bridge.ts:9",
-        "params": [
-          {
-            "name": "args",
-            "type": null,
-            "optional": false,
-            "rest": false
-          }
-        ],
-        "returns": null
-      }
-    },
-    "projectGroups:importNested": {
-      "source": "src/main/ipc/repos/nested-repo-import-handler.ts:32",
-      "params": [
-        {
-          "name": "rawArgs",
-          "type": "unknown",
-          "optional": false,
-          "rest": false
-        }
-      ],
-      "preload": {
-        "api": "window.api.projectGroups.importNested",
-        "source": "src/preload/api/project-groups-bridge.ts:21",
-        "params": [
-          {
-            "name": "args",
-            "type": null,
-            "optional": false,
-            "rest": false
-          }
-        ],
-        "returns": null
-      }
-    },
-    "projectGroups:list": {
-      "source": "src/main/ipc/repos/project-group-handlers.ts:25",
-      "params": [],
-      "preload": {
-        "api": "window.api.projectGroups.list",
-        "source": "src/preload/api/project-groups-bridge.ts:6",
-        "params": [],
-        "returns": null
-      }
-    },
-    "projectGroups:moveProject": {
-      "source": "src/main/ipc/repos/project-group-handlers.ts:70",
-      "params": [
-        {
-          "name": "rawArgs",
-          "type": "unknown",
-          "optional": false,
-          "rest": false
-        }
-      ],
-      "preload": {
-        "api": "window.api.projectGroups.moveProject",
         "source": "src/preload/api/project-groups-bridge.ts:10",
         "params": [
           {
@@ -12579,8 +12725,8 @@
         "returns": null
       }
     },
-    "projectGroups:scanNested": {
-      "source": "src/main/ipc/repos/project-group-handlers.ts:92",
+    "projectGroups:importNested": {
+      "source": "src/main/ipc/repos/nested-repo-import-handler.ts:37",
       "params": [
         {
           "name": "rawArgs",
@@ -12590,7 +12736,41 @@
         }
       ],
       "preload": {
-        "api": "window.api.projectGroups.scanNested",
+        "api": "window.api.projectGroups.importNested",
+        "source": "src/preload/api/project-groups-bridge.ts:22",
+        "params": [
+          {
+            "name": "args",
+            "type": null,
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": null
+      }
+    },
+    "projectGroups:list": {
+      "source": "src/main/ipc/repos/project-group-handlers.ts:26",
+      "params": [],
+      "preload": {
+        "api": "window.api.projectGroups.list",
+        "source": "src/preload/api/project-groups-bridge.ts:6",
+        "params": [],
+        "returns": null
+      }
+    },
+    "projectGroups:moveProject": {
+      "source": "src/main/ipc/repos/project-group-handlers.ts:84",
+      "params": [
+        {
+          "name": "rawArgs",
+          "type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.projectGroups.moveProject",
         "source": "src/preload/api/project-groups-bridge.ts:11",
         "params": [
           {
@@ -12603,8 +12783,32 @@
         "returns": null
       }
     },
+    "projectGroups:scanNested": {
+      "source": "src/main/ipc/repos/project-group-handlers.ts:106",
+      "params": [
+        {
+          "name": "rawArgs",
+          "type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.projectGroups.scanNested",
+        "source": "src/preload/api/project-groups-bridge.ts:12",
+        "params": [
+          {
+            "name": "args",
+            "type": null,
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": null
+      }
+    },
     "projectGroups:update": {
-      "source": "src/main/ipc/repos/project-group-handlers.ts:44",
+      "source": "src/main/ipc/repos/project-group-handlers.ts:45",
       "params": [
         {
           "name": "rawArgs",
@@ -12627,8 +12831,32 @@
         "returns": null
       }
     },
+    "projectGroups:updateMany": {
+      "source": "src/main/ipc/repos/project-group-handlers.ts:58",
+      "params": [
+        {
+          "name": "rawArgs",
+          "type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.projectGroups.updateMany",
+        "source": "src/preload/api/project-groups-bridge.ts:9",
+        "params": [
+          {
+            "name": "args",
+            "type": null,
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": null
+      }
+    },
     "projectHostSetups:create": {
-      "source": "src/main/ipc/repos/project-host-setup-handlers.ts:90",
+      "source": "src/main/ipc/repos/project-host-setup-handlers.ts:56",
       "params": [
         {
           "name": "rawArgs",
@@ -12652,7 +12880,7 @@
       }
     },
     "projectHostSetups:delete": {
-      "source": "src/main/ipc/repos/project-host-setup-handlers.ts:137",
+      "source": "src/main/ipc/repos/project-host-setup-handlers.ts:103",
       "params": [
         {
           "name": "rawArgs",
@@ -12676,7 +12904,7 @@
       }
     },
     "projectHostSetups:list": {
-      "source": "src/main/ipc/repos/repo-catalog-handlers.ts:74",
+      "source": "src/main/ipc/repos/repo-catalog-handlers.ts:77",
       "params": [],
       "preload": {
         "api": "window.api.projects.listHostSetups",
@@ -12686,7 +12914,7 @@
       }
     },
     "projectHostSetups:setupExistingFolder": {
-      "source": "src/main/ipc/repos/project-host-setup-handlers.ts:155",
+      "source": "src/main/ipc/repos/project-host-setup-handlers.ts:121",
       "params": [
         {
           "name": "rawArgs",
@@ -12710,7 +12938,7 @@
       }
     },
     "projectHostSetups:update": {
-      "source": "src/main/ipc/repos/project-host-setup-handlers.ts:108",
+      "source": "src/main/ipc/repos/project-host-setup-handlers.ts:74",
       "params": [
         {
           "name": "rawArgs",
@@ -12734,7 +12962,7 @@
       }
     },
     "projects:list": {
-      "source": "src/main/ipc/repos/repo-catalog-handlers.ts:58",
+      "source": "src/main/ipc/repos/repo-catalog-handlers.ts:61",
       "params": [],
       "preload": {
         "api": "window.api.projects.list",
@@ -12744,7 +12972,7 @@
       }
     },
     "projects:update": {
-      "source": "src/main/ipc/repos/repo-catalog-handlers.ts:63",
+      "source": "src/main/ipc/repos/repo-catalog-handlers.ts:66",
       "params": [
         {
           "name": "rawArgs",
@@ -12791,7 +13019,7 @@
       }
     },
     "pty:clearPendingPaneSerializer": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:221",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:237",
       "params": [
         {
           "name": "args",
@@ -12821,7 +13049,7 @@
       }
     },
     "pty:confirmForegroundProcess": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:156",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:172",
       "params": [
         {
           "name": "args",
@@ -12845,7 +13073,7 @@
       }
     },
     "pty:declarePendingPaneSerializer": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:195",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:211",
       "params": [
         {
           "name": "args",
@@ -12886,7 +13114,7 @@
       }
     },
     "pty:getAuthoritativeBufferSnapshotCapabilities": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:37",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:53",
       "params": [
         {
           "name": "args",
@@ -12897,7 +13125,7 @@
       ],
       "preload": {
         "api": "window.api.pty.getAuthoritativeBufferSnapshotCapabilities",
-        "source": "src/preload/api/pty-bridge-session-control.ts:193",
+        "source": "src/preload/api/pty-bridge-session-control.ts:195",
         "params": [
           {
             "name": "ids",
@@ -12910,7 +13138,7 @@
       }
     },
     "pty:getCwd": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:169",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:185",
       "params": [
         {
           "name": "args",
@@ -12934,7 +13162,7 @@
       }
     },
     "pty:getForegroundProcess": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:113",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:129",
       "params": [
         {
           "name": "args",
@@ -12945,7 +13173,7 @@
       ],
       "preload": {
         "api": "window.api.pty.getForegroundProcess",
-        "source": "src/preload/api/pty-bridge-session-control.ts:247",
+        "source": "src/preload/api/pty-bridge-session-control.ts:251",
         "params": [
           {
             "name": "id",
@@ -12955,6 +13183,30 @@
           }
         ],
         "returns": "Promise<string | null>"
+      }
+    },
+    "pty:getGoneSessionIds": {
+      "source": "src/main/ipc/pty/ipc/inspect.ts:74",
+      "params": [
+        {
+          "name": "args",
+          "type": "{ ids?: unknown; }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.pty.getGoneSessionIds",
+        "source": "src/preload/api/pty-bridge-session-control.ts:197",
+        "params": [
+          {
+            "name": "ids",
+            "type": "string[]",
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": "Promise<string[]>"
       }
     },
     "pty:getMainBufferSnapshot": {
@@ -12969,7 +13221,7 @@
       ],
       "preload": {
         "api": "window.api.pty.getMainBufferSnapshot",
-        "source": "src/preload/api/pty-bridge-session-control.ts:214",
+        "source": "src/preload/api/pty-bridge-session-control.ts:218",
         "params": [
           {
             "name": "id",
@@ -12992,13 +13244,13 @@
       "params": [],
       "preload": {
         "api": "window.api.pty.getRendererDeliveryDebugSnapshot",
-        "source": "src/preload/api/pty-bridge-session-control.ts:241",
+        "source": "src/preload/api/pty-bridge-session-control.ts:245",
         "params": [],
         "returns": "Promise<{ pendingPtyCount: number; pendingChars: number; maxPendingCharsByPty: number; rendererInFlightPtyCount: number; rendererInFlightChars: number; maxRendererInFlightCharsByPty: number; activeRendererPtyCount: number; flushScheduled: boolean; peakPendingChars: number; peakMaxPendingCharsByPty: number; peakRendererInFlightChars: number; peakMaxRendererInFlightCharsByPty: number; ackGatedFlushSkipCount: number; hiddenDeliveryGatedPtyCount: number; hiddenDeliveryGatedVisiblePtyCount: number; hiddenDeliveryGatedActivePtyCount: number; deliveryInterestPtyCount: number; hiddenDeliveryDroppedChars: number; hiddenDeliveryDroppedChunks: number; pendingDroppedChars: number; diagnostics: PtyMainDeliveryDiagnostics; rendererLifecycleResetCount: number; lastLifecycleResetClearedChars: number; rendererPtyDispatcherReady: boolean; rendererDispatcherReadyForcedCount: number; }>"
       }
     },
     "pty:getSize": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:178",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:194",
       "params": [
         {
           "name": "args",
@@ -13033,7 +13285,7 @@
       ],
       "preload": {
         "api": "window.api.pty.getTerminalAttention",
-        "source": "src/preload/api/pty-bridge-session-control.ts:121",
+        "source": "src/preload/api/pty-bridge-session-control.ts:123",
         "params": [
           {
             "name": "ids",
@@ -13046,7 +13298,7 @@
       }
     },
     "pty:hasChildProcesses": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:103",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:119",
       "params": [
         {
           "name": "args",
@@ -13057,7 +13309,7 @@
       ],
       "preload": {
         "api": "window.api.pty.hasChildProcesses",
-        "source": "src/preload/api/pty-bridge-session-control.ts:245",
+        "source": "src/preload/api/pty-bridge-session-control.ts:249",
         "params": [
           {
             "name": "id",
@@ -13070,7 +13322,7 @@
       }
     },
     "pty:hasPty": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:80",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:96",
       "params": [
         {
           "name": "args",
@@ -13081,7 +13333,7 @@
       ],
       "preload": {
         "api": "window.api.pty.hasPty",
-        "source": "src/preload/api/pty-bridge-session-control.ts:194",
+        "source": "src/preload/api/pty-bridge-session-control.ts:198",
         "params": [
           {
             "name": "id",
@@ -13094,7 +13346,7 @@
       }
     },
     "pty:inspectProcess": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:123",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:139",
       "params": [
         {
           "name": "args",
@@ -13145,7 +13397,7 @@
       "params": null,
       "preload": {
         "api": "window.api.pty.kill",
-        "source": "src/preload/api/pty-bridge-session-control.ts:185",
+        "source": "src/preload/api/pty-bridge-session-control.ts:187",
         "params": [
           {
             "name": "id",
@@ -13168,7 +13420,7 @@
       "params": null,
       "preload": {
         "api": "window.api.pty.killFenced",
-        "source": "src/preload/api/pty-bridge-session-control.ts:183",
+        "source": "src/preload/api/pty-bridge-session-control.ts:185",
         "params": [
           {
             "name": "request",
@@ -13198,7 +13450,7 @@
       ],
       "preload": {
         "api": "window.api.pty.listSessions",
-        "source": "src/preload/api/pty-bridge-session-control.ts:189",
+        "source": "src/preload/api/pty-bridge-session-control.ts:191",
         "params": [
           {
             "name": "scope",
@@ -13339,7 +13591,7 @@
       "params": null,
       "preload": {
         "api": "window.api.pty.moveLeafToNewTab",
-        "source": "src/preload/api/pty-bridge-session-control.ts:196",
+        "source": "src/preload/api/pty-bridge-session-control.ts:200",
         "params": [
           {
             "name": "request",
@@ -13420,7 +13672,7 @@
       ],
       "preload": {
         "api": "window.api.pty.reportRendererDeliveryState",
-        "source": "src/preload/api/pty-bridge-session-control.ts:162",
+        "source": "src/preload/api/pty-bridge-session-control.ts:164",
         "params": [
           {
             "name": "report",
@@ -13433,7 +13685,7 @@
       }
     },
     "pty:reportRendererSerializerReady": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:232",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:248",
       "params": [
         {
           "name": "args",
@@ -13461,13 +13713,13 @@
       "params": [],
       "preload": {
         "api": "window.api.pty.resetRendererDeliveryDebug",
-        "source": "src/preload/api/pty-bridge-session-control.ts:243",
+        "source": "src/preload/api/pty-bridge-session-control.ts:247",
         "params": [],
         "returns": "Promise<void>"
       }
     },
     "pty:settlePaneSerializer": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:205",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:221",
       "params": [
         {
           "name": "args",
@@ -13532,11 +13784,11 @@
       ],
       "preload": {
         "api": "window.api.pty.spawn",
-        "source": "src/preload/api/pty-bridge-session-control.ts:97",
+        "source": "src/preload/api/pty-bridge-session-control.ts:98",
         "params": [
           {
             "name": "opts",
-            "type": "{ cols: number; rows: number; cwd?: string; env?: Record<string, string>; envToDelete?: string[]; command?: string; commandDelivery?: 'renderer' | 'provider'; launchConfig?: SleepingAgentLaunchConfig; resumeProviderSession?: AgentProviderSessionMetadata; resumeOrigin?: 'saved'; launchToken?: string; launchAgent?: TuiAgent; startupCommandDelivery?: StartupCommandDelivery; connectionId?: string | null; worktreeId?: string; sessionId?: string; shellOverride?: string; projectRuntime?: ProjectExecutionRuntimeResolution; terminalKittyKeyboardProtocol?: boolean; terminalColorQueryReplies?: { foreground?: string; background?: string; }; initiallyHidden?: boolean; tabId?: string; leafId?: string; replacesPtyId?: string; placement?: TerminalPanePlacement; spawnIntent?: SpawnIntent; wslPassiveRestore?: true; agentLaunch?: AgentPaneLaunchRequest; telemetry?: { agent_kind: AgentKind; launch_source: LaunchSource; request_kind: RequestKind; }; }",
+            "type": "{ cols: number; rows: number; cwd?: string; env?: Record<string, string>; envToDelete?: string[]; command?: string; commandDelivery?: 'renderer' | 'provider'; launchConfig?: SleepingAgentLaunchConfig; resumeProviderSession?: AgentProviderSessionMetadata; resumeOrigin?: 'saved'; launchToken?: string; launchAgent?: TuiAgent; trustWorktreeId?: string; startupCommandDelivery?: StartupCommandDelivery; connectionId?: string | null; worktreeId?: string; sessionId?: string; shellOverride?: string; projectRuntime?: ProjectExecutionRuntimeResolution; terminalKittyKeyboardProtocol?: boolean; terminalColorQueryReplies?: { foreground?: string; background?: string; }; initiallyHidden?: boolean; tabId?: string; leafId?: string; replacesPtyId?: string; placement?: TerminalPanePlacement; spawnIntent?: SpawnIntent; wslPassiveRestore?: true; agentLaunch?: AgentPaneLaunchRequest; telemetry?: { agent_kind: AgentKind; launch_source: LaunchSource; request_kind: RequestKind; }; }",
             "optional": false,
             "rest": false
           }
@@ -13562,7 +13814,7 @@
       }
     },
     "pty:writeAccepted": {
-      "source": "src/main/ipc/pty/ipc/write.ts:36",
+      "source": "src/main/ipc/pty/ipc/write.ts:44",
       "params": [
         {
           "name": "args",
@@ -13573,7 +13825,7 @@
       ],
       "preload": {
         "api": "window.api.pty.writeAccepted",
-        "source": "src/preload/api/pty-bridge-session-control.ts:107",
+        "source": "src/preload/api/pty-bridge-session-control.ts:109",
         "params": [
           {
             "name": "id",
@@ -13722,7 +13974,7 @@
       }
     },
     "repos:add": {
-      "source": "src/main/ipc/repos/repo-creation-handlers.ts:58",
+      "source": "src/main/ipc/repos/repo-creation-handlers.ts:63",
       "params": [
         {
           "name": "args",
@@ -13745,12 +13997,36 @@
         "returns": null
       }
     },
-    "repos:clone": {
-      "source": "src/main/ipc/repos/repo-clone-lifecycle.ts:118",
+    "repos:checkCloneTarget": {
+      "source": "src/main/ipc/repos/repo-clone-lifecycle.ts:124",
       "params": [
         {
           "name": "args",
-          "type": "{ url: string; destination: string; }",
+          "type": "CloneTargetArgs",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.repos.checkCloneTarget",
+        "source": "src/preload/api/repos-bridge.ts:38",
+        "params": [
+          {
+            "name": "args",
+            "type": null,
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": null
+      }
+    },
+    "repos:clone": {
+      "source": "src/main/ipc/repos/repo-clone-lifecycle.ts:128",
+      "params": [
+        {
+          "name": "args",
+          "type": "CloneTargetArgs",
           "optional": false,
           "rest": false
         }
@@ -13770,17 +14046,17 @@
       }
     },
     "repos:cloneAbort": {
-      "source": "src/main/ipc/repos/repo-clone-lifecycle.ts:104",
+      "source": "src/main/ipc/repos/repo-clone-lifecycle.ts:100",
       "params": [],
       "preload": {
         "api": "window.api.repos.cloneAbort",
-        "source": "src/preload/api/repos-bridge.ts:38",
+        "source": "src/preload/api/repos-bridge.ts:40",
         "params": [],
         "returns": null
       }
     },
     "repos:create": {
-      "source": "src/main/ipc/repos/repo-creation-handlers.ts:79",
+      "source": "src/main/ipc/repos/repo-creation-handlers.ts:85",
       "params": [
         {
           "name": "args",
@@ -13815,7 +14091,7 @@
       ],
       "preload": {
         "api": "window.api.repos.getBaseRefDefault",
-        "source": "src/preload/api/repos-bridge.ts:52",
+        "source": "src/preload/api/repos-bridge.ts:54",
         "params": [
           {
             "name": "args",
@@ -13828,7 +14104,7 @@
       }
     },
     "repos:getDefaultCreateProjectParent": {
-      "source": "src/main/ipc/repos/repo-creation-handlers.ts:56",
+      "source": "src/main/ipc/repos/repo-creation-handlers.ts:61",
       "params": [],
       "preload": {
         "api": "window.api.repos.getDefaultCreateProjectParent",
@@ -13838,7 +14114,7 @@
       }
     },
     "repos:isGitAvailable": {
-      "source": "src/main/ipc/repos/repo-creation-handlers.ts:55",
+      "source": "src/main/ipc/repos/repo-creation-handlers.ts:60",
       "params": [],
       "preload": {
         "api": "window.api.repos.isGitAvailable",
@@ -13848,7 +14124,7 @@
       }
     },
     "repos:list": {
-      "source": "src/main/ipc/repos/repo-catalog-handlers.ts:36",
+      "source": "src/main/ipc/repos/repo-catalog-handlers.ts:39",
       "params": [],
       "preload": {
         "api": "window.api.repos.list",
@@ -13858,7 +14134,7 @@
       }
     },
     "repos:listHostCatalogSnapshots": {
-      "source": "src/main/ipc/repos/repo-catalog-handlers.ts:49",
+      "source": "src/main/ipc/repos/repo-catalog-handlers.ts:52",
       "params": [],
       "preload": {
         "api": "window.api.repos.listHostCatalogSnapshots",
@@ -13868,7 +14144,7 @@
       }
     },
     "repos:listWslMoved": {
-      "source": "src/main/ipc/repos/repo-catalog-handlers.ts:44",
+      "source": "src/main/ipc/repos/repo-catalog-handlers.ts:47",
       "params": [],
       "preload": {
         "api": "window.api.repos.listWslMoved",
@@ -13908,7 +14184,7 @@
       }
     },
     "repos:removeForHost": {
-      "source": "src/main/ipc/repos/repo-catalog-handlers.ts:114",
+      "source": "src/main/ipc/repos/repo-catalog-handlers.ts:117",
       "params": [
         {
           "name": "args",
@@ -13932,7 +14208,7 @@
       }
     },
     "repos:reorder": {
-      "source": "src/main/ipc/repos/repo-catalog-handlers.ts:79",
+      "source": "src/main/ipc/repos/repo-catalog-handlers.ts:82",
       "params": [
         {
           "name": "args",
@@ -13956,7 +14232,7 @@
       }
     },
     "repos:reorderForHost": {
-      "source": "src/main/ipc/repos/repo-catalog-handlers.ts:93",
+      "source": "src/main/ipc/repos/repo-catalog-handlers.ts:96",
       "params": [
         {
           "name": "args",
@@ -13991,7 +14267,7 @@
       ],
       "preload": {
         "api": "window.api.repos.searchBaseRefDetails",
-        "source": "src/preload/api/repos-bridge.ts:66",
+        "source": "src/preload/api/repos-bridge.ts:68",
         "params": [
           {
             "name": "args",
@@ -14015,7 +14291,7 @@
       ],
       "preload": {
         "api": "window.api.repos.searchBaseRefs",
-        "source": "src/preload/api/repos-bridge.ts:59",
+        "source": "src/preload/api/repos-bridge.ts:61",
         "params": [
           {
             "name": "args",
@@ -14028,11 +14304,11 @@
       }
     },
     "repos:update": {
-      "source": "src/main/ipc/repos/repo-update-handler.ts:28",
+      "source": "src/main/ipc/repos/repo-update-handler.ts:29",
       "params": [
         {
           "name": "args",
-          "type": "{ repoId: string; hostId?: ExecutionHostId; updates: Partial<Pick<Repo, 'displayName' | 'badgeColor' | 'repoIcon' | 'upstream' | 'hookSettings' | 'editorFormatter' | 'worktreeBaseRef' | 'worktreeBasePath' | 'kind' | 'symlinkPaths' | 'issueSourcePreference' | 'forkSyncMode' | 'externalWorktreeVisibilityPromptDismissedAt' | 'externalWorktreeInboxBaselinePaths' | 'importedExternalWorktreePaths' | 'customWorktreeVisibilitySources' | 'worktreeVisibilitySourcePreferences' | 'projectGroupId' | 'projectGroupOrder'>> & { externalWorktreeVisibility?: Repo['externalWorktreeVisibility'] | null; agentWorktreeVisibility?: Repo['agentWorktreeVisibility'] | null; sourceControlAi?: Repo['sourceControlAi'] | null; externalWorktreeDiscoverySuppressedAt?: Repo['externalWorktreeDiscoverySuppressedAt'] | null; ghAccount?: GhAccountBinding | null; }; }",
+          "type": "{ repoId: string; hostId?: ExecutionHostId; updates: Partial<Pick<Repo, 'displayName' | 'badgeColor' | 'repoIcon' | 'upstream' | 'hookSettings' | 'editorFormatter' | 'worktreeBaseRef' | 'worktreeBasePath' | 'kind' | 'symlinkPaths' | 'dictationTerms' | 'issueSourcePreference' | 'forkSyncMode' | 'agentWorkspaceTrust' | 'externalWorktreeVisibilityPromptDismissedAt' | 'externalWorktreeInboxBaselinePaths' | 'importedExternalWorktreePaths' | 'customWorktreeVisibilitySources' | 'worktreeVisibilitySourcePreferences' | 'projectGroupId'>> & { projectGroupOrder?: number | null; externalWorktreeVisibility?: Repo['externalWorktreeVisibility'] | null; agentWorktreeVisibility?: Repo['agentWorktreeVisibility'] | null; sourceControlAi?: Repo['sourceControlAi'] | null; externalWorktreeDiscoverySuppressedAt?: Repo['externalWorktreeDiscoverySuppressedAt'] | null; ghAccount?: GhAccountBinding | null; }; }",
           "optional": false,
           "rest": false
         }
@@ -14052,7 +14328,7 @@
       }
     },
     "runtime:call": {
-      "source": "src/main/ipc/runtime.ts:77",
+      "source": "src/main/ipc/runtime.ts:85",
       "params": [
         {
           "name": "args",
@@ -14063,7 +14339,7 @@
       ],
       "preload": {
         "api": "window.api.runtime.call",
-        "source": "src/preload/api/runtime-bridge.ts:20",
+        "source": "src/preload/api/runtime-bridge.ts:19",
         "params": [
           {
             "name": "args",
@@ -14076,67 +14352,67 @@
       }
     },
     "runtime:getBrowserDrivers": {
-      "source": "src/main/ipc/runtime.ts:179",
+      "source": "src/main/ipc/runtime.ts:187",
       "params": [],
       "preload": {
         "api": "window.api.runtime.getBrowserDrivers",
-        "source": "src/preload/api/runtime-bridge.ts:60",
+        "source": "src/preload/api/runtime-bridge.ts:59",
         "params": [],
-        "returns": "Promise<{ browserPageId: string; driver: RuntimeBrowserDriverState; }[]>"
+        "returns": "Promise<{ browserPageId: string; driver: RuntimeTerminalDriverState; }[]>"
       }
     },
     "runtime:getBrowserRemoteViewerPages": {
-      "source": "src/main/ipc/runtime.ts:191",
+      "source": "src/main/ipc/runtime.ts:199",
       "params": [],
       "preload": {
         "api": "window.api.runtime.getBrowserRemoteViewerPages",
-        "source": "src/preload/api/runtime-bridge.ts:62",
+        "source": "src/preload/api/runtime-bridge.ts:61",
         "params": [],
         "returns": "Promise<string[]>"
       }
     },
     "runtime:getClientHostedBrowserRows": {
-      "source": "src/main/ipc/runtime.ts:197",
+      "source": "src/main/ipc/runtime.ts:205",
       "params": [],
       "preload": {
         "api": "window.api.runtime.getClientHostedBrowserRows",
-        "source": "src/preload/api/runtime-bridge.ts:64",
+        "source": "src/preload/api/runtime-bridge.ts:63",
         "params": [],
         "returns": "Promise<ClientHostedBrowserRowsEvent[]>"
       }
     },
     "runtime:getStatus": {
-      "source": "src/main/ipc/runtime.ts:71",
+      "source": "src/main/ipc/runtime.ts:79",
       "params": [],
       "preload": {
         "api": "window.api.runtime.getStatus",
-        "source": "src/preload/api/runtime-bridge.ts:18",
+        "source": "src/preload/api/runtime-bridge.ts:17",
         "params": [],
         "returns": "Promise<RuntimeStatus>"
       }
     },
     "runtime:getTerminalDrivers": {
-      "source": "src/main/ipc/runtime.ts:170",
+      "source": "src/main/ipc/runtime.ts:178",
       "params": [],
       "preload": {
         "api": "window.api.runtime.getTerminalDrivers",
-        "source": "src/preload/api/runtime-bridge.ts:54",
+        "source": "src/preload/api/runtime-bridge.ts:53",
         "params": [],
         "returns": "Promise<{ ptyId: string; driver: RuntimeTerminalDriverState; }[]>"
       }
     },
     "runtime:getTerminalFitOverrides": {
-      "source": "src/main/ipc/runtime.ts:153",
+      "source": "src/main/ipc/runtime.ts:161",
       "params": [],
       "preload": {
         "api": "window.api.runtime.getTerminalFitOverrides",
-        "source": "src/preload/api/runtime-bridge.ts:48",
+        "source": "src/preload/api/runtime-bridge.ts:47",
         "params": [],
         "returns": "Promise<{ ptyId: string; mode: 'mobile-fit' | 'remote-desktop-fit'; cols: number; rows: number; }[]>"
       }
     },
     "runtime:reclaimBrowserForDesktop": {
-      "source": "src/main/ipc/runtime.ts:235",
+      "source": "src/main/ipc/runtime.ts:243",
       "params": [
         {
           "name": "args",
@@ -14147,7 +14423,7 @@
       ],
       "preload": {
         "api": "window.api.runtime.reclaimBrowserForDesktop",
-        "source": "src/preload/api/runtime-bridge.ts:68",
+        "source": "src/preload/api/runtime-bridge.ts:67",
         "params": [
           {
             "name": "browserPageId",
@@ -14160,7 +14436,7 @@
       }
     },
     "runtime:restoreTerminalFit": {
-      "source": "src/main/ipc/runtime.ts:203",
+      "source": "src/main/ipc/runtime.ts:211",
       "params": [
         {
           "name": "args",
@@ -14171,7 +14447,7 @@
       ],
       "preload": {
         "api": "window.api.runtime.restoreTerminalFit",
-        "source": "src/preload/api/runtime-bridge.ts:66",
+        "source": "src/preload/api/runtime-bridge.ts:65",
         "params": [
           {
             "name": "ptyId",
@@ -14184,7 +14460,7 @@
       }
     },
     "runtime:subscribe": {
-      "source": "src/main/ipc/runtime.ts:104",
+      "source": "src/main/ipc/runtime.ts:112",
       "params": [
         {
           "name": "args",
@@ -14195,7 +14471,7 @@
       ],
       "preload": {
         "api": "window.api.runtime.subscribe",
-        "source": "src/preload/api/runtime-bridge.ts:31",
+        "source": "src/preload/api/runtime-bridge.ts:30",
         "params": [
           {
             "name": "args",
@@ -14214,7 +14490,7 @@
       }
     },
     "runtime:syncWindowGraph": {
-      "source": "src/main/ipc/runtime.ts:44",
+      "source": "src/main/ipc/runtime.ts:52",
       "params": [
         {
           "name": "graph",
@@ -14225,7 +14501,7 @@
       ],
       "preload": {
         "api": "window.api.runtime.syncWindowGraph",
-        "source": "src/preload/api/runtime-bridge.ts:17",
+        "source": "src/preload/api/runtime-bridge.ts:16",
         "params": [
           {
             "name": "graph",
@@ -14522,7 +14798,7 @@
       }
     },
     "runtimeEnvironments:keepOrcadServerVersion": {
-      "source": "src/main/ipc/runtime-environments/orcad-delta-move-handlers.ts:72",
+      "source": "src/main/ipc/runtime-environments/orcad-delta-move-handlers.ts:75",
       "params": [
         {
           "name": "args",
@@ -14546,7 +14822,7 @@
       }
     },
     "runtimeEnvironments:linkSshAccess": {
-      "source": "src/main/ipc/runtime-ssh-access-handlers.ts:13",
+      "source": "src/main/ipc/runtime-ssh-access-handlers.ts:16",
       "params": [
         {
           "name": "input",
@@ -14590,7 +14866,7 @@
       }
     },
     "runtimeEnvironments:moveOrcadDelta": {
-      "source": "src/main/ipc/runtime-environments/orcad-delta-move-handlers.ts:32",
+      "source": "src/main/ipc/runtime-environments/orcad-delta-move-handlers.ts:35",
       "params": [
         {
           "name": "args",
@@ -14638,7 +14914,7 @@
       }
     },
     "runtimeEnvironments:previewOrcadDeltaMove": {
-      "source": "src/main/ipc/runtime-environments/orcad-delta-move-handlers.ts:23",
+      "source": "src/main/ipc/runtime-environments/orcad-delta-move-handlers.ts:26",
       "params": [
         {
           "name": "args",
@@ -14876,7 +15152,7 @@
       "preload": null
     },
     "runtimeEnvironments:unlinkSshAccess": {
-      "source": "src/main/ipc/runtime-ssh-access-handlers.ts:28",
+      "source": "src/main/ipc/runtime-ssh-access-handlers.ts:31",
       "params": [
         {
           "name": "input",
@@ -15100,7 +15376,7 @@
       }
     },
     "settings:get": {
-      "source": "src/main/ipc/settings.ts:86",
+      "source": "src/main/ipc/settings.ts:88",
       "params": [],
       "preload": {
         "api": "window.api.settings.get",
@@ -15110,7 +15386,7 @@
       }
     },
     "settings:listFonts": {
-      "source": "src/main/ipc/settings.ts:304",
+      "source": "src/main/ipc/settings.ts:306",
       "params": [],
       "preload": {
         "api": "window.api.settings.listFonts",
@@ -15192,7 +15468,7 @@
       }
     },
     "settings:set": {
-      "source": "src/main/ipc/settings.ts:108",
+      "source": "src/main/ipc/settings.ts:110",
       "params": [
         {
           "name": "args",
@@ -15216,7 +15492,7 @@
       }
     },
     "settings:set-active-runtime-environment-preference": {
-      "source": "src/main/ipc/settings.ts:287",
+      "source": "src/main/ipc/settings.ts:289",
       "params": [
         {
           "name": "args",
@@ -15240,7 +15516,7 @@
       }
     },
     "settings:update-pr-bot-author-override": {
-      "source": "src/main/ipc/settings.ts:90",
+      "source": "src/main/ipc/settings.ts:92",
       "params": [
         {
           "name": "args",
@@ -16008,7 +16284,7 @@
       }
     },
     "sparsePresets:list": {
-      "source": "src/main/ipc/repos/sparse-preset-handlers.ts:10",
+      "source": "src/main/ipc/repos/sparse-preset-handlers.ts:17",
       "params": [
         {
           "name": "args",
@@ -16032,7 +16308,7 @@
       }
     },
     "sparsePresets:remove": {
-      "source": "src/main/ipc/repos/sparse-preset-handlers.ts:45",
+      "source": "src/main/ipc/repos/sparse-preset-handlers.ts:61",
       "params": [
         {
           "name": "args",
@@ -16056,7 +16332,7 @@
       }
     },
     "sparsePresets:save": {
-      "source": "src/main/ipc/repos/sparse-preset-handlers.ts:14",
+      "source": "src/main/ipc/repos/sparse-preset-handlers.ts:21",
       "params": [
         {
           "name": "args",
@@ -16079,8 +16355,25 @@
         "returns": null
       }
     },
+    "speech:cancelDictation": {
+      "source": "src/main/ipc/speech.ts:277",
+      "params": null,
+      "preload": {
+        "api": "window.api.speech.cancelDictation",
+        "source": "src/preload/api/speech-bridge.ts:100",
+        "params": [
+          {
+            "name": "sessionId",
+            "type": "string",
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": "Promise<void>"
+      }
+    },
     "speech:cancelDownload": {
-      "source": "src/main/ipc/speech.ts:69",
+      "source": "src/main/ipc/speech.ts:100",
       "params": [
         {
           "name": "modelId",
@@ -16091,7 +16384,7 @@
       ],
       "preload": {
         "api": "window.api.speech.cancelDownload",
-        "source": "src/preload/api/speech-bridge.ts:26",
+        "source": "src/preload/api/speech-bridge.ts:40",
         "params": [
           {
             "name": "modelId",
@@ -16104,17 +16397,27 @@
       }
     },
     "speech:clearOpenAiApiKey": {
-      "source": "src/main/ipc/speech.ts:35",
+      "source": "src/main/ipc/speech.ts:47",
       "params": [],
       "preload": {
         "api": "window.api.speech.clearOpenAiApiKey",
-        "source": "src/preload/api/speech-bridge.ts:22",
+        "source": "src/preload/api/speech-bridge.ts:30",
         "params": [],
         "returns": "Promise<{ configured: boolean; }>"
       }
     },
+    "speech:clearOpenAiCompatibleProvider": {
+      "source": "src/main/ipc/speech.ts:67",
+      "params": [],
+      "preload": {
+        "api": "window.api.speech.clearOpenAiCompatibleProvider",
+        "source": "src/preload/api/speech-bridge.ts:36",
+        "params": [],
+        "returns": "Promise<void>"
+      }
+    },
     "speech:deleteModel": {
-      "source": "src/main/ipc/speech.ts:73",
+      "source": "src/main/ipc/speech.ts:104",
       "params": [
         {
           "name": "modelId",
@@ -16125,7 +16428,7 @@
       ],
       "preload": {
         "api": "window.api.speech.deleteModel",
-        "source": "src/preload/api/speech-bridge.ts:28",
+        "source": "src/preload/api/speech-bridge.ts:42",
         "params": [
           {
             "name": "modelId",
@@ -16138,7 +16441,7 @@
       }
     },
     "speech:downloadModel": {
-      "source": "src/main/ipc/speech.ts:40",
+      "source": "src/main/ipc/speech.ts:71",
       "params": [
         {
           "name": "modelId",
@@ -16149,7 +16452,7 @@
       ],
       "preload": {
         "api": "window.api.speech.downloadModel",
-        "source": "src/preload/api/speech-bridge.ts:24",
+        "source": "src/preload/api/speech-bridge.ts:38",
         "params": [
           {
             "name": "modelId",
@@ -16162,7 +16465,7 @@
       }
     },
     "speech:feedAudio": {
-      "source": "src/main/ipc/speech.ts:231",
+      "source": "src/main/ipc/speech.ts:253",
       "params": [
         {
           "name": "buffer",
@@ -16185,7 +16488,7 @@
       ],
       "preload": {
         "api": "window.api.speech.feedAudio",
-        "source": "src/preload/api/speech-bridge.ts:36",
+        "source": "src/preload/api/speech-bridge.ts:80",
         "params": [
           {
             "name": "samples",
@@ -16210,37 +16513,47 @@
       }
     },
     "speech:getCatalog": {
-      "source": "src/main/ipc/speech.ts:18",
+      "source": "src/main/ipc/speech.ts:30",
       "params": [],
       "preload": {
         "api": "window.api.speech.getCatalog",
-        "source": "src/preload/api/speech-bridge.ts:13",
+        "source": "src/preload/api/speech-bridge.ts:21",
         "params": [],
         "returns": "Promise<SpeechModelManifest[]>"
       }
     },
     "speech:getModelStates": {
-      "source": "src/main/ipc/speech.ts:22",
+      "source": "src/main/ipc/speech.ts:34",
       "params": [],
       "preload": {
         "api": "window.api.speech.getModelStates",
-        "source": "src/preload/api/speech-bridge.ts:14",
+        "source": "src/preload/api/speech-bridge.ts:22",
         "params": [],
         "returns": "Promise<SpeechModelState[]>"
       }
     },
     "speech:getOpenAiApiKeyStatus": {
-      "source": "src/main/ipc/speech.ts:26",
+      "source": "src/main/ipc/speech.ts:38",
       "params": [],
       "preload": {
         "api": "window.api.speech.getOpenAiApiKeyStatus",
-        "source": "src/preload/api/speech-bridge.ts:18",
+        "source": "src/preload/api/speech-bridge.ts:26",
         "params": [],
         "returns": "Promise<{ configured: boolean; protection: SecretAtRestProtection | null; }>"
       }
     },
+    "speech:getOpenAiCompatibleProvider": {
+      "source": "src/main/ipc/speech.ts:52",
+      "params": [],
+      "preload": {
+        "api": "window.api.speech.getOpenAiCompatibleProvider",
+        "source": "src/preload/api/speech-bridge.ts:32",
+        "params": [],
+        "returns": "Promise<OpenAiCompatibleSpeechProviderSummary | null>"
+      }
+    },
     "speech:saveOpenAiApiKey": {
-      "source": "src/main/ipc/speech.ts:30",
+      "source": "src/main/ipc/speech.ts:42",
       "params": [
         {
           "name": "apiKey",
@@ -16251,7 +16564,7 @@
       ],
       "preload": {
         "api": "window.api.speech.saveOpenAiApiKey",
-        "source": "src/preload/api/speech-bridge.ts:20",
+        "source": "src/preload/api/speech-bridge.ts:28",
         "params": [
           {
             "name": "apiKey",
@@ -16263,8 +16576,32 @@
         "returns": "Promise<{ configured: boolean; }>"
       }
     },
+    "speech:saveOpenAiCompatibleProvider": {
+      "source": "src/main/ipc/speech.ts:60",
+      "params": [
+        {
+          "name": "input",
+          "type": "OpenAiCompatibleSpeechProvider",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.speech.saveOpenAiCompatibleProvider",
+        "source": "src/preload/api/speech-bridge.ts:34",
+        "params": [
+          {
+            "name": "provider",
+            "type": "OpenAiCompatibleSpeechProvider",
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": "Promise<void>"
+      }
+    },
     "speech:startDictation": {
-      "source": "src/main/ipc/speech.ts:112",
+      "source": "src/main/ipc/speech.ts:129",
       "params": [
         {
           "name": "modelId",
@@ -16273,8 +16610,8 @@
           "rest": false
         },
         {
-          "name": "hotwords",
-          "type": "string[]",
+          "name": "context",
+          "type": "DictationContext",
           "optional": true,
           "rest": false
         },
@@ -16287,7 +16624,7 @@
       ],
       "preload": {
         "api": "window.api.speech.startDictation",
-        "source": "src/preload/api/speech-bridge.ts:33",
+        "source": "src/preload/api/speech-bridge.ts:53",
         "params": [
           {
             "name": "modelId",
@@ -16296,8 +16633,8 @@
             "rest": false
           },
           {
-            "name": "hotwords",
-            "type": "string[] | undefined",
+            "name": "context",
+            "type": "DictationContext | undefined",
             "optional": false,
             "rest": false
           },
@@ -16312,18 +16649,11 @@
       }
     },
     "speech:stopDictation": {
-      "source": "src/main/ipc/speech.ts:244",
-      "params": [
-        {
-          "name": "sessionId",
-          "type": null,
-          "optional": true,
-          "rest": false
-        }
-      ],
+      "source": "src/main/ipc/speech.ts:276",
+      "params": null,
       "preload": {
         "api": "window.api.speech.stopDictation",
-        "source": "src/preload/api/speech-bridge.ts:43",
+        "source": "src/preload/api/speech-bridge.ts:95",
         "params": [
           {
             "name": "sessionId",
@@ -16384,7 +16714,7 @@
       }
     },
     "ssh:browseDir": {
-      "source": "src/main/ipc/ssh/ssh-browse.ts:10",
+      "source": "src/main/ipc/ssh/ssh-browse.ts:13",
       "params": [
         {
           "name": "args",
@@ -16946,27 +17276,27 @@
       }
     },
     "telemetry:acknowledgeBanner": {
-      "source": "src/main/ipc/telemetry.ts:120",
+      "source": "src/main/ipc/telemetry.ts:124",
       "params": [],
       "preload": {
         "api": "window.api.telemetryAcknowledgeBanner",
-        "source": "src/preload/index.ts:102",
+        "source": "src/preload/index.ts:103",
         "params": [],
         "returns": null
       }
     },
     "telemetry:getConsentState": {
-      "source": "src/main/ipc/telemetry.ts:112",
+      "source": "src/main/ipc/telemetry.ts:116",
       "params": [],
       "preload": {
         "api": "window.api.telemetryGetConsentState",
-        "source": "src/preload/index.ts:104",
+        "source": "src/preload/index.ts:105",
         "params": [],
         "returns": null
       }
     },
     "telemetry:setOptIn": {
-      "source": "src/main/ipc/telemetry.ts:95",
+      "source": "src/main/ipc/telemetry.ts:99",
       "params": [
         {
           "name": "optedIn",
@@ -16977,7 +17307,7 @@
       ],
       "preload": {
         "api": "window.api.telemetrySetOptIn",
-        "source": "src/preload/index.ts:100",
+        "source": "src/preload/index.ts:101",
         "params": [
           {
             "name": "optedIn",
@@ -16990,7 +17320,7 @@
       }
     },
     "telemetry:track": {
-      "source": "src/main/ipc/telemetry.ts:62",
+      "source": "src/main/ipc/telemetry.ts:66",
       "params": [
         {
           "name": "name",
@@ -17007,7 +17337,7 @@
       ],
       "preload": {
         "api": "window.api.telemetryTrack",
-        "source": "src/preload/index.ts:98",
+        "source": "src/preload/index.ts:99",
         "params": [
           {
             "name": "name",
@@ -17525,12 +17855,22 @@
         "returns": null
       }
     },
+    "window:isActive": {
+      "source": "src/main/window/main-window-activity.ts:42",
+      "params": [],
+      "preload": {
+        "api": "window.api.ui.isWindowActive",
+        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:218",
+        "params": [],
+        "returns": "Promise<boolean>"
+      }
+    },
     "window:isMaximized": {
       "source": null,
       "params": null,
       "preload": {
         "api": "window.api.ui.isMaximized",
-        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:197",
+        "source": "src/preload/api/ui-bridge-clipboard-and-window-controls.ts:211",
         "params": [],
         "returns": "Promise<boolean>"
       }
@@ -17808,7 +18148,7 @@
       }
     },
     "workspaceSpace:openWindow": {
-      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:26",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:27",
       "params": [],
       "preload": {
         "api": "window.api.workspaceSpace.openWindow",
@@ -17818,7 +18158,7 @@
       }
     },
     "workspaceSpace:publishWindowAnalysis": {
-      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:75",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:97",
       "params": [
         {
           "name": "analysis",
@@ -17829,7 +18169,7 @@
       ],
       "preload": {
         "api": "window.api.workspaceSpace.publishWindowAnalysis",
-        "source": "src/preload/api/workspace-space-bridge.ts:25",
+        "source": "src/preload/api/workspace-space-bridge.ts:27",
         "params": [
           {
             "name": "analysis",
@@ -17842,7 +18182,7 @@
       }
     },
     "workspaceSpace:publishWindowState": {
-      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:31",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:32",
       "params": [
         {
           "name": "state",
@@ -17865,8 +18205,44 @@
         "returns": null
       }
     },
+    "workspaceSpace:requestIssueRefresh": {
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:77",
+      "params": [
+        {
+          "name": "worktreeId",
+          "type": "unknown",
+          "optional": false,
+          "rest": false
+        },
+        {
+          "name": "hostId",
+          "type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.workspaceSpace.requestIssueRefresh",
+        "source": "src/preload/api/workspace-space-bridge.ts:25",
+        "params": [
+          {
+            "name": "worktreeId",
+            "type": "string",
+            "optional": false,
+            "rest": false
+          },
+          {
+            "name": "executionHostId",
+            "type": "ExecutionHostId",
+            "optional": true,
+            "rest": false
+          }
+        ],
+        "returns": null
+      }
+    },
     "workspaceSpace:requestWindowState": {
-      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:36",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:37",
       "params": [],
       "preload": {
         "api": "window.api.workspaceSpace.requestWindowState",
@@ -17876,7 +18252,7 @@
       }
     },
     "workspaceSpace:requestWorktreeRefresh": {
-      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:70",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:71",
       "params": [],
       "preload": {
         "api": "window.api.workspaceSpace.requestWorktreeRefresh",
@@ -17886,7 +18262,7 @@
       }
     },
     "workspaceSpace:revealWorktree": {
-      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:41",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:42",
       "params": [
         {
           "name": "worktreeId",
@@ -17934,7 +18310,7 @@
       }
     },
     "worktrees:adoptProvisionedRoot": {
-      "source": "src/main/ipc/worktrees/create/register-worktree-create-handlers.ts:149",
+      "source": "src/main/ipc/worktrees/create/register-worktree-create-handlers.ts:129",
       "params": [
         {
           "name": "rawArgs",
@@ -17945,7 +18321,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.adoptProvisionedRoot",
-        "source": "src/preload/api/worktrees-bridge.ts:30",
+        "source": "src/preload/api/worktrees-bridge.ts:31",
         "params": [
           {
             "name": "args",
@@ -17969,7 +18345,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.cancelListDetected",
-        "source": "src/preload/api/worktrees-bridge.ts:24",
+        "source": "src/preload/api/worktrees-bridge.ts:25",
         "params": [
           {
             "name": "args",
@@ -17982,7 +18358,7 @@
       }
     },
     "worktrees:create": {
-      "source": "src/main/ipc/worktrees/create/register-worktree-create-handlers.ts:45",
+      "source": "src/main/ipc/worktrees/create/register-worktree-create-handlers.ts:39",
       "params": [
         {
           "name": "rawArgs",
@@ -17993,7 +18369,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.create",
-        "source": "src/preload/api/worktrees-bridge.ts:28",
+        "source": "src/preload/api/worktrees-bridge.ts:29",
         "params": [
           {
             "name": "args",
@@ -18017,7 +18393,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.forceDeletePreservedBranch",
-        "source": "src/preload/api/worktrees-bridge.ts:61",
+        "source": "src/preload/api/worktrees-bridge.ts:62",
         "params": [
           {
             "name": "args",
@@ -18041,7 +18417,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.forgetLocal",
-        "source": "src/preload/api/worktrees-bridge.ts:58",
+        "source": "src/preload/api/worktrees-bridge.ts:59",
         "params": [
           {
             "name": "args",
@@ -18065,7 +18441,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.forgetRemovedForExecutionHost",
-        "source": "src/preload/api/worktrees-bridge.ts:22",
+        "source": "src/preload/api/worktrees-bridge.ts:23",
         "params": [
           {
             "name": "args",
@@ -18089,7 +18465,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.getBranchRenameFailureOutput",
-        "source": "src/preload/api/worktrees-bridge.ts:72",
+        "source": "src/preload/api/worktrees-bridge.ts:73",
         "params": [
           {
             "name": "args",
@@ -18113,7 +18489,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.listDetected",
-        "source": "src/preload/api/worktrees-bridge.ts:16",
+        "source": "src/preload/api/worktrees-bridge.ts:17",
         "params": [
           {
             "name": "args",
@@ -18137,7 +18513,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.listKnownForExecutionHost",
-        "source": "src/preload/api/worktrees-bridge.ts:19",
+        "source": "src/preload/api/worktrees-bridge.ts:20",
         "params": [
           {
             "name": "args",
@@ -18154,7 +18530,7 @@
       "params": [],
       "preload": {
         "api": "window.api.worktrees.listLineage",
-        "source": "src/preload/api/worktrees-bridge.ts:65",
+        "source": "src/preload/api/worktrees-bridge.ts:66",
         "params": [],
         "returns": null
       }
@@ -18171,7 +18547,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.listRetiredNames",
-        "source": "src/preload/api/worktrees-bridge.ts:14",
+        "source": "src/preload/api/worktrees-bridge.ts:15",
         "params": [
           {
             "name": "args",
@@ -18195,7 +18571,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.persistSortOrder",
-        "source": "src/preload/api/worktrees-bridge.ts:69",
+        "source": "src/preload/api/worktrees-bridge.ts:70",
         "params": [
           {
             "name": "args",
@@ -18219,7 +18595,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.prefetchCreateBase",
-        "source": "src/preload/api/worktrees-bridge.ts:41",
+        "source": "src/preload/api/worktrees-bridge.ts:42",
         "params": [
           {
             "name": "args",
@@ -18232,7 +18608,7 @@
       }
     },
     "worktrees:previewNestedRemoval": {
-      "source": "src/main/ipc/worktrees/removal/register-worktree-removal-handlers.ts:36",
+      "source": "src/main/ipc/worktrees/removal/register-worktree-removal-handlers.ts:37",
       "params": [
         {
           "name": "args",
@@ -18243,7 +18619,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.previewNestedRemoval",
-        "source": "src/preload/api/worktrees-bridge.ts:47",
+        "source": "src/preload/api/worktrees-bridge.ts:48",
         "params": [
           {
             "name": "args",
@@ -18256,7 +18632,7 @@
       }
     },
     "worktrees:remove": {
-      "source": "src/main/ipc/worktrees/removal/register-worktree-removal-handlers.ts:135",
+      "source": "src/main/ipc/worktrees/removal/register-worktree-removal-handlers.ts:130",
       "params": [
         {
           "name": "args",
@@ -18267,7 +18643,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.remove",
-        "source": "src/preload/api/worktrees-bridge.ts:56",
+        "source": "src/preload/api/worktrees-bridge.ts:57",
         "params": [
           {
             "name": "args",
@@ -18291,7 +18667,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.resolveMrBase",
-        "source": "src/preload/api/worktrees-bridge.ts:45",
+        "source": "src/preload/api/worktrees-bridge.ts:46",
         "params": [
           {
             "name": "args",
@@ -18315,7 +18691,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.resolvePrBase",
-        "source": "src/preload/api/worktrees-bridge.ts:43",
+        "source": "src/preload/api/worktrees-bridge.ts:44",
         "params": [
           {
             "name": "args",
@@ -18345,7 +18721,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.resumeSleptPane",
-        "source": "src/preload/api/worktrees-bridge.ts:52",
+        "source": "src/preload/api/worktrees-bridge.ts:53",
         "params": [
           {
             "name": "pane",
@@ -18375,7 +18751,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.retireStrandedSleepRecord",
-        "source": "src/preload/api/worktrees-bridge.ts:54",
+        "source": "src/preload/api/worktrees-bridge.ts:55",
         "params": [
           {
             "name": "args",
@@ -18388,7 +18764,7 @@
       }
     },
     "worktrees:runApprovedSetup": {
-      "source": "src/main/ipc/worktrees/create/register-worktree-create-handlers.ts:140",
+      "source": "src/main/ipc/worktrees/create/register-worktree-create-handlers.ts:120",
       "params": [
         {
           "name": "args",
@@ -18399,7 +18775,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.runApprovedSetup",
-        "source": "src/preload/api/worktrees-bridge.ts:32",
+        "source": "src/preload/api/worktrees-bridge.ts:33",
         "params": [
           {
             "name": "args",
@@ -18423,7 +18799,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.scanStartingWslDistro",
-        "source": "src/preload/api/worktrees-bridge.ts:26",
+        "source": "src/preload/api/worktrees-bridge.ts:27",
         "params": [
           {
             "name": "args",
@@ -18447,7 +18823,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.sleep",
-        "source": "src/preload/api/worktrees-bridge.ts:49",
+        "source": "src/preload/api/worktrees-bridge.ts:50",
         "params": [
           {
             "name": "request",
@@ -18471,7 +18847,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.sleepReopened",
-        "source": "src/preload/api/worktrees-bridge.ts:50",
+        "source": "src/preload/api/worktrees-bridge.ts:51",
         "params": [
           {
             "name": "worktreeId",
@@ -18495,7 +18871,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.updateLineage",
-        "source": "src/preload/api/worktrees-bridge.ts:67",
+        "source": "src/preload/api/worktrees-bridge.ts:68",
         "params": [
           {
             "name": "args",
@@ -18519,7 +18895,7 @@
       ],
       "preload": {
         "api": "window.api.worktrees.updateMeta",
-        "source": "src/preload/api/worktrees-bridge.ts:63",
+        "source": "src/preload/api/worktrees-bridge.ts:64",
         "params": [
           {
             "name": "args",
@@ -18552,7 +18928,7 @@
       }
     },
     "wslDriveProject:convert": {
-      "source": "src/main/ipc/wsl/wsl-drive-project-handlers.ts:33",
+      "source": "src/main/ipc/wsl/wsl-drive-project-handlers.ts:32",
       "params": [
         {
           "name": "args",
@@ -18576,7 +18952,7 @@
       }
     },
     "wslDriveProject:preview": {
-      "source": "src/main/ipc/wsl/wsl-drive-project-handlers.ts:30",
+      "source": "src/main/ipc/wsl/wsl-drive-project-handlers.ts:29",
       "params": [
         {
           "name": "projectId",
@@ -19116,7 +19492,9 @@
     "agent.launch",
     "agent.launchReplay",
     "agentHooks.prepareCodexForWslPane",
+    "agentSession.history",
     "agentSession.rename",
+    "agentSession.send",
     "agentTeams.prepareLaunch",
     "agentTeams.tmuxCompat",
     "appUi.invoke",
@@ -19155,6 +19533,8 @@
     "browser.drag",
     "browser.eval",
     "browser.exec",
+    "browser.extensionList",
+    "browser.extensionReload",
     "browser.fill",
     "browser.find",
     "browser.focus",
@@ -19201,6 +19581,7 @@
     "browser.storage.session.clear",
     "browser.storage.session.get",
     "browser.storage.session.set",
+    "browser.tabAnnotations",
     "browser.tabClose",
     "browser.tabCreate",
     "browser.tabCurrent",
@@ -19254,6 +19635,7 @@
     "emulator.type",
     "files.open",
     "files.openDiff",
+    "folderWorkspace.delete",
     "folderWorkspace.list",
     "folderWorkspace.update",
     "git.status",
