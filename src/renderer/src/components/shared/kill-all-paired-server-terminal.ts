@@ -1,4 +1,4 @@
-import { resolveTerminalCloseRoute } from '@/lib/terminal-close-route'
+import { resolveTerminalCloseRoute } from '@/lib/workspace/ownership/terminal-close-route'
 import type { TerminalTabRetirementState } from '@/store/terminals/terminal-tab-retirement'
 
 /** A paired server's tab mirrors that server's terminal, and closing it stops the terminal there. */
