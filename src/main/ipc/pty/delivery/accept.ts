@@ -17,6 +17,7 @@ import {
 import { shouldSendInteractiveOutputNow } from './interactive'
 import { requestDeliveryResyncForGatedPty } from './accounting'
 import { warnIfDroppingHiddenBytesForVisiblePty } from './debug-snapshot'
+import { revealHiddenPtyShownInFocusedWindow } from './shown-pty-reveal'
 import { clearFlushTimerIfIdle } from './flush'
 import { advancePtyEscapeBoundary, escapeBoundaryFields } from './pty-escape-boundary'
 import type { PtyIpcSession } from '../session'
@@ -100,6 +101,9 @@ export function acceptPtyDataForRenderer(
     warnIfDroppingHiddenBytesForVisiblePty(session, payload.id, droppedChars)
     if (drop.shouldEmitActivityNotice) {
       sendPtyHiddenOutputActivity(session, payload.id)
+    }
+    if (revealHiddenPtyShownInFocusedWindow(session, payload.id, outputSeq)) {
+      return
     }
     if (drop.shouldEmitRestoreMarker) {
       sendModelRestoreNeededMarker(
