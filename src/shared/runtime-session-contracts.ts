@@ -148,6 +148,8 @@ export type RuntimeSyncedLeaf = {
   title?: string | null
   /** True when this leaf is retained by a parked PTY watcher, not mounted in the renderer. */
   parked?: boolean
+  /** Unmounted and held by no watcher: the window cannot vouch for the PTY, so main keeps the leaf only while it runs it. */
+  unwatched?: boolean
 }
 
 /** Layout-owner builds: a pane the window shows of a workspace main owns. */

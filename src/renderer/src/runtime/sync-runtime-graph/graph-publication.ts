@@ -1,4 +1,6 @@
 import { getEagerPtyBufferHandle } from '@/components/terminal-pane/pty-transport/delivery/pty-dispatcher'
+import { hasPreHandlerPtyExit } from '@/components/terminal-pane/pty-transport/delivery/pty-pre-handler-buffer'
+import { isRemoteRuntimePtyId } from '../../../../shared/remote-runtime/remote-runtime-pty-id'
 import { warnTerminalLifecycleAnomaly } from '@/components/terminal-pane/layout/reconciliation/terminal-lifecycle-diagnostics'
 import {
   collectParkedTerminalWatcherPtyIds,
@@ -156,8 +158,10 @@ export async function syncRuntimeGraph(): Promise<void> {
     }
   }
 
-  // Unmounted automation/parked tabs publish saved leaves only with live eager-buffer/watcher proof.
+  // Unmounted automation/parked tabs publish saved leaves; a leaf without live eager-buffer/watcher proof goes as unwatched.
   const parkedWatcherPtyIds = collectParkedTerminalWatcherPtyIds()
+  const isWatched = (ptyId: string): boolean =>
+    Boolean(getEagerPtyBufferHandle(ptyId)) || parkedWatcherPtyIds.has(ptyId)
   for (const [worktreeId, tabs] of Object.entries(state.tabsByWorktree)) {
     for (const tab of tabs) {
       if (ambiguousTerminalTabIds.has(tab.id)) {
@@ -174,19 +178,24 @@ export async function syncRuntimeGraph(): Promise<void> {
       if (!savedPtyIdsByLeafId) {
         continue
       }
-      const liveLeaves = Object.entries(savedPtyIdsByLeafId).filter(
+      const savedLeaves = Object.entries(savedPtyIdsByLeafId).filter(
         ([leafId, ptyId]) =>
-          typeof ptyId === 'string' &&
-          ptyId.length > 0 &&
-          isTerminalLeafId(leafId) &&
-          (Boolean(getEagerPtyBufferHandle(ptyId)) || parkedWatcherPtyIds.has(ptyId))
+          typeof ptyId === 'string' && ptyId.length > 0 && isTerminalLeafId(leafId)
       )
-      if (liveLeaves.length === 0) {
-        continue
-      }
       // Switch point: main lists this workspace's panes; the window says only which it parks.
       if (ORCA_LAYOUT_OWNER_IS_MAIN && mainListsWorkspaceTerminals(state, worktreeId)) {
-        addParkedPanes(graph, tab.id, liveLeaves, state)
+        const watchedLeaves = savedLeaves.filter(([, ptyId]) => isWatched(ptyId))
+        if (watchedLeaves.length > 0) {
+          addParkedPanes(graph, tab.id, watchedLeaves, state)
+        }
+        continue
+      }
+      // A pane parking or a targeted mount left unwatched still belongs to this tab; main keeps it only while main runs its PTY. A buffered exit or a paired host's PTY stays out.
+      const liveLeaves = savedLeaves.filter(
+        ([, ptyId]) =>
+          isWatched(ptyId) || (!hasPreHandlerPtyExit(ptyId) && !isRemoteRuntimePtyId(ptyId))
+      )
+      if (liveLeaves.length === 0) {
         continue
       }
       const title = resolveRuntimeTerminalTitle(tab, generatedTitlesEnabled)
@@ -220,6 +229,7 @@ export async function syncRuntimeGraph(): Promise<void> {
           paneRuntimeId: parkedPaneId ?? index + 1,
           ptyId,
           parked: true,
+          ...(isWatched(ptyId) ? {} : { unwatched: true }),
           paneTitle: (parkedPaneId === undefined ? null : parkedPaneTitles[parkedPaneId]) ?? null,
           title
         })
