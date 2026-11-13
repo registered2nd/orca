@@ -13,6 +13,7 @@ import { sendModelRestoreNeededMarker, sendPtyDataToRenderer } from './payload'
 import { shouldSendInteractiveOutputNow } from './interactive'
 import { requestDeliveryResyncForGatedPty } from './accounting'
 import { warnIfDroppingHiddenBytesForVisiblePty } from './debug-snapshot'
+import { revealHiddenPtyShownInFocusedWindow } from './shown-pty-reveal'
 import { clearFlushTimerIfIdle } from './flush'
 import { advancePtyEscapeBoundary, escapeBoundaryFields } from './pty-escape-boundary'
 import type { PtyIpcSession } from '../session'
@@ -94,6 +95,9 @@ export function acceptPtyDataForRenderer(
     const droppedChars = payload.data.length
     const drop = recordHiddenRendererPtyDataDrop(payload.id, droppedChars)
     warnIfDroppingHiddenBytesForVisiblePty(session, payload.id, droppedChars)
+    if (revealHiddenPtyShownInFocusedWindow(session, payload.id, outputSeq)) {
+      return
+    }
     if (drop.shouldEmitRestoreMarker) {
       sendModelRestoreNeededMarker(
         session,

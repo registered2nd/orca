@@ -15,6 +15,7 @@ import { makeDroppedOutputPayload } from './pending'
 import { resolveSynchronizedOutputSafeSplit } from '../../../../shared/terminal/protocol/escape/terminal-synchronized-output-scan'
 import { makePtyDataPayload, sendModelRestoreNeededMarker, sendPtyDataToRenderer } from './payload'
 import { warnIfDroppingHiddenBytesForVisiblePty } from './debug-snapshot'
+import { revealHiddenPtyShownInFocusedWindow } from './shown-pty-reveal'
 import type { PtyIpcSession } from '../session'
 
 export function schedulePendingDataFlush(session: PtyIpcSession, delayMs: number): void {
@@ -111,6 +112,15 @@ export function flushPendingData(session: PtyIpcSession): void {
         session.updateProducerFlowControl(id)
         const drop = recordHiddenRendererPtyDataDrop(id, pending.data.length)
         warnIfDroppingHiddenBytesForVisiblePty(session, id, pending.data.length)
+        if (
+          revealHiddenPtyShownInFocusedWindow(
+            session,
+            id,
+            session.runtime?.getPtyOutputSequence(id)
+          )
+        ) {
+          continue
+        }
         if (drop.shouldEmitRestoreMarker) {
           sendModelRestoreNeededMarker(
             session,
