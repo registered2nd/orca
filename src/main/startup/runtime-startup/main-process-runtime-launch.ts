@@ -10,8 +10,7 @@ import { OrcaRuntimeRpcServer } from '../../runtime/rpc/server/runtime-rpc'
 import { resolveServePinnedBindHost } from '../serve-launch/serve-pinned-bind-host'
 import { isOrcadSidecarLaunch } from '../../window/activation/foreground-activation-policy'
 import type { MainWindowOpenOptions } from '../../window/main-window/main-window-contracts'
-import { registerMobileHandlers } from '../../ipc/mobile'
-import { registerRuntimeRelayPairingHandler } from '../../ipc/runtime-relay-pairing-ipc'
+import { registerMobileAndRuntimeRelayPairingHandlers } from '../../ipc/runtime-relay-pairing-ipc'
 import { createRuntimeEnvironmentMobileRelayHosts } from '../../ipc/runtime-environments/mobile-relay/runtime-environment-mobile-relay-hosts'
 import { registerHeadlessPtyRuntime } from '../../ipc/pty/register-headless-runtime'
 import { publishHeadlessRuntimeGraph } from '../../runtime/session-graph/headless-runtime-graph'
@@ -116,7 +115,7 @@ function installRuntimeRpc(
   state.core.runtimeRpc = runtimeRpc
   runtime.setAgentSenderPeerKey(() => runtimeRpc.getE2EEPublicKey())
   runtimeRpc.setMobileDesktopRelayHosts(createRuntimeEnvironmentMobileRelayHosts())
-  registerMobileHandlers(runtimeRpc, {
+  registerMobileAndRuntimeRelayPairingHandlers(runtimeRpc, {
     getRelayStatus: getDesktopRelayStatus,
     consumePendingUnpairedDeviceAuthFailure: (webContentsId) => {
       if (
@@ -131,7 +130,6 @@ function installRuntimeRpc(
       return true
     }
   })
-  registerRuntimeRelayPairingHandler(runtimeRpc)
   // Pairing and revocation complete in main with no renderer call, so push them to open lists.
   runtimeRpc.setOnPairedDevicesChanged(() => {
     if (state.mainWindow && !state.mainWindow.isDestroyed()) {
