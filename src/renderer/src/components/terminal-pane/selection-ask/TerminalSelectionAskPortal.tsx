@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom'
-import type { ManagedPane } from '@/lib/pane-manager/pane-manager'
+import type { ManagedPane } from '@/lib/pane-manager/pane-manager-types'
 import { TerminalSelectionAskPanel } from './TerminalSelectionAskPanel'
 import type { TerminalSelectionAskState } from './use-terminal-selection-ask'
 
