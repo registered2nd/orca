@@ -146,4 +146,46 @@ describe('syncRuntimeGraph cold-parked tabs', () => {
 
     expect(reportedPanes(graph)).not.toContainEqual(expect.objectContaining({ tabId: TAB_ID }))
   })
+
+  it('reports a watched parked pane without the unwatched flag', async () => {
+    installParkedWatcher(PARKED_PTY)
+
+    const graph = await captureGraph()
+
+    expect(reportedPanes(graph)).toContainEqual(
+      expect.objectContaining({ tabId: TAB_ID, leafId: LEAF, parked: true })
+    )
+    expect(reportedPanes(graph)).not.toContainEqual(expect.objectContaining({ unwatched: true }))
+  })
+
+  it('publishes an unmounted pane no watcher holds as unwatched, so main can keep its live PTY', async () => {
+    // Parking or a targeted background mount can leave a live tab unmounted with no watcher.
+    const graph = await captureGraph()
+
+    if (ORCA_LAYOUT_OWNER_IS_MAIN) {
+      // Main lists this app's panes itself; the window reports only what it parks with a watcher.
+      expect(reportedPanes(graph)).not.toContainEqual(expect.objectContaining({ tabId: TAB_ID }))
+      return
+    }
+    expect(graph.leaves).toContainEqual(
+      expect.objectContaining({
+        tabId: TAB_ID,
+        leafId: LEAF,
+        ptyId: PARKED_PTY,
+        parked: true,
+        unwatched: true
+      })
+    )
+    expect(graph.tabs).toContainEqual(
+      expect.objectContaining({ tabId: TAB_ID, activeLeafId: LEAF })
+    )
+  })
+
+  it('drops an unwatched pane whose PTY exit is buffered', async () => {
+    bufferPreHandlerPtyExit(PARKED_PTY, 0)
+
+    const graph = await captureGraph()
+
+    expect(reportedPanes(graph)).not.toContainEqual(expect.objectContaining({ tabId: TAB_ID }))
+  })
 })

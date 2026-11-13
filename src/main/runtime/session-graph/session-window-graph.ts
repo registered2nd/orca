@@ -77,7 +77,16 @@ export abstract class OrcaRuntimeWithSyncWindowGraph extends OrcaRuntimeWithAdmi
     const previousTabs = this.tabs
     const previousLeaves = this.leaves
     this.terminalIdentity.replaceTabs(graph.tabs)
-    const lifecycleLeaves = this.reconcileMobileSessionRetirementFences(graph.leaves)
+    // An unwatched leaf is an unmounted pane the window cannot vouch for; only main's own running PTY keeps it.
+    const lifecycleLeaves = this.reconcileMobileSessionRetirementFences(
+      graph.leaves.filter(
+        (leaf) =>
+          !leaf.unwatched ||
+          (leaf.ptyId !== null &&
+            this.controllerKnowsPtyIsLive(leaf.ptyId) &&
+            this.getPtyLivenessVerdict(leaf.ptyId)?.status !== 'exited')
+      )
+    )
     const mobileSessionResyncWorktrees = new Set<string>()
     const changedMobileWorktrees = this.syncMobileSessionTabs(
       graph.mobileSessionTabs,

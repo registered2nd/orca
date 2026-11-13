@@ -110,16 +110,20 @@ export function registerTerminalListSurfaceLostOrphanTests(): void {
     return { worktreeId: WORKTREE_ID, tabId, leafId, ptyId }
   }
 
-  /** Both PTYs stay live on the host throughout; only the graph changes. */
-  function makeRuntime(session?: WorkspaceSessionState): OrcaRuntimeService {
+  /** Both PTYs stay live on the host throughout; only the graph changes. The controller vouches only for controllerLivePtyIds. */
+  function makeRuntime(
+    session?: WorkspaceSessionState,
+    controllerLivePtyIds: ReadonlySet<string> = new Set()
+  ): OrcaRuntimeService {
     const store = makeStore(session)
     const runtime = new OrcaRuntimeService(partialRuntimeStore(store))
     storesByRuntime.set(runtime, store)
-    // oxlint-disable-next-line typescript/consistent-type-assertions -- SAFETY: the stub carries the four controller members this suite drives; both PTYs stay live throughout.
+    // oxlint-disable-next-line typescript/consistent-type-assertions -- SAFETY: the stub carries the controller members this suite drives; both PTYs stay live throughout.
     runtime.setPtyController({
       spawn: vi.fn(async () => ({ id: 'never' })),
       write: () => true,
       kill: () => true,
+      hasPty: (ptyId: string) => controllerLivePtyIds.has(ptyId),
       listProcesses: vi.fn(async () => [
         { id: KEPT_PTY, cwd: '/tmp/probe-worktree', incarnationId: KEPT_INCARNATION },
         { id: DROPPED_PTY, cwd: '/tmp/probe-worktree', incarnationId: DROPPED_INCARNATION }
@@ -209,6 +213,44 @@ export function registerTerminalListSurfaceLostOrphanTests(): void {
         expect(terminal.orphaned).toBe(false)
       }
     })
+
+    /** The window republishes the dropped pane unmounted, with no watcher holding its PTY. */
+    function republishDroppedPaneUnwatched(runtime: OrcaRuntimeService): void {
+      runtime.syncWindowGraph(1, {
+        tabs: [tab('tab-kept', KEPT_LEAF), tab('tab-dropped', DROPPED_LEAF)],
+        leaves: [
+          leaf('tab-kept', KEPT_LEAF, KEPT_PTY),
+          { ...leaf('tab-dropped', DROPPED_LEAF, DROPPED_PTY), parked: true, unwatched: true }
+        ]
+      })
+    }
+
+    it.runIf(!ORCA_LAYOUT_OWNER_IS_MAIN)(
+      'keeps an unwatched parked pane attached while main runs its PTY',
+      async () => {
+        const runtime = makeRuntime(undefined, new Set([KEPT_PTY, DROPPED_PTY]))
+        republishDroppedPaneUnwatched(runtime)
+
+        const { terminals } = await runtime.listTerminals(`id:${WORKTREE_ID}`)
+        const dropped = terminals.find((terminal) => terminal.ptyId === DROPPED_PTY)
+        expect(dropped?.orphaned).toBe(false)
+        expect(dropped?.tabId).toBe('tab-dropped')
+        expect(dropped?.leafId).toBe(DROPPED_LEAF)
+      }
+    )
+
+    it.runIf(!ORCA_LAYOUT_OWNER_IS_MAIN)(
+      'does not let an unwatched pane hold a PTY main does not run',
+      async () => {
+        const runtime = makeRuntime(undefined, new Set([KEPT_PTY]))
+        republishDroppedPaneUnwatched(runtime)
+
+        const { terminals } = await runtime.listTerminals(`id:${WORKTREE_ID}`)
+        const dropped = terminals.find((terminal) => terminal.ptyId === DROPPED_PTY)
+        expect(dropped?.orphaned).toBe(true)
+        expect(dropped?.tabId).toBe(`pty:${DROPPED_PTY}`)
+      }
+    )
 
     it('keeps naming the dropped pane after the graph goes away', async () => {
       const runtime = makeRuntime()
