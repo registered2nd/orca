@@ -1,5 +1,6 @@
-import { useCallback, useEffect, useEffectEvent, useMemo, useSyncExternalStore } from 'react'
+import { useCallback, useEffect, useMemo, useSyncExternalStore } from 'react'
 import type { TerminalTab } from '../../../../../../shared/workspace-layout/terminal-tab-types'
+import { useLatestHandler } from '@/lib/use-latest-handler'
 import { syncParkedTerminalTabWatchers } from '../output-watchers/terminal-parked-tab-watchers'
 import { disposeParkedTerminalWatchersForWorktree } from '../output-watchers/terminal-parked-watcher-registry'
 import {
@@ -26,7 +27,8 @@ export function useParkedTerminalWatcherSynchronization(args: {
   const { worktreeId, terminalTabs, parkedTabIds, activationDeferredMountTabIds } = args
   const inputs = useTerminalParkingWorkspaceInputs(worktreeId)
   useEffect(() => () => disposeParkedTerminalWatchersForWorktree(worktreeId), [worktreeId])
-  const synchronize = useEffectEvent(() => {
+  // Why not useEffectEvent: React 19.2 never refreshes its callback inside memo() components (facebook/react#34831), and the caller is the memoized TerminalPaneOverlayLayer. Every sync then ran with the first render's verdict: a tab deferred at startup kept its watcher, and the watcher's hidden-delivery claim, once revealed, and a tab parked later got no watcher.
+  const synchronize = useLatestHandler(() => {
     syncParkedTerminalTabWatchers({
       worktreeId,
       tabs: terminalTabs,
@@ -36,5 +38,5 @@ export function useParkedTerminalWatcherSynchronization(args: {
   })
   useEffect(() => {
     synchronize()
-  }, [activationDeferredMountTabIds, parkedTabIds, inputs])
+  }, [activationDeferredMountTabIds, parkedTabIds, inputs, synchronize])
 }
