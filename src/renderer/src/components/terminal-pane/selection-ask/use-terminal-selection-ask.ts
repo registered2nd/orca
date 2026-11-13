@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
-import type { ManagedPane, PaneManager } from '@/lib/pane-manager/pane-manager'
+import type { ManagedPane } from '@/lib/pane-manager/pane-manager-types'
+import type { PaneManager } from '@/lib/pane-manager/pane-manager'
 import type { TerminalSelectionAsk } from './TerminalSelectionAskPanel'
 import { subscribeTerminalSelectionAsk } from './terminal-selection-ask-request'
 import {
