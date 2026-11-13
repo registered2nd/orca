@@ -1,5 +1,15 @@
 import { ipcMain } from 'electron'
 import type { OrcaRuntimeRpcServer } from '../runtime/rpc/server/runtime-rpc'
+import { registerMobileHandlers } from './mobile'
+
+/** The phone pairing handlers, plus the relay link a desktop or CLI client pairs with. */
+export function registerMobileAndRuntimeRelayPairingHandlers(
+  rpcServer: OrcaRuntimeRpcServer,
+  dependencies: Parameters<typeof registerMobileHandlers>[1]
+): void {
+  registerMobileHandlers(rpcServer, dependencies)
+  registerRuntimeRelayPairingHandler(rpcServer)
+}
 
 // Why its own channel: the direct-address link widens the listener; a relay link never does.
 export function registerRuntimeRelayPairingHandler(rpcServer: OrcaRuntimeRpcServer): void {
