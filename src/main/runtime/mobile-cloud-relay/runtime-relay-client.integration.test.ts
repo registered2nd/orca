@@ -7,9 +7,9 @@ import { WebSocketServer, type RawData, type WebSocket } from 'ws'
 import { sendRemoteRuntimeRequestOnSocket } from '../../../shared/remote-runtime/requests/remote-runtime-request-socket'
 import type { PairedRuntimeRelayRoute } from '../../../shared/remote-runtime/pairing/paired-runtime-connection'
 import { DeviceRegistry } from '../rpc/server/pairing/device-registry'
-import { MobileSocketWiring } from '../rpc/mobile-socket-wiring'
-import { CloudRelayTransport } from '../rpc/relay-transport'
-import { deriveRelayHostId } from './relay-http-client'
+import { MobileSocketWiring } from '../rpc/mobile/mobile-socket-wiring'
+import { CloudRelayTransport } from '../rpc/transports/relay-transport'
+import { deriveRelayHostId } from './director/relay-http-client'
 
 const INVITE = 'B'.repeat(43)
 
