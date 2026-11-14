@@ -1,6 +1,6 @@
 import { app } from 'electron'
 import type { BrowserWindow } from 'electron'
-import { handleSpeakRepliesShortcut } from '../speech/speak-replies-shortcut'
+import { handleSpeakRepliesShortcut } from '../../speech/speak-replies-shortcut'
 import {
   ModifierDoubleTapDetector,
   toModifierDoubleTapEvent
