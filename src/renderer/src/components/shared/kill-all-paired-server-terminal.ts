@@ -1,5 +1,5 @@
 import { resolveTerminalCloseRoute } from '@/lib/workspace/ownership/terminal-close-route'
-import type { TerminalTabRetirementState } from '@/store/terminals/terminal-tab-retirement'
+import type { TerminalTabRetirementState } from '@/store/terminals/retirement/terminal-tab-retirement'
 
 /** A paired server's tab mirrors that server's terminal, and closing it stops the terminal there. */
 export function isPairedServerTerminal(
