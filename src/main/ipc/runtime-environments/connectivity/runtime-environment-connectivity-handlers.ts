@@ -18,8 +18,7 @@ import {
   connectThroughOwningService,
   removeThroughOwningService
 } from './runtime-environment-host-service-ops'
-import { ELECTRON_REMOTE_RUNTIME_CLIENT_CAPABILITIES } from '../../../../shared/remote-runtime/protocol/electron-remote-runtime-client-capabilities'
-import { addEnvironmentFromAnyPairingCode } from '../../../../shared/remote-runtime/host-store/runtime-environment-relay-store'
+import { addDesktopEnvironmentFromPairingCode } from '../pairing/runtime-environment-desktop-pairing-add'
 import type { RuntimeRpcResponse } from '../../../../shared/remote-runtime/rpc/runtime-rpc-envelope'
 import type { RuntimeStatus } from '../../../../shared/remote-runtime/session-graph/runtime-session-contracts'
 import type { Store } from '../../../persistence/loading-store/store'
@@ -92,11 +91,7 @@ export function registerRuntimeEnvironmentConnectivityHandlers({
       args: { name: string; pairingCode: string }
     ): Promise<{ environment: PublicKnownRuntimeEnvironment }> => {
       // An unverified code must not replace a working pairing.
-      const environment = await addEnvironmentFromAnyPairingCode(
-        getUserDataPath(),
-        args,
-        ELECTRON_REMOTE_RUNTIME_CLIENT_CAPABILITIES
-      )
+      const environment = await addDesktopEnvironmentFromPairingCode(getUserDataPath(), args)
       clearRuntimeEnvironmentManualDisconnect(environment.id)
       return { environment: redactRuntimeEnvironment(environment) }
     }
