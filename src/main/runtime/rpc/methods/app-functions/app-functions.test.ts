@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { denyRpcMethodForCaller } from '../../rpc-caller-scope'
+import { denyRpcMethodForCaller } from '../../callers/rpc-caller-scope'
 import { APP_FUNCTION_METHODS } from './app-functions'
 
 describe('app function RPC methods', () => {
