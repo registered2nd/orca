@@ -34,7 +34,10 @@ export async function writeEnvironmentRelayAccess(
 async function assertRelayPairingSavable(
   ...args: Parameters<typeof relayStore.assertRelayPairingSavable>
 ): Promise<void> {
-  const reply = await submitEnvironmentStoreCommand({ operation: 'assertRelayPairingSavable', args })
+  const reply = await submitEnvironmentStoreCommand({
+    operation: 'assertRelayPairingSavable',
+    args
+  })
   if (reply.operation !== 'assertRelayPairingSavable') {
     throw new Error('Unexpected environment store response')
   }
