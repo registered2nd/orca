@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { toast } from 'sonner'
-import type { SpeakRepliesStatus, VoiceSettings } from '../../../../../shared/speech-types'
+import type { SpeakRepliesStatus, VoiceSettings } from '../../../../../shared/speech/speech-types'
 import { Button } from '../../ui/button'
 import { Input } from '../../ui/input'
 import { Label } from '../../ui/label'
