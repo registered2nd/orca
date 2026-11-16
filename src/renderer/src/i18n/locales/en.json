@@ -26121,6 +26121,7 @@
       "chatFind": "Find in chat",
       "terminalToggleNativeChat": "Switch between Chat UI and terminal",
       "terminalAskAboutSelection": "Ask agent about terminal selection",
+      "terminalSteerAgent": "Steer agent (stop the current step and send)",
       "terminalClosePane": "Close active pane",
       "terminalCopySessionId": "Copy Session ID",
       "terminalSplitRight": "Split terminal right",
