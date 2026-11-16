@@ -37,6 +37,7 @@ import { keyboardEventBelongsToScope } from './terminal-keyboard-scope'
 import { isEditableTarget } from './terminal-keyboard-shortcut-matching'
 import { resolveTerminalShortcutAction as resolveTerminalKeyboardShortcutAction } from './terminal-shortcut-policy'
 import { createTerminalNativeOnlyShortcutTracker } from './terminal-native-only-shortcut'
+import { createActivePaneSteerCheck } from '../../agent-steer/terminal-agent-steer'
 
 type RuntimeOptions = {
   tabId: string
@@ -216,6 +217,7 @@ export function createTerminalKeyboardRuntime(options: RuntimeOptions) {
     }
     return !titleHasExplicitAgentIdentity(state.runtimePaneTitlesByTabId[tabId]?.[pane.id] ?? '')
   }
+  const canSteerActivePaneAgent = createActivePaneSteerCheck(managerRef, tabId)
   const resolveShortcutEvent = (
     event: Parameters<typeof resolveTerminalKeyboardShortcutAction>[0]
   ) =>
@@ -234,7 +236,8 @@ export function createTerminalKeyboardRuntime(options: RuntimeOptions) {
       terminalShortcutPolicy,
       hasActivePaneCtrlEnterCsiUAuthority,
       getModifyOtherKeysActivePane,
-      isActivePaneNonAgentFullScreen
+      isActivePaneNonAgentFullScreen,
+      canSteerActivePaneAgent
     )
   const createCapturedInputSender = (pane: { id: number; leafId: string }, data: string) => {
     const capturedTransport = paneTransportsRef.current.get(pane.id)
