@@ -13,6 +13,8 @@ import {
 import type { resolveTerminalShortcutAction as resolveTerminalKeyboardShortcutAction } from './terminal-shortcut-policy'
 import { equalizeTerminalPanes } from '../../layout/ownership/terminal-pane-layout-owner-commands'
 import { requestTerminalSelectionAsk } from '../../selection-ask/terminal-selection-ask-request'
+import { steerTerminalAgent } from '../../agent-steer/terminal-agent-steer'
+import { makePaneKey } from '../../../../../../shared/workspace-layout/stable-pane-id'
 
 type TerminalShortcutAction = NonNullable<ReturnType<typeof resolveTerminalKeyboardShortcutAction>>
 
@@ -217,6 +219,15 @@ export function dispatchTerminalShortcutAction(
     const pane = manager.getActivePane() ?? manager.getPanes()[0]
     if (pane) {
       requestTerminalSelectionAsk({ tabId, paneId: pane.id })
+    }
+    return
+  }
+  if (action.type === 'steerAgent') {
+    event.preventDefault()
+    event.stopImmediatePropagation()
+    const pane = manager.getActivePane() ?? manager.getPanes()[0]
+    if (pane) {
+      void steerTerminalAgent({ paneKey: makePaneKey(tabId, pane.leafId), terminal: pane.terminal })
     }
     return
   }

@@ -153,6 +153,11 @@ const STATIC_TITLE_COPY = {
     translate('keybindings.title.terminalCopySessionId', 'Copy Session ID'),
   'terminal.askAboutSelection': () =>
     translate('keybindings.title.terminalAskAboutSelection', 'Ask agent about terminal selection'),
+  'terminal.steerAgent': () =>
+    translate(
+      'keybindings.title.terminalSteerAgent',
+      'Steer agent (stop the current step and send)'
+    ),
   'terminal.closePane': () => translate('keybindings.title.terminalClosePane', 'Close active pane'),
   'terminal.splitRight': () =>
     translate('keybindings.title.terminalSplitRight', 'Split terminal right'),

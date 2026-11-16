@@ -59,6 +59,7 @@ export type TerminalShortcutAction =
   | { type: 'clearPaneTitle' }
   | { type: 'copySessionId' }
   | { type: 'askAboutSelection' }
+  | { type: 'steerAgent' }
   | { type: 'closeActivePane' }
   | { type: 'splitActivePane'; direction: 'vertical' | 'horizontal' }
   | { type: 'scrollViewport'; position: 'top' | 'bottom' }
@@ -96,7 +97,9 @@ export function resolveTerminalShortcutAction(
   // Why: pi arms modifyOtherKeys when its kitty query goes unanswered; see encodeModifyOtherKeysEnter.
   getModifyOtherKeysActivePane?: () => number,
   // Why: vim/nano treat ESC d as Escape + d, so a non-agent full-screen app keeps xterm's CSI 3;3~.
-  isActivePaneNonAgentFullScreen?: () => boolean
+  isActivePaneNonAgentFullScreen?: () => boolean,
+  // Why: lazy so the input-box read runs only when the steer chord is pressed.
+  canSteerActivePaneAgent?: () => boolean
 ): TerminalShortcutAction | null {
   const platform: NodeJS.Platform = isMac ? 'darwin' : isWindows ? 'win32' : 'linux'
   const matchOptions: KeybindingMatchOptions = { context: 'terminal', terminalShortcutPolicy }
@@ -156,6 +159,10 @@ export function resolveTerminalShortcutAction(
 
     if (matches('terminal.askAboutSelection')) {
       return { type: 'askAboutSelection' }
+    }
+
+    if (matches('terminal.steerAgent') && canSteerActivePaneAgent?.() === true) {
+      return { type: 'steerAgent' }
     }
 
     // Treat remapped terminal-scope tab.close as pane close; floating L2 defers so splits never close the whole tab.
