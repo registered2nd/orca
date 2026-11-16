@@ -72,9 +72,9 @@ class FakeClaudeCode {
 
 function stateFor(agentType: string, status: AgentStatusEntry['state'] | null): SteerPaneState {
   return {
-    agentStatusByPaneKey: status
-      ? { [PANE]: { state: status, agentType, paneKey: PANE } as AgentStatusEntry }
-      : {},
+    agentStatusByPaneKey: new Map(
+      status ? [[PANE, { state: status, agentType, paneKey: PANE } as AgentStatusEntry]] : []
+    ),
     paneForegroundAgentByPaneKey: {}
   }
 }

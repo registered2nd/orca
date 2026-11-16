@@ -35,6 +35,8 @@ function useSpeakRepliesTriggers(): void {
     // Started before the store subscription below, so it has recorded focus by the time that reads it.
     const stopTracking = trackLastFocusedAgentPane()
 
+    // Why: status versions share one live row map, so the previous state reads current rows; keep what was last seen.
+    let seen = new Map(useAppStore.getState().agentStatusByPaneKey)
     const unsubscribeStore = useAppStore.subscribe((state, previous) => {
       // Why: dictation does not stop the voice, so the user can talk while listening.
       const voice = state.settings?.voice
@@ -45,12 +47,18 @@ function useSpeakRepliesTriggers(): void {
         return
       }
       const speaking = getReplySpeechState()
-      for (const [paneKey, entry] of Object.entries(state.agentStatusByPaneKey)) {
-        const before = previous.agentStatusByPaneKey[paneKey]
-        if (entry === before) {
+      const before = seen
+      seen = new Map(state.agentStatusByPaneKey)
+      for (const [paneKey, entry] of seen) {
+        const previousEntry = before.get(paneKey)
+        if (entry === previousEntry) {
           continue
         }
-        if (speaking.speaking && speaking.paneKey === paneKey && startedNewTurn(entry, before)) {
+        if (
+          speaking.speaking &&
+          speaking.paneKey === paneKey &&
+          startedNewTurn(entry, previousEntry)
+        ) {
           stopReplySpeech()
         }
         if (!voice?.speakReplies) {
@@ -59,7 +67,7 @@ function useSpeakRepliesTriggers(): void {
         if (voice.speakScope !== 'all' && paneKey !== getLastFocusedAgentPane()?.paneKey) {
           continue
         }
-        const reply = finishedTurnReply(entry, before, mountedAt)
+        const reply = finishedTurnReply(entry, previousEntry, mountedAt)
         if (reply) {
           void speakWholeTurn(reply, entry.providerSession?.transcriptPath, paneKey)
         }
