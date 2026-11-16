@@ -8,7 +8,7 @@ import type {
   PairedRuntimeRelayRoute
 } from '../pairing/paired-runtime-connection'
 import type { PairingOffer } from '../pairing/mobile-relay-pairing-offer'
-import type { RuntimeCapability } from '../../protocol-version'
+import type { RuntimeCapability } from '../protocol/protocol-version'
 import { sendRemoteRuntimeRequestOnSocket } from '../requests/remote-runtime-request-socket'
 import { RemoteRuntimeClientError } from '../remote-runtime-client-error'
 import type { RuntimeRelayAccess } from './runtime-relay-access-schema'

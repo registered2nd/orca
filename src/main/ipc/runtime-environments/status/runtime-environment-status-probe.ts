@@ -1,5 +1,5 @@
 import { resolveEnvironment } from '../../../../shared/remote-runtime/host-store/runtime-environment-store'
-import { ELECTRON_REMOTE_RUNTIME_CLIENT_CAPABILITIES } from '../../../../shared/electron-remote-runtime-client-capabilities'
+import { ELECTRON_REMOTE_RUNTIME_CLIENT_CAPABILITIES } from '../../../../shared/remote-runtime/protocol/electron-remote-runtime-client-capabilities'
 import {
   getOrcadSshDeployment,
   getPreferredPairedRuntimeConnection,
