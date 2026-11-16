@@ -109,6 +109,15 @@ export const KEYBINDING_DEFINITION_CORE_4: readonly KeybindingDefinition[] = [
     }
   },
   {
+    id: 'terminal.steerAgent',
+    title: 'Steer agent (stop the current step and send)',
+    group: 'Terminal Panes',
+    scope: 'terminal',
+    searchKeywords: ['shortcut', 'terminal', 'steer', 'interrupt', 'agent', 'claude', 'send'],
+    // Why: claims the chord only in a Claude Code pane with typed input; elsewhere it keeps its terminal encoding.
+    defaultBindings: platformBindings(['Mod+Enter'])
+  },
+  {
     id: 'terminal.closePane',
     title: 'Close active pane',
     group: 'Terminal Panes',
