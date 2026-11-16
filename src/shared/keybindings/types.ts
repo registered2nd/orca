@@ -127,6 +127,7 @@ export type KeybindingActionId =
   | 'terminal.clearPaneTitle'
   | 'terminal.copySessionId'
   | 'terminal.askAboutSelection'
+  | 'terminal.steerAgent'
   | 'terminal.closePane'
   | 'terminal.splitRight'
   | 'terminal.splitDown'
