@@ -1,6 +1,6 @@
 import { encodePairingOffer } from '../../../../shared/remote-runtime/pairing/pairing'
 import { PAIRING_OFFER_VERSION } from '../../../../shared/remote-runtime/pairing/mobile-relay-pairing-offer'
-import { withTimeout } from '../../../../shared/promise-timeout-fallback'
+import { withTimeout } from '../../../../shared/concurrency/promise-timeout-fallback'
 import { RuntimeRpcMobilePairing } from './runtime-rpc-mobile-pairing'
 import { pairingUnavailable, type PairingOfferUnavailable } from './runtime-rpc-pairing-types'
 
