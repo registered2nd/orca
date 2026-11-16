@@ -11,7 +11,7 @@ import { makePaneKey } from '../../../../../shared/workspace-layout/stable-pane-
 export const TERMINAL_STEER_TAG = '[Steer, not a stop: fold this into the task and carry on.]'
 
 export type SteerPaneState = {
-  agentStatusByPaneKey: Record<string, AgentStatusEntry | undefined>
+  agentStatusByPaneKey: Pick<ReadonlyMap<string, AgentStatusEntry>, 'get'>
   paneForegroundAgentByPaneKey: Record<string, PaneForegroundAgentEntry | undefined>
 }
 
@@ -42,7 +42,7 @@ const DEFAULT_TIMING: SteerTiming = {
 const steersInFlight = new Set<string>()
 
 function isClaudeCodePane(state: SteerPaneState, paneKey: string): boolean {
-  const row = state.agentStatusByPaneKey[paneKey]
+  const row = state.agentStatusByPaneKey.get(paneKey)
   if (row?.agentType) {
     return row.agentType === 'claude'
   }
@@ -105,7 +105,7 @@ export async function steerTerminalAgent(args: {
   try {
     // Why: a tag after a slash command would become its arguments.
     const isCommand = readTypedDraft(terminal)?.trim().startsWith('/') === true
-    if (state.agentStatusByPaneKey[paneKey]?.state !== 'working' || isCommand) {
+    if (state.agentStatusByPaneKey.get(paneKey)?.state !== 'working' || isCommand) {
       terminal.input('\r', true)
       return 'submitted'
     }

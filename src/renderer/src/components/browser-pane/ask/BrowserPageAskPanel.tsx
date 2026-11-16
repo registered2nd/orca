@@ -48,7 +48,7 @@ export function BrowserPageAskPanel({
   const items = useSyncExternalStore(subscribeAskBasket, () => getAskBasket(browserPageId))
   const target = useSyncExternalStore(subscribeLastFocusedAgentPane, getLastFocusedAgentPane)
   const targetTitle = useAppStore((s) => {
-    const entry = target ? s.agentStatusByPaneKey[target.paneKey] : undefined
+    const entry = target ? s.agentStatusByPaneKey.get(target.paneKey) : undefined
     return entry?.terminalTitle || entry?.agentType || null
   })
   const [question, setQuestion] = useState('')
