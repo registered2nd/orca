@@ -1,6 +1,6 @@
 import { keybindingMatchesAction } from '../../shared/keybindings/matching'
 import type { KeybindingMatchOptions, KeybindingOverrides } from '../../shared/keybindings/types'
-import type { WindowShortcutInput } from '../../shared/window-shortcut-policy'
+import type { WindowShortcutInput } from '../../shared/keybindings/window-shortcut-policy'
 import { sendSpeakControl, toggleSpeakReplies } from './speak-replies-service'
 
 /** Consumes the read-aloud toggle/stop chords from the main window or a browser guest. */
