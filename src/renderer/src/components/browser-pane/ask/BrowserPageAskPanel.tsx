@@ -12,7 +12,7 @@ import {
 } from '@/lib/last-focused-agent-pane'
 import { useAppStore } from '@/store'
 import { parsePaneKey } from '../../../../../shared/workspace-layout/stable-pane-id'
-import type { GrabModeHook } from '../annotate/useGrabMode'
+import type { GrabModeHook } from '../annotate/grab/useGrabMode'
 import {
   addAskItem,
   clearAskBasket,
