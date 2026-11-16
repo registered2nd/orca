@@ -1,6 +1,6 @@
 import { OrcaRuntimeWithAgentPromptWriteGuards } from './terminal-agent-prompt-guards'
 import type { AgentPromptActivity } from './agent-prompt-submission-verification'
-import type { RuntimeTerminalPromptDelivery } from '../../../../shared/runtime-terminal-send-contract'
+import type { RuntimeTerminalPromptDelivery } from '../../../../shared/terminal/runtime/runtime-terminal-send-contract'
 import { readTerminalComposerTypedText } from '../../../../shared/terminal/input/terminal-composer-draft'
 
 /** How long a mid-turn agent gets to take a submitted prompt out of its composer. */
