@@ -3,7 +3,7 @@ import {
   speechChunks,
   speechLanguageOf
 } from '../../../../shared/speech-reply-text'
-import type { SpeakSynthesisResult } from '../../../../shared/speech-types'
+import type { SpeakSynthesisResult } from '../../../../shared/speech/speech-types'
 
 export type ReplySpeechState = { speaking: boolean; paneKey: string | null }
 

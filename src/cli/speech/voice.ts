@@ -1,9 +1,9 @@
 import type { CommandHandler } from '../dispatch/dispatch'
 import { getOptionalStringFlag, getRequiredStringFlag } from '../arguments/flags'
 import { printResult } from '../output/command-result-output'
-import { RuntimeClientError } from '../runtime/types'
-import type { SpeakRepliesStatus, SpeakRepliesUpdate } from '../../shared/speech-types'
-import type { RuntimeSpeechSetupState } from '../../shared/runtime-types'
+import { RuntimeClientError } from '../runtime/connection/types'
+import type { SpeakRepliesStatus, SpeakRepliesUpdate } from '../../shared/speech/speech-types'
+import type { RuntimeSpeechSetupState } from '../../shared/worktree/catalog/runtime-worktree-contracts'
 
 function formatSpeakStatus(status: SpeakRepliesStatus): string {
   return [

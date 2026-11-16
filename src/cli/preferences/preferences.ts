@@ -1,7 +1,7 @@
 import type { CommandHandler } from '../dispatch/dispatch'
 import { getOptionalStringFlag, getRequiredStringFlag } from '../arguments/flags'
 import { printResult } from '../output/command-result-output'
-import { RuntimeClientError } from '../runtime/types'
+import { RuntimeClientError } from '../runtime/connection/types'
 import type { CliPreferences, CliShortcut } from '../../shared/cli-preferences-types'
 
 function formatPreferences(preferences: CliPreferences): string {
