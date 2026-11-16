@@ -1,4 +1,4 @@
-import type { SpeakSynthesisResult, VoiceSettings } from '../../shared/speech-types'
+import type { SpeakSynthesisResult, VoiceSettings } from '../../shared/speech/speech-types'
 import { buildSpeechSsml, speechLanguageOf, speechSegments } from '../../shared/speech-reply-text'
 import { startSpan } from '../observability/tracer'
 import { readAzureSpeechKey } from './azure-speech-key-store'

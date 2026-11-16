@@ -1,9 +1,6 @@
-import {
-  getEffectiveKeybindingsForDefinition,
-  isKeybindingActionId,
-  KEYBINDING_DEFINITIONS,
-  type KeybindingActionId
-} from '../../shared/keybindings'
+import { getEffectiveKeybindingsForDefinition } from '../../shared/keybindings/effective'
+import { isKeybindingActionId, KEYBINDING_DEFINITIONS } from '../../shared/keybindings/definitions'
+import type { KeybindingActionId } from '../../shared/keybindings/types'
 import type { CliPreferences, CliShortcut } from '../../shared/cli-preferences-types'
 import type { KeybindingService } from '../keybindings/keybinding-service'
 import { broadcastKeybindingsChanged } from '../ipc/keybindings'
