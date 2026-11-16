@@ -36,14 +36,12 @@ export function TerminalSelectionAskPanel({
 }): React.JSX.Element {
   const selection = useMemo(() => cleanTerminalSelection(ask.text, ask.columns), [ask])
   const sourcePaneKey = makePaneKey(tabId, ask.leafId)
-  const sourceIsAgent = useAppStore((s) =>
-    Boolean(s.agentStatusByPaneKey[sourcePaneKey] || s.retainedAgentsByPaneKey[sourcePaneKey])
-  )
+  const sourceIsAgent = useAppStore((s) => s.agentStatusByPaneKey.has(sourcePaneKey))
   const lastFocused = useSyncExternalStore(subscribeLastFocusedAgentPane, getLastFocusedAgentPane)
   // Why: text selected in an agent's own output is a question for that agent; a plain shell's goes to the last agent used.
   const target = sourceIsAgent ? { paneKey: sourcePaneKey, worktreeId } : lastFocused
   const targetTitle = useAppStore((s) => {
-    const entry = target ? s.agentStatusByPaneKey[target.paneKey] : undefined
+    const entry = target ? s.agentStatusByPaneKey.get(target.paneKey) : undefined
     return entry?.terminalTitle || entry?.agentType || null
   })
   const sourceTitle = useAppStore(
