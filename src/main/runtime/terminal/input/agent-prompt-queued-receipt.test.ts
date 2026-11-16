@@ -51,6 +51,18 @@ async function createClaudePane(
 ): Promise<Pane> {
   let handle = ''
   let typed = ''
+  const rows = () => [
+    {
+      paneKey: 'busy-pane',
+      terminalHandle: handle,
+      state: hook.state,
+      prompt: 'earlier task',
+      agentType: 'claude',
+      connectionId: null,
+      receivedAt: Date.now(),
+      stateStartedAt: hook.stateStartedAt
+    }
+  ]
   const pane = await createAgentPromptSubmissionRuntime(
     (runtime, data) => {
       if (data !== '\r') {
@@ -68,20 +80,7 @@ async function createClaudePane(
     },
     'claude',
     () => true,
-    {
-      getAgentStatusSnapshot: () => [
-        {
-          paneKey: 'busy-pane',
-          terminalHandle: handle,
-          state: hook.state,
-          prompt: 'earlier task',
-          agentType: 'claude',
-          connectionId: null,
-          receivedAt: Date.now(),
-          stateStartedAt: hook.stateStartedAt
-        }
-      ]
-    }
+    { getAgentStatusSnapshot: rows, getPublicAgentStatusSnapshotForPane: rows }
   )
   handle = pane.handle
   pane.runtime.onPtyData(PTY_ID, composerFrame(''), Date.now())
