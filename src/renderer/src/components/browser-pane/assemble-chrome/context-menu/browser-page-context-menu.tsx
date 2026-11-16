@@ -17,7 +17,7 @@ import {
   BrowserPageContextMenuItems,
   type BrowserPageContextMenuActions
 } from './browser-page-context-menu-items'
-import { askAboutBrowserSelection, type BrowserAskIntent } from '../ask/browser-page-ask-send'
+import { askAboutBrowserSelection, type BrowserAskIntent } from '../../ask/browser-page-ask-send'
 
 export function BrowserPageContextMenu({
   browserPageId,

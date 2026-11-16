@@ -1,6 +1,6 @@
 import { ipcMain } from 'electron'
 import type { Store } from '../persistence/loading-store/store'
-import type { SpeakRepliesUpdate } from '../../shared/speech-types'
+import type { SpeakRepliesUpdate } from '../../shared/speech/speech-types'
 import { getDefaultVoiceSettings } from '../../shared/constants'
 import { synthesizeWithAzure } from '../speech/azure-tts-client'
 import { readTurnReplyFromTranscript } from '../speech/turn-reply-transcript'

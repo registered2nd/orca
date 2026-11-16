@@ -5,7 +5,7 @@ import type {
   SpeakRepliesStatus,
   SpeakRepliesUpdate,
   VoiceSettings
-} from '../../shared/speech-types'
+} from '../../shared/speech/speech-types'
 import type { Store } from '../persistence/loading-store/store'
 import {
   clearAzureSpeechKey,
