@@ -93,9 +93,7 @@ jobs:
             node config/scripts/generate-app-functions-catalog.mjs || echo "::warning::app functions catalog not regenerated"
           fi
 
-      - name: Build app
-        run: pnpm build:release
-
+      # Before the build: build:native already signs Orca's macOS helpers with CSC_NAME.
       - name: Install the signing identity
         env:
           P12: ${{ secrets.MAC_SIGNING_P12 }}
@@ -115,6 +113,9 @@ jobs:
           security find-certificate -c "Orca Personal Fork" -p "$kc" > "$RUNNER_TEMP/signing.pem"
           sudo security add-trusted-cert -d -r trustRoot -p codeSign -k /Library/Keychains/System.keychain "$RUNNER_TEMP/signing.pem"
           security find-identity -v -p codesigning | grep "$CSC_NAME"
+
+      - name: Build app
+        run: pnpm build:release
 
       - name: Package and sign
         run: |
