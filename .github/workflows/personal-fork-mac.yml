@@ -37,10 +37,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # GitHub's macos-15 arm64 pool ran out of capacity on 2026-11-17: three queued jobs were
-          # never picked up and were cancelled after 15 min each.
+          # On 2026-11-17 no GitHub-hosted arm64 runner picked up a job here: three on macos-15 and one
+          # on macos-26 were cancelled after 15 min queued ("not acquired by Runner of type hosted").
           - arch: arm64
-            runner: macos-26
+            runner: macos-14
           # Native Intel runner: packaging boots the x64 terminal host, which times out under Rosetta here.
           - arch: x64
             runner: macos-15-intel
