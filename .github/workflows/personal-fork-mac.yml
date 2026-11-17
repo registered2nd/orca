@@ -38,9 +38,10 @@ jobs:
       matrix:
         include:
           # On 2026-11-17 no GitHub-hosted arm64 runner picked up a job here: three on macos-15 and one
-          # on macos-26 were cancelled after 15 min queued ("not acquired by Runner of type hosted").
+          # on macos-26 were cancelled after 15 min queued ("not acquired by Runner of type hosted");
+          # macos-14 is retired. The release job then builds Apple silicon on Chelsea's Mac.
           - arch: arm64
-            runner: macos-14
+            runner: macos-15
           # Native Intel runner: packaging boots the x64 terminal host, which times out under Rosetta here.
           - arch: x64
             runner: macos-15-intel
