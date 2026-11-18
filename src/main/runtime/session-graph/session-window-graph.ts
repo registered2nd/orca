@@ -11,7 +11,6 @@ import type { RuntimeLeafRecord } from '../terminal/records/runtime-terminal-sta
 import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../../shared/workspace-layout/layout-owner-switch'
 import { AgentOrchestrationGraphRevision } from '../orchestration/crew/agent-orchestration-graph-revision'
 import { assertBrowserPageInventoryFrames } from '../session-tabs/inventory/mobile-session-inventory-base'
-import { admitUnwatchedLeavesMainRuns } from './unwatched-leaf-admission'
 
 type Graph = RuntimeSyncWindowGraph
 
@@ -62,9 +61,7 @@ export abstract class OrcaRuntimeWithSyncWindowGraph extends OrcaRuntimeWithAdmi
     const previousTabs = this.tabs
     const previousLeaves = this.leaves
     this.terminalIdentity.replaceTabs(graph.tabs)
-    const lifecycleLeaves = this.reconcileMobileSessionRetirementFences(
-      admitUnwatchedLeavesMainRuns(graph.leaves, (id) => this.controllerKnowsPtyIsLive(id), this)
-    )
+    const lifecycleLeaves = this.admitSyncedGraphLeaves(graph.leaves)
     const mobileSessionResyncWorktrees = new Set<string>()
     const changedMobileWorktrees = this.syncMobileSessionTabs(
       graph.mobileSessionTabs,
