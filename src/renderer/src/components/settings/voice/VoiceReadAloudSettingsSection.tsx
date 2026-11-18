@@ -6,7 +6,7 @@ import { Input } from '../../ui/input'
 import { Label } from '../../ui/label'
 import { Separator } from '../../ui/separator'
 import { Switch } from '../../ui/switch'
-import { useShortcutLabel } from '@/hooks/useShortcutLabel'
+import { useShortcutLabel } from '@/lib/keyboard/useShortcutLabel'
 import { translate } from '@/i18n/i18n'
 import { speakReply } from '../../speak-replies/reply-speech-player'
 
