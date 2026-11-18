@@ -1,5 +1,5 @@
 import { hasOsViewerOnlyFileExtension } from '../../../../../../shared/file-preview/binary-file-extensions'
-import { LOCAL_EXECUTION_HOST_ID } from '../../../../../../shared/execution-host'
+import { LOCAL_EXECUTION_HOST_ID } from '../../../../../../shared/execution-host/execution-host'
 import type { RuntimeFileOperationArgs } from '@/runtime/files/runtime-file-client-types'
 import { downloadAndOpenRemoteTerminalFile } from './terminal-remote-file-download-open'
 
