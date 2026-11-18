@@ -1,5 +1,5 @@
 import { BrowserWindow } from 'electron'
-import { getDefaultVoiceSettings } from '../../shared/constants'
+import { getDefaultVoiceSettings } from '../../shared/orca-profiles/constants'
 import type {
   SpeakControlEvent,
   SpeakRepliesStatus,
