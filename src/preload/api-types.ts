@@ -21,6 +21,7 @@ import type { AiVaultApi } from './api/ai-vault/ai-vault-api'
 import type { AppApi, E2EApi, PlatformApi } from './api/app-api'
 import type { AutomationsApi } from './api/automations/automation-api'
 import type { BrowserApi } from './api/browser/browser-api'
+import type { BrowserAskApi } from './api/browser/browser-ask-api'
 import type { CliApi } from './api/cli-install/cli-install-api'
 import type { OrcaUninstallApi } from './api/orca-uninstall/orca-uninstall-api'
 import type { CrashReportsApi, FeedbackApi } from './api/diagnostics/crash-report-api'
@@ -153,7 +154,7 @@ export type PreloadApi = {
   skills: SkillsApi
   pet: PetApi
   appIcon: AppIconApi
-  browser: BrowserApi
+  browser: BrowserApi & BrowserAskApi
   browserPasswords: BrowserPasswordsApi
   emulator: EmulatorApi
   hooks: HooksApi
