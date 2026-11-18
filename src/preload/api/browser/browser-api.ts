@@ -11,7 +11,6 @@ import type { BrowserExtensionToolbarApi } from './browser-extension-toolbar-api
 import type { BrowserExtensionSidePanelApi } from './browser-extension-side-panel-api'
 import type { BrowserExtensionContextMenuApi } from './browser-extension-context-menu-api'
 import type { BrowserExtensionWebStoreApi } from './browser-extension-webstore-api'
-import type { BrowserAskApi } from './browser-ask-api'
 import type {
   BrowserExtensionActionResult,
   BrowserExtensionListResult
@@ -84,7 +83,7 @@ import type {
   BrowserClientPageRendererRequest
 } from '../../../shared/browser/client-hosting/browser-client-page-renderer-protocol'
 
-export type BrowserApi = BrowserAskApi & {
+export type BrowserApi = {
   /** Absent on clients that host no browser guests, including web clients. */
   readClientHostId?: () => string | null
   onClientPageRendererRequest?: (
