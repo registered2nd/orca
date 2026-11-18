@@ -1,7 +1,7 @@
 // An unmounted pane no watcher holds still belongs to its tab; main keeps it only while main runs its PTY.
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import type { RuntimeSyncWindowGraph } from '../../../../shared/remote-runtime/session-graph/runtime-session-contracts'
-import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../../../shared/layout-owner-switch'
+import { ORCA_LAYOUT_OWNER_IS_MAIN } from '../../../../shared/workspace-layout/layout-owner-switch'
 import type { AppState } from '../../store/types'
 import type { TerminalTab } from '../../../../shared/workspace-layout/terminal-tab-types'
 import { makeState } from './testing/sync-runtime-graph-test-harness'
