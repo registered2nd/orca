@@ -1,5 +1,5 @@
 import { useAppStore } from '@/store'
-import { requestBackgroundTerminalWorktreeMount } from '@/components/terminal/background-terminal-worktree-mount'
+import { requestBackgroundTerminalWorktreeMount } from '@/components/terminal/workspace-mounting/background-terminal-worktree-mount'
 import { hasPtySerializer } from '@/components/terminal-pane/snapshots/pty-buffer-serializer'
 import { wakeSleepingAgentsForWorktreeInBackground } from './agent-session/resume/wake-sleeping-agents-in-background'
 import type {
