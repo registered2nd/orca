@@ -1,7 +1,7 @@
 import type { Terminal } from '@xterm/xterm'
 import type { PaneManager } from '@/lib/pane-manager/pane-manager'
 import { useAppStore } from '@/store/index'
-import type { PaneForegroundAgentEntry } from '@/store/slices/agent-status/pane-foreground-agent'
+import type { PaneForegroundAgentEntry } from '@/store/slices/agent-status/pane-authority/pane-foreground-agent'
 import type { AgentStatusEntry } from '../../../../../shared/agent-status/contracts/agent-status-types'
 import { readTerminalComposerTypedText } from '../../../../../shared/terminal/input/terminal-composer-draft'
 import { readTerminalCursorLineContext } from '../../../../../shared/terminal/input/terminal-cursor-line-context'
