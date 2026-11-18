@@ -7,9 +7,11 @@ import type {
 import { OrcaRuntimeWithAttachWindow } from './session-graph-promotion'
 import type {
   RuntimeRendererSyncWindowGraph,
+  RuntimeSyncedLeaf,
   RuntimeSyncWindowGraph
 } from '../../../shared/remote-runtime/session-graph/runtime-session-contracts'
 import { HEADLESS_RUNTIME_WINDOW_ID } from '../../../shared/remote-runtime/session-graph/runtime-session-contracts'
+import { admitUnwatchedLeavesMainRuns } from './unwatched-leaf-admission'
 
 export abstract class OrcaRuntimeWithAdmitWindowPublisher extends OrcaRuntimeWithAttachWindow {
   syncRendererAgentStatus(windowId: number, batch: RendererStatusPublication): RendererStatusAck {
@@ -128,6 +130,13 @@ export abstract class OrcaRuntimeWithAdmitWindowPublisher extends OrcaRuntimeWit
       }
       changedMobileWorktrees.add(worktreeId)
     }
+  }
+
+  /** Keeps an unwatched pane only while main runs its PTY, then applies the mobile fences. */
+  protected admitSyncedGraphLeaves(leaves: readonly RuntimeSyncedLeaf[]): RuntimeSyncedLeaf[] {
+    return this.reconcileMobileSessionRetirementFences(
+      admitUnwatchedLeavesMainRuns(leaves, (id) => this.controllerKnowsPtyIsLive(id), this)
+    )
   }
 
   protected admitWindowPublisher(
