@@ -2,7 +2,7 @@ import { MessageCircleQuestion } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { useTranslate } from '@/i18n/use-translate'
-import type { BrowserChromeElementTools } from './browser-annotate-split-button'
+import type { BrowserChromeElementTools } from './browser-annotate-tool-button'
 
 /** Opens and closes the page's Ask panel; the picker's third intent beside Grab and Annotate. */
 export function BrowserChromeAskButton({
