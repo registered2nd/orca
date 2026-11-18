@@ -9,7 +9,7 @@ import type * as WebRuntimeSessionEnvironment from '@/runtime/web-session-tabs-s
 import type * as WebRuntimeSessionTabLifecycle from '@/runtime/web-session-tabs-sync/actions/web-runtime-session-tab-lifecycle'
 import type * as WorktreeAgentActivationGate from '@/lib/workspace/activation/worktree-agent-activation-gate'
 import type * as Sonner from 'sonner'
-import { registerQuitAndStopAllSessionsIpcBridge } from '@/hooks/ipc-events/quit-and-stop-all-sessions-ipc-bridge'
+import { registerQuitAndStopAllSessionsIpcBridge } from '@/hooks/ipc-events/native-app/quit-and-stop-all-sessions-ipc-bridge'
 import {
   runKillAllTerminalSurfaces,
   snapshotKillAllTerminalSurfaceIds
