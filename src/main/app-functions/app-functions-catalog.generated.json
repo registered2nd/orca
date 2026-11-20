@@ -10109,7 +10109,7 @@
       }
     },
     "legacyRelayBridge:attach": {
-      "source": "src/main/ssh/legacy-relay/bridge/legacy-relay-bridge-ipc.ts:127",
+      "source": "src/main/ssh/legacy-relay/bridge/legacy-relay-bridge-ipc.ts:131",
       "params": [
         {
           "name": "payload",
@@ -10133,7 +10133,7 @@
       }
     },
     "legacyRelayBridge:close": {
-      "source": "src/main/ssh/legacy-relay/bridge/legacy-relay-bridge-ipc.ts:134",
+      "source": "src/main/ssh/legacy-relay/bridge/legacy-relay-bridge-ipc.ts:138",
       "params": [
         {
           "name": "payload",
@@ -10157,7 +10157,7 @@
       }
     },
     "legacyRelayBridge:listPanes": {
-      "source": "src/main/ssh/legacy-relay/bridge/legacy-relay-bridge-ipc.ts:126",
+      "source": "src/main/ssh/legacy-relay/bridge/legacy-relay-bridge-ipc.ts:130",
       "params": [],
       "preload": {
         "api": "window.api.legacyRelayBridge.listPanes",
@@ -14308,7 +14308,7 @@
       }
     },
     "pty:reportRendererDeliveryState": {
-      "source": "src/main/ipc/pty/ipc/resize-visibility.ts:155",
+      "source": "src/main/ipc/pty/ipc/resize-visibility.ts:156",
       "params": [
         {
           "name": "args",
@@ -15185,7 +15185,7 @@
       }
     },
     "runtimeEnvironments:addFromPairingCode": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:86",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:87",
       "params": [
         {
           "name": "args",
@@ -15233,7 +15233,7 @@
       }
     },
     "runtimeEnvironments:call": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:241",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:242",
       "params": [
         {
           "name": "args",
@@ -15244,7 +15244,7 @@
       ],
       "preload": {
         "api": "window.api.runtimeEnvironments.call",
-        "source": "src/preload/api/runtime/runtime-environments-bridge.ts:124",
+        "source": "src/preload/api/runtime/runtime-environments-bridge.ts:125",
         "params": [
           {
             "name": "args",
@@ -15281,7 +15281,7 @@
       }
     },
     "runtimeEnvironments:connect": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:171",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:172",
       "params": [
         {
           "name": "args",
@@ -15353,7 +15353,7 @@
       }
     },
     "runtimeEnvironments:desktopCreatedChatIds": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:73",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:74",
       "params": [],
       "preload": {
         "api": "window.api.runtimeEnvironments.desktopCreatedChatIds",
@@ -15363,7 +15363,7 @@
       }
     },
     "runtimeEnvironments:disconnect": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:156",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:157",
       "params": [
         {
           "name": "args",
@@ -15435,22 +15435,22 @@
       }
     },
     "runtimeEnvironments:getStatus": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:207",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:208",
       "params": [
         {
           "name": "args",
-          "type": "{ selector: string; timeoutMs?: number; observeOnly?: true; }",
+          "type": "{ selector: string; timeoutMs?: number; observeOnly?: true; force?: true; }",
           "optional": false,
           "rest": false
         }
       ],
       "preload": {
         "api": "window.api.runtimeEnvironments.getStatus",
-        "source": "src/preload/api/runtime/runtime-environments-bridge.ts:84",
+        "source": "src/preload/api/runtime/runtime-environments-bridge.ts:85",
         "params": [
           {
             "name": "args",
-            "type": "{ selector: string; timeoutMs?: number; observeOnly?: true; }",
+            "type": "{ selector: string; timeoutMs?: number; observeOnly?: true; force?: true; }",
             "optional": false,
             "rest": false
           }
@@ -15459,7 +15459,7 @@
       }
     },
     "runtimeEnvironments:getStatusSnapshots": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:76",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:77",
       "params": [],
       "preload": {
         "api": "window.api.runtimeEnvironments.getStatusSnapshots",
@@ -15517,7 +15517,7 @@
       }
     },
     "runtimeEnvironments:list": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:79",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:80",
       "params": [],
       "preload": {
         "api": "window.api.runtimeEnvironments.list",
@@ -15572,7 +15572,7 @@
       ],
       "preload": {
         "api": "window.api.runtimeEnvironments.prepareBrowserClientHostPlacement",
-        "source": "src/preload/api/runtime/runtime-environments-bridge.ts:114",
+        "source": "src/preload/api/runtime/runtime-environments-bridge.ts:115",
         "params": [
           {
             "name": "args",
@@ -15657,7 +15657,7 @@
       }
     },
     "runtimeEnvironments:remove": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:115",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:116",
       "params": [
         {
           "name": "args",
@@ -15705,7 +15705,7 @@
       }
     },
     "runtimeEnvironments:resolve": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:112",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:113",
       "params": [
         {
           "name": "args",
@@ -15757,7 +15757,7 @@
       "params": [],
       "preload": {
         "api": "window.api.runtimeEnvironments.retryConnectionsNow",
-        "source": "src/preload/api/runtime/runtime-environments-bridge.ts:116",
+        "source": "src/preload/api/runtime/runtime-environments-bridge.ts:117",
         "params": [],
         "returns": "Promise<void>"
       }
@@ -15883,7 +15883,7 @@
       }
     },
     "runtimeEnvironments:verifyAndAddFromPairingCode": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:98",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:99",
       "params": [
         {
           "name": "args",
@@ -18095,7 +18095,7 @@
       }
     },
     "telemetry:acknowledgeBanner": {
-      "source": "src/main/ipc/telemetry.ts:146",
+      "source": "src/main/ipc/telemetry.ts:147",
       "params": [],
       "preload": {
         "api": "window.api.telemetryAcknowledgeBanner",
@@ -18105,7 +18105,7 @@
       }
     },
     "telemetry:assignBrowserExtensionsBanner": {
-      "source": "src/main/ipc/telemetry.ts:80",
+      "source": "src/main/ipc/telemetry.ts:81",
       "params": [],
       "preload": {
         "api": "window.api.telemetryAssignBrowserExtensionsBanner",
@@ -18115,7 +18115,7 @@
       }
     },
     "telemetry:getConsentState": {
-      "source": "src/main/ipc/telemetry.ts:138",
+      "source": "src/main/ipc/telemetry.ts:139",
       "params": [],
       "preload": {
         "api": "window.api.telemetryGetConsentState",
@@ -18125,7 +18125,7 @@
       }
     },
     "telemetry:setOptIn": {
-      "source": "src/main/ipc/telemetry.ts:121",
+      "source": "src/main/ipc/telemetry.ts:122",
       "params": [
         {
           "name": "optedIn",
@@ -18149,7 +18149,7 @@
       }
     },
     "telemetry:track": {
-      "source": "src/main/ipc/telemetry.ts:88",
+      "source": "src/main/ipc/telemetry.ts:89",
       "params": [
         {
           "name": "name",
