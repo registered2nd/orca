@@ -890,14 +890,16 @@ import {
   HostedReviewForBranch
 } from './source-control/hosted-review-params'
 import {
+  SpeakAzureCredentials,
+  SpeakRepliesConfigure,
+  SpeakSay
+} from './speech/speak-replies-params'
+import {
   DictationChunk,
   DictationHandle,
   DictationSetup,
   DictationStart,
   OpenAiSpeechKeySet,
-  SpeakAzureCredentials,
-  SpeakRepliesConfigure,
-  SpeakSay,
   SpeechModelAction,
   SpeechSetupRead
 } from './speech/speech-params'
