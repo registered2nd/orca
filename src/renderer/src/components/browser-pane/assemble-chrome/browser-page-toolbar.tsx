@@ -146,6 +146,7 @@ export function BrowserPageToolbar({
     <BrowserChromeToolbar
       closeTabOwner={{ worktreeId, browserPageId }}
       showTourAnchors
+      showAskButton
       controls={{
         canGoBack: canGoBack || Boolean(convertedFrom),
         canGoForward: canGoForward || Boolean(convertedTo),
