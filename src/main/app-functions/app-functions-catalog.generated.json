@@ -431,7 +431,7 @@
       }
     },
     "app:await-before-unload-checkpoint": {
-      "source": "src/main/ipc/renderer-shutdown-checkpoint.ts:131",
+      "source": "src/main/ipc/renderer-shutdown-checkpoint.ts:20",
       "params": [],
       "preload": {
         "api": null,
@@ -461,7 +461,7 @@
       }
     },
     "app:getFeatureWallAssetBaseUrl": {
-      "source": "src/main/ipc/app.ts:159",
+      "source": "src/main/ipc/app.ts:150",
       "params": [],
       "preload": {
         "api": "window.api.app.getFeatureWallAssetBaseUrl",
@@ -471,7 +471,7 @@
       }
     },
     "app:getFloatingMarkdownDirectory": {
-      "source": "src/main/ipc/app.ts:246",
+      "source": "src/main/ipc/app.ts:237",
       "params": [],
       "preload": {
         "api": "window.api.app.getFloatingMarkdownDirectory",
@@ -481,7 +481,7 @@
       }
     },
     "app:getFloatingTerminalCwd": {
-      "source": "src/main/ipc/app.ts:242",
+      "source": "src/main/ipc/app.ts:233",
       "params": [
         {
           "name": "args",
@@ -505,7 +505,7 @@
       }
     },
     "app:getIdentity": {
-      "source": "src/main/ipc/app.ts:161",
+      "source": "src/main/ipc/app.ts:152",
       "params": [],
       "preload": {
         "api": "window.api.app.getIdentity",
@@ -515,7 +515,7 @@
       }
     },
     "app:getKeyboardInputSourceId": {
-      "source": "src/main/ipc/app.ts:184",
+      "source": "src/main/ipc/app.ts:175",
       "params": [],
       "preload": {
         "api": "window.api.app.getKeyboardInputSourceId",
@@ -525,7 +525,7 @@
       }
     },
     "app:getKeyboardLayoutSnapshot": {
-      "source": "src/main/ipc/app.ts:199",
+      "source": "src/main/ipc/app.ts:190",
       "params": [],
       "preload": {
         "api": "window.api.app.getKeyboardLayoutSnapshot",
@@ -545,7 +545,7 @@
       }
     },
     "app:getMacosUpgradeSupport": {
-      "source": "src/main/ipc/app.ts:155",
+      "source": "src/main/ipc/app.ts:146",
       "params": [
         {
           "name": "minimumMacosVersion",
@@ -569,7 +569,7 @@
       }
     },
     "app:getSystemLanguageDetection": {
-      "source": "src/main/ipc/app.ts:137",
+      "source": "src/main/ipc/app.ts:128",
       "params": [
         {
           "name": "preferences",
@@ -593,7 +593,7 @@
       }
     },
     "app:getWindowsAdministratorStatus": {
-      "source": "src/main/ipc/app.ts:154",
+      "source": "src/main/ipc/app.ts:145",
       "params": [],
       "preload": {
         "api": "window.api.app.getWindowsAdministratorStatus",
@@ -613,7 +613,7 @@
       }
     },
     "app:isProfileStateSaveDelayed": {
-      "source": "src/main/ipc/app.ts:136",
+      "source": "src/main/ipc/app.ts:127",
       "params": [],
       "preload": {
         "api": "window.api.app.isProfileStateSaveDelayed",
@@ -623,7 +623,7 @@
       }
     },
     "app:pickFloatingMarkdownDocument": {
-      "source": "src/main/ipc/app.ts:248",
+      "source": "src/main/ipc/app.ts:239",
       "params": [],
       "preload": {
         "api": "window.api.app.pickFloatingMarkdownDocument",
@@ -633,7 +633,7 @@
       }
     },
     "app:pickFloatingWorkspaceDirectory": {
-      "source": "src/main/ipc/app.ts:250",
+      "source": "src/main/ipc/app.ts:241",
       "params": [],
       "preload": {
         "api": "window.api.app.pickFloatingWorkspaceDirectory",
@@ -677,7 +677,7 @@
       }
     },
     "app:relaunch": {
-      "source": "src/main/ipc/app.ts:210",
+      "source": "src/main/ipc/app.ts:201",
       "params": [],
       "preload": {
         "api": "window.api.app.relaunch",
@@ -687,7 +687,7 @@
       }
     },
     "app:reload": {
-      "source": "src/main/window/attach-main-window-services.ts:271",
+      "source": "src/main/window/attach-main-window-services.ts:274",
       "params": [],
       "preload": {
         "api": null,
@@ -697,7 +697,7 @@
       }
     },
     "app:restart": {
-      "source": "src/main/ipc/app.ts:222",
+      "source": "src/main/ipc/app.ts:213",
       "params": [],
       "preload": {
         "api": "window.api.app.restart",
@@ -707,7 +707,7 @@
       }
     },
     "app:restartAsAdministrator": {
-      "source": "src/main/ipc/app.ts:231",
+      "source": "src/main/ipc/app.ts:222",
       "params": [],
       "preload": {
         "api": "window.api.app.restartAsAdministrator",
@@ -717,7 +717,7 @@
       }
     },
     "app:setWindowMaterialSuppressed": {
-      "source": "src/main/ipc/app.ts:201",
+      "source": "src/main/ipc/app.ts:192",
       "params": [
         {
           "name": "suppressed",
@@ -741,7 +741,7 @@
       }
     },
     "app:startupDiagnostic": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:145",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:150",
       "params": [
         {
           "name": "event",
@@ -902,8 +902,66 @@
         "returns": "Promise<number>"
       }
     },
+    "avatarGeneration:cancel": {
+      "source": "src/main/avatar-generation/avatar-generation-ipc.ts:127",
+      "params": [
+        {
+          "name": "raw",
+          "type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.avatarGeneration.cancel",
+        "source": "src/preload/api/avatar-generation-bridge.ts:7",
+        "params": [
+          {
+            "name": "args",
+            "type": null,
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": null
+      }
+    },
+    "avatarGeneration:capability": {
+      "source": "src/main/avatar-generation/avatar-generation-ipc.ts:58",
+      "params": [],
+      "preload": {
+        "api": "window.api.avatarGeneration.capability",
+        "source": "src/preload/api/avatar-generation-bridge.ts:5",
+        "params": [],
+        "returns": null
+      }
+    },
+    "avatarGeneration:generate": {
+      "source": "src/main/avatar-generation/avatar-generation-ipc.ts:66",
+      "params": [
+        {
+          "name": "raw",
+          "type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.avatarGeneration.generate",
+        "source": "src/preload/api/avatar-generation-bridge.ts:6",
+        "params": [
+          {
+            "name": "args",
+            "type": null,
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": null
+      }
+    },
     "backend:connect": {
-      "source": "src/main/backend-desktop/backend-supervisor.ts:49",
+      "source": "src/main/backend-desktop/backend-supervisor.ts:50",
       "params": [
         {
           "name": "token",
@@ -920,7 +978,7 @@
       ],
       "preload": {
         "api": null,
-        "source": "src/preload/usage/backend-port-client.ts:93",
+        "source": "src/preload/usage/backend-port-client.ts:101",
         "params": [
           {
             "name": "attempt",
@@ -1117,7 +1175,7 @@
       }
     },
     "browser:awaitGrabSelection": {
-      "source": "src/main/ipc/browser/browser-grab-ipc.ts:119",
+      "source": "src/main/ipc/browser/browser-grab-ipc.ts:61",
       "params": [
         {
           "name": "args",
@@ -1165,7 +1223,7 @@
       }
     },
     "browser:cancelGrab": {
-      "source": "src/main/ipc/browser/browser-grab-ipc.ts:134",
+      "source": "src/main/ipc/browser/browser-grab-ipc.ts:76",
       "params": [
         {
           "name": "args",
@@ -1189,7 +1247,7 @@
       }
     },
     "browser:captureSelectionScreenshot": {
-      "source": "src/main/ipc/browser/browser-grab-ipc.ts:147",
+      "source": "src/main/ipc/browser/browser-grab-ipc.ts:89",
       "params": [
         {
           "name": "args",
@@ -1261,7 +1319,7 @@
       }
     },
     "browser:extractHoverPayload": {
-      "source": "src/main/ipc/browser/browser-grab-ipc.ts:172",
+      "source": "src/main/ipc/browser/browser-grab-ipc.ts:114",
       "params": [
         {
           "name": "args",
@@ -3028,7 +3086,7 @@
       }
     },
     "claudeAccounts:add": {
-      "source": "src/main/ipc/accounts/claude-accounts.ts:9",
+      "source": "src/main/ipc/accounts/claude-accounts.ts:20",
       "params": [
         {
           "name": "args",
@@ -3039,7 +3097,7 @@
       ],
       "preload": {
         "api": "window.api.claudeAccounts.add",
-        "source": "src/preload/api/agent-accounts/claude-accounts-bridge.ts:8",
+        "source": "src/preload/api/agent-accounts/claude-accounts-bridge.ts:12",
         "params": [
           {
             "name": "args",
@@ -3052,27 +3110,51 @@
       }
     },
     "claudeAccounts:cancelPendingLogin": {
-      "source": "src/main/ipc/accounts/claude-accounts.ts:14",
+      "source": "src/main/ipc/accounts/claude-accounts.ts:25",
       "params": [],
       "preload": {
         "api": "window.api.claudeAccounts.cancelPendingLogin",
-        "source": "src/preload/api/agent-accounts/claude-accounts-bridge.ts:10",
+        "source": "src/preload/api/agent-accounts/claude-accounts-bridge.ts:14",
         "params": [],
         "returns": "Promise<boolean>"
       }
     },
     "claudeAccounts:list": {
-      "source": "src/main/ipc/accounts/claude-accounts.ts:8",
+      "source": "src/main/ipc/accounts/claude-accounts.ts:19",
       "params": [],
       "preload": {
         "api": "window.api.claudeAccounts.list",
-        "source": "src/preload/api/agent-accounts/claude-accounts-bridge.ts:6",
+        "source": "src/preload/api/agent-accounts/claude-accounts-bridge.ts:10",
         "params": [],
         "returns": null
       }
     },
+    "claudeAccounts:moveUnheldRunningSessions": {
+      "source": "src/main/ipc/accounts/claude-accounts.ts:47",
+      "params": [
+        {
+          "name": "args",
+          "type": "{ change: ClaudeHostSelectionChange; heldPtyIds: string[]; }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.claudeAccounts.moveUnheldRunningSessions",
+        "source": "src/preload/api/agent-accounts/claude-accounts-bridge.ts:31",
+        "params": [
+          {
+            "name": "args",
+            "type": "{ change: ClaudeHostSelectionChange; heldPtyIds: string[]; }",
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": "Promise<ClaudeHostRunningSessionsMove | undefined>"
+      }
+    },
     "claudeAccounts:reauthenticate": {
-      "source": "src/main/ipc/accounts/claude-accounts.ts:15",
+      "source": "src/main/ipc/accounts/claude-accounts.ts:26",
       "params": [
         {
           "name": "args",
@@ -3083,7 +3165,7 @@
       ],
       "preload": {
         "api": "window.api.claudeAccounts.reauthenticate",
-        "source": "src/preload/api/agent-accounts/claude-accounts-bridge.ts:12",
+        "source": "src/preload/api/agent-accounts/claude-accounts-bridge.ts:16",
         "params": [
           {
             "name": "args",
@@ -3096,7 +3178,7 @@
       }
     },
     "claudeAccounts:remove": {
-      "source": "src/main/ipc/accounts/claude-accounts.ts:21",
+      "source": "src/main/ipc/accounts/claude-accounts.ts:32",
       "params": [
         {
           "name": "args",
@@ -3107,7 +3189,7 @@
       ],
       "preload": {
         "api": "window.api.claudeAccounts.remove",
-        "source": "src/preload/api/agent-accounts/claude-accounts-bridge.ts:15",
+        "source": "src/preload/api/agent-accounts/claude-accounts-bridge.ts:19",
         "params": [
           {
             "name": "args",
@@ -3120,7 +3202,7 @@
       }
     },
     "claudeAccounts:rename": {
-      "source": "src/main/ipc/accounts/claude-accounts.ts:24",
+      "source": "src/main/ipc/accounts/claude-accounts.ts:35",
       "params": [
         {
           "name": "args",
@@ -3131,7 +3213,7 @@
       ],
       "preload": {
         "api": "window.api.claudeAccounts.rename",
-        "source": "src/preload/api/agent-accounts/claude-accounts-bridge.ts:17",
+        "source": "src/preload/api/agent-accounts/claude-accounts-bridge.ts:21",
         "params": [
           {
             "name": "args",
@@ -3144,7 +3226,7 @@
       }
     },
     "claudeAccounts:select": {
-      "source": "src/main/ipc/accounts/claude-accounts.ts:29",
+      "source": "src/main/ipc/accounts/claude-accounts.ts:40",
       "params": [
         {
           "name": "args",
@@ -3155,7 +3237,7 @@
       ],
       "preload": {
         "api": "window.api.claudeAccounts.select",
-        "source": "src/preload/api/agent-accounts/claude-accounts-bridge.ts:22",
+        "source": "src/preload/api/agent-accounts/claude-accounts-bridge.ts:26",
         "params": [
           {
             "name": "args",
@@ -3168,11 +3250,11 @@
       }
     },
     "claudeAccounts:waitForSignInLink": {
-      "source": "src/main/ipc/accounts/claude-accounts.ts:20",
+      "source": "src/main/ipc/accounts/claude-accounts.ts:31",
       "params": [],
       "preload": {
         "api": "window.api.claudeAccounts.waitForSignInLink",
-        "source": "src/preload/api/agent-accounts/claude-accounts-bridge.ts:14",
+        "source": "src/preload/api/agent-accounts/claude-accounts-bridge.ts:18",
         "params": [],
         "returns": "Promise<string | null>"
       }
@@ -3280,7 +3362,7 @@
       }
     },
     "clipboard:hasImage": {
-      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:158",
+      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:157",
       "params": [],
       "preload": {
         "api": "window.api.ui.clipboardHasImage",
@@ -3290,7 +3372,7 @@
       }
     },
     "clipboard:readFilePaths": {
-      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:163",
+      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:162",
       "params": [],
       "preload": {
         "api": "window.api.ui.readClipboardFilePaths",
@@ -3300,7 +3382,7 @@
       }
     },
     "clipboard:readImageThumbnail": {
-      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:149",
+      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:148",
       "params": [],
       "preload": {
         "api": "window.api.ui.readClipboardImageThumbnail",
@@ -3310,7 +3392,7 @@
       }
     },
     "clipboard:readLinkHtml": {
-      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:132",
+      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:131",
       "params": [],
       "preload": {
         "api": "window.api.ui.readClipboardLinkHtml",
@@ -3320,7 +3402,7 @@
       }
     },
     "clipboard:readSelectionText": {
-      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:137",
+      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:136",
       "params": [
         {
           "name": "options",
@@ -3344,7 +3426,7 @@
       }
     },
     "clipboard:readText": {
-      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:127",
+      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:126",
       "params": [
         {
           "name": "options",
@@ -3368,7 +3450,7 @@
       }
     },
     "clipboard:restoreNativeChatPastes": {
-      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:144",
+      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:143",
       "params": [
         {
           "name": "paths",
@@ -3392,7 +3474,7 @@
       }
     },
     "clipboard:saveImageAsTempFile": {
-      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:168",
+      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:167",
       "params": [
         {
           "name": "args",
@@ -3416,7 +3498,7 @@
       }
     },
     "clipboard:savePastedTextAsFile": {
-      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:189",
+      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:188",
       "params": [
         {
           "name": "args",
@@ -3440,7 +3522,7 @@
       }
     },
     "clipboard:writeFile": {
-      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:194",
+      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:193",
       "params": [
         {
           "name": "args",
@@ -3464,7 +3546,7 @@
       }
     },
     "clipboard:writeImage": {
-      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:261",
+      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:260",
       "params": [
         {
           "name": "dataUrl",
@@ -3488,7 +3570,7 @@
       }
     },
     "clipboard:writeSecretText": {
-      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:244",
+      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:243",
       "params": [
         {
           "name": "text",
@@ -3512,7 +3594,7 @@
       }
     },
     "clipboard:writeSelectionText": {
-      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:254",
+      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:253",
       "params": [
         {
           "name": "text",
@@ -3536,7 +3618,7 @@
       }
     },
     "clipboard:writeTerminalText": {
-      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:250",
+      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:249",
       "params": [
         {
           "name": "text",
@@ -3560,7 +3642,7 @@
       }
     },
     "clipboard:writeText": {
-      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:233",
+      "source": "src/main/window/clipboard/clipboard-ipc-handlers.ts:232",
       "params": [
         {
           "name": "text",
@@ -3860,7 +3942,7 @@
       }
     },
     "crashReports:copyLatestDiagnostics": {
-      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:99",
+      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:92",
       "params": [
         {
           "name": "args",
@@ -3884,7 +3966,7 @@
       }
     },
     "crashReports:dismiss": {
-      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:73",
+      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:69",
       "params": [
         {
           "name": "args",
@@ -3908,7 +3990,7 @@
       }
     },
     "crashReports:getLatestPending": {
-      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:64",
+      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:60",
       "params": [],
       "preload": {
         "api": "window.api.crashReports.getLatestPending",
@@ -3918,7 +4000,7 @@
       }
     },
     "crashReports:getLatestReport": {
-      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:67",
+      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:63",
       "params": [],
       "preload": {
         "api": "window.api.crashReports.getLatestReport",
@@ -3928,7 +4010,7 @@
       }
     },
     "crashReports:recordRendererError": {
-      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:123",
+      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:116",
       "params": [
         {
           "name": "args",
@@ -3952,7 +4034,7 @@
       }
     },
     "crashReports:submit": {
-      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:133",
+      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:126",
       "params": [
         {
           "name": "args",
@@ -3986,7 +4068,7 @@
       }
     },
     "dashboard:getPopoutOpen": {
-      "source": "src/main/ipc/dashboard/dashboard-popout.ts:95",
+      "source": "src/main/ipc/dashboard/dashboard-popout.ts:97",
       "params": [],
       "preload": {
         "api": "window.api.dashboard.getPopoutOpen",
@@ -3996,7 +4078,7 @@
       }
     },
     "dashboard:publishSnapshot": {
-      "source": "src/main/ipc/dashboard/dashboard-popout.ts:63",
+      "source": "src/main/ipc/dashboard/dashboard-popout.ts:65",
       "params": [
         {
           "name": "snapshot",
@@ -4020,7 +4102,7 @@
       }
     },
     "dashboard:requestSnapshot": {
-      "source": "src/main/ipc/dashboard/dashboard-popout.ts:85",
+      "source": "src/main/ipc/dashboard/dashboard-popout.ts:87",
       "params": [],
       "preload": {
         "api": "window.api.dashboard.requestSnapshot",
@@ -4030,7 +4112,7 @@
       }
     },
     "dashboardPopout:ackAgent": {
-      "source": "src/main/ipc/dashboard/dashboard-popout.ts:102",
+      "source": "src/main/ipc/dashboard/dashboard-popout.ts:104",
       "params": [
         {
           "name": "args",
@@ -4060,7 +4142,7 @@
       }
     },
     "dashboardPopout:open": {
-      "source": "src/main/ipc/dashboard/dashboard-popout.ts:54",
+      "source": "src/main/ipc/dashboard/dashboard-popout.ts:56",
       "params": [],
       "preload": {
         "api": "window.api.dashboard.openPopout",
@@ -4070,7 +4152,7 @@
       }
     },
     "dashboardPopout:revealAgent": {
-      "source": "src/main/ipc/dashboard/dashboard-popout.ts:118",
+      "source": "src/main/ipc/dashboard/dashboard-popout.ts:120",
       "params": [
         {
           "name": "args",
@@ -4449,11 +4531,11 @@
       ],
       "preload": {
         "api": "window.api.emulator.sendScrcpyKeyboard",
-        "source": "src/preload/api/emulator/emulator-bridge.ts:63",
+        "source": "src/preload/api/emulator/emulator-bridge.ts:65",
         "params": [
           {
             "name": "input",
-            "type": "{ deviceId: string; text: string; } | { deviceId: string; key: string; shift: boolean; }",
+            "type": "{ deviceId: string; text: string; paste?: boolean; } | { deviceId: string; key: string; shift: boolean; }",
             "optional": false,
             "rest": false
           }
@@ -8457,7 +8539,7 @@
       }
     },
     "gitBash:isAvailable": {
-      "source": "src/main/ipc/app.ts:181",
+      "source": "src/main/ipc/app.ts:172",
       "params": [],
       "preload": {
         "api": "window.api.gitBash.isAvailable",
@@ -10109,7 +10191,7 @@
       }
     },
     "legacyRelayBridge:attach": {
-      "source": "src/main/ssh/legacy-relay/bridge/legacy-relay-bridge-ipc.ts:131",
+      "source": "src/main/ssh/legacy-relay/bridge/legacy-relay-bridge-ipc.ts:48",
       "params": [
         {
           "name": "payload",
@@ -10133,7 +10215,7 @@
       }
     },
     "legacyRelayBridge:close": {
-      "source": "src/main/ssh/legacy-relay/bridge/legacy-relay-bridge-ipc.ts:138",
+      "source": "src/main/ssh/legacy-relay/bridge/legacy-relay-bridge-ipc.ts:54",
       "params": [
         {
           "name": "payload",
@@ -10157,7 +10239,7 @@
       }
     },
     "legacyRelayBridge:listPanes": {
-      "source": "src/main/ssh/legacy-relay/bridge/legacy-relay-bridge-ipc.ts:130",
+      "source": "src/main/ssh/legacy-relay/bridge/legacy-relay-bridge-ipc.ts:47",
       "params": [],
       "preload": {
         "api": "window.api.legacyRelayBridge.listPanes",
@@ -10871,8 +10953,32 @@
         "returns": "Promise<void>"
       }
     },
+    "memory:countHiddenBrowserPages": {
+      "source": "src/main/ipc/memory.ts:22",
+      "params": [
+        {
+          "name": "hiddenForMs",
+          "type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.memory.countHiddenBrowserPages",
+        "source": "src/preload/api/diagnostics/memory-bridge.ts:14",
+        "params": [
+          {
+            "name": "hiddenForMs",
+            "type": "number",
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": "Promise<number>"
+      }
+    },
     "memory:getSnapshot": {
-      "source": "src/main/ipc/memory.ts:13",
+      "source": "src/main/ipc/memory.ts:14",
       "params": [
         {
           "name": "admission",
@@ -10883,7 +10989,7 @@
       ],
       "preload": {
         "api": "window.api.memory.getSnapshot",
-        "source": "src/preload/api/diagnostics/memory-bridge.ts:9",
+        "source": "src/preload/api/diagnostics/memory-bridge.ts:10",
         "params": [
           {
             "name": "admission",
@@ -10895,12 +11001,22 @@
         "returns": "Promise<MemorySnapshot>"
       }
     },
+    "memory:readPerfNoticeSignals": {
+      "source": "src/main/ipc/memory.ts:21",
+      "params": [],
+      "preload": {
+        "api": "window.api.memory.readPerfNoticeSignals",
+        "source": "src/preload/api/diagnostics/memory-bridge.ts:12",
+        "params": [],
+        "returns": "Promise<PerfNoticeSignals>"
+      }
+    },
     "memory:resourceWindowVisible": {
-      "source": "src/main/ipc/memory.ts:20",
+      "source": "src/main/ipc/memory.ts:25",
       "params": [],
       "preload": {
         "api": "window.api.memory.resourceWindowVisible",
-        "source": "src/preload/api/diagnostics/memory-bridge.ts:10",
+        "source": "src/preload/api/diagnostics/memory-bridge.ts:15",
         "params": [],
         "returns": "Promise<boolean>"
       }
@@ -11450,7 +11566,7 @@
       }
     },
     "notifications:acknowledgeAttention": {
-      "source": "src/main/ipc/notifications/notifications.ts:171",
+      "source": "src/main/ipc/notifications/notifications.ts:172",
       "params": [
         {
           "name": "acknowledgement",
@@ -11486,7 +11602,7 @@
       }
     },
     "notifications:dismiss": {
-      "source": "src/main/ipc/notifications/notifications.ts:181",
+      "source": "src/main/ipc/notifications/notifications.ts:182",
       "params": [
         {
           "name": "ids",
@@ -11534,7 +11650,7 @@
       }
     },
     "notifications:dispatch": {
-      "source": "src/main/ipc/notifications/notifications.ts:299",
+      "source": "src/main/ipc/notifications/notifications.ts:300",
       "params": [
         {
           "name": "args",
@@ -11558,7 +11674,7 @@
       }
     },
     "notifications:getDesktopAwayState": {
-      "source": "src/main/ipc/notifications/notifications.ts:42",
+      "source": "src/main/ipc/notifications/notifications.ts:43",
       "params": [],
       "preload": {
         "api": "window.api.notifications.getDesktopAwayState",
@@ -11568,7 +11684,7 @@
       }
     },
     "notifications:getPermissionStatus": {
-      "source": "src/main/ipc/notifications/notifications.ts:59",
+      "source": "src/main/ipc/notifications/notifications.ts:60",
       "params": null,
       "preload": {
         "api": "window.api.notifications.getPermissionStatus",
@@ -11595,7 +11711,7 @@
       }
     },
     "notifications:openSystemSettings": {
-      "source": "src/main/ipc/notifications/notifications.ts:48",
+      "source": "src/main/ipc/notifications/notifications.ts:49",
       "params": [],
       "preload": {
         "api": "window.api.notifications.openSystemSettings",
@@ -11605,7 +11721,7 @@
       }
     },
     "notifications:probeDelivery": {
-      "source": "src/main/ipc/notifications/notifications.ts:60",
+      "source": "src/main/ipc/notifications/notifications.ts:61",
       "params": [
         {
           "name": "args",
@@ -11653,7 +11769,7 @@
       }
     },
     "notifications:settleStructuredPrompts": {
-      "source": "src/main/ipc/notifications/notifications.ts:279",
+      "source": "src/main/ipc/notifications/notifications.ts:280",
       "params": [
         {
           "name": "scope",
@@ -12300,7 +12416,7 @@
       }
     },
     "plugins:addMarketplace": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:92",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:111",
       "params": [
         {
           "name": "args",
@@ -12389,7 +12505,7 @@
       }
     },
     "plugins:getAutoUpdateState": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:141",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:160",
       "params": [],
       "preload": {
         "api": "window.api.plugins.getAutoUpdateState",
@@ -12399,7 +12515,7 @@
       }
     },
     "plugins:getInstallCounts": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:151",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:170",
       "params": [],
       "preload": {
         "api": "window.api.plugins.getInstallCounts",
@@ -12457,7 +12573,7 @@
       }
     },
     "plugins:getRollbackVersion": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:156",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:175",
       "params": [
         {
           "name": "args",
@@ -12529,7 +12645,7 @@
       }
     },
     "plugins:installMarketplacePlugin": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:115",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:134",
       "params": [
         {
           "name": "args",
@@ -12607,7 +12723,7 @@
       }
     },
     "plugins:listMarketplacePlugins": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:107",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:126",
       "params": [],
       "preload": {
         "api": "window.api.plugins.listMarketplacePlugins",
@@ -12617,7 +12733,7 @@
       }
     },
     "plugins:listMarketplaces": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:88",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:107",
       "params": [],
       "preload": {
         "api": "window.api.plugins.listMarketplaces",
@@ -12793,7 +12909,7 @@
       }
     },
     "plugins:previewMarketplacePlugin": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:111",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:130",
       "params": [
         {
           "name": "args",
@@ -12817,7 +12933,7 @@
       }
     },
     "plugins:previewMarketplaceUpdate": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:129",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:148",
       "params": [
         {
           "name": "args",
@@ -12923,7 +13039,7 @@
       }
     },
     "plugins:refreshMarketplaces": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:101",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:120",
       "params": [
         {
           "name": "args",
@@ -12971,7 +13087,7 @@
       }
     },
     "plugins:removeMarketplace": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:96",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:115",
       "params": [
         {
           "name": "args",
@@ -13019,7 +13135,7 @@
       }
     },
     "plugins:rollbackMarketplacePlugin": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:160",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:179",
       "params": [
         {
           "name": "args",
@@ -13101,7 +13217,7 @@
       }
     },
     "plugins:suggestForFileType": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:65",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:71",
       "params": [
         {
           "name": "fileType",
@@ -13137,7 +13253,7 @@
       }
     },
     "plugins:takeUpdateReviewNotices": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:146",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:165",
       "params": [],
       "preload": {
         "api": "window.api.plugins.takeUpdateReviewNotices",
@@ -14503,7 +14619,7 @@
       }
     },
     "pwsh:isAvailable": {
-      "source": "src/main/ipc/app.ts:180",
+      "source": "src/main/ipc/app.ts:171",
       "params": [],
       "preload": {
         "api": "window.api.pwsh.isAvailable",
@@ -15811,10 +15927,10 @@
       }
     },
     "runtimeEnvironments:subscribe": {
-      "source": "src/main/ipc/runtime-environments/subscriptions/runtime-environment-subscription-handlers.ts:30",
+      "source": "src/main/ipc/runtime-environments/subscriptions/runtime-environment-subscription-handlers.ts:13",
       "params": [
         {
-          "name": "args",
+          "name": "subscribe",
           "type": "RuntimeEnvironmentSubscribeArgs",
           "optional": false,
           "rest": false
@@ -15906,19 +16022,19 @@
         "returns": "Promise<VerifyAndAddRuntimeEnvironmentResult>"
       }
     },
-    "session:close-terminal-surface": {
-      "source": "src/main/ipc/session.ts:115",
+    "session:apply-desktop-relays": {
+      "source": "src/main/ipc/session-desktop-relays.ts:134",
       "params": [
         {
           "name": "args",
-          "type": "{ worktreeId?: unknown; target?: unknown; reason?: unknown; } | undefined",
+          "type": "unknown",
           "optional": false,
           "rest": false
         }
       ],
       "preload": {
-        "api": "window.api.session.closeTerminalSurface",
-        "source": "src/preload/api/workspaces/session-bridge.ts:10",
+        "api": "window.api.session.applyDesktopRelays",
+        "source": "src/preload/api/workspaces/session-bridge.ts:12",
         "params": [
           {
             "name": "args",
@@ -15930,18 +16046,52 @@
         "returns": null
       }
     },
-    "session:flush": {
-      "source": "src/main/ipc/session.ts:135",
+    "session:close-terminal-surface": {
+      "source": "src/main/ipc/session.ts:183",
+      "params": [
+        {
+          "name": "args",
+          "type": "{ worktreeId?: unknown; target?: unknown; reason?: unknown; } | undefined",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.session.closeTerminalSurface",
+        "source": "src/preload/api/workspaces/session-bridge.ts:13",
+        "params": [
+          {
+            "name": "args",
+            "type": null,
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": null
+      }
+    },
+    "session:desktop-relays-version": {
+      "source": "src/main/ipc/session-desktop-relays.ts:132",
       "params": [],
       "preload": {
-        "api": "window.api.session.flush",
+        "api": "window.api.session.desktopRelaysVersion",
         "source": "src/preload/api/workspaces/session-bridge.ts:11",
         "params": [],
         "returns": null
       }
     },
+    "session:flush": {
+      "source": "src/main/ipc/session.ts:203",
+      "params": [],
+      "preload": {
+        "api": "window.api.session.flush",
+        "source": "src/preload/api/workspaces/session-bridge.ts:14",
+        "params": [],
+        "returns": null
+      }
+    },
     "session:get": {
-      "source": "src/main/ipc/session.ts:33",
+      "source": "src/main/ipc/session.ts:49",
       "params": [
         {
           "name": "hostId",
@@ -15965,7 +16115,7 @@
       }
     },
     "session:list-host-ids": {
-      "source": "src/main/ipc/session.ts:38",
+      "source": "src/main/ipc/session.ts:54",
       "params": [],
       "preload": {
         "api": "window.api.session.listHostIds",
@@ -15975,7 +16125,7 @@
       }
     },
     "session:patch": {
-      "source": "src/main/ipc/session.ts:89",
+      "source": "src/main/ipc/session.ts:154",
       "params": [
         {
           "name": "args",
@@ -16011,7 +16161,7 @@
       }
     },
     "session:patch-entries": {
-      "source": "src/main/ipc/session.ts:94",
+      "source": "src/main/ipc/session.ts:159",
       "params": [
         {
           "name": "args",
@@ -16024,11 +16174,17 @@
           "type": "string | null",
           "optional": true,
           "rest": false
+        },
+        {
+          "name": "relays",
+          "type": "unknown",
+          "optional": true,
+          "rest": false
         }
       ],
       "preload": {
         "api": "window.api.session.patchEntries",
-        "source": "src/preload/api/workspaces/session-bridge.ts:9",
+        "source": "src/preload/api/workspaces/session-bridge.ts:10",
         "params": [
           {
             "name": "args",
@@ -16041,13 +16197,19 @@
             "type": null,
             "optional": false,
             "rest": false
+          },
+          {
+            "name": "relays",
+            "type": null,
+            "optional": false,
+            "rest": false
           }
         ],
         "returns": null
       }
     },
     "session:read-terminal-scrollback": {
-      "source": "src/main/ipc/session.ts:140",
+      "source": "src/main/ipc/session.ts:208",
       "params": [
         {
           "name": "args",
@@ -16058,7 +16220,7 @@
       ],
       "preload": {
         "api": "window.api.session.readTerminalScrollback",
-        "source": "src/preload/api/workspaces/session-bridge.ts:12",
+        "source": "src/preload/api/workspaces/session-bridge.ts:15",
         "params": [
           {
             "name": "args",
@@ -16071,7 +16233,7 @@
       }
     },
     "session:set": {
-      "source": "src/main/ipc/session.ts:58",
+      "source": "src/main/ipc/session.ts:86",
       "params": [
         {
           "name": "args",
@@ -16082,6 +16244,12 @@
         {
           "name": "hostId",
           "type": "string | null",
+          "optional": true,
+          "rest": false
+        },
+        {
+          "name": "options",
+          "type": "WindowSessionSetOptions",
           "optional": true,
           "rest": false
         }
@@ -16098,6 +16266,12 @@
           },
           {
             "name": "hostId",
+            "type": null,
+            "optional": false,
+            "rest": false
+          },
+          {
+            "name": "options",
             "type": null,
             "optional": false,
             "rest": false
@@ -17123,7 +17297,7 @@
       }
     },
     "speech:cancelDictation": {
-      "source": "src/main/ipc/speech.ts:325",
+      "source": "src/main/ipc/speech.ts:328",
       "params": null,
       "preload": {
         "api": "window.api.speech.cancelDictation",
@@ -17164,7 +17338,7 @@
       }
     },
     "speech:cancelDownload": {
-      "source": "src/main/ipc/speech.ts:148",
+      "source": "src/main/ipc/speech.ts:151",
       "params": [
         {
           "name": "modelId",
@@ -17224,7 +17398,7 @@
       }
     },
     "speech:clearOpenAiApiKey": {
-      "source": "src/main/ipc/speech.ts:95",
+      "source": "src/main/ipc/speech.ts:98",
       "params": [],
       "preload": {
         "api": "window.api.speech.clearOpenAiApiKey",
@@ -17234,7 +17408,7 @@
       }
     },
     "speech:clearOpenAiCompatibleProvider": {
-      "source": "src/main/ipc/speech.ts:115",
+      "source": "src/main/ipc/speech.ts:118",
       "params": [],
       "preload": {
         "api": "window.api.speech.clearOpenAiCompatibleProvider",
@@ -17244,7 +17418,7 @@
       }
     },
     "speech:deleteModel": {
-      "source": "src/main/ipc/speech.ts:152",
+      "source": "src/main/ipc/speech.ts:155",
       "params": [
         {
           "name": "modelId",
@@ -17268,7 +17442,7 @@
       }
     },
     "speech:downloadModel": {
-      "source": "src/main/ipc/speech.ts:119",
+      "source": "src/main/ipc/speech.ts:122",
       "params": [
         {
           "name": "modelId",
@@ -17292,7 +17466,7 @@
       }
     },
     "speech:feedAudio": {
-      "source": "src/main/ipc/speech.ts:301",
+      "source": "src/main/ipc/speech.ts:304",
       "params": [
         {
           "name": "buffer",
@@ -17370,7 +17544,7 @@
       }
     },
     "speech:getOpenAiCompatibleProvider": {
-      "source": "src/main/ipc/speech.ts:100",
+      "source": "src/main/ipc/speech.ts:103",
       "params": [],
       "preload": {
         "api": "window.api.speech.getOpenAiCompatibleProvider",
@@ -17390,7 +17564,7 @@
       }
     },
     "speech:saveOpenAiApiKey": {
-      "source": "src/main/ipc/speech.ts:90",
+      "source": "src/main/ipc/speech.ts:93",
       "params": [
         {
           "name": "apiKey",
@@ -17414,7 +17588,7 @@
       }
     },
     "speech:saveOpenAiCompatibleProvider": {
-      "source": "src/main/ipc/speech.ts:108",
+      "source": "src/main/ipc/speech.ts:111",
       "params": [
         {
           "name": "input",
@@ -17474,7 +17648,7 @@
       }
     },
     "speech:startDictation": {
-      "source": "src/main/ipc/speech.ts:177",
+      "source": "src/main/ipc/speech.ts:180",
       "params": [
         {
           "name": "modelId",
@@ -17522,7 +17696,7 @@
       }
     },
     "speech:stopDictation": {
-      "source": "src/main/ipc/speech.ts:324",
+      "source": "src/main/ipc/speech.ts:327",
       "params": null,
       "preload": {
         "api": "window.api.speech.stopDictation",
@@ -17910,7 +18084,7 @@
       }
     },
     "ssh:submitCredential": {
-      "source": "src/main/ipc/ssh/ssh-passphrase.ts:79",
+      "source": "src/main/ipc/ssh/ssh.ts:79",
       "params": [
         {
           "name": "args",
@@ -18095,11 +18269,11 @@
       }
     },
     "telemetry:acknowledgeBanner": {
-      "source": "src/main/ipc/telemetry.ts:147",
+      "source": "src/main/ipc/telemetry.ts:152",
       "params": [],
       "preload": {
         "api": "window.api.telemetryAcknowledgeBanner",
-        "source": "src/preload/index.ts:108",
+        "source": "src/preload/index.ts:109",
         "params": [],
         "returns": null
       }
@@ -18109,17 +18283,17 @@
       "params": [],
       "preload": {
         "api": "window.api.telemetryAssignBrowserExtensionsBanner",
-        "source": "src/preload/index.ts:110",
+        "source": "src/preload/index.ts:111",
         "params": [],
         "returns": null
       }
     },
     "telemetry:getConsentState": {
-      "source": "src/main/ipc/telemetry.ts:139",
+      "source": "src/main/ipc/telemetry.ts:144",
       "params": [],
       "preload": {
         "api": "window.api.telemetryGetConsentState",
-        "source": "src/preload/index.ts:112",
+        "source": "src/preload/index.ts:113",
         "params": [],
         "returns": null
       }
@@ -18136,7 +18310,7 @@
       ],
       "preload": {
         "api": "window.api.telemetrySetOptIn",
-        "source": "src/preload/index.ts:106",
+        "source": "src/preload/index.ts:107",
         "params": [
           {
             "name": "optedIn",
@@ -18166,7 +18340,7 @@
       ],
       "preload": {
         "api": "window.api.telemetryTrack",
-        "source": "src/preload/index.ts:104",
+        "source": "src/preload/index.ts:105",
         "params": [
           {
             "name": "name",
@@ -18359,7 +18533,7 @@
       }
     },
     "ui:consumePendingBotLink": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:96",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:99",
       "params": [],
       "preload": {
         "api": "window.api.ui.consumePendingBotLink",
@@ -18369,7 +18543,7 @@
       }
     },
     "ui:consumePendingMarkdownFileOpens": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:134",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:139",
       "params": [],
       "preload": {
         "api": "window.api.ui.consumePendingMarkdownFileOpens",
@@ -18379,7 +18553,7 @@
       }
     },
     "ui:consumePendingOpenSettings": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:92",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:95",
       "params": [],
       "preload": {
         "api": "window.api.ui.consumePendingOpenSettings",
@@ -18389,7 +18563,7 @@
       }
     },
     "ui:consumePendingPluginInstallLink": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:132",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:137",
       "params": [],
       "preload": {
         "api": "window.api.ui.consumePendingPluginInstallLink",
@@ -18399,7 +18573,7 @@
       }
     },
     "ui:consumePendingQuitAndStopAllSessions": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:126",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:131",
       "params": [],
       "preload": {
         "api": "window.api.ui.consumePendingQuitAndStopAllSessions",
@@ -18409,7 +18583,7 @@
       }
     },
     "ui:consumePendingSkillShare": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:95",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:98",
       "params": [],
       "preload": {
         "api": "window.api.ui.consumePendingSkillShare",
@@ -18473,7 +18647,7 @@
       }
     },
     "ui:quitAfterStoppingAllSessions": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:129",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:134",
       "params": [],
       "preload": {
         "api": "window.api.ui.quitAfterStoppingAllSessions",
@@ -18555,7 +18729,7 @@
       }
     },
     "updater:check": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:160",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:176",
       "params": [
         {
           "name": "options",
@@ -18579,7 +18753,7 @@
       }
     },
     "updater:dismissAvailableUpdate": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:167",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:183",
       "params": [],
       "preload": {
         "api": "window.api.updater.dismissAvailableUpdate",
@@ -18589,7 +18763,7 @@
       }
     },
     "updater:dismissNudge": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:166",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:182",
       "params": [],
       "preload": {
         "api": "window.api.updater.dismissNudge",
@@ -18599,7 +18773,7 @@
       }
     },
     "updater:download": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:164",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:180",
       "params": [],
       "preload": {
         "api": "window.api.updater.download",
@@ -18609,7 +18783,7 @@
       }
     },
     "updater:getLinuxPackageInstallInstructions": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:169",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:185",
       "params": [],
       "preload": {
         "api": "window.api.updater.getLinuxPackageInstallInstructions",
@@ -18619,7 +18793,7 @@
       }
     },
     "updater:getStatus": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:158",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:174",
       "params": [],
       "preload": {
         "api": "window.api.updater.getStatus",
@@ -18629,7 +18803,7 @@
       }
     },
     "updater:getVersion": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:159",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:175",
       "params": [],
       "preload": {
         "api": "window.api.updater.getVersion",
@@ -18639,7 +18813,7 @@
       }
     },
     "updater:listBuilds": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:177",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:193",
       "params": [
         {
           "name": "channel",
@@ -18675,7 +18849,7 @@
       }
     },
     "updater:quitAndInstall": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:165",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:181",
       "params": [],
       "preload": {
         "api": "window.api.updater.quitAndInstall",
@@ -18685,7 +18859,7 @@
       }
     },
     "updater:showLinuxPackage": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:173",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:189",
       "params": [],
       "preload": {
         "api": "window.api.updater.showLinuxPackage",
@@ -18987,7 +19161,7 @@
       }
     },
     "workspaceSpace:openWindow": {
-      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:27",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:29",
       "params": [],
       "preload": {
         "api": "window.api.workspaceSpace.openWindow",
@@ -18997,7 +19171,7 @@
       }
     },
     "workspaceSpace:publishWindowAnalysis": {
-      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:97",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:99",
       "params": [
         {
           "name": "analysis",
@@ -19021,7 +19195,7 @@
       }
     },
     "workspaceSpace:publishWindowState": {
-      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:32",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:34",
       "params": [
         {
           "name": "state",
@@ -19045,7 +19219,7 @@
       }
     },
     "workspaceSpace:requestIssueRefresh": {
-      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:77",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:79",
       "params": [
         {
           "name": "worktreeId",
@@ -19081,7 +19255,7 @@
       }
     },
     "workspaceSpace:requestWindowState": {
-      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:37",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:39",
       "params": [],
       "preload": {
         "api": "window.api.workspaceSpace.requestWindowState",
@@ -19091,7 +19265,7 @@
       }
     },
     "workspaceSpace:requestWorktreeRefresh": {
-      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:71",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:73",
       "params": [],
       "preload": {
         "api": "window.api.workspaceSpace.requestWorktreeRefresh",
@@ -19101,7 +19275,7 @@
       }
     },
     "workspaceSpace:revealWorktree": {
-      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:42",
+      "source": "src/main/ipc/workspace-space/workspace-space-window.ts:44",
       "params": [
         {
           "name": "worktreeId",
@@ -19795,7 +19969,7 @@
       }
     },
     "wsl:isAvailable": {
-      "source": "src/main/ipc/app.ts:175",
+      "source": "src/main/ipc/app.ts:166",
       "params": [],
       "preload": {
         "api": "window.api.wsl.isAvailable",
@@ -19805,7 +19979,7 @@
       }
     },
     "wsl:listDistros": {
-      "source": "src/main/ipc/app.ts:176",
+      "source": "src/main/ipc/app.ts:167",
       "params": [],
       "preload": {
         "api": "window.api.wsl.listDistros",
@@ -19815,7 +19989,7 @@
       }
     },
     "wsl:resolveMappedDrivePath": {
-      "source": "src/main/ipc/app.ts:177",
+      "source": "src/main/ipc/app.ts:168",
       "params": [
         {
           "name": "path",
@@ -20700,6 +20874,7 @@
     "preferences.shortcuts.set",
     "preferences.update",
     "preflight.detectAgents",
+    "preflight.installedAgents",
     "project.list",
     "projectGroup.list",
     "projectHostSetup.clone",
