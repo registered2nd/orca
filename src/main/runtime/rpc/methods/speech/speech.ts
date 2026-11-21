@@ -5,12 +5,14 @@ import {
   DictationSetup,
   DictationStart,
   OpenAiSpeechKeySet,
-  SpeakAzureCredentials,
-  SpeakRepliesConfigure,
-  SpeakSay,
   SpeechModelAction,
   SpeechSetupRead
 } from '../../../../../shared/rpc-contract/speech/speech-params'
+import {
+  SpeakAzureCredentials,
+  SpeakRepliesConfigure,
+  SpeakSay
+} from '../../../../../shared/rpc-contract/speech/speak-replies-params'
 import {
   getSpeakRepliesStatus,
   sendSpeakControl,
