@@ -903,7 +903,7 @@
       }
     },
     "avatarGeneration:cancel": {
-      "source": "src/main/avatar-generation/avatar-generation-ipc.ts:127",
+      "source": "src/main/avatar-generation/avatar-generation-ipc.ts:131",
       "params": [
         {
           "name": "raw",
@@ -927,7 +927,7 @@
       }
     },
     "avatarGeneration:capability": {
-      "source": "src/main/avatar-generation/avatar-generation-ipc.ts:58",
+      "source": "src/main/avatar-generation/avatar-generation-ipc.ts:59",
       "params": [],
       "preload": {
         "api": "window.api.avatarGeneration.capability",
@@ -937,7 +937,7 @@
       }
     },
     "avatarGeneration:generate": {
-      "source": "src/main/avatar-generation/avatar-generation-ipc.ts:66",
+      "source": "src/main/avatar-generation/avatar-generation-ipc.ts:67",
       "params": [
         {
           "name": "raw",
@@ -11566,7 +11566,7 @@
       }
     },
     "notifications:acknowledgeAttention": {
-      "source": "src/main/ipc/notifications/notifications.ts:172",
+      "source": "src/main/ipc/notifications/notifications.ts:173",
       "params": [
         {
           "name": "acknowledgement",
@@ -11602,7 +11602,7 @@
       }
     },
     "notifications:dismiss": {
-      "source": "src/main/ipc/notifications/notifications.ts:182",
+      "source": "src/main/ipc/notifications/notifications.ts:183",
       "params": [
         {
           "name": "ids",
@@ -11650,7 +11650,7 @@
       }
     },
     "notifications:dispatch": {
-      "source": "src/main/ipc/notifications/notifications.ts:300",
+      "source": "src/main/ipc/notifications/notifications.ts:302",
       "params": [
         {
           "name": "args",
@@ -11674,7 +11674,7 @@
       }
     },
     "notifications:getDesktopAwayState": {
-      "source": "src/main/ipc/notifications/notifications.ts:43",
+      "source": "src/main/ipc/notifications/notifications.ts:44",
       "params": [],
       "preload": {
         "api": "window.api.notifications.getDesktopAwayState",
@@ -11684,7 +11684,7 @@
       }
     },
     "notifications:getPermissionStatus": {
-      "source": "src/main/ipc/notifications/notifications.ts:60",
+      "source": "src/main/ipc/notifications/notifications.ts:61",
       "params": null,
       "preload": {
         "api": "window.api.notifications.getPermissionStatus",
@@ -11711,7 +11711,7 @@
       }
     },
     "notifications:openSystemSettings": {
-      "source": "src/main/ipc/notifications/notifications.ts:49",
+      "source": "src/main/ipc/notifications/notifications.ts:50",
       "params": [],
       "preload": {
         "api": "window.api.notifications.openSystemSettings",
@@ -11721,7 +11721,7 @@
       }
     },
     "notifications:probeDelivery": {
-      "source": "src/main/ipc/notifications/notifications.ts:61",
+      "source": "src/main/ipc/notifications/notifications.ts:62",
       "params": [
         {
           "name": "args",
@@ -11769,7 +11769,7 @@
       }
     },
     "notifications:settleStructuredPrompts": {
-      "source": "src/main/ipc/notifications/notifications.ts:280",
+      "source": "src/main/ipc/notifications/notifications.ts:282",
       "params": [
         {
           "name": "scope",
@@ -12416,7 +12416,7 @@
       }
     },
     "plugins:addMarketplace": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:111",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:122",
       "params": [
         {
           "name": "args",
@@ -12505,7 +12505,7 @@
       }
     },
     "plugins:getAutoUpdateState": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:160",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:171",
       "params": [],
       "preload": {
         "api": "window.api.plugins.getAutoUpdateState",
@@ -12515,7 +12515,7 @@
       }
     },
     "plugins:getInstallCounts": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:170",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:181",
       "params": [],
       "preload": {
         "api": "window.api.plugins.getInstallCounts",
@@ -12573,7 +12573,7 @@
       }
     },
     "plugins:getRollbackVersion": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:175",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:186",
       "params": [
         {
           "name": "args",
@@ -12645,7 +12645,7 @@
       }
     },
     "plugins:installMarketplacePlugin": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:134",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:145",
       "params": [
         {
           "name": "args",
@@ -12723,22 +12723,50 @@
       }
     },
     "plugins:listMarketplacePlugins": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:126",
-      "params": [],
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:137",
+      "params": [
+        {
+          "name": "args",
+          "type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
       "preload": {
         "api": "window.api.plugins.listMarketplacePlugins",
         "source": "src/preload/api/plugins/plugins-bridge.ts:76",
-        "params": [],
+        "params": [
+          {
+            "name": "args",
+            "type": null,
+            "optional": false,
+            "rest": false
+          }
+        ],
         "returns": null
       }
     },
     "plugins:listMarketplaces": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:107",
-      "params": [],
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:118",
+      "params": [
+        {
+          "name": "args",
+          "type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
       "preload": {
         "api": "window.api.plugins.listMarketplaces",
         "source": "src/preload/api/plugins/plugins-bridge.ts:72",
-        "params": [],
+        "params": [
+          {
+            "name": "args",
+            "type": null,
+            "optional": false,
+            "rest": false
+          }
+        ],
         "returns": null
       }
     },
@@ -12909,7 +12937,7 @@
       }
     },
     "plugins:previewMarketplacePlugin": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:130",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:141",
       "params": [
         {
           "name": "args",
@@ -12933,7 +12961,7 @@
       }
     },
     "plugins:previewMarketplaceUpdate": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:148",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:159",
       "params": [
         {
           "name": "args",
@@ -13039,7 +13067,7 @@
       }
     },
     "plugins:refreshMarketplaces": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:120",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:131",
       "params": [
         {
           "name": "args",
@@ -13087,7 +13115,7 @@
       }
     },
     "plugins:removeMarketplace": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:115",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:126",
       "params": [
         {
           "name": "args",
@@ -13135,7 +13163,7 @@
       }
     },
     "plugins:rollbackMarketplacePlugin": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:179",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:190",
       "params": [
         {
           "name": "args",
@@ -13217,7 +13245,7 @@
       }
     },
     "plugins:suggestForFileType": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:71",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:75",
       "params": [
         {
           "name": "fileType",
@@ -13253,7 +13281,7 @@
       }
     },
     "plugins:takeUpdateReviewNotices": {
-      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:165",
+      "source": "src/main/ipc/plugins/plugin-marketplaces.ts:176",
       "params": [],
       "preload": {
         "api": "window.api.plugins.takeUpdateReviewNotices",
