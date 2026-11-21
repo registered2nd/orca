@@ -43,7 +43,8 @@ export function BrowserChromeToolbar({
   shareControl,
   overflowMenu,
   closeTabOwner,
-  showTourAnchors = false
+  showTourAnchors = false,
+  showAskButton = false
 }: {
   controls: BrowserNavigationControls
   addressSlot: React.ReactNode
@@ -67,6 +68,8 @@ export function BrowserChromeToolbar({
   closeTabOwner: { worktreeId: string; browserPageId: string }
   /** Only the browsing pane anchors the contextual tour; a second anchor would steal its steps. */
   showTourAnchors?: boolean
+  /** Only the browsing pane mounts the Ask panel. */
+  showAskButton?: boolean
 }): React.JSX.Element {
   const closeTab = useFloatingSplitTabClose(closeTabOwner.worktreeId, (state) =>
     resolveBrowserSourceUnifiedTab(state, closeTabOwner.browserPageId, closeTabOwner.worktreeId)
@@ -107,7 +110,7 @@ export function BrowserChromeToolbar({
             notes={notes}
             showTourAnchors={showTourAnchors}
           />
-          <BrowserChromeAskButton tools={elementTools} />
+          {showAskButton ? <BrowserChromeAskButton tools={elementTools} /> : null}
         </>
       ) : (
         <MarkupDrawButton
