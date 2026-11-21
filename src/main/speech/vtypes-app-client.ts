@@ -1,4 +1,5 @@
-import { existsSync, readFileSync } from 'node:fs'
+import { readFileSync } from 'node:fs'
+import { access } from 'node:fs/promises'
 import { homedir } from 'node:os'
 import { join } from 'node:path'
 import { encodePcm16Wav } from './openai-transcription-client'
@@ -33,8 +34,11 @@ export function getVtypesAgentApiFilePath(
   return join(configRoot, 'com.vtype.desktop', 'agent-api.json')
 }
 
-export function hasVtypesAgentApiFile(): boolean {
-  return existsSync(getVtypesAgentApiFilePath())
+export async function hasVtypesAgentApiFile(): Promise<boolean> {
+  return access(getVtypesAgentApiFilePath()).then(
+    () => true,
+    () => false
+  )
 }
 
 function readEndpoint(filePath: string): AgentApiEndpoint {
