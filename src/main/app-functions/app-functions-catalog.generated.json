@@ -11100,11 +11100,11 @@
       }
     },
     "mobile:consumePendingUnpairedDeviceAuthFailure": {
-      "source": "src/main/ipc/mobile.ts:239",
+      "source": "src/main/ipc/mobile.ts:236",
       "params": [],
       "preload": {
         "api": "window.api.mobile.consumePendingUnpairedDeviceAuthFailure",
-        "source": "src/preload/api/mobile/mobile-bridge.ts:91",
+        "source": "src/preload/api/mobile/mobile-bridge.ts:97",
         "params": [],
         "returns": "Promise<boolean>"
       }
@@ -11134,7 +11134,7 @@
       }
     },
     "mobile:getRelayStatus": {
-      "source": "src/main/ipc/mobile.ts:234",
+      "source": "src/main/ipc/mobile.ts:231",
       "params": [],
       "preload": {
         "api": "window.api.mobile.getRelayStatus",
@@ -11180,7 +11180,7 @@
       "preload": null
     },
     "mobile:getWindowsFirewallStatus": {
-      "source": "src/main/ipc/mobile.ts:209",
+      "source": "src/main/ipc/mobile.ts:206",
       "params": [
         {
           "name": "args",
@@ -11224,7 +11224,7 @@
       }
     },
     "mobile:listRuntimeAccessGrants": {
-      "source": "src/main/ipc/mobile.ts:178",
+      "source": "src/main/ipc/mobile.ts:175",
       "params": [],
       "preload": {
         "api": "window.api.mobile.listRuntimeAccessGrants",
@@ -11234,7 +11234,7 @@
       }
     },
     "mobile:openWindowsNetworkSettings": {
-      "source": "src/main/ipc/mobile.ts:223",
+      "source": "src/main/ipc/mobile.ts:220",
       "params": [],
       "preload": {
         "api": "window.api.mobile.openWindowsNetworkSettings",
@@ -11244,7 +11244,7 @@
       }
     },
     "mobile:repairWindowsFirewall": {
-      "source": "src/main/ipc/mobile.ts:214",
+      "source": "src/main/ipc/mobile.ts:211",
       "params": [],
       "preload": {
         "api": "window.api.mobile.repairWindowsFirewall",
@@ -11254,7 +11254,7 @@
       }
     },
     "mobile:revokeDevice": {
-      "source": "src/main/ipc/mobile.ts:193",
+      "source": "src/main/ipc/mobile.ts:190",
       "params": [
         {
           "name": "args",
@@ -11278,7 +11278,7 @@
       }
     },
     "mobile:revokeRuntimeAccess": {
-      "source": "src/main/ipc/mobile.ts:201",
+      "source": "src/main/ipc/mobile.ts:198",
       "params": [
         {
           "name": "args",
@@ -13517,7 +13517,7 @@
       }
     },
     "projectGroups:importNested": {
-      "source": "src/main/ipc/repos/nested-repo-import-handler.ts:40",
+      "source": "src/main/ipc/repos/nested-repo-import-handler.ts:41",
       "params": [
         {
           "name": "rawArgs",
@@ -13791,7 +13791,7 @@
       "params": null,
       "preload": {
         "api": "window.api.pty.claudeDiffPanelMayAutoOpen",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:39",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:40",
         "params": [
           {
             "name": "id",
@@ -13810,7 +13810,7 @@
       }
     },
     "pty:clearPendingPaneSerializer": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:239",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:249",
       "params": [
         {
           "name": "args",
@@ -13821,7 +13821,7 @@
       ],
       "preload": {
         "api": "window.api.pty.clearPendingPaneSerializer",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:179",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:180",
         "params": [
           {
             "name": "paneKey",
@@ -13840,7 +13840,7 @@
       }
     },
     "pty:confirmForegroundProcess": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:174",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:184",
       "params": [
         {
           "name": "args",
@@ -13851,7 +13851,7 @@
       ],
       "preload": {
         "api": "window.api.pty.confirmForegroundProcess",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:25",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:26",
         "params": [
           {
             "name": "id",
@@ -13864,7 +13864,7 @@
       }
     },
     "pty:declarePendingPaneSerializer": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:213",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:223",
       "params": [
         {
           "name": "args",
@@ -13875,7 +13875,7 @@
       ],
       "preload": {
         "api": "window.api.pty.declarePendingPaneSerializer",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:175",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:176",
         "params": [
           {
             "name": "paneKey",
@@ -13892,7 +13892,7 @@
       "params": null,
       "preload": {
         "api": "window.api.pty.disableCodexSharedServerAutoStart",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:29",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:30",
         "params": [
           {
             "name": "id",
@@ -13929,7 +13929,7 @@
       }
     },
     "pty:getCwd": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:187",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:197",
       "params": [
         {
           "name": "args",
@@ -13940,7 +13940,7 @@
       ],
       "preload": {
         "api": "window.api.pty.getCwd",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:44",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:45",
         "params": [
           {
             "name": "id",
@@ -14041,7 +14041,7 @@
       }
     },
     "pty:getSize": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:196",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:206",
       "params": [
         {
           "name": "args",
@@ -14052,7 +14052,7 @@
       ],
       "preload": {
         "api": "window.api.pty.getSize",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:46",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:47",
         "params": [
           {
             "name": "id",
@@ -14141,14 +14141,14 @@
       "params": [
         {
           "name": "args",
-          "type": "{ id: string; expectedIncarnationId?: string; scanChildProcesses?: boolean; steadyState?: boolean; jobMembershipOnly?: boolean; }",
+          "type": "{ id: string; expectedIncarnationId?: string; scanChildProcesses?: boolean; steadyState?: boolean; jobMembershipOnly?: boolean; foregroundOnly?: boolean; }",
           "optional": false,
           "rest": false
         }
       ],
       "preload": {
         "api": "window.api.pty.inspectProcess",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:23",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:24",
         "params": [
           {
             "name": "id",
@@ -14158,7 +14158,7 @@
           },
           {
             "name": "options",
-            "type": "{ expectedIncarnationId?: string; scanChildProcesses?: boolean; steadyState?: boolean; jobMembershipOnly?: boolean; }",
+            "type": "{ expectedIncarnationId?: string; scanChildProcesses?: boolean; steadyState?: boolean; jobMembershipOnly?: boolean; foregroundOnly?: boolean; }",
             "optional": true,
             "rest": false
           }
@@ -14171,7 +14171,7 @@
       "params": null,
       "preload": {
         "api": "window.api.pty.isCodexOnSharedServer",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:27",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:28",
         "params": [
           {
             "name": "id",
@@ -14264,7 +14264,7 @@
       "params": [],
       "preload": {
         "api": "window.api.pty.management.asyncIoHealth",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:183",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:184",
         "params": [],
         "returns": null
       }
@@ -14274,7 +14274,7 @@
       "params": [],
       "preload": {
         "api": "window.api.pty.management.killAll",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:185",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:186",
         "params": [],
         "returns": null
       }
@@ -14291,7 +14291,7 @@
       ],
       "preload": {
         "api": "window.api.pty.management.killOne",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:186",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:187",
         "params": [
           {
             "name": "args",
@@ -14308,7 +14308,7 @@
       "params": [],
       "preload": {
         "api": "window.api.pty.management.listSessions",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:184",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:185",
         "params": [],
         "returns": null
       }
@@ -14318,7 +14318,7 @@
       "params": [],
       "preload": {
         "api": "window.api.pty.management.macTccAttribution",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:188",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:189",
         "params": [],
         "returns": null
       }
@@ -14328,7 +14328,7 @@
       "params": [],
       "preload": {
         "api": "window.api.pty.management.resetFolderAccess",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:189",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:190",
         "params": [],
         "returns": null
       }
@@ -14338,7 +14338,7 @@
       "params": [],
       "preload": {
         "api": "window.api.pty.management.restart",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:187",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:188",
         "params": [],
         "returns": null
       }
@@ -14355,7 +14355,7 @@
       ],
       "preload": {
         "api": "window.api.pty.management.restartSeveredDaemon",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:192",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:193",
         "params": [
           {
             "name": "expected",
@@ -14372,7 +14372,7 @@
       "params": [],
       "preload": {
         "api": "window.api.pty.management.severedDaemon",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:190",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:191",
         "params": [],
         "returns": null
       }
@@ -14399,7 +14399,7 @@
       "params": null,
       "preload": {
         "api": "window.api.pty.openedBeforeClaudeAccounts",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:35",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:36",
         "params": [
           {
             "name": "id",
@@ -14429,7 +14429,7 @@
       ],
       "preload": {
         "api": "window.api.pty.readNewerDaemonHeldScreen",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:41",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:42",
         "params": [
           {
             "name": "sessionId",
@@ -14446,7 +14446,7 @@
       "params": [],
       "preload": {
         "api": "window.api.pty.reopenNewerDaemonTerminals",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:43",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:44",
         "params": [],
         "returns": "Promise<NewerDaemonReopenResult>"
       }
@@ -14476,7 +14476,7 @@
       }
     },
     "pty:reportRendererSerializerReady": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:250",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:260",
       "params": [
         {
           "name": "args",
@@ -14487,7 +14487,7 @@
       ],
       "preload": {
         "api": "window.api.pty.reportRendererSerializerReady",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:181",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:182",
         "params": [
           {
             "name": "ptyId",
@@ -14510,7 +14510,7 @@
       }
     },
     "pty:settlePaneSerializer": {
-      "source": "src/main/ipc/pty/ipc/inspect.ts:223",
+      "source": "src/main/ipc/pty/ipc/inspect.ts:233",
       "params": [
         {
           "name": "args",
@@ -14521,7 +14521,7 @@
       ],
       "preload": {
         "api": "window.api.pty.settlePaneSerializer",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:177",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:178",
         "params": [
           {
             "name": "paneKey",
@@ -14551,7 +14551,7 @@
       ],
       "preload": {
         "api": "window.api.pty.getSideEffectSnapshot",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:100",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:101",
         "params": [
           {
             "name": "id",
@@ -14592,7 +14592,7 @@
       "params": null,
       "preload": {
         "api": "window.api.pty.stopCodexSharedServer",
-        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:31",
+        "source": "src/preload/api/terminal/pty-bridge-stream-and-serialization.ts:32",
         "params": [
           {
             "name": "id",
@@ -15401,7 +15401,7 @@
       }
     },
     "runtimeEnvironments:cancelOrcadStop": {
-      "source": "src/main/ipc/runtime-environments/managed-orcad/orcad-runtime-maintenance-handlers.ts:64",
+      "source": "src/main/ipc/runtime-environments/managed-orcad/orcad-runtime-maintenance-handlers.ts:67",
       "params": [
         {
           "name": "args",
@@ -15531,7 +15531,7 @@
       }
     },
     "runtimeEnvironments:forgetOrcad": {
-      "source": "src/main/ipc/runtime-environments/managed-orcad/orcad-runtime-maintenance-handlers.ts:69",
+      "source": "src/main/ipc/runtime-environments/managed-orcad/orcad-runtime-maintenance-handlers.ts:72",
       "params": [
         {
           "name": "args",
@@ -15753,7 +15753,7 @@
       }
     },
     "runtimeEnvironments:reclaimOrcadStaleLock": {
-      "source": "src/main/ipc/runtime-environments/managed-orcad/orcad-runtime-maintenance-handlers.ts:49",
+      "source": "src/main/ipc/runtime-environments/managed-orcad/orcad-runtime-maintenance-handlers.ts:52",
       "params": [
         {
           "name": "args",
@@ -15777,7 +15777,7 @@
       }
     },
     "runtimeEnvironments:recoverOrcad": {
-      "source": "src/main/ipc/runtime-environments/managed-orcad/orcad-runtime-maintenance-handlers.ts:41",
+      "source": "src/main/ipc/runtime-environments/managed-orcad/orcad-runtime-maintenance-handlers.ts:44",
       "params": [
         {
           "name": "args",
@@ -15873,7 +15873,7 @@
       }
     },
     "runtimeEnvironments:restartOrcad": {
-      "source": "src/main/ipc/runtime-environments/managed-orcad/orcad-runtime-maintenance-handlers.ts:46",
+      "source": "src/main/ipc/runtime-environments/managed-orcad/orcad-runtime-maintenance-handlers.ts:49",
       "params": [
         {
           "name": "args",
@@ -15907,7 +15907,7 @@
       }
     },
     "runtimeEnvironments:rollbackOrcad": {
-      "source": "src/main/ipc/runtime-environments/managed-orcad/orcad-runtime-maintenance-handlers.ts:38",
+      "source": "src/main/ipc/runtime-environments/managed-orcad/orcad-runtime-maintenance-handlers.ts:41",
       "params": [
         {
           "name": "args",
@@ -15931,7 +15931,7 @@
       }
     },
     "runtimeEnvironments:stopOrcad": {
-      "source": "src/main/ipc/runtime-environments/managed-orcad/orcad-runtime-maintenance-handlers.ts:61",
+      "source": "src/main/ipc/runtime-environments/managed-orcad/orcad-runtime-maintenance-handlers.ts:64",
       "params": [
         {
           "name": "args",
@@ -16007,7 +16007,7 @@
       "params": [
         {
           "name": "args",
-          "type": "{ selector: string; force?: boolean; pastLiveTerminals?: { incumbentVersion?: unknown; }; }",
+          "type": "{ selector: string; force?: boolean; pastLiveTerminals?: { incumbentVersion?: unknown; uncounted?: unknown; }; }",
           "optional": false,
           "rest": false
         }
@@ -20156,7 +20156,7 @@
       "params": null,
       "preload": {
         "api": "wslHostsApi.add",
-        "source": "src/preload/api/wsl/wsl-hosts-api.ts:50",
+        "source": "src/preload/api/wsl/wsl-hosts-api.ts:52",
         "params": [
           {
             "name": "args",
@@ -20173,7 +20173,7 @@
       "params": null,
       "preload": {
         "api": "wslHostsApi.connect",
-        "source": "src/preload/api/wsl/wsl-hosts-api.ts:58",
+        "source": "src/preload/api/wsl/wsl-hosts-api.ts:60",
         "params": [
           {
             "name": "args",
@@ -20190,7 +20190,7 @@
       "params": null,
       "preload": {
         "api": "wslHostsApi.focusHost",
-        "source": "src/preload/api/wsl/wsl-hosts-api.ts:67",
+        "source": "src/preload/api/wsl/wsl-hosts-api.ts:69",
         "params": [
           {
             "name": "args",
@@ -20207,7 +20207,7 @@
       "params": null,
       "preload": {
         "api": "wslHostsApi.getCapability",
-        "source": "src/preload/api/wsl/wsl-hosts-api.ts:42",
+        "source": "src/preload/api/wsl/wsl-hosts-api.ts:44",
         "params": [],
         "returns": null
       }
@@ -20217,7 +20217,7 @@
       "params": null,
       "preload": {
         "api": "wslHostsApi.getStatuses",
-        "source": "src/preload/api/wsl/wsl-hosts-api.ts:59",
+        "source": "src/preload/api/wsl/wsl-hosts-api.ts:61",
         "params": [],
         "returns": null
       }
@@ -20227,7 +20227,7 @@
       "params": null,
       "preload": {
         "api": "wslHostsApi.listDistros",
-        "source": "src/preload/api/wsl/wsl-hosts-api.ts:49",
+        "source": "src/preload/api/wsl/wsl-hosts-api.ts:51",
         "params": [],
         "returns": null
       }
@@ -20237,7 +20237,7 @@
       "params": null,
       "preload": {
         "api": "wslHostsApi.remove",
-        "source": "src/preload/api/wsl/wsl-hosts-api.ts:57",
+        "source": "src/preload/api/wsl/wsl-hosts-api.ts:59",
         "params": [
           {
             "name": "args",
@@ -20254,7 +20254,7 @@
       "params": null,
       "preload": {
         "api": "wslHostsApi.setVisibleWork",
-        "source": "src/preload/api/wsl/wsl-hosts-api.ts:66",
+        "source": "src/preload/api/wsl/wsl-hosts-api.ts:68",
         "params": [
           {
             "name": "args",
