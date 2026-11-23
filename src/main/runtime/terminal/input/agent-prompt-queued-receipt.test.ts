@@ -1,32 +1,10 @@
-import type * as WorktreeScanCacheModule from '../../../git/worktrees/catalog/worktree-scan-cache'
-import type * as WorktreeListingModule from '../../../git/worktrees/catalog/worktree-listing'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { createAgentPromptSubmissionRuntime } from './agent-prompt-submission-runtime-test-fixture'
-
-const worktrees = vi.hoisted(() => [
-  {
-    path: '/tmp/worktree-a',
-    head: 'abc',
-    branch: 'feature/queued-receipt',
-    isBare: false,
-    isMainWorktree: false
-  }
-])
-
-vi.mock('../../../git/worktrees/catalog/worktree-scan-cache', async (importOriginal) => ({
-  ...(await importOriginal<typeof WorktreeScanCacheModule>()),
-  listWorktrees: vi.fn().mockResolvedValue(worktrees)
-}))
-
-vi.mock('../../../git/worktrees/catalog/worktree-listing', async (importOriginal) => ({
-  ...(await importOriginal<typeof WorktreeListingModule>()),
-  listWorktreesStrict: vi.fn().mockResolvedValue(worktrees)
-}))
+import { OrcaRuntimeService } from '../../orca-runtime'
 
 const PTY_ID = 'pty-prompt'
 const RULE = '─'.repeat(40)
 
-type Pane = Awaited<ReturnType<typeof createAgentPromptSubmissionRuntime>>
+type Pane = { runtime: OrcaRuntimeService; handle: string; writes: string[] }
 type Hook = { state: 'working' | 'done'; stateStartedAt: number }
 /** How the pane answers Enter: take the prompt out of the composer, or leave it there. */
 type OnEnter = 'take' | 'swallow'
@@ -42,6 +20,37 @@ function composerFrame(text: string): string {
     '  ? for shortcuts',
     `\x1b[3;${3 + text.length}H`
   ].join('')
+}
+
+/** A store-less runtime with Claude Code in its one PTY's foreground; every write goes to `onWrite`. */
+async function createClaudeRuntime(
+  onWrite: (runtime: OrcaRuntimeService, data: string) => void,
+  runtimeDeps: ConstructorParameters<typeof OrcaRuntimeService>[2]
+): Promise<Pane> {
+  const runtime = new OrcaRuntimeService(undefined, undefined, runtimeDeps)
+  const writes: string[] = []
+  runtime.setPtyController({
+    write: (_ptyId: string, data: string) => {
+      writes.push(data)
+      onWrite(runtime, data)
+      return true
+    },
+    kill: () => true,
+    getForegroundProcess: async () => 'claude',
+    getSize: () => ({ cols: 100, rows: 30 })
+  })
+  // oxlint-disable-next-line typescript/consistent-type-assertions -- SAFETY: the protected handle issue a registered terminal goes through; no public seam exists.
+  const internals = runtime as unknown as {
+    issuePtyHandle: (pty: unknown) => void
+    ptysById: Map<string, unknown>
+    handles: Map<string, unknown>
+  }
+  runtime.registerPty(PTY_ID, 'wt-1')
+  internals.issuePtyHandle(internals.ptysById.get(PTY_ID))
+  const [handle] = internals.handles.keys()
+  // The host reports Claude Code in the foreground, which makes it the send's settling agent.
+  await runtime.refreshPtyForegroundAgentFromController(PTY_ID)
+  return { runtime, handle, writes }
 }
 
 /** A Claude pane whose hooks report `hook`; each Enter runs `enter.onEnter`. */
@@ -63,7 +72,7 @@ async function createClaudePane(
       stateStartedAt: hook.stateStartedAt
     }
   ]
-  const pane = await createAgentPromptSubmissionRuntime(
+  const pane = await createClaudeRuntime(
     (runtime, data) => {
       if (data !== '\r') {
         typed = data.replaceAll('\x1b[200~', '').replaceAll('\x1b[201~', '')
@@ -78,8 +87,6 @@ async function createClaudePane(
         }
       }
     },
-    'claude',
-    () => true,
     { getAgentStatusSnapshot: rows, getPublicAgentStatusSnapshotForPane: rows }
   )
   handle = pane.handle
