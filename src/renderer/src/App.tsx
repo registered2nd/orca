@@ -15,6 +15,7 @@ import WorktreeBaseFallbackDialog from './components/sidebar/workspace-creation/
 import ClaudeAccountSwitchDialog from './components/provider-accounts/claude/ClaudeAccountSwitchDialog'
 import { AppBackgroundServices } from './app-shell/AppBackgroundServices'
 import { AppRootSurfaces } from './app-shell/AppRootSurfaces'
+import { SpeakRepliesSurface } from './components/speak-replies/SpeakRepliesSurface'
 import { AppWorkspaceShell } from './app-shell/AppWorkspaceShell'
 import { WindowControls } from './app-shell/chrome/WindowControls'
 import {
@@ -117,6 +118,7 @@ function App(): React.JSX.Element {
               floatingWorkspace={floatingWorkspace}
               onboardingGate={onboardingGate}
             />
+            <SpeakRepliesSurface />
             <BrowserWebAuthnAccountDialog />
             <BrowserExtensionInstallDialog />
           </LinkRoutingPreferenceDialogProvider>
