@@ -15,7 +15,10 @@ export type SteerPaneState = {
   paneForegroundAgentByPaneKey: Record<string, PaneForegroundAgentEntry | undefined>
 }
 
-export type SteerTerminal = Pick<Terminal, 'input' | 'onWriteParsed' | 'buffer' | 'modes' | 'rows'>
+export type SteerTerminal = Pick<
+  Terminal,
+  'input' | 'onWriteParsed' | 'buffer' | 'modes' | 'cols' | 'rows'
+>
 
 export type SteerOutcome = 'submitted' | 'steered' | 'left-in-composer' | 'aborted' | 'busy'
 
