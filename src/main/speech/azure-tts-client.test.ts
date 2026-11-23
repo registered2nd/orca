@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { _resetTracerForTests, setActiveSink } from '../observability/tracer'
+import { setActiveSink } from '../observability/tracer'
 import { getLastAzureSpeechFailure, synthesizeWithAzure } from './azure-tts-client'
 
 vi.mock('./azure-speech-key-store', () => ({ readAzureSpeechKey: () => 'test-key' }))
@@ -26,7 +26,7 @@ beforeEach(() => {
 })
 
 afterEach(() => {
-  _resetTracerForTests()
+  setActiveSink(null)
   vi.unstubAllGlobals()
 })
 
