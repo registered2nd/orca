@@ -43,6 +43,7 @@ import { registerComputerUsePermissionHandlers } from '../computer-use-permissio
 import { setAgentBrowserBridgeRef, registerBrowserHandlers } from '../browser/browser'
 import { registerBrowserServerDownloadCopyHandlers } from '../browser/browser-server-download-copy-ipc'
 import { setTrustedBrowserRendererWebContentsId } from '../browser/browser-renderer-trust'
+import { registerBrowserAskHandlers } from '../browser/browser-ask-ipc'
 import { registerSessionHandlers } from '../session'
 import { registerSettingsHandlers } from '../settings/settings'
 import { registerDiagnosticsHandlers } from '../diagnostics'
@@ -206,6 +207,7 @@ export async function registerCoreHandlers(
     registerOrcaProfileHandlers(store, lifecycleOptions.orcaAccount, {
       onBeforeRelaunch: lifecycleOptions.onBeforeRelaunch
     })
+    registerBrowserAskHandlers()
     registerBrowserHandlers(store)
     registerBrowserServerDownloadCopyHandlers()
     registerShellHandlers(store)
