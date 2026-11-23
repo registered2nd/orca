@@ -11,17 +11,17 @@
       }
     },
     "agentStatus:getMigrationUnsupportedSnapshot": {
-      "source": "src/main/ipc/agent-hooks/agent-hooks.ts:66",
+      "source": "src/main/ipc/agent-hooks/agent-hooks.ts:74",
       "params": [],
       "preload": {
         "api": "window.api.agentStatus.getMigrationUnsupportedSnapshot",
-        "source": "src/preload/api/agent-status/agent-status-bridge.ts:66",
+        "source": "src/preload/api/agent-status/agent-status-bridge.ts:72",
         "params": [],
         "returns": "Promise<MigrationUnsupportedPtyEntry[]>"
       }
     },
     "agentStatus:getSnapshot": {
-      "source": "src/main/ipc/agent-hooks/agent-hooks.ts:41",
+      "source": "src/main/ipc/agent-hooks/agent-hooks.ts:44",
       "params": [],
       "preload": {
         "api": "window.api.agentStatus.getSnapshot",
@@ -30,8 +30,18 @@
         "returns": "Promise<AgentStatusIpcPayload[]>"
       }
     },
+    "agentStatus:hasRestartOffers": {
+      "source": "src/main/ipc/agent-hooks/agent-hooks.ts:70",
+      "params": [],
+      "preload": {
+        "api": "window.api.agentStatus.hasRestartOffers",
+        "source": "src/preload/api/agent-status/agent-status-bridge.ts:70",
+        "params": [],
+        "returns": "Promise<boolean>"
+      }
+    },
     "agentStatus:hasVerifiableAgentProcess": {
-      "source": "src/main/ipc/agent-hooks/agent-hooks.ts:63",
+      "source": "src/main/ipc/agent-hooks/agent-hooks.ts:66",
       "params": [
         {
           "name": "paneKey",
@@ -55,7 +65,7 @@
       }
     },
     "agentStatus:inferInterrupt": {
-      "source": "src/main/ipc/agent-hooks/agent-hooks.ts:51",
+      "source": "src/main/ipc/agent-hooks/agent-hooks.ts:54",
       "params": [
         {
           "name": "request",
@@ -79,7 +89,7 @@
       }
     },
     "agentStatus:inferQuestionAnswered": {
-      "source": "src/main/ipc/agent-hooks/agent-hooks.ts:57",
+      "source": "src/main/ipc/agent-hooks/agent-hooks.ts:60",
       "params": [
         {
           "name": "request",
@@ -441,7 +451,7 @@
       }
     },
     "app:awaitFirstWindowStartupServices": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:33",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:34",
       "params": [],
       "preload": {
         "api": "window.api.app.awaitFirstWindowStartupServices",
@@ -451,7 +461,7 @@
       }
     },
     "app:awaitGitEnvironmentStartupBarrier": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:40",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:41",
       "params": [],
       "preload": {
         "api": "window.api.app.awaitGitEnvironmentStartupBarrier",
@@ -603,7 +613,7 @@
       }
     },
     "app:holdsStructuredAgentSessions": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:51",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:52",
       "params": [],
       "preload": {
         "api": "window.api.app.holdsStructuredAgentSessions",
@@ -643,7 +653,7 @@
       }
     },
     "app:prepareTerminalStartupRestoration": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:43",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:44",
       "params": [],
       "preload": {
         "api": "window.api.app.prepareTerminalStartupRestoration",
@@ -653,7 +663,7 @@
       }
     },
     "app:recoverLegacyWorkerTerminalsForRendererStartup": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:65",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:66",
       "params": [
         {
           "name": "options",
@@ -687,7 +697,7 @@
       }
     },
     "app:reload": {
-      "source": "src/main/window/attach-main-window-services.ts:274",
+      "source": "src/main/window/attach-main-window-services.ts:278",
       "params": [],
       "preload": {
         "api": null,
@@ -741,7 +751,7 @@
       }
     },
     "app:startupDiagnostic": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:150",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:151",
       "params": [
         {
           "name": "event",
@@ -1055,7 +1065,7 @@
       }
     },
     "browser:acknowledgeGuestRemoval": {
-      "source": "src/main/ipc/browser/browser-guest-discard-ipc.ts:138",
+      "source": "src/main/ipc/browser/browser-guest-discard-ipc.ts:143",
       "params": [
         {
           "name": "args",
@@ -1079,7 +1089,7 @@
       }
     },
     "browser:activeTabChanged": {
-      "source": "src/main/ipc/browser/browser.ts:287",
+      "source": "src/main/ipc/browser/browser.ts:296",
       "params": [
         {
           "name": "args",
@@ -1090,7 +1100,7 @@
       ],
       "preload": {
         "api": "window.api.browser.notifyActiveTabChanged",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:232",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:236",
         "params": [
           {
             "name": "args",
@@ -1114,7 +1124,7 @@
       ],
       "preload": {
         "api": "window.api.browser.addWordToDictionary",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:117",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:119",
         "params": [
           {
             "name": "args",
@@ -1138,7 +1148,7 @@
       ],
       "preload": {
         "api": "window.api.browser.askReadPage",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:147",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:151",
         "params": [
           {
             "name": "args",
@@ -1162,7 +1172,7 @@
       ],
       "preload": {
         "api": "window.api.browser.askSaveAttachment",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:149",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:153",
         "params": [
           {
             "name": "args",
@@ -1186,7 +1196,7 @@
       ],
       "preload": {
         "api": "window.api.browser.awaitGrabSelection",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:135",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:139",
         "params": [
           {
             "name": "args",
@@ -1210,7 +1220,7 @@
       ],
       "preload": {
         "api": "window.api.browser.cancelDownload",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:131",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:135",
         "params": [
           {
             "name": "args",
@@ -1234,7 +1244,7 @@
       ],
       "preload": {
         "api": "window.api.browser.cancelGrab",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:137",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:141",
         "params": [
           {
             "name": "args",
@@ -1258,7 +1268,7 @@
       ],
       "preload": {
         "api": "window.api.browser.captureSelectionScreenshot",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:141",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:145",
         "params": [
           {
             "name": "args",
@@ -1282,7 +1292,7 @@
       ],
       "preload": {
         "api": "window.api.browser.closeDevTools",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:100",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:102",
         "params": [
           {
             "name": "args",
@@ -1306,7 +1316,7 @@
       ],
       "preload": {
         "api": "window.api.browser.copyImageAt",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:121",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:123",
         "params": [
           {
             "name": "args",
@@ -1330,7 +1340,7 @@
       ],
       "preload": {
         "api": "window.api.browser.extractHoverPayload",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:143",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:147",
         "params": [
           {
             "name": "args",
@@ -1343,7 +1353,7 @@
       }
     },
     "browser:getGuestDiscardProtection": {
-      "source": "src/main/ipc/browser/browser-guest-discard-ipc.ts:155",
+      "source": "src/main/ipc/browser/browser-guest-discard-ipc.ts:166",
       "params": [
         {
           "name": "args",
@@ -1354,7 +1364,7 @@
       ],
       "preload": {
         "api": "window.api.browser.getGuestDiscardProtection",
-        "source": "src/preload/api/browser/browser-bridge-guest-discard.ts:19",
+        "source": "src/preload/api/browser/browser-bridge-guest-discard.ts:20",
         "params": [
           {
             "name": "args",
@@ -1367,7 +1377,7 @@
       }
     },
     "browser:getGuestMetadata": {
-      "source": "src/main/ipc/browser/browser.ts:126",
+      "source": "src/main/ipc/browser/browser.ts:127",
       "params": [
         {
           "name": "args",
@@ -1402,7 +1412,7 @@
       ],
       "preload": {
         "api": "window.api.browser.getPageSiteDisplay",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:129",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:131",
         "params": [
           {
             "name": "args",
@@ -1415,17 +1425,17 @@
       }
     },
     "browser:identity:get": {
-      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:77",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:80",
       "params": [],
       "preload": {
         "api": "window.api.browser.identityGet",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:194",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:198",
         "params": [],
         "returns": null
       }
     },
     "browser:identity:set": {
-      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:84",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:87",
       "params": [
         {
           "name": "mode",
@@ -1436,7 +1446,7 @@
       ],
       "preload": {
         "api": "window.api.browser.identitySet",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:195",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:199",
         "params": [
           {
             "name": "mode",
@@ -1460,7 +1470,7 @@
       ],
       "preload": {
         "api": "window.api.browser.insertDictationText",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:123",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:125",
         "params": [
           {
             "name": "args",
@@ -1473,7 +1483,7 @@
       }
     },
     "browser:isGuestRegistered": {
-      "source": "src/main/ipc/browser/browser.ts:193",
+      "source": "src/main/ipc/browser/browser.ts:194",
       "params": [
         {
           "name": "args",
@@ -1508,7 +1518,7 @@
       ],
       "preload": {
         "api": "window.api.browser.openDevTools",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:98",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:100",
         "params": [
           {
             "name": "args",
@@ -1520,12 +1530,36 @@
         "returns": "Promise<boolean>"
       }
     },
+    "browser:openStreamedExternalAppLink": {
+      "source": "src/main/ipc/browser/browser.ts:270",
+      "params": [
+        {
+          "name": "rawUrl",
+          "type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.browser.openStreamedExternalAppLink",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:95",
+        "params": [
+          {
+            "name": "url",
+            "type": "string",
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": "Promise<boolean>"
+      }
+    },
     "browser:preparePageAttach": {
-      "source": "src/main/browser/guest-lifecycle/navigation/browser-link-materialization-electron-fixture.ts:34",
+      "source": "src/main/ipc/browser/browser-guest-discard-ipc.ts:62",
       "params": [
         {
           "name": "args",
-          "type": null,
+          "type": "{ browserPageId?: unknown; partition?: unknown; url?: unknown; }",
           "optional": false,
           "rest": false
         }
@@ -1545,7 +1579,7 @@
       }
     },
     "browser:prepareSshWorkspacePartition": {
-      "source": "src/main/ipc/browser/browser.ts:151",
+      "source": "src/main/ipc/browser/browser.ts:152",
       "params": [
         {
           "name": "args",
@@ -1556,7 +1590,7 @@
       ],
       "preload": {
         "api": "window.api.browser.prepareSshWorkspacePartition",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:189",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:193",
         "params": [
           {
             "name": "args",
@@ -1569,7 +1603,7 @@
       }
     },
     "browser:proceedCertificate": {
-      "source": "src/main/ipc/browser/browser.ts:269",
+      "source": "src/main/ipc/browser/browser.ts:278",
       "params": [
         {
           "name": "args",
@@ -1580,7 +1614,7 @@
       ],
       "preload": {
         "api": "window.api.browser.proceedCertificate",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:186",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:196",
         "params": [
           {
             "name": "args",
@@ -1604,7 +1638,7 @@
       ],
       "preload": {
         "api": "window.api.browser.publishClientPageMetadata",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:153",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:155",
         "params": [
           {
             "name": "args",
@@ -1617,7 +1651,7 @@
       }
     },
     "browser:registerGuest": {
-      "source": "src/main/ipc/browser/browser.ts:122",
+      "source": "src/main/ipc/browser/browser.ts:123",
       "params": [
         {
           "name": "args",
@@ -1689,7 +1723,7 @@
       }
     },
     "browser:repairGuestRegistration": {
-      "source": "src/main/ipc/browser/browser.ts:189",
+      "source": "src/main/ipc/browser/browser.ts:190",
       "params": [
         {
           "name": "args",
@@ -1713,7 +1747,7 @@
       }
     },
     "browser:respondPagePrompt": {
-      "source": "src/main/ipc/browser/browser.ts:259",
+      "source": "src/main/ipc/browser/browser.ts:260",
       "params": [
         {
           "name": "response",
@@ -1737,7 +1771,7 @@
       }
     },
     "browser:respondWebAuthnAccount": {
-      "source": "src/main/ipc/browser/browser.ts:249",
+      "source": "src/main/ipc/browser/browser.ts:250",
       "params": [
         {
           "name": "response",
@@ -1761,13 +1795,37 @@
       }
     },
     "browser:session:clearDefaultCookies": {
-      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:191",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:203",
       "params": [],
       "preload": {
         "api": "window.api.browser.sessionClearDefaultCookies",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:222",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:224",
         "params": [],
         "returns": "Promise<boolean>"
+      }
+    },
+    "browser:session:clearDefaultCookiesForClientHost": {
+      "source": "src/main/ipc/browser/browser-client-host-cookie-import-ipc.ts:93",
+      "params": [
+        {
+          "name": "args",
+          "type": "{ environmentId: string; }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.browser.sessionClearDefaultCookiesForClientHost",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:226",
+        "params": [
+          {
+            "name": "args",
+            "type": "{ environmentId: string; }",
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": null
       }
     },
     "browser:session:clearGoogleCookies": {
@@ -1782,7 +1840,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionClearGoogleCookies",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:220",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:222",
         "params": [
           {
             "name": "target",
@@ -1795,7 +1853,7 @@
       }
     },
     "browser:session:clientRouteImportSources": {
-      "source": "src/main/ipc/browser/browser-client-host-cookie-import-ipc.ts:64",
+      "source": "src/main/ipc/browser/browser-client-host-cookie-import-ipc.ts:82",
       "params": [
         {
           "name": "args",
@@ -1806,7 +1864,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionClientRouteImportSources",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:216",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:218",
         "params": [
           {
             "name": "args",
@@ -1819,7 +1877,7 @@
       }
     },
     "browser:session:createProfile": {
-      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:56",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:59",
       "params": [
         {
           "name": "args",
@@ -1830,7 +1888,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionCreateProfile",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:191",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:195",
         "params": [
           {
             "name": "args",
@@ -1843,7 +1901,7 @@
       }
     },
     "browser:session:deleteProfile": {
-      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:95",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:98",
       "params": [
         {
           "name": "args",
@@ -1854,7 +1912,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionDeleteProfile",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:197",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:201",
         "params": [
           {
             "name": "args",
@@ -1867,17 +1925,17 @@
       }
     },
     "browser:session:detectBrowsers": {
-      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:202",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:214",
       "params": [],
       "preload": {
         "api": "window.api.browser.sessionDetectBrowsers",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:204",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:208",
         "params": [],
         "returns": null
       }
     },
     "browser:session:detectBrowsersForClientHost": {
-      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:210",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:222",
       "params": [
         {
           "name": "args",
@@ -1888,7 +1946,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionDetectBrowsersForClientHost",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:206",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:210",
         "params": [
           {
             "name": "args",
@@ -1901,7 +1959,7 @@
       }
     },
     "browser:session:ensureManagedProfile": {
-      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:69",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:72",
       "params": [
         {
           "name": "args",
@@ -1912,7 +1970,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionEnsureManagedProfile",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:193",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:197",
         "params": [
           {
             "name": "args",
@@ -1936,7 +1994,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionGoogleCookieClearTarget",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:218",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:220",
         "params": [
           {
             "name": "args",
@@ -1949,22 +2007,22 @@
       }
     },
     "browser:session:importCookies": {
-      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:105",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:108",
       "params": [
         {
           "name": "args",
-          "type": "{ profileId: string; }",
+          "type": "{ profileId: string; sshTargetId?: unknown; }",
           "optional": false,
           "rest": false
         }
       ],
       "preload": {
         "api": "window.api.browser.sessionImportCookies",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:199",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:203",
         "params": [
           {
             "name": "args",
-            "type": "{ profileId: string; }",
+            "type": "BrowserProfileCookieImportArgs",
             "optional": false,
             "rest": false
           }
@@ -1973,22 +2031,22 @@
       }
     },
     "browser:session:importCookiesForClientHost": {
-      "source": "src/main/ipc/browser/browser-client-host-cookie-import-ipc.ts:46",
+      "source": "src/main/ipc/browser/browser-client-host-cookie-import-ipc.ts:65",
       "params": [
         {
           "name": "args",
-          "type": "{ environmentId: string; profileId: string; }",
+          "type": "ClientHostCookieImportTargetArgs",
           "optional": false,
           "rest": false
         }
       ],
       "preload": {
         "api": "window.api.browser.sessionImportCookiesForClientHost",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:201",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:205",
         "params": [
           {
             "name": "args",
-            "type": "{ environmentId: string; profileId: string; }",
+            "type": "BrowserClientHostCookieImportArgs",
             "optional": false,
             "rest": false
           }
@@ -1997,22 +2055,22 @@
       }
     },
     "browser:session:importFromBrowser": {
-      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:223",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:235",
       "params": [
         {
           "name": "args",
-          "type": "{ profileId: string; browserFamily: string; browserProfile?: string; }",
+          "type": "{ profileId: string; browserFamily: string; browserProfile?: string; sshTargetId?: unknown; }",
           "optional": false,
           "rest": false
         }
       ],
       "preload": {
         "api": "window.api.browser.sessionImportFromBrowser",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:208",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:213",
         "params": [
           {
             "name": "args",
-            "type": "{ profileId: string; browserFamily: string; }",
+            "type": "BrowserProfileCookieImportArgs & { browserFamily: string; browserProfile?: string; }",
             "optional": false,
             "rest": false
           }
@@ -2021,22 +2079,22 @@
       }
     },
     "browser:session:importFromBrowserForClientHost": {
-      "source": "src/main/ipc/browser/browser-client-host-cookie-import-ipc.ts:22",
+      "source": "src/main/ipc/browser/browser-client-host-cookie-import-ipc.ts:44",
       "params": [
         {
           "name": "args",
-          "type": "{ environmentId: string; profileId: string; browserFamily: string; browserProfile?: string; }",
+          "type": "ClientHostCookieImportTargetArgs & { browserFamily: string; browserProfile?: string; }",
           "optional": false,
           "rest": false
         }
       ],
       "preload": {
         "api": "window.api.browser.sessionImportFromBrowserForClientHost",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:214",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:216",
         "params": [
           {
             "name": "args",
-            "type": "{ environmentId: string; profileId: string; browserFamily: string; browserProfile?: string; }",
+            "type": "BrowserClientHostCookieImportArgs & { browserFamily: string; browserProfile?: string; }",
             "optional": false,
             "rest": false
           }
@@ -2045,17 +2103,17 @@
       }
     },
     "browser:session:listProfiles": {
-      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:49",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:52",
       "params": [],
       "preload": {
         "api": "window.api.browser.sessionListProfiles",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:177",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:181",
         "params": [],
         "returns": null
       }
     },
     "browser:session:resolvePartition": {
-      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:134",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:146",
       "params": [
         {
           "name": "args",
@@ -2066,7 +2124,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionResolvePartition",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:203",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:207",
         "params": [
           {
             "name": "args",
@@ -2090,7 +2148,7 @@
       ],
       "preload": {
         "api": "window.api.browser.setAnnotationViewportBridge",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:151",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:153",
         "params": [
           {
             "name": "args",
@@ -2114,7 +2172,7 @@
       ],
       "preload": {
         "api": "window.api.browser.setDevToolsDockBounds",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:105",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:107",
         "params": [
           {
             "name": "args",
@@ -2127,11 +2185,18 @@
       }
     },
     "browser:setGrabMode": {
-      "source": "src/main/browser/guest-lifecycle/navigation/browser-link-materialization-electron-fixture.ts:38",
-      "params": [],
+      "source": "src/main/ipc/browser/browser-grab-ipc.ts:44",
+      "params": [
+        {
+          "name": "args",
+          "type": "BrowserSetGrabModeArgs",
+          "optional": false,
+          "rest": false
+        }
+      ],
       "preload": {
         "api": "window.api.browser.setGrabMode",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:133",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:137",
         "params": [
           {
             "name": "args",
@@ -2155,7 +2220,7 @@
       ],
       "preload": {
         "api": "window.api.browser.setPageAudioMuted",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:140",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:142",
         "params": [
           {
             "name": "args",
@@ -2179,7 +2244,7 @@
       ],
       "preload": {
         "api": "window.api.browser.setPageSiteColorScheme",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:138",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:140",
         "params": [
           {
             "name": "args",
@@ -2203,7 +2268,7 @@
       ],
       "preload": {
         "api": "window.api.browser.setViewportOverride",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:127",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:129",
         "params": [
           {
             "name": "args",
@@ -2216,7 +2281,7 @@
       }
     },
     "browser:sitePermissions:list": {
-      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:144",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:156",
       "params": [
         {
           "name": "args",
@@ -2227,7 +2292,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sitePermissionsList",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:224",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:228",
         "params": [
           {
             "name": "args",
@@ -2240,7 +2305,7 @@
       }
     },
     "browser:sitePermissions:set": {
-      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:157",
+      "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:169",
       "params": [
         {
           "name": "args",
@@ -2251,7 +2316,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sitePermissionsSet",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:230",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:234",
         "params": [
           {
             "name": "args",
@@ -2264,7 +2329,7 @@
       }
     },
     "browser:unregisterGuest": {
-      "source": "src/main/ipc/browser/browser.ts:210",
+      "source": "src/main/ipc/browser/browser.ts:211",
       "params": [
         {
           "name": "args",
@@ -2287,6 +2352,30 @@
         "returns": "Promise<void>"
       }
     },
+    "browser:wakeClientPage": {
+      "source": "src/main/ipc/browser/browser-guest-discard-ipc.ts:160",
+      "params": [
+        {
+          "name": "args",
+          "type": "{ browserPageId?: unknown; }",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.browser.wakeClientPage",
+        "source": "src/preload/api/browser/browser-bridge-guest-discard.ts:18",
+        "params": [
+          {
+            "name": "args",
+            "type": null,
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": null
+      }
+    },
     "browser:zoomPage": {
       "source": "src/main/ipc/browser/browser-guest-view-ipc.ts:75",
       "params": [
@@ -2299,7 +2388,7 @@
       ],
       "preload": {
         "api": "window.api.browser.zoomPage",
-        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:133",
+        "source": "src/preload/api/browser/browser-bridge-guest-registration-and-downloads.ts:135",
         "params": [
           {
             "name": "args",
@@ -3942,7 +4031,7 @@
       }
     },
     "crashReports:copyLatestDiagnostics": {
-      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:92",
+      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:71",
       "params": [
         {
           "name": "args",
@@ -3966,7 +4055,7 @@
       }
     },
     "crashReports:dismiss": {
-      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:69",
+      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:48",
       "params": [
         {
           "name": "args",
@@ -3990,7 +4079,7 @@
       }
     },
     "crashReports:getLatestPending": {
-      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:60",
+      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:39",
       "params": [],
       "preload": {
         "api": "window.api.crashReports.getLatestPending",
@@ -4000,7 +4089,7 @@
       }
     },
     "crashReports:getLatestReport": {
-      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:63",
+      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:42",
       "params": [],
       "preload": {
         "api": "window.api.crashReports.getLatestReport",
@@ -4010,7 +4099,7 @@
       }
     },
     "crashReports:recordRendererError": {
-      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:116",
+      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:95",
       "params": [
         {
           "name": "args",
@@ -4034,7 +4123,7 @@
       }
     },
     "crashReports:submit": {
-      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:126",
+      "source": "src/main/ipc/crash-reporting/crash-reporting.ts:105",
       "params": [
         {
           "name": "args",
@@ -4388,7 +4477,7 @@
       }
     },
     "docPreview:authorizeDirectory": {
-      "source": "src/main/ipc/doc-preview-grant-ipc.ts:84",
+      "source": "src/main/ipc/doc-preview-grant-ipc.ts:82",
       "params": [
         {
           "name": "grantId",
@@ -4424,7 +4513,7 @@
       }
     },
     "docPreview:mintGrant": {
-      "source": "src/main/ipc/doc-preview-grant-ipc.ts:52",
+      "source": "src/main/ipc/doc-preview-grant-ipc.ts:50",
       "params": [
         {
           "name": "request",
@@ -4448,7 +4537,7 @@
       }
     },
     "docPreview:revokeGrant": {
-      "source": "src/main/ipc/doc-preview-grant-ipc.ts:80",
+      "source": "src/main/ipc/doc-preview-grant-ipc.ts:78",
       "params": [
         {
           "name": "grantId",
@@ -4520,7 +4609,7 @@
       }
     },
     "emulator:scrcpyKeyboard": {
-      "source": "src/main/ipc/emulator/emulator-scrcpy-keyboard.ts:30",
+      "source": "src/main/ipc/emulator/emulator-scrcpy-keyboard.ts:47",
       "params": [
         {
           "name": "value",
@@ -4535,7 +4624,7 @@
         "params": [
           {
             "name": "input",
-            "type": "{ deviceId: string; text: string; paste?: boolean; } | { deviceId: string; key: string; shift: boolean; }",
+            "type": "{ deviceId: string; text: string; paste?: boolean; hid?: { usage: number; shift: boolean; }; } | { deviceId: string; key: string; shift: boolean; hid?: { usage: number; shift: boolean; }; }",
             "optional": false,
             "rest": false
           }
@@ -5170,7 +5259,7 @@
       }
     },
     "fs:copy": {
-      "source": "src/main/ipc/filesystem/mutations/filesystem-mutations.ts:120",
+      "source": "src/main/ipc/filesystem/mutations/filesystem-mutations.ts:114",
       "params": [
         {
           "name": "args",
@@ -5194,7 +5283,7 @@
       }
     },
     "fs:createDir": {
-      "source": "src/main/ipc/filesystem/mutations/filesystem-mutations.ts:67",
+      "source": "src/main/ipc/filesystem/mutations/filesystem-mutations.ts:61",
       "params": [
         {
           "name": "args",
@@ -5338,7 +5427,7 @@
       }
     },
     "fs:grantRuntimeFilePreview": {
-      "source": "src/main/ipc/filesystem/reads/filesystem-read-handlers.ts:143",
+      "source": "src/main/ipc/filesystem/reads/filesystem-read-handlers.ts:148",
       "params": [
         {
           "name": "args",
@@ -5362,7 +5451,7 @@
       }
     },
     "fs:hasSymlinkBelowRoot": {
-      "source": "src/main/ipc/filesystem/reads/filesystem-read-handlers.ts:206",
+      "source": "src/main/ipc/filesystem/reads/filesystem-read-handlers.ts:211",
       "params": [
         {
           "name": "args",
@@ -5386,7 +5475,7 @@
       }
     },
     "fs:importExternalPaths": {
-      "source": "src/main/ipc/filesystem/mutations/filesystem-mutations.ts:155",
+      "source": "src/main/ipc/filesystem/mutations/filesystem-mutations.ts:149",
       "params": [
         {
           "name": "args",
@@ -5434,7 +5523,7 @@
       }
     },
     "fs:listMarkdownDocuments": {
-      "source": "src/main/ipc/filesystem/reads/filesystem-read-handlers.ts:151",
+      "source": "src/main/ipc/filesystem/reads/filesystem-read-handlers.ts:156",
       "params": [
         {
           "name": "args",
@@ -5458,7 +5547,7 @@
       }
     },
     "fs:pathExists": {
-      "source": "src/main/ipc/filesystem/reads/filesystem-read-handlers.ts:246",
+      "source": "src/main/ipc/filesystem/reads/filesystem-read-handlers.ts:251",
       "params": [
         {
           "name": "args",
@@ -5482,7 +5571,7 @@
       }
     },
     "fs:pathsExist": {
-      "source": "src/main/ipc/filesystem/reads/filesystem-read-handlers.ts:216",
+      "source": "src/main/ipc/filesystem/reads/filesystem-read-handlers.ts:221",
       "params": [
         {
           "name": "args",
@@ -5523,7 +5612,7 @@
       }
     },
     "fs:readDir": {
-      "source": "src/main/ipc/filesystem/reads/filesystem-read-handlers.ts:47",
+      "source": "src/main/ipc/filesystem/reads/filesystem-read-handlers.ts:48",
       "params": [
         {
           "name": "args",
@@ -5547,7 +5636,7 @@
       }
     },
     "fs:readFile": {
-      "source": "src/main/ipc/filesystem/reads/filesystem-read-handlers.ts:98",
+      "source": "src/main/ipc/filesystem/reads/filesystem-read-handlers.ts:99",
       "params": [
         {
           "name": "args",
@@ -5619,7 +5708,7 @@
       }
     },
     "fs:readPreviewRange": {
-      "source": "src/main/ipc/filesystem/reads/filesystem-read-handlers.ts:137",
+      "source": "src/main/ipc/filesystem/reads/filesystem-read-handlers.ts:142",
       "params": [
         {
           "name": "args",
@@ -5643,7 +5732,7 @@
       }
     },
     "fs:rename": {
-      "source": "src/main/ipc/filesystem/mutations/filesystem-mutations.ts:89",
+      "source": "src/main/ipc/filesystem/mutations/filesystem-mutations.ts:83",
       "params": [
         {
           "name": "args",
@@ -5667,7 +5756,7 @@
       }
     },
     "fs:resolveDroppedPathsForAgent": {
-      "source": "src/main/ipc/filesystem/mutations/filesystem-mutations.ts:251",
+      "source": "src/main/ipc/filesystem/mutations/filesystem-mutations.ts:245",
       "params": [
         {
           "name": "args",
@@ -5739,7 +5828,7 @@
       }
     },
     "fs:stageExternalPathsForRuntimeUpload": {
-      "source": "src/main/ipc/filesystem/mutations/filesystem-mutations.ts:200",
+      "source": "src/main/ipc/filesystem/mutations/filesystem-mutations.ts:194",
       "params": [
         {
           "name": "args",
@@ -5811,7 +5900,7 @@
       }
     },
     "fs:stat": {
-      "source": "src/main/ipc/filesystem/reads/filesystem-read-handlers.ts:180",
+      "source": "src/main/ipc/filesystem/reads/filesystem-read-handlers.ts:185",
       "params": [
         {
           "name": "args",
@@ -5883,7 +5972,7 @@
       }
     },
     "fs:uploadExternalFileToRuntime": {
-      "source": "src/main/ipc/filesystem/mutations/filesystem-mutations.ts:221",
+      "source": "src/main/ipc/filesystem/mutations/filesystem-mutations.ts:215",
       "params": [
         {
           "name": "args",
@@ -9281,7 +9370,7 @@
       }
     },
     "hooks:check": {
-      "source": "src/main/ipc/hooks/register-worktree-hook-check-handler.ts:20",
+      "source": "src/main/ipc/hooks/register-worktree-hook-check-handler.ts:18",
       "params": [
         {
           "name": "args",
@@ -10810,47 +10899,6 @@
         "returns": "Promise<{ ok: true; } | { ok: false; error: string; }>"
       }
     },
-    "link-probe:guests": {
-      "source": "src/main/browser/guest-lifecycle/navigation/browser-link-materialization-electron-fixture.ts:46",
-      "params": [],
-      "preload": null
-    },
-    "link-probe:open": {
-      "source": "src/main/browser/guest-lifecycle/navigation/browser-link-materialization-electron-fixture.ts:39",
-      "params": [
-        {
-          "name": "event",
-          "type": null,
-          "optional": false,
-          "rest": false
-        }
-      ],
-      "preload": null
-    },
-    "link-probe:register": {
-      "source": "src/main/browser/guest-lifecycle/navigation/browser-link-materialization-electron-fixture.ts:42",
-      "params": [
-        {
-          "name": "args",
-          "type": null,
-          "optional": false,
-          "rest": false
-        }
-      ],
-      "preload": null
-    },
-    "link-probe:seed": {
-      "source": "src/main/browser/guest-lifecycle/navigation/browser-link-materialization-electron-fixture.ts:57",
-      "params": [
-        {
-          "name": "origin",
-          "type": null,
-          "optional": false,
-          "rest": false
-        }
-      ],
-      "preload": null
-    },
     "linkPreview:get": {
       "source": "src/main/ipc/link-preview.ts:7",
       "params": [
@@ -11302,7 +11350,7 @@
       }
     },
     "nativeChat:conversationNameFailureOutput": {
-      "source": "src/main/ipc/native-chat.ts:333",
+      "source": "src/main/ipc/native-chat.ts:321",
       "params": [
         {
           "name": "sessionId",
@@ -11326,7 +11374,7 @@
       }
     },
     "nativeChat:readSession": {
-      "source": "src/main/ipc/native-chat.ts:323",
+      "source": "src/main/ipc/native-chat.ts:311",
       "params": [
         {
           "name": "args",
@@ -11905,7 +11953,7 @@
       }
     },
     "orcaProfiles:authStatus": {
-      "source": "src/main/ipc/profiles/orca-profiles.ts:151",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:156",
       "params": [],
       "preload": {
         "api": "window.api.orcaProfiles.authStatus",
@@ -11915,7 +11963,7 @@
       }
     },
     "orcaProfiles:cancelSignIn": {
-      "source": "src/main/ipc/profiles/orca-profiles.ts:252",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:258",
       "params": [],
       "preload": {
         "api": "window.api.orcaProfiles.cancelSignIn",
@@ -11925,7 +11973,7 @@
       }
     },
     "orcaProfiles:connectCurrent": {
-      "source": "src/main/ipc/profiles/orca-profiles.ts:244",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:250",
       "params": [],
       "preload": {
         "api": "window.api.orcaProfiles.connectCurrent",
@@ -11935,7 +11983,7 @@
       }
     },
     "orcaProfiles:createCloudLinked": {
-      "source": "src/main/ipc/profiles/orca-profiles.ts:254",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:260",
       "params": [
         {
           "name": "rawArgs",
@@ -11959,7 +12007,7 @@
       }
     },
     "orcaProfiles:createLocal": {
-      "source": "src/main/ipc/profiles/orca-profiles.ts:159",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:165",
       "params": [
         {
           "name": "args",
@@ -11983,7 +12031,7 @@
       }
     },
     "orcaProfiles:findProjectProfiles": {
-      "source": "src/main/ipc/profiles/orca-profiles.ts:235",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:241",
       "params": [
         {
           "name": "rawArgs",
@@ -12007,12 +12055,36 @@
       }
     },
     "orcaProfiles:list": {
-      "source": "src/main/ipc/profiles/orca-profiles.ts:146",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:151",
       "params": [],
       "preload": {
         "api": "window.api.orcaProfiles.list",
         "source": "src/preload/api/profiles/orca-profiles-bridge.ts:15",
         "params": [],
+        "returns": null
+      }
+    },
+    "orcaProfiles:openCloudConsole": {
+      "source": "src/main/ipc/profiles/orca-profiles.ts:285",
+      "params": [
+        {
+          "name": "rawArgs",
+          "type": "unknown",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.orcaProfiles.openCloudConsole",
+        "source": "src/preload/api/profiles/orca-profiles-bridge.ts:68",
+        "params": [
+          {
+            "name": "args",
+            "type": null,
+            "optional": false,
+            "rest": false
+          }
+        ],
         "returns": null
       }
     },
@@ -12137,7 +12209,7 @@
       }
     },
     "orcaProfiles:refreshAuth": {
-      "source": "src/main/ipc/profiles/orca-profiles.ts:265",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:271",
       "params": [],
       "preload": {
         "api": "window.api.orcaProfiles.refreshAuth",
@@ -12147,7 +12219,7 @@
       }
     },
     "orcaProfiles:selectOrg": {
-      "source": "src/main/ipc/profiles/orca-profiles.ts:273",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:279",
       "params": [
         {
           "name": "rawArgs",
@@ -12171,7 +12243,7 @@
       }
     },
     "orcaProfiles:signInProgress": {
-      "source": "src/main/ipc/profiles/orca-profiles.ts:248",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:254",
       "params": [],
       "preload": {
         "api": "window.api.orcaProfiles.signInProgress",
@@ -12181,7 +12253,7 @@
       }
     },
     "orcaProfiles:signOutCurrent": {
-      "source": "src/main/ipc/profiles/orca-profiles.ts:269",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:275",
       "params": [],
       "preload": {
         "api": "window.api.orcaProfiles.signOutCurrent",
@@ -12191,7 +12263,7 @@
       }
     },
     "orcaProfiles:switch": {
-      "source": "src/main/ipc/profiles/orca-profiles.ts:168",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:174",
       "params": [
         {
           "name": "args",
@@ -12208,7 +12280,7 @@
       }
     },
     "orcaProfiles:transferProject": {
-      "source": "src/main/ipc/profiles/orca-profiles.ts:188",
+      "source": "src/main/ipc/profiles/orca-profiles.ts:194",
       "params": [
         {
           "name": "rawArgs",
@@ -12457,7 +12529,7 @@
       }
     },
     "plugins:consent": {
-      "source": "src/main/ipc/plugins/plugins.ts:123",
+      "source": "src/main/ipc/plugins/plugins.ts:126",
       "params": [
         {
           "name": "args",
@@ -12492,7 +12564,7 @@
       ],
       "preload": {
         "api": "window.api.plugins.editorSaveHook",
-        "source": "src/preload/api/plugins/plugins-bridge.ts:120",
+        "source": "src/preload/api/plugins/plugins-bridge.ts:121",
         "params": [
           {
             "name": "event",
@@ -12519,13 +12591,13 @@
       "params": [],
       "preload": {
         "api": "window.api.plugins.getInstallCounts",
-        "source": "src/preload/api/plugins/plugins-bridge.ts:111",
+        "source": "src/preload/api/plugins/plugins-bridge.ts:112",
         "params": [],
         "returns": null
       }
     },
     "plugins:getInstalledManifest": {
-      "source": "src/main/ipc/plugins/plugins.ts:101",
+      "source": "src/main/ipc/plugins/plugins.ts:104",
       "params": [
         {
           "name": "args",
@@ -12549,7 +12621,7 @@
       }
     },
     "plugins:getLogs": {
-      "source": "src/main/ipc/plugins/plugins.ts:256",
+      "source": "src/main/ipc/plugins/plugins.ts:262",
       "params": [
         {
           "name": "args",
@@ -12621,7 +12693,7 @@
       }
     },
     "plugins:install": {
-      "source": "src/main/ipc/plugins/plugins.ts:212",
+      "source": "src/main/ipc/plugins/plugins.ts:215",
       "params": [
         {
           "name": "args",
@@ -12669,7 +12741,7 @@
       }
     },
     "plugins:invokeCommand": {
-      "source": "src/main/ipc/plugins/plugins.ts:199",
+      "source": "src/main/ipc/plugins/plugins.ts:202",
       "params": [
         {
           "name": "args",
@@ -12693,7 +12765,7 @@
       }
     },
     "plugins:list": {
-      "source": "src/main/ipc/plugins/plugins.ts:100",
+      "source": "src/main/ipc/plugins/plugins.ts:102",
       "params": [],
       "preload": {
         "api": "window.api.plugins.list",
@@ -12865,7 +12937,7 @@
       }
     },
     "plugins:panelAction": {
-      "source": "src/main/ipc/plugins/plugins.ts:162",
+      "source": "src/main/ipc/plugins/plugins.ts:165",
       "params": [
         {
           "name": "args",
@@ -12889,7 +12961,7 @@
       }
     },
     "plugins:panelImage": {
-      "source": "src/main/ipc/plugins/plugins.ts:187",
+      "source": "src/main/ipc/plugins/plugins.ts:190",
       "params": [
         {
           "name": "args",
@@ -12913,7 +12985,7 @@
       }
     },
     "plugins:panelState": {
-      "source": "src/main/ipc/plugins/plugins.ts:174",
+      "source": "src/main/ipc/plugins/plugins.ts:177",
       "params": [
         {
           "name": "args",
@@ -13009,7 +13081,7 @@
       }
     },
     "plugins:readNewFileTemplate": {
-      "source": "src/main/ipc/plugins/plugins.ts:155",
+      "source": "src/main/ipc/plugins/plugins.ts:158",
       "params": [
         {
           "name": "args",
@@ -13057,7 +13129,7 @@
       }
     },
     "plugins:refresh": {
-      "source": "src/main/ipc/plugins/plugins.ts:261",
+      "source": "src/main/ipc/plugins/plugins.ts:267",
       "params": [],
       "preload": {
         "api": "window.api.plugins.refresh",
@@ -13091,7 +13163,7 @@
       }
     },
     "plugins:remove": {
-      "source": "src/main/ipc/plugins/plugins.ts:241",
+      "source": "src/main/ipc/plugins/plugins.ts:247",
       "params": [
         {
           "name": "args",
@@ -13139,7 +13211,7 @@
       }
     },
     "plugins:resolveGitSource": {
-      "source": "src/main/ipc/plugins/plugins.ts:208",
+      "source": "src/main/ipc/plugins/plugins.ts:211",
       "params": [
         {
           "name": "args",
@@ -13187,7 +13259,7 @@
       }
     },
     "plugins:setEnabled": {
-      "source": "src/main/ipc/plugins/plugins.ts:136",
+      "source": "src/main/ipc/plugins/plugins.ts:139",
       "params": [
         {
           "name": "args",
@@ -13239,7 +13311,7 @@
       "params": [],
       "preload": {
         "api": "window.api.plugins.statusBarState",
-        "source": "src/preload/api/plugins/plugins-bridge.ts:119",
+        "source": "src/preload/api/plugins/plugins-bridge.ts:120",
         "params": [],
         "returns": null
       }
@@ -13280,12 +13352,22 @@
         "returns": null
       }
     },
+    "plugins:takeRequiredPluginFailures": {
+      "source": "src/main/ipc/plugins/plugins.ts:103",
+      "params": [],
+      "preload": {
+        "api": "window.api.plugins.takeRequiredPluginFailures",
+        "source": "src/preload/api/plugins/plugins-bridge.ts:110",
+        "params": [],
+        "returns": null
+      }
+    },
     "plugins:takeUpdateReviewNotices": {
       "source": "src/main/ipc/plugins/plugin-marketplaces.ts:176",
       "params": [],
       "preload": {
         "api": "window.api.plugins.takeUpdateReviewNotices",
-        "source": "src/preload/api/plugins/plugins-bridge.ts:110",
+        "source": "src/preload/api/plugins/plugins-bridge.ts:111",
         "params": [],
         "returns": null
       }
@@ -14657,31 +14739,31 @@
       }
     },
     "rateLimits:consumeCodexResetCredit": {
-      "source": "src/main/ipc/rate-limits.ts:16",
+      "source": "src/main/ipc/rate-limits.ts:17",
       "params": [],
       "preload": {
         "api": "window.api.rateLimits.consumeCodexResetCredit",
-        "source": "src/preload/api/agent-usage/rate-limits-bridge.ts:15",
+        "source": "src/preload/api/agent-usage/rate-limits-bridge.ts:16",
         "params": [],
         "returns": "Promise<CodexRateLimitResetResult>"
       }
     },
     "rateLimits:fetchInactiveClaudeAccounts": {
-      "source": "src/main/ipc/rate-limits.ts:22",
+      "source": "src/main/ipc/rate-limits.ts:23",
       "params": [],
       "preload": {
         "api": "window.api.rateLimits.fetchInactiveClaudeAccounts",
-        "source": "src/preload/api/agent-usage/rate-limits-bridge.ts:19",
+        "source": "src/preload/api/agent-usage/rate-limits-bridge.ts:20",
         "params": [],
         "returns": "Promise<void>"
       }
     },
     "rateLimits:fetchInactiveCodexAccounts": {
-      "source": "src/main/ipc/rate-limits.ts:25",
+      "source": "src/main/ipc/rate-limits.ts:26",
       "params": [],
       "preload": {
         "api": "window.api.rateLimits.fetchInactiveCodexAccounts",
-        "source": "src/preload/api/agent-usage/rate-limits-bridge.ts:21",
+        "source": "src/preload/api/agent-usage/rate-limits-bridge.ts:22",
         "params": [],
         "returns": "Promise<void>"
       }
@@ -14707,7 +14789,7 @@
       }
     },
     "rateLimits:refreshClaudeForTarget": {
-      "source": "src/main/ipc/rate-limits.ts:19",
+      "source": "src/main/ipc/rate-limits.ts:20",
       "params": [
         {
           "name": "target",
@@ -14718,7 +14800,7 @@
       ],
       "preload": {
         "api": "window.api.rateLimits.refreshClaudeForTarget",
-        "source": "src/preload/api/agent-usage/rate-limits-bridge.ts:17",
+        "source": "src/preload/api/agent-usage/rate-limits-bridge.ts:18",
         "params": [
           {
             "name": "target",
@@ -14731,7 +14813,7 @@
       }
     },
     "rateLimits:refreshCodexForTarget": {
-      "source": "src/main/ipc/rate-limits.ts:12",
+      "source": "src/main/ipc/rate-limits.ts:13",
       "params": [
         {
           "name": "target",
@@ -14742,7 +14824,7 @@
       ],
       "preload": {
         "api": "window.api.rateLimits.refreshCodexForTarget",
-        "source": "src/preload/api/agent-usage/rate-limits-bridge.ts:13",
+        "source": "src/preload/api/agent-usage/rate-limits-bridge.ts:14",
         "params": [
           {
             "name": "target",
@@ -14755,13 +14837,23 @@
       }
     },
     "rateLimits:refreshGrok": {
-      "source": "src/main/ipc/rate-limits.ts:28",
+      "source": "src/main/ipc/rate-limits.ts:29",
       "params": [],
       "preload": {
         "api": "window.api.rateLimits.refreshGrok",
-        "source": "src/preload/api/agent-usage/rate-limits-bridge.ts:22",
+        "source": "src/preload/api/agent-usage/rate-limits-bridge.ts:23",
         "params": [],
         "returns": "Promise<RateLimitState>"
+      }
+    },
+    "rateLimits:refreshOnOwnerReturn": {
+      "source": "src/main/ipc/rate-limits.ts:12",
+      "params": [],
+      "preload": {
+        "api": "window.api.rateLimits.refreshOnOwnerReturn",
+        "source": "src/preload/api/agent-usage/rate-limits-bridge.ts:12",
+        "params": [],
+        "returns": "Promise<void>"
       }
     },
     "repos:add": {
@@ -15329,7 +15421,7 @@
       }
     },
     "runtimeEnvironments:addFromPairingCode": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:87",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:75",
       "params": [
         {
           "name": "args",
@@ -15377,22 +15469,22 @@
       }
     },
     "runtimeEnvironments:call": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:242",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:183",
       "params": [
         {
           "name": "args",
-          "type": "{ selector: string; method: string; params?: unknown; timeoutMs?: number; expectedEnvironmentPairingRevision?: number; expectedEnvironmentRuntimeId?: string; }",
+          "type": "{ selector: string; method: string; params?: unknown; timeoutMs?: number; expectedEnvironmentPairingRevision?: number; expectedEnvironmentRuntimeId?: string; background?: boolean; wake?: boolean; }",
           "optional": false,
           "rest": false
         }
       ],
       "preload": {
         "api": "window.api.runtimeEnvironments.call",
-        "source": "src/preload/api/runtime/runtime-environments-bridge.ts:125",
+        "source": "src/preload/api/runtime/runtime-environments-bridge.ts:127",
         "params": [
           {
             "name": "args",
-            "type": "{ selector: string; method: string; params?: unknown; timeoutMs?: number; expectedEnvironmentPairingRevision?: number; expectedEnvironmentRuntimeId?: string; }",
+            "type": "{ selector: string; method: string; params?: unknown; timeoutMs?: number; expectedEnvironmentPairingRevision?: number; expectedEnvironmentRuntimeId?: string; background?: boolean; wake?: boolean; }",
             "optional": false,
             "rest": false
           }
@@ -15425,7 +15517,7 @@
       }
     },
     "runtimeEnvironments:connect": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:172",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:120",
       "params": [
         {
           "name": "args",
@@ -15497,7 +15589,7 @@
       }
     },
     "runtimeEnvironments:desktopCreatedChatIds": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:74",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:62",
       "params": [],
       "preload": {
         "api": "window.api.runtimeEnvironments.desktopCreatedChatIds",
@@ -15507,7 +15599,7 @@
       }
     },
     "runtimeEnvironments:disconnect": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:157",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:105",
       "params": [
         {
           "name": "args",
@@ -15579,7 +15671,7 @@
       }
     },
     "runtimeEnvironments:getStatus": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:208",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:149",
       "params": [
         {
           "name": "args",
@@ -15603,7 +15695,7 @@
       }
     },
     "runtimeEnvironments:getStatusSnapshots": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:77",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:65",
       "params": [],
       "preload": {
         "api": "window.api.runtimeEnvironments.getStatusSnapshots",
@@ -15661,7 +15753,7 @@
       }
     },
     "runtimeEnvironments:list": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:80",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:68",
       "params": [],
       "preload": {
         "api": "window.api.runtimeEnvironments.list",
@@ -15801,7 +15893,7 @@
       }
     },
     "runtimeEnvironments:remove": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:116",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-remove-handler.ts:37",
       "params": [
         {
           "name": "args",
@@ -15849,7 +15941,7 @@
       }
     },
     "runtimeEnvironments:resolve": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:113",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:101",
       "params": [
         {
           "name": "args",
@@ -16027,7 +16119,7 @@
       }
     },
     "runtimeEnvironments:verifyAndAddFromPairingCode": {
-      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:99",
+      "source": "src/main/ipc/runtime-environments/connectivity/runtime-environment-connectivity-handlers.ts:87",
       "params": [
         {
           "name": "args",
@@ -16075,7 +16167,7 @@
       }
     },
     "session:close-terminal-surface": {
-      "source": "src/main/ipc/session.ts:183",
+      "source": "src/main/ipc/session.ts:187",
       "params": [
         {
           "name": "args",
@@ -16109,7 +16201,7 @@
       }
     },
     "session:flush": {
-      "source": "src/main/ipc/session.ts:203",
+      "source": "src/main/ipc/session.ts:207",
       "params": [],
       "preload": {
         "api": "window.api.session.flush",
@@ -16237,7 +16329,7 @@
       }
     },
     "session:read-terminal-scrollback": {
-      "source": "src/main/ipc/session.ts:208",
+      "source": "src/main/ipc/session.ts:212",
       "params": [
         {
           "name": "args",
@@ -18112,7 +18204,7 @@
       }
     },
     "ssh:submitCredential": {
-      "source": "src/main/ipc/ssh/ssh.ts:79",
+      "source": "src/main/ipc/ssh/ssh.ts:48",
       "params": [
         {
           "name": "args",
@@ -18297,7 +18389,7 @@
       }
     },
     "telemetry:acknowledgeBanner": {
-      "source": "src/main/ipc/telemetry.ts:152",
+      "source": "src/main/ipc/telemetry.ts:150",
       "params": [],
       "preload": {
         "api": "window.api.telemetryAcknowledgeBanner",
@@ -18307,7 +18399,7 @@
       }
     },
     "telemetry:assignBrowserExtensionsBanner": {
-      "source": "src/main/ipc/telemetry.ts:81",
+      "source": "src/main/ipc/telemetry.ts:79",
       "params": [],
       "preload": {
         "api": "window.api.telemetryAssignBrowserExtensionsBanner",
@@ -18317,7 +18409,7 @@
       }
     },
     "telemetry:getConsentState": {
-      "source": "src/main/ipc/telemetry.ts:144",
+      "source": "src/main/ipc/telemetry.ts:142",
       "params": [],
       "preload": {
         "api": "window.api.telemetryGetConsentState",
@@ -18327,7 +18419,7 @@
       }
     },
     "telemetry:setOptIn": {
-      "source": "src/main/ipc/telemetry.ts:122",
+      "source": "src/main/ipc/telemetry.ts:120",
       "params": [
         {
           "name": "optedIn",
@@ -18351,7 +18443,7 @@
       }
     },
     "telemetry:track": {
-      "source": "src/main/ipc/telemetry.ts:89",
+      "source": "src/main/ipc/telemetry.ts:87",
       "params": [
         {
           "name": "name",
@@ -18561,7 +18653,7 @@
       }
     },
     "ui:consumePendingBotLink": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:99",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:100",
       "params": [],
       "preload": {
         "api": "window.api.ui.consumePendingBotLink",
@@ -18571,7 +18663,7 @@
       }
     },
     "ui:consumePendingMarkdownFileOpens": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:139",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:140",
       "params": [],
       "preload": {
         "api": "window.api.ui.consumePendingMarkdownFileOpens",
@@ -18581,7 +18673,7 @@
       }
     },
     "ui:consumePendingOpenSettings": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:95",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:96",
       "params": [],
       "preload": {
         "api": "window.api.ui.consumePendingOpenSettings",
@@ -18591,7 +18683,7 @@
       }
     },
     "ui:consumePendingPluginInstallLink": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:137",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:138",
       "params": [],
       "preload": {
         "api": "window.api.ui.consumePendingPluginInstallLink",
@@ -18601,7 +18693,7 @@
       }
     },
     "ui:consumePendingQuitAndStopAllSessions": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:131",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:132",
       "params": [],
       "preload": {
         "api": "window.api.ui.consumePendingQuitAndStopAllSessions",
@@ -18611,7 +18703,7 @@
       }
     },
     "ui:consumePendingSkillShare": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:98",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:99",
       "params": [],
       "preload": {
         "api": "window.api.ui.consumePendingSkillShare",
@@ -18675,7 +18767,7 @@
       }
     },
     "ui:quitAfterStoppingAllSessions": {
-      "source": "src/main/startup/main-process-ipc-bootstrap.ts:134",
+      "source": "src/main/startup/main-process-ipc-bootstrap.ts:135",
       "params": [],
       "preload": {
         "api": "window.api.ui.quitAfterStoppingAllSessions",
@@ -18757,7 +18849,7 @@
       }
     },
     "updater:check": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:176",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:231",
       "params": [
         {
           "name": "options",
@@ -18781,7 +18873,7 @@
       }
     },
     "updater:dismissAvailableUpdate": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:183",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:238",
       "params": [],
       "preload": {
         "api": "window.api.updater.dismissAvailableUpdate",
@@ -18791,7 +18883,7 @@
       }
     },
     "updater:dismissNudge": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:182",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:237",
       "params": [],
       "preload": {
         "api": "window.api.updater.dismissNudge",
@@ -18801,7 +18893,7 @@
       }
     },
     "updater:download": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:180",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:235",
       "params": [],
       "preload": {
         "api": "window.api.updater.download",
@@ -18811,17 +18903,17 @@
       }
     },
     "updater:getLinuxPackageInstallInstructions": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:185",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:244",
       "params": [],
       "preload": {
         "api": "window.api.updater.getLinuxPackageInstallInstructions",
-        "source": "src/preload/api/updater/updater-bridge.ts:15",
+        "source": "src/preload/api/updater/updater-bridge.ts:16",
         "params": [],
         "returns": null
       }
     },
     "updater:getStatus": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:174",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:229",
       "params": [],
       "preload": {
         "api": "window.api.updater.getStatus",
@@ -18831,7 +18923,7 @@
       }
     },
     "updater:getVersion": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:175",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:230",
       "params": [],
       "preload": {
         "api": "window.api.updater.getVersion",
@@ -18841,7 +18933,7 @@
       }
     },
     "updater:listBuilds": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:193",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:252",
       "params": [
         {
           "name": "channel",
@@ -18858,7 +18950,7 @@
       ],
       "preload": {
         "api": "window.api.updater.listBuilds",
-        "source": "src/preload/api/updater/updater-bridge.ts:17",
+        "source": "src/preload/api/updater/updater-bridge.ts:18",
         "params": [
           {
             "name": "channel",
@@ -18877,21 +18969,31 @@
       }
     },
     "updater:quitAndInstall": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:181",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:236",
       "params": [],
       "preload": {
         "api": "window.api.updater.quitAndInstall",
-        "source": "src/preload/api/updater/updater-bridge.ts:22",
+        "source": "src/preload/api/updater/updater-bridge.ts:23",
         "params": [],
         "returns": null
       }
     },
     "updater:showLinuxPackage": {
-      "source": "src/main/updater/lifecycle/main-window-updater.ts:189",
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:248",
       "params": [],
       "preload": {
         "api": "window.api.updater.showLinuxPackage",
-        "source": "src/preload/api/updater/updater-bridge.ts:16",
+        "source": "src/preload/api/updater/updater-bridge.ts:17",
+        "params": [],
+        "returns": null
+      }
+    },
+    "updater:snoozeRequiredUpdate": {
+      "source": "src/main/updater/lifecycle/main-window-updater.ts:239",
+      "params": [],
+      "preload": {
+        "api": "window.api.updater.snoozeRequiredUpdate",
+        "source": "src/preload/api/updater/updater-bridge.ts:14",
         "params": [],
         "returns": null
       }
@@ -20574,6 +20676,7 @@
     "agent.show",
     "agentHooks.prepareCodexForWslPane",
     "agentSession.rename",
+    "agentSession.toolCaller",
     "agentTeams.prepareLaunch",
     "agentTeams.tmuxCompat",
     "appUi.invoke",
@@ -20765,6 +20868,7 @@
     "google.client.export",
     "google.client.import",
     "google.contacts.find",
+    "google.default.set",
     "google.disconnect",
     "google.docs.append",
     "google.docs.comment",
