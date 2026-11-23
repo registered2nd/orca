@@ -1,28 +1,33 @@
+import type * as NodeModule from 'node:module'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import {
-  __setWindowsProcessTreeLoaderForTests,
-  readWindowsProcessTableFresh,
-  resetWindowsProcessTableForTests
-} from './windows-process-table'
+import { readWindowsProcessTableFresh } from './windows-process-table'
 
-const getAllProcesses = vi.fn()
+const { getAllProcesses } = vi.hoisted(() => ({ getAllProcesses: vi.fn() }))
+
+// The table loads its addon through createRequire, which a vi.mock of the package does not reach.
+vi.mock('node:module', async (importOriginal) => ({
+  ...(await importOriginal<typeof NodeModule>()),
+  createRequire: () => (specifier: string) => {
+    if (specifier !== '@vscode/windows-process-tree') {
+      throw new Error(`unexpected require: ${specifier}`)
+    }
+    return {
+      ProcessDataFlag: { None: 0, Memory: 1, CommandLine: 2, CreationTime: 4 },
+      supportedProcessDataFlags: 7,
+      getAllProcesses
+    }
+  }
+}))
 
 describe('windows process table, malformed snapshot row', () => {
   let platform: PropertyDescriptor | undefined
 
   beforeEach(() => {
-    getAllProcesses.mockReset()
     platform = Object.getOwnPropertyDescriptor(process, 'platform')
     Object.defineProperty(process, 'platform', { configurable: true, value: 'win32' })
-    __setWindowsProcessTreeLoaderForTests(() => ({
-      ProcessDataFlag: { None: 0, Memory: 1, CommandLine: 2, CreationTime: 4 },
-      supportedProcessDataFlags: 7,
-      getAllProcesses
-    }))
   })
 
   afterEach(() => {
-    __setWindowsProcessTreeLoaderForTests()
     if (platform) {
       Object.defineProperty(process, 'platform', platform)
     }
@@ -39,7 +44,6 @@ describe('windows process table, malformed snapshot row', () => {
         thrown = error
       }
     })
-    resetWindowsProcessTableForTests()
     await expect(readWindowsProcessTableFresh()).rejects.toThrow()
     expect(thrown).toBeUndefined()
   })
