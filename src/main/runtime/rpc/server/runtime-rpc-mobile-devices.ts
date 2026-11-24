@@ -10,6 +10,8 @@ import type {
   DelegatedMobileDeviceSyncResult
 } from '../../../../shared/remote-runtime/pairing/delegated-mobile-device-contract'
 import { RuntimeRpcRequestAdmission } from './runtime-rpc-request-admission'
+import type { AuthenticatedMobileSocket } from '../mobile/mobile-socket-wiring'
+import type { DeviceScope } from '../../../../shared/remote-runtime/session-graph/runtime-session-contracts'
 import { settleRemovedPairedClient } from '../../orchestration/federation/client-asks/client-ask-queue'
 
 // Why: below dispatch so a caller-bound RPC context can revoke and mint mobile devices.
@@ -171,6 +173,14 @@ export class RuntimeRpcMobileDevices extends RuntimeRpcRequestAdmission {
 
   setOnPushUnregisterQueued(callback: (() => void) | null): void {
     this.onPushUnregisterQueued = callback ?? undefined
+  }
+
+  // Why: v2 token auth carries none, so phones and relayed desktops report capabilities later.
+  protected reportsCapabilitiesLater(
+    scope: DeviceScope,
+    socket: AuthenticatedMobileSocket
+  ): boolean {
+    return scope === 'mobile' || socket.transport.transport === 'relay'
   }
 
   protected queueRelayDeviceRevoke(binding: RelayDeviceBinding): boolean {
