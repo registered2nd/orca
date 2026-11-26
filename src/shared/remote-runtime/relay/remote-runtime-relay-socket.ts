@@ -5,6 +5,8 @@ import type {
   PairedRuntimeConnection,
   PairedRuntimeRelayRoute
 } from '../pairing/paired-runtime-connection'
+import { remoteRuntimeConnectOptions } from '../remote-runtime-connect-bound'
+import { REMOTE_RUNTIME_MAX_WEBSOCKET_FRAME_BYTES } from '../remote-runtime-memory-limits'
 
 // Why a subclass: callers drive the socket by its 'open'/'message' events; holding 'open' back until
 // the relay greets lets every existing E2EE client path run unchanged over a relay splice.
@@ -90,4 +92,14 @@ export function createRemoteRuntimeWebSocket(
     ...options,
     perMessageDeflate: false
   })
+}
+
+/** A request's socket: no runtime frame exceeds the cap, so a larger one is a broken peer. */
+export function createBoundedRemoteRuntimeWebSocket(
+  connection: Pick<PairedRuntimeConnection, 'endpoint' | 'relay'>
+): WebSocket {
+  return createRemoteRuntimeWebSocket(
+    connection,
+    remoteRuntimeConnectOptions({ maxPayload: REMOTE_RUNTIME_MAX_WEBSOCKET_FRAME_BYTES })
+  )
 }
