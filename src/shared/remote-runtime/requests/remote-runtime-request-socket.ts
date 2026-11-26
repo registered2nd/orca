@@ -1,5 +1,5 @@
 import WebSocket from 'ws'
-import { createRemoteRuntimeWebSocket } from '../relay/remote-runtime-relay-socket'
+import { createBoundedRemoteRuntimeWebSocket } from '../relay/remote-runtime-relay-socket'
 import { abortSignalReason, throwIfSignalAborted } from '../../concurrency/abort-signal-reason'
 import type { PairedRuntimeConnection } from '../pairing/paired-runtime-connection'
 import type { RuntimeCapability } from '../protocol/protocol-version'
@@ -13,11 +13,7 @@ import {
   type RemoteRuntimeClientHandshake
 } from '../remote-runtime-client-framing'
 import { RemoteRuntimeClientError } from '../remote-runtime-client-error'
-import {
-  remoteRuntimeConnectFailureMessage,
-  remoteRuntimeConnectOptions
-} from '../remote-runtime-connect-bound'
-import { REMOTE_RUNTIME_MAX_WEBSOCKET_FRAME_BYTES } from '../remote-runtime-memory-limits'
+import { remoteRuntimeConnectFailureMessage } from '../remote-runtime-connect-bound'
 import {
   releaseRemoteRuntimePreparedRequest,
   takeRemoteRuntimePreparedRequest
@@ -235,10 +231,7 @@ export async function sendRemoteRuntimeRequestOnSocket<TResult>(
           return
         }
         try {
-          const connectOptions = remoteRuntimeConnectOptions({
-            maxPayload: REMOTE_RUNTIME_MAX_WEBSOCKET_FRAME_BYTES
-          })
-          ws = createRemoteRuntimeWebSocket(connection, connectOptions)
+          ws = createBoundedRemoteRuntimeWebSocket(connection)
         } catch (error) {
           const message = error instanceof Error ? error.message : String(error)
           finishError(
