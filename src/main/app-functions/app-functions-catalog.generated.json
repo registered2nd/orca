@@ -1110,7 +1110,7 @@
       ],
       "preload": {
         "api": "window.api.browser.notifyActiveTabChanged",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:248",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:280",
         "params": [
           {
             "name": "args",
@@ -1158,7 +1158,7 @@
       ],
       "preload": {
         "api": "window.api.browser.askReadPage",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:161",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:220",
         "params": [
           {
             "name": "args",
@@ -1182,7 +1182,7 @@
       ],
       "preload": {
         "api": "window.api.browser.askSaveAttachment",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:163",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:222",
         "params": [
           {
             "name": "args",
@@ -1195,7 +1195,7 @@
       }
     },
     "browser:awaitGrabSelection": {
-      "source": "src/main/ipc/browser/browser-grab-ipc.ts:61",
+      "source": "src/main/ipc/browser/browser-grab-ipc.ts:126",
       "params": [
         {
           "name": "args",
@@ -1206,11 +1206,11 @@
       ],
       "preload": {
         "api": "window.api.browser.awaitGrabSelection",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:149",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:159",
         "params": [
           {
             "name": "args",
-            "type": "{ browserPageId: string; opId: string; }",
+            "type": "BrowserAwaitGrabSelectionArgs",
             "optional": false,
             "rest": false
           }
@@ -1230,7 +1230,7 @@
       ],
       "preload": {
         "api": "window.api.browser.cancelDownload",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:139",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:150",
         "params": [
           {
             "name": "args",
@@ -1243,7 +1243,7 @@
       }
     },
     "browser:cancelGrab": {
-      "source": "src/main/ipc/browser/browser-grab-ipc.ts:76",
+      "source": "src/main/ipc/browser/browser-grab-ipc.ts:187",
       "params": [
         {
           "name": "args",
@@ -1254,11 +1254,11 @@
       ],
       "preload": {
         "api": "window.api.browser.cancelGrab",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:151",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:161",
         "params": [
           {
             "name": "args",
-            "type": "{ browserPageId: string; }",
+            "type": "BrowserCancelGrabArgs",
             "optional": false,
             "rest": false
           }
@@ -1278,7 +1278,7 @@
       ],
       "preload": {
         "api": "window.api.browser.cancelServerDownloadCopy",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:145",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:156",
         "params": [
           {
             "name": "args",
@@ -1290,8 +1290,32 @@
         "returns": "Promise<boolean>"
       }
     },
+    "browser:captureCleanPage": {
+      "source": "src/main/ipc/browser/browser-grab-ipc.ts:106",
+      "params": [
+        {
+          "name": "args",
+          "type": "BrowserCaptureCleanPageArgs",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.browser.captureCleanPage",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:183",
+        "params": [
+          {
+            "name": "args",
+            "type": "BrowserCaptureCleanPageArgs",
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": "Promise<BrowserCleanPageCapture | null>"
+      }
+    },
     "browser:captureSelectionScreenshot": {
-      "source": "src/main/ipc/browser/browser-grab-ipc.ts:89",
+      "source": "src/main/ipc/browser/browser-grab-ipc.ts:199",
       "params": [
         {
           "name": "args",
@@ -1302,11 +1326,11 @@
       ],
       "preload": {
         "api": "window.api.browser.captureSelectionScreenshot",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:155",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:179",
         "params": [
           {
             "name": "args",
-            "type": "{ browserPageId: string; rect: { x: number; y: number; width: number; height: number; }; }",
+            "type": "BrowserCaptureSelectionScreenshotArgs",
             "optional": false,
             "rest": false
           }
@@ -1374,7 +1398,7 @@
       ],
       "preload": {
         "api": "window.api.browser.copyServerDownload",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:143",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:154",
         "params": [
           {
             "name": "args",
@@ -1387,7 +1411,7 @@
       }
     },
     "browser:extractHoverPayload": {
-      "source": "src/main/ipc/browser/browser-grab-ipc.ts:114",
+      "source": "src/main/ipc/browser/browser-grab-ipc.ts:229",
       "params": [
         {
           "name": "args",
@@ -1398,7 +1422,7 @@
       ],
       "preload": {
         "api": "window.api.browser.extractHoverPayload",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:157",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:181",
         "params": [
           {
             "name": "args",
@@ -1482,12 +1506,36 @@
         "returns": "Promise<BrowserPageSiteDisplay | null>"
       }
     },
+    "browser:grabPickedElementPresent": {
+      "source": "src/main/ipc/browser/browser-grab-ipc.ts:164",
+      "params": [
+        {
+          "name": "args",
+          "type": "BrowserGrabPickedElementPresentArgs",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.browser.grabPickedElementPresent",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:177",
+        "params": [
+          {
+            "name": "args",
+            "type": "{ browserPageId: string; selectionId: string; interactive?: boolean; }",
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": "Promise<boolean | null>"
+      }
+    },
     "browser:identity:get": {
       "source": "src/main/ipc/browser/browser-session-profile-ipc.ts:81",
       "params": [],
       "preload": {
         "api": "window.api.browser.identityGet",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:208",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:240",
         "params": [],
         "returns": null
       }
@@ -1504,7 +1552,7 @@
       ],
       "preload": {
         "api": "window.api.browser.identitySet",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:209",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:241",
         "params": [
           {
             "name": "mode",
@@ -1648,7 +1696,7 @@
       ],
       "preload": {
         "api": "window.api.browser.prepareSshWorkspacePartition",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:203",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:235",
         "params": [
           {
             "name": "args",
@@ -1864,7 +1912,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionClearCookies",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:234",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:266",
         "params": [
           {
             "name": "args",
@@ -1888,7 +1936,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionClearCookiesForClientHost",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:236",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:268",
         "params": [
           {
             "name": "args",
@@ -1912,7 +1960,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionClearCookiesForSshHost",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:238",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:270",
         "params": [
           {
             "name": "args",
@@ -1936,7 +1984,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionClearGoogleCookies",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:232",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:264",
         "params": [
           {
             "name": "target",
@@ -1960,7 +2008,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionClientRouteImportSources",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:228",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:260",
         "params": [
           {
             "name": "args",
@@ -1984,7 +2032,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionCreateProfile",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:205",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:237",
         "params": [
           {
             "name": "args",
@@ -2008,7 +2056,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionDeleteProfile",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:211",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:243",
         "params": [
           {
             "name": "args",
@@ -2025,7 +2073,7 @@
       "params": [],
       "preload": {
         "api": "window.api.browser.sessionDetectBrowsers",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:218",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:250",
         "params": [],
         "returns": null
       }
@@ -2042,7 +2090,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionDetectBrowsersForClientHost",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:220",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:252",
         "params": [
           {
             "name": "args",
@@ -2066,7 +2114,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionEnsureManagedProfile",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:207",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:239",
         "params": [
           {
             "name": "args",
@@ -2090,7 +2138,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionGoogleCookieClearTarget",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:230",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:262",
         "params": [
           {
             "name": "args",
@@ -2114,7 +2162,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionImportCookies",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:213",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:245",
         "params": [
           {
             "name": "args",
@@ -2138,7 +2186,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionImportCookiesForClientHost",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:215",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:247",
         "params": [
           {
             "name": "args",
@@ -2162,7 +2210,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionImportFromBrowser",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:223",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:255",
         "params": [
           {
             "name": "args",
@@ -2186,7 +2234,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionImportFromBrowserForClientHost",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:226",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:258",
         "params": [
           {
             "name": "args",
@@ -2203,7 +2251,7 @@
       "params": [],
       "preload": {
         "api": "window.api.browser.sessionListProfiles",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:191",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:223",
         "params": [],
         "returns": null
       }
@@ -2220,7 +2268,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sessionResolvePartition",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:217",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:249",
         "params": [
           {
             "name": "args",
@@ -2280,8 +2328,32 @@
         "returns": "Promise<string | null>"
       }
     },
+    "browser:setGrabLabelAvoidArea": {
+      "source": "src/main/ipc/browser/browser-grab-ipc.ts:150",
+      "params": [
+        {
+          "name": "args",
+          "type": "BrowserSetGrabLabelAvoidAreaArgs",
+          "optional": false,
+          "rest": false
+        }
+      ],
+      "preload": {
+        "api": "window.api.browser.setGrabLabelAvoidArea",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:172",
+        "params": [
+          {
+            "name": "args",
+            "type": "{ browserPageId: string; area: { x: number; y: number; width: number; height: number; frameWidth: number; frameHeight: number; } | null; }",
+            "optional": false,
+            "rest": false
+          }
+        ],
+        "returns": "Promise<boolean>"
+      }
+    },
     "browser:setGrabMode": {
-      "source": "src/main/ipc/browser/browser-grab-ipc.ts:44",
+      "source": "src/main/ipc/browser/browser-grab-ipc.ts:66",
       "params": [
         {
           "name": "args",
@@ -2292,11 +2364,11 @@
       ],
       "preload": {
         "api": "window.api.browser.setGrabMode",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:147",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:157",
         "params": [
           {
             "name": "args",
-            "type": "{ browserPageId: string; enabled: boolean; }",
+            "type": "BrowserSetGrabModeArgs",
             "optional": false,
             "rest": false
           }
@@ -2388,7 +2460,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sitePermissionsList",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:240",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:272",
         "params": [
           {
             "name": "args",
@@ -2412,7 +2484,7 @@
       ],
       "preload": {
         "api": "window.api.browser.sitePermissionsSet",
-        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:246",
+        "source": "src/preload/api/browser/browser-bridge-page-interaction-and-sessions.ts:278",
         "params": [
           {
             "name": "args",
@@ -10350,7 +10422,7 @@
       }
     },
     "keybindings:ensureFile": {
-      "source": "src/main/ipc/keybindings.ts:21",
+      "source": "src/main/ipc/keybindings.ts:23",
       "params": [],
       "preload": {
         "api": "window.api.keybindings.ensureFile",
@@ -10360,7 +10432,7 @@
       }
     },
     "keybindings:get": {
-      "source": "src/main/ipc/keybindings.ts:19",
+      "source": "src/main/ipc/keybindings.ts:21",
       "params": [],
       "preload": {
         "api": "window.api.keybindings.get",
@@ -10370,7 +10442,7 @@
       }
     },
     "keybindings:openFile": {
-      "source": "src/main/ipc/keybindings.ts:45",
+      "source": "src/main/ipc/keybindings.ts:47",
       "params": [],
       "preload": {
         "api": "window.api.keybindings.openFile",
@@ -10380,7 +10452,7 @@
       }
     },
     "keybindings:reload": {
-      "source": "src/main/ipc/keybindings.ts:38",
+      "source": "src/main/ipc/keybindings.ts:40",
       "params": [],
       "preload": {
         "api": "window.api.keybindings.reload",
@@ -10390,7 +10462,7 @@
       }
     },
     "keybindings:revealFile": {
-      "source": "src/main/ipc/keybindings.ts:54",
+      "source": "src/main/ipc/keybindings.ts:56",
       "params": [],
       "preload": {
         "api": "window.api.keybindings.revealFile",
@@ -10400,7 +10472,7 @@
       }
     },
     "keybindings:setAction": {
-      "source": "src/main/ipc/keybindings.ts:28",
+      "source": "src/main/ipc/keybindings.ts:30",
       "params": [
         {
           "name": "args",
