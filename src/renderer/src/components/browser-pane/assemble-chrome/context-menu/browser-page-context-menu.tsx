@@ -18,7 +18,8 @@ import {
   BrowserPageContextMenuItems,
   type BrowserPageContextMenuActions
 } from './browser-page-context-menu-items'
-import { askAboutBrowserSelection, type BrowserAskIntent } from '../../ask/browser-page-ask-send'
+import { askAboutBrowserSelection } from '../../ask/browser-page-ask-send'
+import { useBrowserPageAskIntent } from '../../ask/browser-page-ask-intents'
 
 export function BrowserPageContextMenu({
   browserPageId,
@@ -26,7 +27,6 @@ export function BrowserPageContextMenu({
   canGoBack,
   canGoForward,
   webviewRef,
-  ask,
   onReload,
   remoteRoutedNetwork = false,
   externalUrl,
@@ -37,8 +37,6 @@ export function BrowserPageContextMenu({
   canGoBack: boolean
   canGoForward: boolean
   webviewRef: MutableRefObject<Electron.WebviewTag | null>
-  /** The pane's Ask panel; absent where the pane has none. */
-  ask?: BrowserAskIntent
   onReload: () => void
   /** The page browses through a remote host, whose loopback this desktop's browser cannot reach. */
   remoteRoutedNetwork?: boolean
@@ -48,6 +46,7 @@ export function BrowserPageContextMenu({
   openExternal?: (url: string) => void
 }): React.JSX.Element | null {
   const [contextMenu, setContextMenu] = useState<BrowserPageContextMenuState | null>(null)
+  const readAsk = useBrowserPageAskIntent(browserPageId)
   const contextMenuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -232,9 +231,9 @@ export function BrowserPageContextMenu({
           actions={webviewMenuActions(contextMenu.pagePoint)}
           onClose={closeMenu}
           onAskAboutSelection={
-            ask
+            readAsk
               ? (selectionText) => {
-                  void askAboutBrowserSelection(browserPageId, selectionText, ask)
+                  void askAboutBrowserSelection(browserPageId, selectionText, readAsk())
                   setContextMenu(null)
                 }
               : undefined

@@ -29,6 +29,7 @@ import { BrowserNewTabPage } from '../new-tab/BrowserNewTabPage'
 import { BrowserGuestAnnotateOverlays } from '../annotate/browser-guest-annotate-overlays'
 import { BrowserPasswordFillDropdown } from '../passwords/BrowserPasswordFillDropdown'
 import { BrowserPageAskPanel } from '../ask/BrowserPageAskPanel'
+import { useProvideBrowserPageAskIntent } from '../ask/browser-page-ask-intents'
 import type { MarkupModeController } from '../annotate/capture/useMarkupMode'
 import type { GrabModeHook } from '../annotate/grab/useGrabMode'
 import type { BrowserOverlayViewport } from '../describe-page/browser-annotation-geometry'
@@ -92,6 +93,7 @@ export function BrowserPageViewportOverlays({
 }): React.JSX.Element {
   const getAgentCursorHost = useCallback(() => containerRef.current, [containerRef])
   useBrowserAgentCursor(browserTab.id, webviewRef, getAgentCursorHost)
+  useProvideBrowserPageAskIntent(browserTab.id, grabAnnotations)
   return (
     <>
       <BrowserGuestAnnotateOverlays
